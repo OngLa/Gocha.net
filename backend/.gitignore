@@ -1,0 +1,75 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories (optional if you are using VS Code alongside IntelliJ)
+.vscode/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# Spring Boot
+log/
+target/
+
+# Java related
+*.class
+*.log
+*.ctxt
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Gradle (if you're using it)
+.gradle/
+build/
+
+# Others
+*.bak
+*.swp
+*.swo
+*.tmp
+*.temp
+*.ttf
+*.otf
+*.log
+*.log.*
+.DS_Store
+*.pem

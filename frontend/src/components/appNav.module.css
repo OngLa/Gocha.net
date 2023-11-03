@@ -1,0 +1,22 @@
+.navWrap {
+  height: 80px;
+  width: 412px;
+  background-color: #334E58;
+
+  position: fixed;
+  left:auto;
+  bottom: 0;
+
+  border-top: 2px solid #486F7D;
+  border-radius : 15px 15px 0px 0px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.logoStyle {
+    width: 75px;
+    height: 60px;
+}

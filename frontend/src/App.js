@@ -1,22 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
-import BtnNormal from './components/BtnNormal';
+import AppHeader from './components/AppHeader';
+import AppRoute from './AppRoute';
+import AppNav from './components/AppNav';
+
 
 function App() {
-  function testFunc() {
-    console.log("Test");
-  }
-
-
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          안녕하세요
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <BtnNormal contents="예약하기" onClick={testFunc}/>
-      </header>
+      <div>
+        <AppHeader />
+      </div>
+      <div className='emptySpace90'></div>
+      <div className='AppRouteWrap'>
+        <AppRoute />
+      </div>
+      <div className='emptySpace90'></div>
+      <div>
+        <AppNav />
+      </div>
     </div>
   );
 }

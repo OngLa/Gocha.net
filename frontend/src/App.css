@@ -11,6 +11,15 @@
 }
 
 .App {
-  text-align: center;
   max-width: 412px;
+  background-color: #334E58;
+  margin: auto;
+}
+
+.emptySpace90 {
+  height: 90px;
+}
+
+.AppRouteWrap {
+  min-height: 400px;
 }

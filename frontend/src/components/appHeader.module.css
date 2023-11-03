@@ -1,0 +1,30 @@
+.headerWrap {
+  width: 412px;
+  height: 80px;
+  background-color:#334E58;
+
+  position: fixed;
+  left:auto;
+  top: 0;
+}
+
+.flexHeader {
+  display: flex;
+  flex-direction: row;
+}
+
+.sideBox {
+  width: 91px;
+  height: 80px;
+}
+
+.logoStyle {
+    width: 230px;
+    height: 60px;
+}
+
+.hrLine {
+  width: 370px;
+  border: 0.8px solid #486F7D;
+  /* border-color: #486F7D; */
+}

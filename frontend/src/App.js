@@ -1,22 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import BtnNormal from './components/BtnNormal';
 
 function App() {
+  function testFunc() {
+    console.log("Test");
+  }
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
+          안녕하세요
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <BtnNormal contents="예약하기" onClick={testFunc}/>
       </header>
     </div>
   );

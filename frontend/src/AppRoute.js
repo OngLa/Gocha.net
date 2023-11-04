@@ -13,6 +13,10 @@ const AppRoute = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/chatting/*" element={<Chatting />} />
+        {/* <Route path="/reservation/*" element={<Chatting />} /> */}
+        {/* <Route path="/cardata/*" element={<Chatting />} /> */}
+        {/* <Route path="/carinfo/*" element={<Chatting />} /> */}
+        {/* <Route path="/parts/*" element={<Chatting />} /> */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>

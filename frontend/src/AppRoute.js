@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-// import Chatting from "./pages/Chatting";
+import Chatting from "./pages/Chatting";
 import Signup from "./pages/Member/Signup";
 import Member from "./pages/Member";
 
@@ -10,7 +10,7 @@ const AppRoute = () => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/chatting/*" element={<Chatting />} /> */}
+        <Route path="/chatting/*" element={<Chatting />} />
         {/* <Route path="/reservation/*" element={<Chatting />} /> */}
         {/* <Route path="/cardata/*" element={<Chatting />} /> */}
         {/* <Route path="/carinfo/*" element={<Chatting />} /> */}

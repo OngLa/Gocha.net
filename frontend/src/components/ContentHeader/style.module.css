@@ -1,0 +1,20 @@
+.wrapper {
+  margin-left: 15px;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+
+.wrapper img {
+  margin-right: 8px; /* Adjust the space between the icon and the title */
+  width: 24px; /* Size of the left arrow icon */
+  height: 24px; /* Size of the left arrow icon */
+}
+
+.menuName {
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+}

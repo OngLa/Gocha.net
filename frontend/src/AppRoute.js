@@ -20,7 +20,6 @@ const AppRoute = () => {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
-   
   );
 };
 

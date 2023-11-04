@@ -1,20 +1,40 @@
 .headerWrap {
-  width: 100%;
-  height: 65px;
+  width: 100vw;
+  height: 10vh;
   background-color: #334e58;
   position: fixed;
   top: 0;
-  width: 100%;
+  @media (min-width: 1171px) {
+    width: 40vw;
+  }
 }
 
 .flexHeader {
   display: flex;
   flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.logoWrap {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2%;
+}
+
+.logoStyle {
+  width: 95%;
+  height: 50%;
 }
 
 .sideBox {
   width: 20%;
-  height: 65px;
+  height: 100%;
+  padding-top: 2%;
 
   display: flex;
   flex-direction: row;
@@ -22,24 +42,21 @@
   justify-content: center;
 }
 
-.logoWrap {
-  width: 60%;
+.memberWrap {
   display: flex;
   justify-content: center;
 }
 
-.logoStyle {
-  width: 95%;
-  height: 55px;
-}
-
 .MemberStyle {
-  padding-top: 15px;
-  width: 33px;
-  height: 33px;
+  width: 45%;
+  height: 45%;
 }
 
 .hrLine {
-  width: 340px;
+  width: 90vw;
   border: 0.5px solid #486f7d;
+
+  @media (min-width: 1171px) {
+    width: 35vw;
+  }
 }

@@ -5,14 +5,14 @@ function Chatting() {
   return (
     <div className={style.chattingWrap}>
       <div className={style.menuTitle}>
-        <div>회원 목록</div>
+        <div>정비소 목록</div>
       </div>
-      <div>
+      <div className={style.ChatMemberBoxWrap}>
         <div>
-          <ChatMemberBox />
+          <ChatMemberBox name="서울점" />
         </div>
         <div>
-          <ChatMemberBox />
+          <ChatMemberBox name="경기도점" />
         </div>
       </div>
     </div>

@@ -11,12 +11,17 @@
 }
 
 .App {
-  max-width: 412px;
+  width: 100vw;
   background-color: #334E58;
   margin: auto;
+
+  @media (min-width: 1171px) {
+    width: 40vw;
+  }
 }
 
+
 .AppRouteWrap {
-  min-height: 500px;
+  height: 80vh;
   padding: 80px 20px 20px 20px;
 }

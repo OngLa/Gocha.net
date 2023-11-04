@@ -13,7 +13,7 @@ function AppHeader() {
             <img src="./logo.png" alt="Gochanet" className={style.logoStyle} />
           </Link>
           <div className={style.sideBox}>
-            <Link to="/member">
+            <Link to="/member" className={style.memberWrap}>
               <img
                 src="./navMenu/memberMenu.png"
                 alt="Member"

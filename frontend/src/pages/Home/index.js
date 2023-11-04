@@ -2,8 +2,8 @@ import style from './index.module.css';
 
 function Home() {
   return (
-    <div className={style.Wrap}>
-      Home
+    <div className={style.homeWrap}>
+      <img src="./homeBackground.png" alt="homeBackground" className={style.homeBackground} />
     </div>
   );
 }

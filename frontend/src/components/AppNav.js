@@ -14,7 +14,7 @@ function AppNav() {
         <Link to = "/"><img src="./homeMenu.png" alt="Gochanet" className={style.logoStyle}/></Link>
       </div>
       <div className={style.menuBox}>
-        <Link to = "/cardata"><img src="./carDataMenu.png" alt="Gochanet" className={style.logoStyle}/></Link>
+        <Link to = "/car/data-list"><img src="./carDataMenu.png" alt="Gochanet" className={style.logoStyle}/></Link>
       </div>
       <div className={style.menuBox}>
         <Link to = "/carinfo"><img src="./carInfoMenu.png" alt="Gochanet" className={style.logoStyle}/></Link>

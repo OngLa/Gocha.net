@@ -1,0 +1,42 @@
+.card {
+  background-color: #5d707f;
+  border: 1px solid #45cb85;
+  border-radius: 8px;
+  width: 90%;
+}
+
+.btn {
+  background-color: transparent;
+  width: 100%;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.title {
+  color: white;
+  display: flex; 
+  justify-content: flex-start;
+}
+
+img {
+  width: 24px;
+  height: 24px;
+}
+
+.content {
+  background-color: transparent;
+  color: white;
+  border-top: 1px solid #45cb85;
+  padding: 10px;
+}
+
+.active {
+  display: block;
+}
+
+.nonActive {
+  display: none;
+}

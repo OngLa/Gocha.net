@@ -13,13 +13,39 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+
+  padding-top: 3px;
 }
 
 .menuBox {
-  width: 20%;
+  width: 19.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3px;
 }
 
-.logoStyle {
-    width: 70px;
-    height: 50px;
+.menuHomeBox {
+  width: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.navImgStyle {
+    width: 35px;
+    height: 35px;
+}
+
+.homeImgStyle {
+    width: 85%;
+    height: 85%;
+}
+
+.menuBox > div {
+  color: white;
+  font-size: 12.5px;
+  padding-top: 2px
 }

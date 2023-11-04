@@ -15,7 +15,7 @@ const AppRoute = () => {
         <Route path="/chatting/*" element={<Chatting />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      </>
+    </>
    
   );
 };

@@ -16,10 +16,7 @@
   margin: auto;
 }
 
-.emptySpace90 {
-  height: 90px;
-}
-
 .AppRouteWrap {
-  min-height: 400px;
+  min-height: 500px;
+  padding-top: 80px;
 }

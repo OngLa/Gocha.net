@@ -10,11 +10,9 @@ function App() {
       <div>
         <AppHeader />
       </div>
-      <div className='emptySpace90'></div>
       <div className='AppRouteWrap'>
         <AppRoute />
       </div>
-      <div className='emptySpace90'></div>
       <div>
         <AppNav />
       </div>

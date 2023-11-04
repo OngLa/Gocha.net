@@ -9,10 +9,20 @@ function AppHeader() {
         {/* <img src="./logo.png" alt="Gochanet" className={style.logoStyle} onClick={()=>{navigate("/")}}/> */}
         <div className={style.flexHeader}>
           <div className={style.sideBox}></div>
-          <Link to = "/" ><img src="./logo.png" alt="Gochanet" className={style.logoStyle}/></Link>
-          <div className={style.sideBox}></div>
+          <Link to="/" className={style.logoWrap}>
+            <img src="./logo.png" alt="Gochanet" className={style.logoStyle} />
+          </Link>
+          <div className={style.sideBox}>
+            <Link to="/member">
+              <img
+                src="./memberMenu.png"
+                alt="Member"
+                className={style.MemberStyle}
+              />
+            </Link>
+          </div>
         </div>
-        <hr className={style.hrLine}/>
+        <hr className={style.hrLine} />
       </div>
     </header>
   );

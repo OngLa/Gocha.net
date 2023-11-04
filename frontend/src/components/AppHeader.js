@@ -15,7 +15,7 @@ function AppHeader() {
           <div className={style.sideBox}>
             <Link to="/member">
               <img
-                src="./memberMenu.png"
+                src="./navMenu/memberMenu.png"
                 alt="Member"
                 className={style.MemberStyle}
               />

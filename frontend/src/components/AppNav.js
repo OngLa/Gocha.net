@@ -5,19 +5,51 @@ function AppNav() {
   return (
     <header className={style.navWrap}>
       <div className={style.menuBox}>
-        <Link to = "/chatting"><img src="./chattingMenu.png" alt="Gochanet" className={style.logoStyle}/></Link>
+        <Link to="/chatting">
+          <img
+            src="./navMenu/chattingMenu.png"
+            alt="Gochanet"
+            className={style.navImgStyle}
+          />
+        </Link>
+        <div>비대면 진단</div>
       </div>
       <div className={style.menuBox}>
-        <Link to = "/reservation"><img src="./reservationMenu.png" alt="Gochanet" className={style.logoStyle}/></Link>
+        <Link to="/reservation">
+          <img
+            src="./navMenu/reservationMenu.png"
+            alt="Gochanet"
+            className={style.navImgStyle}
+          />
+        </Link>
+        <div>예약하기</div>
+      </div>
+      <Link to="/" className={style.menuHomeBox}>
+        <img
+          src="./navMenu/homeMenu.png"
+          alt="Gochanet"
+          className={style.homeImgStyle}
+        />
+      </Link>
+      <div className={style.menuBox}>
+        <Link to="/cardata">
+          <img
+            src="./navMenu/carDataMenu.png"
+            alt="Gochanet"
+            className={style.navImgStyle}
+          />
+        </Link>
+        <div>차량 데이터</div>
       </div>
       <div className={style.menuBox}>
-        <Link to = "/"><img src="./homeMenu.png" alt="Gochanet" className={style.logoStyle}/></Link>
-      </div>
-      <div className={style.menuBox}>
-        <Link to = "/cardata"><img src="./carDataMenu.png" alt="Gochanet" className={style.logoStyle}/></Link>
-      </div>
-      <div className={style.menuBox}>
-        <Link to = "/carinfo"><img src="./carInfoMenu.png" alt="Gochanet" className={style.logoStyle}/></Link>
+        <Link to="/carinfo">
+          <img
+            src="./navMenu/carInfoMenu.png"
+            alt="Gochanet"
+            className={style.navImgStyle}
+          />
+        </Link>
+        <div>내차 정보</div>
       </div>
     </header>
   );

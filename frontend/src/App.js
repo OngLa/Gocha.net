@@ -3,7 +3,6 @@ import AppHeader from './components/AppHeader';
 import AppRoute from './AppRoute';
 import AppNav from './components/AppNav';
 
-
 function App() {
   return (
     <div className="App">

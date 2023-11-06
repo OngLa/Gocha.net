@@ -1,14 +1,14 @@
 import styles from "./style.module.css";
 
 function LargeButton(props) {
-  const { name, onClick, children } = props;
+  const { name, onClick, children, style } = props;
 
   return (
     <button
       className={`${styles.btn} ${styles.largeBtn}`}
       name={name}
       onClick={onClick}
-     
+     style={style}
     >
       {children}
     </button>

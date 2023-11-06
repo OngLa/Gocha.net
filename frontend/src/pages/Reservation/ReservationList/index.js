@@ -1,14 +1,16 @@
-import { SmallButton } from "../../../components/Button";
+import ReservationCardBody from "./ReservationCardBody";
+import ReservationCardHead from "./ReservationCardHead";
+import styles from "./reservationList.module.css"
 
 function ReservationList() {
+
   return (
-    <div className="ReservationList">
-      <div className="box">
-        <div className="cardtitle"></div>
-        <div className="cardbody">
-          <div className="content"></div>
-          <div><SmallButton>예약취소</SmallButton></div>
-        </div>
+    <div className={styles.ReservationList}>
+      <div className={styles.cardHeader}>
+        <ReservationCardHead/>
+      </div>
+      <div className="card-body">
+        <ReservationCardBody />
       </div>
     </div>
   );

@@ -2,18 +2,9 @@
   font-size: 16px;
   border: 1px solid #45CB85;
   background-color: #5D707F;
-width: 320px;
 
   /* 기타 원하는 스타일 */
 }
-
-
-/* 헤더부분 폭 */
-.react-datepicker__header {
-width: 320px;
-
-}
-
 
 /* 날짜 색 */
 .react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name{

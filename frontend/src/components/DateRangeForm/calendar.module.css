@@ -1,0 +1,58 @@
+/* .calWrapper {
+  padding: 10px;
+} */
+
+:global(.rdt) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #5d707f;
+  border: 1px solid #45cb85;
+  border-radius: 8px;
+  color: white;
+}
+
+:global(.rdtPicker) {
+  width: 80%;
+  padding: 10px;
+}
+
+:global(.rdtDays table) {
+  width: 100%;
+}
+
+:global(.rdtDays table thead) {
+  border-bottom: 1px solid #aeb7bf;
+}
+
+:global(.rdtDays table tr) {
+  text-align: center;
+}
+
+:global(.rdtDays table .rdtOld) {
+  color: #aeb7bf;
+}
+
+:global(.rdtDays table .rdtNew) {
+  color: #e4e4e4;
+}
+
+:global(.rdtDays table .rdtPrev) {
+  color: #aeb7bf;
+}
+
+:global(.rdtDays table .rdtNext) {
+  color: #aeb7bf;
+}
+
+:global(.rdtDays table .dow) {
+  color: #45cb85;
+}
+
+:global(.rdtMonths table) {
+  width: 100%;
+}
+
+:global(.rdtMonths table tr) {
+  text-align: center;
+}

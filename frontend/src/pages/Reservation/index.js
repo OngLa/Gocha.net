@@ -1,8 +1,9 @@
 // import { useState } from "react";
 import { Route, Routes } from "react-router";
-import ShopList from "./ShopList";
-import ShopReservation from "./ShopReservation";
 import ReservationList from "./ReservationList";
+import Sidepanel from "./Sidepanel";
+import MainRepairshop from "./MainRepairshop";
+import Home from "./Home";
 
 
 function Reservation() {
@@ -12,9 +13,11 @@ function Reservation() {
   return (
     <div>
           <Routes>
-            <Route path="/" Component={ShopList}/>
-            <Route path="ShopReservation" Component={ShopReservation}/>
-            <Route path="ReservationList" Component={ReservationList}/>
+            <Route path="/" Component={Home}/>
+            <Route path="sidepanel" Component={Sidepanel}/>
+            <Route path="reservationList" Component={ReservationList}/>
+            <Route path="mainRepairshop" Component={MainRepairshop}/>
+
           </Routes>
     </div>
     );

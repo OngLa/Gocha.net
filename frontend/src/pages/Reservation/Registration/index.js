@@ -1,8 +1,8 @@
 import CardBody from "./CardBody";
 import CardHead from "./CardHead";
-import styles from "./repairshopList.module.css"
+import styles from "./Registration.module.css"
 
-function RepairshopList(props) {
+function Registration(props) {
 
   const { id, address, name } = props;
 
@@ -20,4 +20,4 @@ function RepairshopList(props) {
     </div>
   );
 }
-export default RepairshopList;
+export default Registration;

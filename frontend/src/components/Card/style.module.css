@@ -3,6 +3,9 @@
   border: 1px solid #45cb85;
   border-radius: 8px;
   width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .btn {
@@ -29,6 +32,7 @@ img {
 .content {
   background-color: transparent;
   color: white;
+  width: 90%;
   border-top: 1px solid #45cb85;
   padding: 10px;
 }

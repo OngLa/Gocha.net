@@ -4,6 +4,8 @@ import LargeButton, { SmallButton } from "../../../components/Button";
 import { useRef, useState } from "react";
 import DateRangeForm from "../../../components/DateRangeForm";
 
+import style from "./style.module.css";
+
 function DataList() {
   const [cards, setCards] = useState([
     { date: "2023-11-08", content: "차량 데이터1" },
@@ -44,31 +46,37 @@ function DataList() {
   };
 
   return (
-    <div>
+    <div className={style.wrapper}>
       {/* Content의 헤더, 뒤로가기 기능 */}
-      <ContentHeader menuName="예약관리" />
+      <div className={style.menu}>
+        <ContentHeader menuName="데이터 관리" />
+      </div>
 
       {/* 최신 데이터 업데이트 버튼, 버튼 클릭 시 새로운 데이터 추가 */}
-      <LargeButton
-        name="update"
-        children="최신 데이터 업데이트"
-        onClick={addCard}
-      />
+      <div className={style.addCardBtn}>
+        <LargeButton
+          name="update"
+          children="최신 데이터 업데이트"
+          onClick={addCard}
+        />
+      </div>
 
       {/* 날짜 필터 폼 */}
-      <div>
-        <DateRangeForm title="검색 날짜" ref={dateRangeRef} />
+      <div className={style.dateFormWrapper}>
+        <div className={style.dateForm}>
+          <DateRangeForm title="검색 날짜" ref={dateRangeRef} />
+        </div>
         <SmallButton
           name="filterDate"
           children="검색하기"
           onClick={filterDate}
         />
       </div>
-      
+
       {/* Card 리스트 출력 */}
-      <div className="CardList">
+      <div className={style.cardList}>
         {cards.map((item) => (
-          <div>
+          <div className={style.card}>
             <Card
               title_children={
                 <>

@@ -1,4 +1,4 @@
-import style from './style.module.css'
+import style from "./style.module.css";
 import { useNavigate } from "react-router-dom";
 
 function ContentHeader(props) {
@@ -10,10 +10,12 @@ function ContentHeader(props) {
   }
 
   return (
-    <button className={style.wrapper} onClick={handleCancel}>
-      <img src="/icon/Chevron_Left.png" alt="left"/>
+    <div className={style.wrapper}>
+      <button onClick={handleCancel}>
+        <img src="/icon/Chevron_Left.png" alt="left" />
+      </button>
       <div className={style.menuName}>{menuName}</div>
-    </button>
+    </div>
   );
 }
 

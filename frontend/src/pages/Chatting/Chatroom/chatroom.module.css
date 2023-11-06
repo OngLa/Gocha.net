@@ -1,0 +1,25 @@
+.ChatroomWrap {
+  background-color: #334E58;
+}
+
+.ChatPartnerProfileWrap {
+  margin-top: 6vh;
+}
+
+.ChatboxWrap {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 40px;
+}
+
+.ChatboxSenderWrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 40px;
+}
+
+.SmallButtonWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

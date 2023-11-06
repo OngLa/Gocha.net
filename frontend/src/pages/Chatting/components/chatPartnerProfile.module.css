@@ -1,0 +1,42 @@
+.ChatPartnerProfileWrap {
+  width: 100vw;
+  height: 55px;
+  position: fixed;
+  top: 12vh;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: baseline;
+
+  border-radius: 10px;
+  margin-bottom: 15px;
+  background-color: #334E58;
+  
+  @media (min-width: 1171px) {
+    width: 40vw;
+  };
+
+}
+
+.imgWrap {
+  width: 20%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgWrap > img {
+  border: 1px solid white;
+  border-radius: 50%;
+
+  width: 35px;
+  height: 35px;
+}
+
+.carcenterName {
+  color: #47F6C1;
+  font-size: 22px;
+}

@@ -1,5 +1,4 @@
-.ChatMemberBoxWrap {
-  padding-left: 20px;
+.chattingWrap {
 }
 
 .menuTitle {
@@ -11,4 +10,9 @@
   
   color: #47F6C1;
   font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.ChatMemberBoxWrap > div {
+  margin-bottom: 15px;
 }

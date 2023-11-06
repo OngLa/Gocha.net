@@ -1,0 +1,18 @@
+
+.pageInfo {
+  margin: 20px;
+}
+
+.memberInfo {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.box {
+  margin: 20px;
+  /* display: flex;
+  justify-content:space-between; */
+
+}

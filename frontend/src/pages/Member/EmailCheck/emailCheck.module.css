@@ -2,14 +2,14 @@
   margin: 20px;
 }
 
-.memberWrap {
+.emailWrap {
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
 }
 
-.memberBox {
+.emailBox {
   width: 270px;
   height: 40px;
   margin: 20px;
@@ -19,29 +19,29 @@
   border-radius: 10px;
 }
 
-.memberImg {
+.emailImg {
   margin: 10px;
 }
 
-.memberInput {
+.emailInput {
   width: 150px;
   height: 35px;
   border: none;
   padding: 0px 10px;
 }
 
-.checkIdBtn {
+.EmailCheckNumBtn {
   border: none;
   font-size: 11px;
   background-color: white;
 }
 
-.nicknameCheckResult {
+.result {
   font-size: 11px;
   color: red;
-  margin: 0px 30px;
+  margin: 20px 30px;
 }
 
-.signupBtn {
-  margin: 50px 0px;
+.nextBtn, .EmailCheckApplyBtn {
+  margin: 20px 0px;
 }

@@ -1,0 +1,31 @@
+.pageInfo {
+  margin: 20px;
+}
+
+.mypageWrap {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  
+}
+
+.mypageBox {
+  width: 270px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin: 7px;
+  border: solid 1px #A4DABE;
+  background-color: #5D707F;
+  color: white;
+  border-radius: 10px;
+ 
+}
+
+.mypageImg {
+  margin: 10px;
+}
+
+
+

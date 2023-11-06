@@ -4,7 +4,8 @@ function Login() {
   return (
     <>
       <div>Login</div>
-      <Link to="/member/signup">회원가입</Link>
+      <div><Link to="/member/emailCheck">회원가입</Link></div>
+      <div><Link to="/member/mypage">마이페이지</Link></div>
     </>
   );
 }

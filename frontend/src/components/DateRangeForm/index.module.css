@@ -1,0 +1,19 @@
+.formWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  color: #45cb85;
+  font-weight: 800;
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.between {
+  color: white;
+  font-weight: 800;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 10px;
+}

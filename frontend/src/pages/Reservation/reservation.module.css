@@ -1,0 +1,21 @@
+
+.ShopReservation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidepanel {
+  position: fixed; /* 사이드 패널을 화면에 고정 */
+  top: 0; /* 위에서부터 0 */
+  right: 0; /* 오른쪽에서부터 0 (패널을 오른쪽에 나타나게 함) */
+  width: 300px; /* 사이드 패널의 너비 */
+  height: 100%; /* 전체 높이 */
+  background-color: #ffffff; /* 배경색 */
+  box-shadow: -2px 0 8px rgba(0,0,0,0.2); /* 그림자 효과 */
+  z-index: 1000; /* 다른 요소들 위에 나타나게 함 */
+  transform: translateX(100); /* 오른쪽으로 숨김 */
+  transition: transform 0.3s ease-in-out; /* 애니메이션 효과 */
+}
+

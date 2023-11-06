@@ -61,11 +61,14 @@ const DateRangeForm = forwardRef((props, ref) => {
           />
         </div>
       </div>
+
       {open && (
-        <Calendar
-          date={currentDate === "start" ? startDate : endDate}
-          onChange={calChange}
-        />
+        <div className={style.calendar}>
+          <Calendar
+            date={currentDate === "start" ? startDate : endDate}
+            onChange={calChange}
+          />
+        </div>
       )}
     </div>
   );

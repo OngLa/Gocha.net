@@ -16,6 +16,10 @@
   align-items: center;
 }
 
+.calendar {
+  margin-top: 10px;
+}
+
 .between {
   color: white;
   font-weight: 800;

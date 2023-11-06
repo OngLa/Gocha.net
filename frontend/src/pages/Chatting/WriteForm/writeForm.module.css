@@ -1,0 +1,50 @@
+.WriteFormWrap {
+  background-color: #334e58;
+}
+
+.ChatPartnerProfileWrap {
+  margin-top: 6vh;
+}
+
+.inputWrap {
+  margin-top: 70px;
+}
+
+.textWhite {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.textarea {
+  border-radius: 5px;
+  margin-bottom: 20px;
+  min-height: 30px;
+  line-height: 30px;
+  padding: 0px 7px;
+  resize: vertical;
+}
+
+.selectData {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+.selectDataLabel {
+  color: white;
+  font-size: 20px;
+}
+
+.dataSelectBox {
+  height: 30px;
+  margin-left: 10px;
+  padding-left: 5px;
+}
+
+.LargeButtonWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

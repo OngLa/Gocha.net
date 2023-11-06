@@ -1,12 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import ChattingList from "./ChattingList";
+import ChattingList from "./ChattingList/index";
+import Chatroom from "./Chatroom/index";
+import WriteForm from "./WriteForm/index";
 
 function Chatting(props) {
   return (
     <Routes>
       <Route path="" Component={ChattingList} />
-      {/* <Route path="writeForm" Component={BoardWriteForm}/>         */}
-      {/* <Route path=":bno/read" Component={BoardRead}/> */}
+      <Route path="writeform/:cno" Component={WriteForm}/>        
+      <Route path="chatroom/:cno" Component={Chatroom}/>
     </Routes>
   );
 }

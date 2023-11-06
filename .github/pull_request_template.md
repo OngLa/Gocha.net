@@ -10,6 +10,7 @@
 - [ ] 팀원에게 확인을 받았나요?
 - [ ] Coding Convention을 준수했나요?
 - [ ] Test는 해보셨나요?
+- [ ] 주석은 충분히 달려 있나요?
 
 ## :speech_balloon: 작업 내용
 

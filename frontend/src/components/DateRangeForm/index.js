@@ -47,24 +47,28 @@ const DateRangeForm = forwardRef((props, ref) => {
     <div>
       <div className={style.formWrapper}>
         <div className={style.title}>{title}</div>
-
-        <DateInputForm
-          date={startDate}
-          setDate={setStartDate}
-          clickBtn={() => clickBtn("start")}
-        />
-        <div className={style.between}> ~ </div>
-        <DateInputForm
-          date={endDate}
-          setDate={setEndDate}
-          clickBtn={() => clickBtn("end")}
-        />
+        <div className={style.form}>
+          <DateInputForm
+            date={startDate}
+            setDate={setStartDate}
+            clickBtn={() => clickBtn("start")}
+          />
+          <div className={style.between}> ~ </div>
+          <DateInputForm
+            date={endDate}
+            setDate={setEndDate}
+            clickBtn={() => clickBtn("end")}
+          />
+        </div>
       </div>
+
       {open && (
-        <Calendar
-          date={currentDate === "start" ? startDate : endDate}
-          onChange={calChange}
-        />
+        <div className={style.calendar}>
+          <Calendar
+            date={currentDate === "start" ? startDate : endDate}
+            onChange={calChange}
+          />
+        </div>
       )}
     </div>
   );

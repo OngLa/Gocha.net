@@ -1,0 +1,70 @@
+.WriteFormWrap {
+  background-color: #334e58;
+}
+
+.ChatPartnerProfileWrap {
+  margin-top: 6vh;
+}
+
+.inputWrap {
+  margin-top: 70px;
+}
+
+.textWhite {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.textarea {
+  border-radius: 5px;
+  margin-bottom: 20px;
+  min-height: 30px;
+  line-height: 30px;
+  padding: 0px 7px;
+  resize: vertical;
+}
+
+.selectSevervation {
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 50px;
+  padding-right: 10px;
+}
+
+.checkBoxInput {
+  display: none; /* 체크박스 숨김 */
+}
+
+.checkBoxLabel {
+  position: relative;
+  display: inline-block;
+  width: 20px; /* 원하는 크기로 설정 */
+  height: 20px; /* 원하는 크기로 설정 */
+  background-color: #fff; /* 체크박스 배경 색상 */
+  border: 2px solid #fff; /* 체크박스 테두리 스타일 */
+  border-radius: 5px;
+}
+
+.checkBoxInput:checked + .checkBoxLabel {
+  background-color: #45CB85; /* 체크된 경우의 배경 색상 */
+  border: 2px solid #A4DABE; /* 체크된 경우의 테두리 스타일 */
+}
+
+.checkBox {
+  width: 20px;
+}
+
+.selectSevervationText {
+  color: white;
+  font-size: 20px;
+  margin-left: 7px;
+  padding-top: 1px;
+}
+
+.LargeButtonWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -14,7 +14,7 @@ function AppNavHome2() {
       </Link>
       <div className={style.sideBox}></div>
       <div className={style.menuBox}>
-        <Link to="/chatting">
+        <Link to="/chatting2">
           <img
             src="./navMenu/chattingMenu.png"
             alt="Gochanet"

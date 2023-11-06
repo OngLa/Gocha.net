@@ -1,23 +1,28 @@
-import style from "./chattingList.module.css";
-import ChatMemberBox from "./ChatMemberBox";
+import React, { useState } from "react";
+import style from "./chattingList2.module.css";
+import ChatMemberBox2 from "./ChatMemberBox2";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
-function ChattingList() {
-  const carcenterList = [
+function ChattingList2() {
+  const userList = [
     {
       id: "1",
-      name: "서울점",
+      nickname: "김지선",
       withdrawal: "0",
     },
     {
       id: "2",
-      name: "경기도점",
+      nickname: "윤시호",
       withdrawal: "0",
     },
     {
       id: "3",
-      name: "제주도점",
+      nickname: "하재민",
+      withdrawal: "0",
+    },
+    {
+      id: "4",
+      nickname: "홍석호",
       withdrawal: "1",
     },
   ];
@@ -26,17 +31,14 @@ function ChattingList() {
   const [searchTerm, setSearchTerm] = useState("");
 
   // 검색어 입력 시 해당 검색어와 일치하는 사용자만 필터링
-  const filteredUserList = carcenterList.filter((carcenterList) => {
-    return (
-      carcenterList.withdrawal === "0" &&
-      carcenterList.name.includes(searchTerm)
-    );
+  const filteredUserList = userList.filter((user) => {
+    return user.withdrawal === "0" && user.nickname.includes(searchTerm);
   });
 
   return (
     <div className={style.chattingWrap}>
       <div className={style.menuTitle}>
-        <div>정비소 목록</div>
+        <div>고객 목록</div>
       </div>
       <div className={style.searchWrap}>
         <div className={style.searchImgWrap}>
@@ -49,7 +51,7 @@ function ChattingList() {
         <div>
           <input
             className={style.searchInput}
-            placeholder="정비소를 검색하세요."
+            placeholder="고객을 검색하세요."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -57,14 +59,14 @@ function ChattingList() {
       </div>
       <div className={style.ChatMemberBoxWrap}>
         {filteredUserList.map(
-          (carcenter) =>
-            carcenter.withdrawal === "0" && (
-              <div key={carcenter.id}>
+          (user) =>
+            user.withdrawal === "0" && (
+              <div key={user.id}>
                 <Link
-                  to={`/chatting/chatroom/${carcenter.id}?carcenterName=${carcenter.name}`}
+                  to={`/chatting2/chatroom2/${user.id}?userName=${user.nickname}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <ChatMemberBox carcenterName={carcenter.name} />
+                  <ChatMemberBox2 userName={user.nickname} />
                 </Link>
               </div>
             )
@@ -74,4 +76,4 @@ function ChattingList() {
   );
 }
 
-export default ChattingList;
+export default ChattingList2;

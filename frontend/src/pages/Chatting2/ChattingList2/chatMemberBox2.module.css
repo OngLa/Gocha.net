@@ -1,0 +1,48 @@
+.ChatMemberBoxWrap {
+  width: 100%;
+  height: 55px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: baseline;
+  border-radius: 10px;
+}
+
+.ChatMemberBoxWrap:hover {
+  background-color: #45CB85;
+  border: 2px solid #A4DABE;
+}
+
+
+.imgWrap {
+  width: 20%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgWrap > img {
+  border: 1px solid white;
+  border-radius: 50%;
+
+  width: 35px;
+  height: 35px;
+}
+
+.userName {
+  color: white;
+  font-size: 22px;
+}
+
+.ChatMemberBoxWrapClicked {
+  background-color: #45CB85;
+  border: 1px solid #A4DABE;
+}
+
+.ChatMemberBoxWrap {
+  background-color: #5d707f;
+  border: 1px solid #45cb85;
+}

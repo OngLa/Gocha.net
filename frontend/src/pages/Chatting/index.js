@@ -7,8 +7,8 @@ function Chatting(props) {
   return (
     <Routes>
       <Route path="" Component={ChattingList} />
-      <Route path="writeform/:cno" Component={WriteForm}/>        
       <Route path="chatroom/:cno" Component={Chatroom}/>
+      <Route path="writeform/:cno" Component={WriteForm}/>        
     </Routes>
   );
 }

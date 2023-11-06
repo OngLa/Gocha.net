@@ -32,7 +32,7 @@ function AppNav() {
         />
       </Link>
       <div className={style.menuBox}>
-        <Link to="/cardata">
+        <Link to="/car/data-list">
           <img
             src="./navMenu/carDataMenu.png"
             alt="Gochanet"
@@ -42,7 +42,7 @@ function AppNav() {
         <div>차량 데이터</div>
       </div>
       <div className={style.menuBox}>
-        <Link to="/carinfo">
+        <Link to="/car/info">
           <img
             src="./navMenu/carInfoMenu.png"
             alt="Gochanet"

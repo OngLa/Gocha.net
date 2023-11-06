@@ -78,6 +78,7 @@ function DataList() {
         {cards.map((item) => (
           <div className={style.card}>
             <Card
+              key={item.id}
               title_children={
                 <>
                   <div>날짜 : </div>

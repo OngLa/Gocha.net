@@ -7,14 +7,16 @@
   color: white;
   display: flex;
   justify-content: space-around;
-}
-
-.tag {
-  display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
-.content {
-  margin-bottom: 2px;
+.tag .mb{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 800;
+}
+
+.mb {
+  margin-bottom: 3px;
 }

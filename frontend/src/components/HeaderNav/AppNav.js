@@ -1,13 +1,21 @@
 import { Link } from "react-router-dom";
 import style from "./appNav.module.css";
+import chattingMenu from "../../img/navMenu/chattingMenu.png";
+import reservationMenu from "../../img/navMenu/reservationMenu.png";
+import homeMenu from "../../img/navMenu/homeMenu.png";
+import carDataMenu from "../../img/navMenu/cardataMenu.png";
+import carInfoMenu from "../../img/navMenu/carinfoMenu.png";
 
 function AppNav() {
+  // 고객의 하단 Nav바.
+  // 진단/예약/차량데이터/내차정보 이동 가능
+
   return (
     <header className={style.navWrap}>
       <div className={style.menuBox}>
         <Link to="/chatting">
           <img
-            src="./navMenu/chattingMenu.png"
+            src={chattingMenu}
             alt="Gochanet"
             className={style.navImgStyle}
           />
@@ -17,16 +25,16 @@ function AppNav() {
       <div className={style.menuBox}>
         <Link to="/reservation">
           <img
-            src="./navMenu/reservationMenu.png"
+            src={reservationMenu}
             alt="Gochanet"
             className={style.navImgStyle}
           />
         </Link>
         <div>예약하기</div>
       </div>
-      <Link to="/home2" className={style.menuHomeBox}>
+      <Link to="/" className={style.menuHomeBox}>
         <img
-          src="./navMenu/homeMenu.png"
+          src={homeMenu}
           alt="Gochanet"
           className={style.homeImgStyle}
         />
@@ -34,7 +42,7 @@ function AppNav() {
       <div className={style.menuBox}>
         <Link to="/car/data-list">
           <img
-            src="./navMenu/carDataMenu.png"
+            src={carDataMenu}
             alt="Gochanet"
             className={style.navImgStyle}
           />
@@ -44,7 +52,7 @@ function AppNav() {
       <div className={style.menuBox}>
         <Link to="/car/info">
           <img
-            src="./navMenu/carInfoMenu.png"
+            src={carInfoMenu}
             alt="Gochanet"
             className={style.navImgStyle}
           />

@@ -10,7 +10,7 @@
 }
 
 .memberBox {
-  width: 270px;
+  width: 90%;
   height: 40px;
   margin: 20px;
   display: flex;
@@ -19,12 +19,20 @@
   border-radius: 10px;
 }
 
+.imgWrap {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .memberImg {
   margin: 10px;
 }
 
 .memberInput {
-  width: 150px;
+  width: calc(100% - 80px);
   height: 35px;
   border: none;
   padding: 0px 10px;

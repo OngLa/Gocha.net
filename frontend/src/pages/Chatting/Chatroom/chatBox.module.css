@@ -51,8 +51,35 @@
 
 .contents {
   width: 100%;
-  min-height: 125px;
+  min-height: 100px;
   padding: 8px 15px 8px 15px;
   color: white;
   font-weight: 100;
+}
+
+.is_reservation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.send_dateUser {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  color: white;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #A4DABE;
+}
+
+.send_dateCarcenter {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #A4DABE;
 }

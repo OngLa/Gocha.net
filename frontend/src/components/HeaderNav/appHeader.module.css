@@ -12,7 +12,7 @@
 .flexHeader {
   display: flex;
   flex-direction: row;
-  height: 100%;
+  height: calc(100% - 2px);;
   width: 100%;
 }
 
@@ -52,9 +52,26 @@
   height: 45%;
 }
 
+.hrLineWrap {
+  display: flex;
+  justify-content: center;
+  height: 2px;
+}
+
+.hrSideBox {
+  width: 5vw;
+  background-color: #334e58;
+}
+
 .hrLine {
-  width: 90vw;
-  border: 0.5px solid #486f7d;
+  width: 90vh;
+  border-top: 0.5px solid #486f7d;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 0px;
+  background-color: #334e58;
+  height: 1px;
+  margin: 0;
 
   @media (min-width: 1171px) {
     width: 35vw;

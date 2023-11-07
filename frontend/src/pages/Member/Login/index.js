@@ -19,8 +19,8 @@ function Login() {
     });
   };
 
-  const handleFindPw = async (event) => {
-    navigate("/member/findpw");
+  const handleEditPw = async (event) => {
+    navigate("/member/editpw");
   };
 
   const handleLogin = async (event) => {
@@ -78,20 +78,34 @@ function Login() {
       </div>
       <div className={style.SmallButtonWrap}>
         <SmallButton
-          children="비밀번호 찾기"
-          onClick={handleFindPw}
+          children="비밀번호 수정"
+          onClick={handleEditPw}
           style={{ width: "110px" }}
         ></SmallButton>
       </div>
       <div className={style.LargeButtonWrap}>
         <LargeButton children="로그인" onClick={handleLogin}></LargeButton>
       </div>
-
       <div>
-        <Link to="/member/emailCheck">회원가입</Link>
-      </div>
-      <div>
-        <Link to="/member/mypage">마이페이지</Link>
+        [임시 버튼]
+        <div className={style.tempButton}>
+        <Link to="/member/findpw"><SmallButton
+            children="비밀번호 찾기"
+            style={{ width: "110px" }}
+          ></SmallButton></Link>
+        </div>
+        <div className={style.tempButton}>
+        <Link to="/member/emailCheck"><SmallButton
+            children="회원가입"
+            style={{ width: "110px" }}
+          ></SmallButton></Link>
+        </div>
+        <div className={style.tempButton}>
+        <Link to="/member/mypage"><SmallButton
+            children="마이페이지"
+            style={{ width: "110px" }}
+          ></SmallButton></Link>
+        </div>
       </div>
     </div>
   );

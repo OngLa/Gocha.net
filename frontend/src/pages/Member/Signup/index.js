@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LargeButton from "../../../components/Button";
 import style from "./signup.module.css";
 import { useState } from "react";
+import ContentHeader from "../../../components/ContentHeader";
 
 function Signup() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ function Signup() {
     phoneNumber: "",
   });
 
-  const onChange = (e) => {
+  const handleOnChange = (e) => {
     setMember({
       ...member,
       [e.target.name]: e.target.value,
@@ -23,11 +24,11 @@ function Signup() {
 
   const [nicknameCheckResult, setNicknameCheckResult] = useState(""); // 상태 추가
 
-  const checkId = async () => {
+  const handleCheckId = async () => {
     setNicknameCheckResult("닉네임 사용 가능");
   };
 
-  const onClick = async (event) => {
+  const handleOnClick = async (event) => {
     // 항목 전부 입력해야 회원가입 가능
     if (
       !member.email ||
@@ -59,11 +60,8 @@ function Signup() {
 
   return (
     <>
-      <div className={style.pageInfo}>
-        <Link to="/">
-          <img src="/memberIcon/back.png" alt="뒤로가기" />
-        </Link>
-        <span>회원가입</span>
+      <div className={style.menu}>
+        <ContentHeader menuName="회원가입" />
       </div>
       <div className={style.memberWrap}>
         <form onSubmit={handleSubmit}>
@@ -80,7 +78,7 @@ function Signup() {
               value={member.email}
               name="email"
               onChange={(e) => {
-                onChange(e);
+                handleOnChange(e);
               }}
             />
           </div>
@@ -97,7 +95,7 @@ function Signup() {
               value={member.password}
               name="password"
               onChange={(e) => {
-                onChange(e);
+                handleOnChange(e);
               }}
             />
           </div>
@@ -114,7 +112,7 @@ function Signup() {
               value={member.confirmPassword}
               name="confirmPassword"
               onChange={(e) => {
-                onChange(e);
+                handleOnChange(e);
               }}
             />
           </div>
@@ -131,10 +129,10 @@ function Signup() {
               value={member.nickname}
               name="nickname"
               onChange={(e) => {
-                onChange(e);
+                handleOnChange(e);
               }}
             />
-            <button className={style.checkIdBtn} onClick={checkId}>
+            <button className={style.checkIdBtn} onClick={handleCheckId}>
               중복체크
             </button>
           </div>
@@ -152,12 +150,12 @@ function Signup() {
               value={member.phoneNumber}
               name="phoneNumber"
               onChange={(e) => {
-                onChange(e);
+                handleOnChange(e);
               }}
             />
           </div>
           <div className={style.signupBtn}>
-            <LargeButton onClick={onClick}>회원가입 완료</LargeButton>
+            <LargeButton onClick={handleOnClick}>회원가입 완료</LargeButton>
           </div>
         </form>
       </div>

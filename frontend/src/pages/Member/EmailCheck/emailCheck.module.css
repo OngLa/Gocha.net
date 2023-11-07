@@ -1,11 +1,12 @@
-.pageInfo {
-  margin: 20px;
+.menu {
+  margin-bottom: 25px;
+  padding: 0px;
+  align-self: flex-start;
 }
 
 .emailWrap {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
 }
 
@@ -39,9 +40,13 @@
 .result {
   font-size: 11px;
   color: red;
-  margin: 20px 30px;
+  margin: 0px 30px 50px 30px;
 }
 
-.nextBtn, .EmailCheckApplyBtn {
-  margin: 20px 0px;
+.EmailCheckApplyBtn {
+  margin-bottom: 40px;
+}
+
+.nextBtn {
+  margin: 0px 0px;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import style from "./chatroom.module.css";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import ChatBox from "./ChatBox";
-import { SmallButton } from "../../../components/Button/index";
+import LargeButton from "../../../components/Button/index";
 import ChatPartnerProfile from "../components/ChatPartnerProfile";
 
 function Chatroom(props) {
@@ -39,6 +39,17 @@ function Chatroom(props) {
       is_reservation: "1",
       breakdown_id: "0",
     },
+    {
+      id: "1",
+      chatting_id: "3",
+      sender_id: null,
+      carcenter_id: "1",
+      send_date: new Date().toLocaleDateString(),
+      title: "정비소:답변입니다.",
+      contents: "내용3입니다.",
+      is_reservation: "1",
+      breakdown_id: "0",
+    },
   ];
 
   const navigate = useNavigate(); // useNavigate 훅을 사용
@@ -72,10 +83,10 @@ function Chatroom(props) {
         )
       )}
       <div className={style.SmallButtonWrap}>
-        <SmallButton
+        <LargeButton
           children="작성하기"
           onClick={() => moveWrite(cno)}
-        ></SmallButton>
+        ></LargeButton>
       </div>
     </div>
   );

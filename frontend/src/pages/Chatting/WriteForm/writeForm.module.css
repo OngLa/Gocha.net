@@ -2,14 +2,6 @@
   background-color: #334e58;
 }
 
-.ChatPartnerProfileWrap {
-  margin-top: 6vh;
-}
-
-.inputWrap {
-  margin-top: 70px;
-}
-
 .textWhite {
   color: white;
   font-size: 20px;
@@ -19,9 +11,9 @@
 .textarea {
   border-radius: 5px;
   margin-bottom: 20px;
+  width: 100%;
   min-height: 30px;
   line-height: 30px;
-  padding: 0px 7px;
   resize: vertical;
 }
 

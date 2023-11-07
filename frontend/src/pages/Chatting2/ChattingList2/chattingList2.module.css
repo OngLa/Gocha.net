@@ -1,0 +1,44 @@
+.chattingWrap {
+}
+
+.searchWrap {
+  width: 60%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  background-color: #45CB85;
+  border: 2px solid #A4DABE;
+  border-radius: 7px;
+  margin-bottom: 24px;
+}
+
+.searchImgWrap {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchImg {
+  width: 22px;
+  height: 22px;
+}
+
+.searchInput {
+  width: 90%;
+  height: 22px;
+  background-color: #45CB85;
+  border: 0px;
+  border-bottom: 1px solid white;
+  color: white;
+  font-size: 15px;
+}
+
+.searchInput::placeholder {
+  color: #DAFFE2;
+  font-weight: 100;
+}
+
+.ChatMemberBoxWrap > div {
+  margin-bottom: 15px;
+}

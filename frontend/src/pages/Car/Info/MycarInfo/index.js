@@ -1,4 +1,3 @@
-import { bottom } from '@popperjs/core';
 import styles from './style.module.css'
 
 function MycarInfo(props) {

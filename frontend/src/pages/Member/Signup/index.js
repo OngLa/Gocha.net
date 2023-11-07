@@ -66,11 +66,13 @@ function Signup() {
       <div className={style.memberWrap}>
         <form onSubmit={handleSubmit}>
           <div className={style.memberBox}>
-            <img
-              src="/memberIcon/email.png"
-              alt="emailImg"
-              className={style.memberImg}
-            />
+            <div className={style.imgWrap}>
+              <img
+                src="/memberIcon/email.png"
+                alt="emailImg"
+                className={style.memberImg}
+              />
+            </div>
             <input
               className={style.memberInput}
               type="email"
@@ -83,11 +85,13 @@ function Signup() {
             />
           </div>
           <div className={style.memberBox}>
-            <img
-              src="/memberIcon/password.png"
-              alt="passworImg"
-              className={style.memberImg}
-            />
+            <div className={style.imgWrap}>
+              <img
+                src="/memberIcon/password.png"
+                alt="passworImg"
+                className={style.memberImg}
+              />
+            </div>
             <input
               className={style.memberInput}
               type="password"
@@ -100,11 +104,13 @@ function Signup() {
             />
           </div>
           <div className={style.memberBox}>
-            <img
-              src="/memberIcon/password.png"
-              alt="confirmPasswordImage"
-              className={style.memberImg}
-            />
+            <div className={style.imgWrap}>
+              <img
+                src="/memberIcon/password.png"
+                alt="confirmPasswordImage"
+                className={style.memberImg}
+              />
+            </div>
             <input
               className={style.memberInput}
               type="password"
@@ -117,11 +123,13 @@ function Signup() {
             />
           </div>
           <div className={style.memberBox}>
-            <img
-              src="/memberIcon/nickname.png"
-              alt="nicknameImg"
-              className={style.memberImg}
-            />
+            <div className={style.imgWrap}>
+              <img
+                src="/memberIcon/nickname.png"
+                alt="nicknameImg"
+                className={style.memberImg}
+              />
+            </div>
             <input
               className={style.memberInput}
               type="text"
@@ -138,11 +146,13 @@ function Signup() {
           </div>
           <div className={style.nicknameCheckResult}>{nicknameCheckResult}</div>
           <div className={style.memberBox}>
-            <img
-              src="/memberIcon/phone.png"
-              alt="phoneImg"
-              className={style.memberImg}
-            />
+            <div className={style.imgWrap}>
+              <img
+                src="/memberIcon/phone.png"
+                alt="phoneImg"
+                className={style.memberImg}
+              />
+            </div>
             <input
               className={style.memberInput}
               type="text"

@@ -1,3 +1,4 @@
+import ContentHeader from "../../components/ContentHeader";
 import Registration from "./Registration";
 
 function MainRepairshop() {
@@ -11,14 +12,7 @@ function MainRepairshop() {
 
   return (
     <div className="MainRepairshop">
-      <p
-        style={{
-          color: "#47F6C1",
-          textAlign: "left",
-        }}
-      >
-        {"<"} 주 정비소 등록하기
-      </p>
+     <ContentHeader menuName="예약관리"/>
 
       {carcenters.map((carcenter) => (
         <Registration

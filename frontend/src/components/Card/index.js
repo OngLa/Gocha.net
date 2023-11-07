@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import style from "./style.module.css";
+import upIcon from '../../img/icon/Caret_Up_MD.png'
+import downIcon from '../../img/icon/Caret_Down_MD.png'
 
 function Card(props) {
   const { title_children, content_children } = props;
@@ -14,10 +16,12 @@ function Card(props) {
     <div className={style.card}>
       <button className={style.btn} onClick={toggleContent}>
         <div className={style.title}>{title_children}</div>
-        <img className={style.image}
+        <img
+          className={style.image}
           src={`${
-            isActive ? "/icon/Caret_Up_MD.png" : "/icon/Caret_Down_MD.png"
+            isActive ? upIcon : downIcon
           }`}
+          alt="toggle-icon"
         />
       </button>
       <div
@@ -26,7 +30,6 @@ function Card(props) {
         }`}
         ref={contentRef}
       >
-        {/* <hr/> */}
         {content_children}
       </div>
     </div>

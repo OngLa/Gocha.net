@@ -8,7 +8,7 @@ function LargeButton(props) {
       className={`${styles.btn} ${styles.largeBtn}`}
       name={name}
       onClick={onClick}
-     style={style}
+      style={style}
     >
       {children}
     </button>

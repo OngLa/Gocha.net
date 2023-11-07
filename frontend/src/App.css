@@ -21,6 +21,18 @@
 }
 
 .AppRouteWrap {
-  min-height: 80vh;
-  padding: 13vh 5vw 12vh 5vw;
+  min-height: 60vh;
+  padding: 19vh 5vw 12vh 5vw;
+  margin-bottom: 4vh;
+  overflow-x: hidden;
+
+  @media (min-height: 800px) {
+    padding-top: 17.5vh;
+    margin-bottom: 3vh;
+  }
+}
+
+/* 페이지 height를 벗어나도 흰배경이 보이지 않도록 */
+body {
+  background-color: #334E58;
 }

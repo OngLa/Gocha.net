@@ -59,7 +59,7 @@ function Mypage() {
           alt="reservationImg"
           className={style.mypageImg}
         />
-        <Link to="/">내 예약목록</Link>
+        <Link to="/" className={style.mypageReservation}>내 예약목록</Link>
       </div>
       </div>
       </>

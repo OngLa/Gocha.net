@@ -8,17 +8,16 @@ function EmailCheck() {
   const navigate = useNavigate();
 
   const onClick = () => {
-    // 버튼 클릭 시 다음 페이지로 이동
     navigate('/member/signup');
   }
   
-  const [EmailCheckApplyResult, setEmailCheckApplyResult] = useState(''); // 상태 추가
+  const [EmailCheckApplyResult, setEmailCheckApplyResult] = useState(''); 
 
   const EmailCheckApply = () => {
     
   };
 
-  const [EmailCheckResult, setEmailCheckResult] = useState(''); // 상태 추가
+  const [EmailCheckResult, setEmailCheckResult] = useState(''); 
 
   const EmailCheckNum = () => {
     

@@ -1,5 +1,7 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import styles from "./style.module.css";
+import upIocn from '../../../../img/icon/Caret_Up_MD.png'
+import downIocn from '../../../../img/icon/Caret_Down_MD.png'
 
 const ToggleList = forwardRef((props, ref) => {
   const { title_children, content_children, initActive } = props;
@@ -26,7 +28,7 @@ const ToggleList = forwardRef((props, ref) => {
         <img
           className={styles.image}
           src={`${
-            isActive ? "/icon/Caret_Up_MD.png" : "/icon/Caret_Down_MD.png"
+            isActive ? upIocn : downIocn
           }`}
           alt="toggle-icon"
         />

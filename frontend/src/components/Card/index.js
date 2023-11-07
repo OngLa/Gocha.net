@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import style from "./style.module.css";
+import upIcon from '../../img/icon/Caret_Up_MD.png'
+import downIcon from '../../img/icon/Caret_Down_MD.png'
 
 function Card(props) {
   const { title_children, content_children } = props;
@@ -17,7 +19,7 @@ function Card(props) {
         <img
           className={style.image}
           src={`${
-            isActive ? "/icon/Caret_Up_MD.png" : "/icon/Caret_Down_MD.png"
+            isActive ? upIcon : downIcon
           }`}
           alt="toggle-icon"
         />

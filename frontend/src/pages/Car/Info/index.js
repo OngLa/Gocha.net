@@ -65,18 +65,22 @@ function Info() {
 
   return (
     <div className={styles.wrapper}>
-      <div className={`${styles.mb} ${styles.contentHeader}`}>
+      {/* Content의 헤더, 뒤로가기 기능 */}
+      <div className={styles.contentHeader}>
         <ContentHeader menuName="내 차 정보" />
       </div>
 
+      {/* 내 차량 종류 Selector */}
       <div className={`${styles.mb} ${styles.customSelect}`}>
         <CustomSelect items={myCarList} value={value} setValue={setValue} />
       </div>
 
+      {/* 차량 이미지 출력 */}
       <div className={styles.mb}>
         <img src="https://via.placeholder.com/370x230" alt="sample" />
       </div>
 
+      {/* 내 차 등록하기 버튼 > 차량 등록 페이지로 이동 */}
       <div className={styles.mb}>
         <LargeButton
           name="register"
@@ -85,6 +89,7 @@ function Info() {
         />
       </div>
 
+      {/* 내 자동차 정보 출력 */}
       <div>
         <MycarInfo item={myCarList[value]} />
       </div>

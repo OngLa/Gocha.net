@@ -2,6 +2,8 @@ import moment from "moment";
 
 import style from "./dateInputForm.module.css";
 
+import calendarIcon from '../../img/icon/Calendar.png'
+
 function DateInputForm(props) {
   const { date, setDate, clickBtn } = props;
 
@@ -40,7 +42,7 @@ function DateInputForm(props) {
         onBlur={checkValidDate}
       />
       <button className={style.formBtn} type="button" onClick={clickBtn}>
-        <img className={style.icon} src="/icon/Calendar.png"></img>
+        <img className={style.icon} src={calendarIcon}></img>
       </button>
     </div>
   );

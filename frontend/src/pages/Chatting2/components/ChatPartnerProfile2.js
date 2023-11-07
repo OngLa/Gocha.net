@@ -21,7 +21,7 @@ function ChatPartnerProfile(props) {
       </button>
       <div className={style.imgWrap}>
         <img
-          src={`https://source.boringavatars.com/sunset/${props.userName}?colors=F26B7A,F0F2DC,D9EB52,8AC7DE,87796F`}
+          src={`https://source.boringavatars.com/beam/${props.userName}?colors=F26B7A,F0F2DC,D9EB52,8AC7DE,87796F`}
           alt="User"
         />
       </div>

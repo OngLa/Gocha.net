@@ -9,6 +9,12 @@
   border-radius: 10px;
 }
 
+.ChatMemberBoxWrap:hover {
+  background-color: #45CB85;
+  border: 2px solid #A4DABE;
+}
+
+
 .imgWrap {
   width: 20%;
   height: 100%;

@@ -1,10 +1,14 @@
-import style from "./index.module.css";
+import { Routes, Route } from "react-router-dom";
+import HomeUser from "./HomeUser";
+import HomeCarcenter from "./HomeCarcenter";
 
-function Home() {
+function Home(props) {
   return (
-    <div className={style.homeWrap} id={style.homeWrapId}>
-      <img src="./homeBackground.png" alt="homeBackground" className={style.homeBackground} />
-    </div>
+    <Routes>
+      <Route path="" Component={HomeUser} />
+      <Route path="home" Component={HomeUser} />
+      <Route path="home2" Component={HomeCarcenter} />
+    </Routes>
   );
 }
 

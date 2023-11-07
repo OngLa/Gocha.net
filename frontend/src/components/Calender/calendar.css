@@ -1,0 +1,39 @@
+.react-datepicker {
+  font-size: 16px;
+  border: 1px solid #45CB85;
+  background-color: #5D707F;
+
+  /* 기타 원하는 스타일 */
+}
+
+/* 날짜 색 */
+.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name{
+  color: #fff
+}
+
+.day-before-today {
+  color: #484747 !important; /* 날짜 색상을 회색으로 설정 */
+}
+
+.react-datepicker__header {
+  background-color: #5D707F;
+  /* 헤더 부분의 배경색 변경 */
+}
+
+.react-datepicker__current-month {
+  color:#fff
+}
+
+.react-datepicker__day--selected {
+  background-color: #47F6C1;
+  /* 선택된 날짜의 배경색 변경 */
+}
+
+.react-datepicker__day--selecte:hover {
+  background-color: #000;
+}
+
+/* 선택한날짜 색상주기 */
+.react-datepicker__day-name {
+  color: #47F6C1
+}

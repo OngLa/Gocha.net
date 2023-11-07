@@ -14,10 +14,12 @@ function Card(props) {
     <div className={style.card}>
       <button className={style.btn} onClick={toggleContent}>
         <div className={style.title}>{title_children}</div>
-        <img className={style.image}
+        <img
+          className={style.image}
           src={`${
             isActive ? "/icon/Caret_Up_MD.png" : "/icon/Caret_Down_MD.png"
           }`}
+          alt="toggle-icon"
         />
       </button>
       <div
@@ -26,7 +28,6 @@ function Card(props) {
         }`}
         ref={contentRef}
       >
-        {/* <hr/> */}
         {content_children}
       </div>
     </div>

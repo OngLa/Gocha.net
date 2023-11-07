@@ -6,6 +6,12 @@ import { SmallButton } from "../../../components/Button/index";
 import ChatPartnerProfile from "../components/ChatPartnerProfile";
 
 function Chatroom(props) {
+  // [고객과 정비소의 채팅방]
+  // 고객의 메세지는 우측 초록색 박스로 표현
+  // 정비소의 메세지는 좌측 회색 박스로 표현
+  // 제목/내용/전송날짜/예약버튼/작성버튼을 포함.
+  // 예약버튼의 경우 정비소가 글작성시 예약버튼 활성화를 누를 경우에만 생성된다.
+
   const cno = parseInt(useParams().cno);
   const [searchParams] = useSearchParams();
   let carcenterName = searchParams.get("carcenterName");
@@ -42,9 +48,7 @@ function Chatroom(props) {
 
   return (
     <div className={style.ChatroomWrap}>
-      <div className={style.ChatPartnerProfileWrap}>
-        <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
-      </div>
+      <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
       {messageList.map((message) =>
         message.sender_id !== null ? (
           <div className={style.ChatboxSenderWrap}>

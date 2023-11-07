@@ -5,6 +5,12 @@ import LargeButton from "../../../components/Button/index";
 import ChatPartnerProfile2 from "../components/ChatPartnerProfile2";
 
 function WriteForm2(props) {
+  // [정비소 메세지 작성 페이지]
+  // 제목/내용입력이 가능하며
+  // 정비소는 고객과 다르게 예약활성화 체크박스가있다.
+  // (고객은 정비소와 다르게 데이터 선택 입력란이 있다.)
+  // 데이터 전송 시 채팅방으로 돌아간다.(이 때 url에 고객 이름도 같이 넘기도록함.)
+
   const uno = parseInt(useParams().uno);
   const [searchParams] = useSearchParams();
   let userName = searchParams.get("userName");
@@ -20,15 +26,13 @@ function WriteForm2(props) {
   const sendMessage = (uno) => {
     // message 객체를 이동할 경로로 전달
     // api(`/carcentersendmessage/${uno}/?title=${message.title}&content=${message.content}&selectedData=${message.selectSevervation}`);
-    navigate(`/chatting2/chatroom2/${uno}`);
+    navigate(`/chatting2/chatroom2/${uno}?userName=${userName}`);
   };
 
   return (
     <div className={style.WriteFormWrap}>
-      <div className={style.ChatPartnerProfileWrap}>
-        <ChatPartnerProfile2 userName={userName}></ChatPartnerProfile2>
-      </div>
-      <div className={style.inputWrap}>
+      <ChatPartnerProfile2 userName={userName}></ChatPartnerProfile2>
+      <div>
         <div className={style.textWhite}>제목</div>
         <textarea
           className={style.textarea}

@@ -2,8 +2,16 @@ import style from "./chattingList.module.css";
 import ChatMemberBox from "./ChatMemberBox";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import ContentHeader from "../../../components/ContentHeader";
+import searchIcon from "../../../img/chatting/searchIcon.png";
 
 function ChattingList() {
+  // [고객 채팅목록 페이지]
+  // 정비소 데이터 더미를 임시로 생성하였음.
+  // 검색칸에 정비소명을 입력하면 실시간으로 필터링 됌.
+  // 해당 지점을 클릭하면 채팅방으로 이동
+  // *고객의 채팅목록 페이지는 모든 정비소를 다 보여준다.
+  
   const carcenterList = [
     {
       id: "1",
@@ -35,16 +43,12 @@ function ChattingList() {
 
   return (
     <div className={style.chattingWrap}>
-      <div className={style.menuTitle}>
-        <div>정비소 목록</div>
+      <div>
+        <ContentHeader menuName="정비소 목록"></ContentHeader>
       </div>
       <div className={style.searchWrap}>
         <div className={style.searchImgWrap}>
-          <img
-            className={style.searchImg}
-            src="./chatting/searchIcon.jpg"
-            alt="User"
-          />
+          <img className={style.searchImg} src={searchIcon} alt="User" />
         </div>
         <div>
           <input

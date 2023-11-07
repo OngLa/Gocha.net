@@ -5,6 +5,12 @@ import ChatPartnerProfile from "../components/ChatPartnerProfile";
 import LargeButton from "../../../components/Button/index";
 
 function WriteForm(props) {
+  // [고객 메세지 작성 페이지]
+  // 제목/내용입력이 가능하며
+  // 고객은 정비소와 다르게 데이터 선택 입력란이 있다.
+  // selectbox로 구성되어 있으며 데이터번호&날짜로 구분한다.
+  // 데이터 전송 시 채팅방으로 돌아간다.(이 때 url에 정비소 이름도 같이 넘기도록함.)
+
   const cno = parseInt(useParams().cno);
   const [searchParams] = useSearchParams();
   let carcenterName = searchParams.get("carcenterName");
@@ -39,15 +45,13 @@ function WriteForm(props) {
   const sendMessage = (cno) => {
     // message 객체를 이동할 경로로 전달
     // api(`/usersendmessage/${cno}/?title=${message.title}&content=${message.content}&selectedData=${message.selectData}`);
-    navigate(`/chatting/chatroom/${cno}`);
+    navigate(`/chatting/chatroom/${cno}?carcenterName=${carcenterName}`);
   };
 
   return (
     <div className={style.WriteFormWrap}>
-      <div className={style.ChatPartnerProfileWrap}>
-        <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
-      </div>
-      <div className={style.inputWrap}>
+      <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
+      <div>
         <div className={style.textWhite}>제목</div>
         <textarea
           className={style.textarea}
@@ -82,7 +86,9 @@ function WriteForm(props) {
           id="carData"
           name="carData"
           value={message.selectData}
-          onChange={(e) => setMessage({ ...message, selectData: e.target.value })}
+          onChange={(e) =>
+            setMessage({ ...message, selectData: e.target.value })
+          }
         >
           <option value="">선택</option>
           {carDataList.map((carData) => (

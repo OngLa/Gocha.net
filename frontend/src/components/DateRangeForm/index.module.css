@@ -1,0 +1,29 @@
+.formWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.title {
+  color: #45cb85;
+  font-weight: 800;
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+}
+
+.calendar {
+  margin-top: 10px;
+}
+
+.between {
+  color: white;
+  font-weight: 800;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 13px;
+}

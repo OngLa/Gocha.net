@@ -6,7 +6,7 @@
   padding: 15px;
   color: white;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -18,5 +18,5 @@
 }
 
 .mb {
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 }

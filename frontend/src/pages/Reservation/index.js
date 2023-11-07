@@ -5,7 +5,6 @@ import Sidepanel from "./Sidepanel";
 import MainRepairshop from "./MainRepairshop";
 import Home from "./Home";
 
-
 function Reservation() {
 
 

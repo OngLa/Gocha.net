@@ -31,7 +31,7 @@ function AppNavHome2() {
         <div>비대면 진단</div>
       </div>
       <div className={style.menuBox}>
-        <Link to="/reservation">
+        <Link to="/reservationadmin">
           <img
             src={reservationMenu}
             alt="Gochanet"

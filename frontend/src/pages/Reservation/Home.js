@@ -4,6 +4,7 @@ import LargeButton from "../../components/Button";
 
 import RepairshopList from "./RepairshopList";
 import { useState } from "react";
+import ContentHeader from "../../components/ContentHeader";
 
 function Home() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ function Home() {
 
   return (
     <div className="Reservation" style={{ display: "flex",flexDirection: "column"}}>
-      <p style={{ color: "#47F6C1", textAlign: "left",}}>{"<"} 예약하기 - 정비소 목록</p>
+       <ContentHeader menuName="예약관리"/>
       <div style={{marginTop: "10px", display: "flex", flexDirection: "column", alignItems: "center"}}>
         {/* 주정비소 컴포넌트 */}
         <RepairshopList address="등록하기에서 post한 값 get으로 받아오기" buttonText="예약하기"/>

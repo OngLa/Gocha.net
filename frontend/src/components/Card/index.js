@@ -14,7 +14,7 @@ function Card(props) {
     <div className={style.card}>
       <button className={style.btn} onClick={toggleContent}>
         <div className={style.title}>{title_children}</div>
-        <img
+        <img className={style.image}
           src={`${
             isActive ? "/icon/Caret_Up_MD.png" : "/icon/Caret_Down_MD.png"
           }`}

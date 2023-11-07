@@ -1,81 +1,98 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import style from "./emailCheck.module.css"
+import style from "./emailCheck.module.css";
 import LargeButton from "../../../components/Button";
+import ContentHeader from "../../../components/ContentHeader";
 
 function EmailCheck() {
-  
   const navigate = useNavigate();
 
-  const onClick = () => {
-    navigate('/member/signup');
-  }
-  
-  const [EmailCheckApplyResult, setEmailCheckApplyResult] = useState(''); 
+  const [email, setEmail] = useState({
+    email: "",
+    verificationCode: "",
+  });
 
-  const EmailCheckApply = () => {
-    
+  const handleOnChange = (e) => {
+    setEmail({
+      ...email,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const [EmailCheckResult, setEmailCheckResult] = useState(''); 
+  const handleOnClick = () => {
+      navigate("/member/signup");
+      // navigate("/member/editPassword");
+  };
+  
+  const [EmailCheckApplyResult, setEmailCheckApplyResult] = useState("");
 
-  const EmailCheckNum = () => {
-    
+  const handleEmailCheckApply = () => {
+    setEmailCheckApplyResult("올바른 이메일 형식이 아닙니다.");
   };
 
+  const [EmailCheckResult, setEmailCheckResult] = useState("");
 
-  
-  return(
-  <>
-  <div className={style.pageInfo}>
-    <Link to="/"><img src ="/memberIcon/back.png" alt="뒤로가기" /></Link>
-    <span>회원가입</span>
-  </div>
-  <div className={style.emailWrap}>
-    <div className={style.emailBox}>
-      <img
-        src="/memberIcon/email.png"
-        alt="emailImg"
-        className={style.emailImg}
-      />
-      <input 
-        className={style.emailInput} 
-        type="email" 
-        placeholder="이메일"
-        // value={member.email}
-        // onChange={e => {
-        //   onChange(e)
-        // }}
-      />
-    </div>
-    <div className={style.result}>{EmailCheckApplyResult}</div>
-    <div className={style.EmailCheckApplyBtn}>
-      <LargeButton onClick={EmailCheckApply}>인증요청</LargeButton>
-    </div>
-    <div className={style.emailBox}>
-      <img
-        src="/memberIcon/emailcheck.png"
-        alt="emailCheckImg"
-        className={style.emailImg}
-      />
-      <input 
-        className={style.emailInput} 
-        type="text" 
-        placeholder="인증번호 입력"
-        // value={member.email}
-        // onChange={e => {
-        //   onChange(e)
-        // }}
-      />
-      <button className={style.EmailCheckNumBtn} onClick={EmailCheckNum}>확인</button> 
-    </div>
-    <div className={style.result}>{EmailCheckResult}</div>
-    <div className={style.nextBtn}>
-      <LargeButton onClick={onClick}>다음</LargeButton>
-    </div>
-  </div>
-  </>
-  )
+  const handleEmailCheckNum = () => {
+    setEmailCheckResult("인증 번호가 일치하지 않습니다.");
+  };
+
+  return (
+    <>
+      <div className={style.menu}>
+        <ContentHeader menuName="이메일 인증" />
+      </div>
+      <div className={style.emailWrap}>
+        <div className={style.emailBox}>
+          <img
+            src="/memberIcon/email.png"
+            alt="emailImg"
+            className={style.emailImg}
+          />
+          <input
+            className={style.emailInput}
+            type="email"
+            placeholder="이메일"
+            name="email"
+            value={email.email}
+            onChange={(e) => {
+              handleOnChange(e);
+            }}
+          />
+        </div>
+        <div className={style.result}>{EmailCheckApplyResult}</div>
+        <div className={style.EmailCheckApplyBtn}>
+          <LargeButton onClick={handleEmailCheckApply}>인증요청</LargeButton>
+        </div>
+        <div className={style.emailBox}>
+          <img
+            src="/memberIcon/emailcheck.png"
+            alt="emailCheckImg"
+            className={style.emailImg}
+          />
+          <input
+            className={style.emailInput}
+            type="text"
+            placeholder="인증번호 입력"
+            name="verificationCode"
+            value={email.verificationCode}
+            onChange={(e) => {
+              handleOnChange(e);
+            }}
+          />
+          <button
+            className={style.EmailCheckNumBtn}
+            onClick={handleEmailCheckNum}
+          >
+            확인
+          </button>
+        </div>
+        <div className={style.result}>{EmailCheckResult}</div>
+        <div className={style.nextBtn}>
+          <LargeButton onClick={handleOnClick}>다음</LargeButton>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default EmailCheck;

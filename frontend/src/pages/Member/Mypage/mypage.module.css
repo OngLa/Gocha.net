@@ -1,5 +1,7 @@
-.pageInfo {
-  margin: 20px;
+.menu {
+  margin-bottom: 25px;
+  padding: 0px;
+  align-self: flex-start;
 }
 
 .mypageWrap {
@@ -20,17 +22,46 @@
   background-color: #5D707F;
   color: white;
   border-radius: 10px;
- 
 }
 
 .mypageImg {
   margin: 10px;
+  
+}
+
+.text {
+  width: 150px;
+  margin-left: 10px;
 }
 
 .mypageReservation {
   text-decoration: none;
   color: white;
+  margin-left: 10px;
 }
 
+.mypageSelect {
+  width: 80px;
+  height: 25px;
+  margin-left: 5px;
+  color: white;
+  background-color: #5D707F;
+  border: solid 1px white;
+  border-radius: 5px;
+}
+
+.withdrawalBox {
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+}
+
+.withdrawalBtn {
+  border: none;
+  color: white;
+  background-color: #334E58;
+  display: flex;
+  justify-content: end;
+}
 
 

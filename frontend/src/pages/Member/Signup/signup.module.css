@@ -1,11 +1,12 @@
-.pageInfo {
-  margin: 20px;
+.menu {
+  margin-bottom: 25px;
+  padding: 0px;
+  align-self: flex-start;
 }
 
 .memberWrap {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
 }
 
@@ -52,4 +53,6 @@
 
 .signupBtn {
   margin: 50px 0px;
+  display: flex;
+  justify-content: center;
 }

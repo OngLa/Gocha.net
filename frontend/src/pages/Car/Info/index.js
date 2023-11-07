@@ -6,9 +6,11 @@ import LargeButton from "../../../components/Button";
 import MycarInfo from "./MycarInfo";
 
 import styles from "./style.module.css";
+import { useNavigate } from "react-router-dom";
 
 function Info() {
   const [value, setValue] = useState(0);
+  const navigate = useNavigate();
 
   const myCarList = [
     {
@@ -58,7 +60,7 @@ function Info() {
   ];
 
   const handleRegisterCar = () => {
-    console.log("test");
+    navigate("/car/registration");
   };
 
   return (

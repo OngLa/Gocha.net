@@ -1,15 +1,16 @@
-import { Routes, Route } from "react-router-dom";
-import HomeUser from "./HomeUser";
-import HomeCarcenter from "./HomeCarcenter";
+import style from "./homeUser.module.css";
+import homeBackground from "../../img/homeBackground.png";
 
-function Home(props) {
+function HomeUser() {
   return (
-    <Routes>
-      <Route path="" Component={HomeUser} />
-      <Route path="home" Component={HomeUser} />
-      <Route path="home2" Component={HomeCarcenter} />
-    </Routes>
+    <div className={style.homeWrap} id={style.homeWrapId}>
+      <img
+        src={homeBackground}
+        alt="homeBackground"
+        className={style.homeBackground}
+      />
+    </div>
   );
 }
 
-export default Home;
+export default HomeUser;

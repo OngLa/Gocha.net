@@ -1,20 +1,20 @@
 import React from "react";
-import style from "./chatroom.module.css";
+import style from "./chatroom2.module.css";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import ChatBox from "./ChatBox";
+import ChatBox2 from "./ChatBox2";
 import { SmallButton } from "../../../components/Button/index";
-import ChatPartnerProfile from "../components/ChatPartnerProfile";
+import ChatPartnerProfile2 from "../components/ChatPartnerProfile2";
 
-function Chatroom(props) {
+function Chatroom2(props) {
   // [고객과 정비소의 채팅방]
-  // 고객의 메세지는 우측 초록색 박스로 표현
-  // 정비소의 메세지는 좌측 회색 박스로 표현
+  // 정비소의 메세지는 우측 초록색 박스로 표현
+  // 고객의 메세지는 좌측 회색 박스로 표현
   // 제목/내용/전송날짜/예약버튼/작성버튼을 포함.
   // 예약버튼의 경우 정비소가 글작성시 예약버튼 활성화를 누를 경우에만 생성된다.
 
-  const cno = parseInt(useParams().cno);
+  const uno = parseInt(useParams().uno);
   const [searchParams] = useSearchParams();
-  let carcenterName = searchParams.get("carcenterName");
+  let userName = searchParams.get("userName");
 
   const messageList = [
     {
@@ -23,7 +23,7 @@ function Chatroom(props) {
       sender_id: "1",
       carcenter_id: null,
       send_date: new Date().toLocaleDateString(),
-      title: "고객:문의입니다.",
+      title: "정비소:답변입니다.",
       contents: "내용1입니다.",
       is_reservation: "0",
       breakdown_id: "0",
@@ -34,7 +34,7 @@ function Chatroom(props) {
       sender_id: null,
       carcenter_id: "1",
       send_date: new Date().toLocaleDateString(),
-      title: "정비소:답변입니다.",
+      title: "고객:문의입니다.",
       contents: "내용2입니다.",
       is_reservation: "1",
       breakdown_id: "0",
@@ -42,43 +42,43 @@ function Chatroom(props) {
   ];
 
   const navigate = useNavigate(); // useNavigate 훅을 사용
-  const moveWrite = (cno) => {
-    navigate(`/chatting/writeform/${cno}?carcenterName=${carcenterName}`);
+  const moveWrite = (uno) => {
+    navigate(`/chatting2/writeform2/${uno}?userName=${userName}`);
   };
 
   return (
     <div className={style.ChatroomWrap}>
-      <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
+      <ChatPartnerProfile2 userName={userName}></ChatPartnerProfile2>
       {messageList.map((message) =>
-        message.sender_id !== null ? (
+        message.carcenter_id !== null ? (
           <div className={style.ChatboxSenderWrap}>
-            <ChatBox
-              title={message.title}
-              contents={message.contents}
-              send_date={message.send_date}
-              issender="1"
-            ></ChatBox>
-          </div>
-        ) : (
-          <div className={style.ChatboxWrap}>
-            <ChatBox
+            <ChatBox2
               title={message.title}
               contents={message.contents}
               send_date={message.send_date}
               is_reservation={message.is_reservation}
+              issender="1"
+            ></ChatBox2>
+          </div>
+        ) : (
+          <div className={style.ChatboxWrap}>
+            <ChatBox2
+              title={message.title}
+              contents={message.contents}
+              send_date={message.send_date}
               issender="0"
-            ></ChatBox>
+            ></ChatBox2>
           </div>
         )
       )}
       <div className={style.SmallButtonWrap}>
         <SmallButton
           children="작성하기"
-          onClick={() => moveWrite(cno)}
+          onClick={() => moveWrite(uno)}
         ></SmallButton>
       </div>
     </div>
   );
 }
 
-export default Chatroom;
+export default Chatroom2;

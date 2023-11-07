@@ -1,22 +1,29 @@
 import { Link } from "react-router-dom";
 import style from "./appNavHome2.module.css";
+import homeMenu from "../../img/navMenu/homeMenu.png"
+import chattingMenu from "../../img/navMenu/chattingMenu.png"
+import reservationMenu from "../../img/navMenu/reservationMenu.png"
+import partsMenu from "../../img/navMenu/partsMenu.png"
 
 function AppNavHome2() {
+  // 정비소의 하단 Nav바.
+  // 진단/예약/부품 관리 페이지 이동 가능.
+
   return (
     <header className={style.navWrap}>
       <div className={style.sideBox}></div>
-      <Link to="/home2" className={style.menuBox}>
+      <Link to="/" className={style.menuBox}>
         <img
-          src="./navMenu/homeMenu.png"
+          src={homeMenu}
           alt="Gochanet"
           className={style.homeImgStyle}
         />
       </Link>
       <div className={style.sideBox}></div>
       <div className={style.menuBox}>
-        <Link to="/chatting">
+        <Link to="/chatting2">
           <img
-            src="./navMenu/chattingMenu.png"
+            src={chattingMenu}
             alt="Gochanet"
             className={style.navImgStyle}
           />
@@ -26,7 +33,7 @@ function AppNavHome2() {
       <div className={style.menuBox}>
         <Link to="/reservation">
           <img
-            src="./navMenu/reservationMenu.png"
+            src={reservationMenu}
             alt="Gochanet"
             className={style.navImgStyle}
           />
@@ -36,7 +43,7 @@ function AppNavHome2() {
       <div className={style.menuBox}>
         <Link to="/parts">
           <img
-            src="./navMenu/partsMenu.png"
+            src={partsMenu}
             alt="Gochanet"
             className={style.navImgStyle}
           />

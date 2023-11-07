@@ -5,7 +5,6 @@ import Reservation from "./pages/Reservation";
 import Car from "./pages/Car";
 import Member from "./pages/Member";
 
-// function Approute() {} 이랑 아래 에로우 함수랑 같다.
 const AppRoute = () => {
   return (
     <>

@@ -2,7 +2,7 @@ import React from "react";
 import style from "./chatroom2.module.css";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import ChatBox2 from "./ChatBox2";
-import { SmallButton } from "../../../components/Button/index";
+import LargeButton from "../../../components/Button/index";
 import ChatPartnerProfile2 from "../components/ChatPartnerProfile2";
 
 function Chatroom2(props) {
@@ -72,10 +72,10 @@ function Chatroom2(props) {
         )
       )}
       <div className={style.SmallButtonWrap}>
-        <SmallButton
+        <LargeButton
           children="작성하기"
           onClick={() => moveWrite(uno)}
-        ></SmallButton>
+        ></LargeButton>
       </div>
     </div>
   );

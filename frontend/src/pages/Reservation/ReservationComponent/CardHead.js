@@ -1,5 +1,5 @@
 
-function ReservationCardHead(props) {
+function CardHead(props) {
 
 
   //액시오스로 데이터 받아옴 {id: ""}
@@ -12,4 +12,4 @@ function ReservationCardHead(props) {
   </div>
 );
 }
-export default ReservationCardHead;
+export default CardHead;

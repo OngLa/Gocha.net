@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { SmallButton } from "../../../components/Button";
-import styels from "./Registration.module.css";
+import styels from "./MainRepairshopComponent.module.css";
 
 function CardBody(props) {
   

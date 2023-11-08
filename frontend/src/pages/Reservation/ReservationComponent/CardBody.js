@@ -1,6 +1,6 @@
 import { SmallButton } from "../../../components/Button";
-import styles from "./reservationList.module.css"
-function ReservationCardBody(props) {
+import styles from "./reservationComponent.module.css"
+function CardBody(props) {
  
 
   return (
@@ -12,4 +12,4 @@ function ReservationCardBody(props) {
     </div>
   );
 }
-export default ReservationCardBody;
+export default CardBody;

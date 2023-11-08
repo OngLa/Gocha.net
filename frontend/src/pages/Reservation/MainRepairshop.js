@@ -1,7 +1,8 @@
 import ContentHeader from "../../components/ContentHeader";
-import Registration from "./Registration";
+import MainRepairshopComponent from "./MainRepairshopComponent";
 
 function MainRepairshop() {
+  //주 정비소 등록하기 페이지
 
   const carcenters = [
     { id: 1, name: "정비소 A", address: "등록하기 누르면 post 데이터 넘어감" },
@@ -12,10 +13,10 @@ function MainRepairshop() {
 
   return (
     <div className="MainRepairshop">
-     <ContentHeader menuName="예약관리"/>
+     <ContentHeader menuName="주 정비소 등록하기"/>
 
       {carcenters.map((carcenter) => (
-        <Registration
+        <MainRepairshopComponent
           key={carcenter.id} // React 리스트에서 고유한 key prop 필요
           id={carcenter.id}
           name={carcenter.name}

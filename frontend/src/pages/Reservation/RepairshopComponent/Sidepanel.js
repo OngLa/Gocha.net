@@ -1,6 +1,6 @@
-import styles from "./reservation.module.css";
-import { SmallButton } from "../../components/Button/index";
-import Calender from "../../components/Calender";
+import styles from "./sidepanel.module.css";
+import { SmallButton } from "../../../components/Button/index";
+import Calender from "../../../components/Calender";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 

@@ -1,8 +1,5 @@
-// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import LargeButton from "../../components/Button";
-
-// import RepairshopList from "./RepairshopList";
 import { useState } from "react";
 import ContentHeader from "../../components/ContentHeader";
 import RepairshopComponent from "./RepairshopComponent";
@@ -16,7 +13,7 @@ function RepairshopList() {
   const [filter, setFilter] = useState("");
 
   const handleOnclick = () => {
-    navigate("mainRepairshop");
+    navigate("../mainrepairshop");
   };
 
   const carcenters = [
@@ -41,8 +38,8 @@ function RepairshopList() {
     <div >
        <ContentHeader menuName="정비소 목록"/>
       <div style={{marginTop: "10px", display: "flex", flexDirection: "column", alignItems: "center"}}>
-        {/* 주정비소 컴포넌트 */}
-        <RepairshopComponent address="등록하기에서 post한 값 get으로 받아오기" buttonText="예약하기"/>
+        {/* 주정비소 등록하기에서 보낸 id,adress값  get으로 받기*/}
+        <RepairshopComponent></RepairshopComponent>
         <LargeButton onClick={handleOnclick} style={{marginTop: "30px"}}>주 정비소 등록하기</LargeButton>
       </div>
       

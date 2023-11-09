@@ -9,7 +9,7 @@ const navigate= useNavigate();
   const handleRegisterClick = () => {
     alert("테스트");
     navigate(-1);
-    // post로 데이터를 보내야지
+    // post로 데이터를 보내야지(name,adress)
   };
   
   return (

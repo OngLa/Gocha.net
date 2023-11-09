@@ -30,7 +30,7 @@ function AppNav() {
             className={style.navImgStyle}
           />
         </Link>
-        <div>예약하기</div>
+        <div>예약관리</div>
       </div>
       <Link to="/" className={style.menuHomeBox}>
         <img

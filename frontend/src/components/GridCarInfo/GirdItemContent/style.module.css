@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  color: white;
+  padding: 10px;
+  gap: 5px;
+  border: 1px solid #45cb85;
+  border-radius: 8px;
+  background-color: #5d707f;
+}
+
+.tag {
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.image {
+  width: 30px;
+  height: 30px;
+}
+
+.backRed {
+  background-color: #db3069;
+  border: 1px solid white;
+}

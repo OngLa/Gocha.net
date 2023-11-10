@@ -77,23 +77,23 @@ function Login() {
         />
       </div>
       <div className={style.SmallButtonWrap}>
-        <SmallButton
-          children="비밀번호 수정"
-          onClick={handleEditPw}
-          style={{ width: "110px" }}
-        ></SmallButton>
-      </div>
+        <Link to="/member/findpw"><SmallButton
+            children="비밀번호 찾기"
+            style={{ width: "110px" }}
+          ></SmallButton></Link>
+        </div>
       <div className={style.LargeButtonWrap}>
         <LargeButton children="로그인" onClick={handleLogin}></LargeButton>
       </div>
       <div>
         [임시 버튼]
         <div className={style.tempButton}>
-        <Link to="/member/findpw"><SmallButton
-            children="비밀번호 찾기"
-            style={{ width: "110px" }}
-          ></SmallButton></Link>
-        </div>
+        <SmallButton
+          children="비밀번호 수정"
+          onClick={handleEditPw}
+          style={{ width: "110px" }}
+        ></SmallButton>
+      </div>
         <div className={style.tempButton}>
         <Link to="/member/emailCheck"><SmallButton
             children="회원가입"

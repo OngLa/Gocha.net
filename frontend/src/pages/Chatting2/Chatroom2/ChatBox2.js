@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { SmallButton } from "../../../components/Button";
+import { SmallButton, SmallButton2 } from "../../../components/Button";
 import style from "./chatBox2.module.css";
+import { useState } from "react";
+import Sidepanel from "./Sidepanel";
 
 function ChatBox2(props) {
   // ChatBox는 채팅방에 사용되는 제목&내용을 포함한 박스이다.
@@ -11,7 +13,14 @@ function ChatBox2(props) {
 
   const navigate = useNavigate(); // useNavigate 훅을 사용
   const moveReservation = () => {
-    navigate("/");
+    // navigate(`/reservation?cardata_id=${props.cardata_id}`);
+    alert("고객만이 사용 가능합니다.")
+  };
+
+  const [openSidepanel, setOpenSidepanel] = useState(false);
+
+  const toggleSidepanel = () => {
+    setOpenSidepanel(!openSidepanel);
   };
 
   if (props.issender === "1") {
@@ -23,9 +32,7 @@ function ChatBox2(props) {
           <div className={style.contents}>{props.contents}</div>
           {props.is_reservation === "1" ? (
             <div className={style.is_reservation}>
-              <div className={style.SmallButtonWrap}>
-                <SmallButton children="예약하기" onClick={moveReservation} />
-              </div>
+              <SmallButton2 children="예약하기" onClick={moveReservation} />
             </div>
           ) : null}
         </div>
@@ -41,6 +48,23 @@ function ChatBox2(props) {
           <div className={style.titleCarcenter}>{props.title}</div>
           <hr className={style.hrLineCarcenter} />
           <div className={style.contents}>{props.contents}</div>
+          <div className={style.contents}>{props.contents}</div>
+          {props.cardata_id !== null ? (
+            <div>
+              <div className={style.is_reservation}>
+                <SmallButton
+                  children="데이터 보기"
+                  style={{ width: "110px" }}
+                  onClick={toggleSidepanel}
+                />
+              </div>
+              <div>
+                {openSidepanel && (
+                  <Sidepanel open={openSidepanel} toggle={toggleSidepanel} cardata_id={props.cardata_id} />
+                )}
+              </div>
+            </div>
+          ) : null}
         </div>
         <div className={style.send_dateCarcenter}>
           <div>{props.send_date}</div>

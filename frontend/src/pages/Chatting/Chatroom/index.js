@@ -19,7 +19,7 @@ function Chatroom(props) {
   const messageList = [
     {
       id: "1",
-      chatting_id: "2",
+      chatting_id: "1",
       sender_id: "1",
       carcenter_id: null,
       send_date: new Date().toLocaleDateString(),
@@ -27,21 +27,23 @@ function Chatroom(props) {
       contents: "내용1입니다.",
       is_reservation: "0",
       breakdown_id: "0",
+      cardata_id: 1
     },
     {
-      id: "1",
-      chatting_id: "2",
+      id: "2",
+      chatting_id: "1",
       sender_id: null,
       carcenter_id: "1",
       send_date: new Date().toLocaleDateString(),
       title: "정비소:답변입니다.",
-      contents: "내용2입니다.",
+      contents: "내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.",
       is_reservation: "1",
       breakdown_id: "0",
+      cardata_id: null
     },
     {
-      id: "1",
-      chatting_id: "3",
+      id: "3",
+      chatting_id: "1",
       sender_id: null,
       carcenter_id: "1",
       send_date: new Date().toLocaleDateString(),
@@ -49,6 +51,7 @@ function Chatroom(props) {
       contents: "내용3입니다.",
       is_reservation: "1",
       breakdown_id: "0",
+      cardata_id: null
     },
   ];
 
@@ -67,6 +70,8 @@ function Chatroom(props) {
               title={message.title}
               contents={message.contents}
               send_date={message.send_date}
+              // is_reservation={message.is_reservation} 고객은 예약 활성화 버튼 필요x
+              cardata_id={message.cardata_id}
               issender="1"
             ></ChatBox>
           </div>
@@ -77,6 +82,7 @@ function Chatroom(props) {
               contents={message.contents}
               send_date={message.send_date}
               is_reservation={message.is_reservation}
+              // cardata_id={message.cardata_id} 정비소는 데이터 첨부 버튼 필요x
               issender="0"
             ></ChatBox>
           </div>

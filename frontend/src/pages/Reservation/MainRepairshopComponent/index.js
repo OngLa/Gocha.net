@@ -1,14 +1,14 @@
 import CardBody from "./CardBody";
 import CardHead from "./CardHead";
-import styles from "./Registration.module.css"
+import styles from "./MainRepairshopComponent.module.css"
 
-function Registration(props) {
+function MainRepairshopComponent(props) {
 
   const { id, address, name } = props;
 
 
   return (
-    <div className={styles.RepairshopList}>
+    <div className={styles.MainRepairshopComponent}>
       <div className={styles.cardHeader}>
         <CardHead id={id} name={name}/>
       </div>
@@ -20,4 +20,4 @@ function Registration(props) {
     </div>
   );
 }
-export default Registration;
+export default MainRepairshopComponent;

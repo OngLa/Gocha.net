@@ -5,7 +5,6 @@ import AppNav from './components/HeaderNav/AppNav';
 import AppNavHome2 from './components/HeaderNav/AppNavHome2';
 
 function App() {
-  
   return (
     <div className="App">
       <div>
@@ -14,7 +13,6 @@ function App() {
       <div className='AppRouteWrap'>
         <AppRoute />
       </div>
-      {/* 유저Home의 Nav */}
       <div>
         <AppNav />
       </div>

@@ -1,17 +1,19 @@
-// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import LargeButton from "../../components/Button";
-
-import RepairshopList from "./RepairshopList";
 import { useState } from "react";
 import ContentHeader from "../../components/ContentHeader";
+import RepairshopComponent from "./RepairshopComponent";
 
-function Home() {
+function RepairshopList() {
+
+//정비소 목록페이지
+
+
   const navigate = useNavigate();
   const [filter, setFilter] = useState("");
 
   const handleOnclick = () => {
-    navigate("./MainRepairshop");
+    navigate("../mainrepairshop");
   };
 
   const carcenters = [
@@ -33,11 +35,11 @@ function Home() {
 
 
   return (
-    <div className="Reservation" style={{ display: "flex",flexDirection: "column"}}>
-       <ContentHeader menuName="예약관리"/>
+    <div >
+       <ContentHeader menuName="정비소 목록"/>
       <div style={{marginTop: "10px", display: "flex", flexDirection: "column", alignItems: "center"}}>
-        {/* 주정비소 컴포넌트 */}
-        <RepairshopList address="등록하기에서 post한 값 get으로 받아오기" buttonText="예약하기"/>
+        {/* 주정비소 등록하기에서 보낸 id,adress값  get으로 받기*/}
+        <RepairshopComponent></RepairshopComponent>
         <LargeButton onClick={handleOnclick} style={{marginTop: "30px"}}>주 정비소 등록하기</LargeButton>
       </div>
       
@@ -55,7 +57,7 @@ function Home() {
       {/* 필터링된 정비소 목록 렌더링 */}
       <div>
         {filteredCarcenters.map(carcenter => (
-          <RepairshopList
+          <RepairshopComponent
             key={carcenter.id}
             id={carcenter.id}
             name={carcenter.name}
@@ -68,4 +70,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default RepairshopList;

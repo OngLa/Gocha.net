@@ -1,0 +1,89 @@
+.sidePanel {
+  position: fixed; /* 화면에 고정 */
+  top: 0; /* 상단에 정렬 */
+  right: 0; /* 오른쪽 가장자리에 정렬 */
+  height: 100vh; /* 전체 높이 */
+  width: 60vw; /* 전체 높이 */
+  background-color: #1b263b; /* 배경 색상 */
+  z-index: 1000; /* 다른 요소들 위에 표시 */
+  transition: transform 0.3s ease-in-out; /* 부드러운 애니메이션 효과 */
+  transform: translateX(100%); /* 기본 상태에서는 화면 밖으로 숨겨져 있음 */
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5); /* 그림자 효과를 강화 */
+  padding: 5vh 20px 2vh 5vh; /* 내부 여백 추가 */
+  color: #fff; /* 글자 색상 흰색으로 변경 */
+}
+
+/* 사이드 패널을 열 때 적용되는 클래스 */
+.open {
+  transform: translateX(0); /* 화면 안으로 이동 */
+}
+
+.dataNumber {
+  margin-bottom: 20px;
+  color: #47F6C1;
+  font-size: 20px;
+
+  text-decoration: underline;
+  text-decoration-color: #47F6C1;
+}
+
+.warmingdataWrap {
+  width: 200px;
+  min-height: 40px;
+  background-color: #5D707F;
+  border: 1px solid #45CB85;
+  border-radius: 10px;
+  margin-bottom: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ChatMemberBoxWrap:hover {
+  background-color: #45CB85;
+  border: 2px solid #A4DABE;
+}
+
+
+.imgWrap {
+  width: 20%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0px;
+  color: red;
+  font-size: 18px;
+}
+
+.imgWrap > img {
+  padding-right: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.explanation{
+  margin-bottom: 10px;
+  color: white;
+  font-size: 14px;
+}
+
+.hrLine {
+  width: 100%;
+  border:  0.5px solid #45CB85;
+}
+
+.carStatus {
+  margin: 20px 0px;
+}
+
+
+
+
+

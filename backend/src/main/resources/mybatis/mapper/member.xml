@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosa.afnica.backend.db.mapper.MemberMapper">
+    <insert id="insert" parameterType="member">
+        insert into member(id, email, password, nickname, phone_number, withdrawal)
+        values (#{id}, #{email}, #{password}, #{nickname}, #{phone_number}, 1)
+    </insert>
+</mapper>

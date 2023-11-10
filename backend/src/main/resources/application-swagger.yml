@@ -1,0 +1,13 @@
+springdoc:
+  api-docs:
+    enabled: true    # API 문서 활성화
+    path: /api-docs
+    groups:
+      enabled: true
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+    path: /swagger-ui.html
+    doc-expansion: operation
+  default-produces-media-type: application/json;charset=UTF-8
+  default-consumes-media-type: application/json;charset=UTF-8

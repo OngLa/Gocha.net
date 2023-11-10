@@ -1,0 +1,11 @@
+spring:
+  # DB 기본정보 설정
+  datasource:
+    url: jdbc:oracle:thin:@kosa402.iptime.org:1521:ORCL
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: { id }
+    password: { password }
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mapper-config.xml

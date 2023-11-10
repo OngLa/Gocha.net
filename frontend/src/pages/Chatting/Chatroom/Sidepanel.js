@@ -3,6 +3,7 @@ import { SmallButton } from "../../../components/Button/index";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import breakdownIcon from "../../../img/chatting/breakdownIcon.png";
+import GridCarInfo from "../../../components/GridCarInfo";
 
 function Sidepanel({ open, toggle, cardata_id }) {
   const cardata = {
@@ -22,7 +23,6 @@ function Sidepanel({ open, toggle, cardata_id }) {
     warming_data: [
       { breakdown_code: "E001", explanation: "에러코드 설명1" },
       { breakdown_code: "E002", explanation: "에러코드 설명2" },
-      { breakdown_code: "E003", explanation: "에러코드 설명3" }
     ],
   };
 
@@ -39,8 +39,8 @@ function Sidepanel({ open, toggle, cardata_id }) {
         </div>
       ))}
       <hr className={style.hrLine}></hr>
-      <div className={style.carStatus}>차량 상태 정보(추후 그리드로 제작)</div>
-      <div style={{ display: "flex", marginTop: "20px" }}>
+      <div className={style.carStatus}><GridCarInfo item={cardata} layoutType="B" style={{fontSize:"10px", height:"15px"}} ></GridCarInfo></div>
+      <div style={{ display: "flex", marginTop: "15px" }}>
         <SmallButton onClick={toggle} style={{ backgroundColor: "#647A76" }}>
           뒤로가기
         </SmallButton>

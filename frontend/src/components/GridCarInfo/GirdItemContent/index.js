@@ -6,7 +6,7 @@ import happy from "../../../img/icon/happy.png";
 import sad from "../../../img/icon/sad.png";
 
 function GirdItemContent(props) {
-  const { tag, value, fontSize } = props;
+  const { tag, value, style } = props;
 
   let content = value;
   const setContent = () => {
@@ -39,7 +39,7 @@ function GirdItemContent(props) {
       }`}
     >
       <div className={styles.tag}>{tag}</div>
-      <div className={styles.value} style={{fontSize:fontSize}}>{content}</div>
+      <div className={styles.value} style={style}>{content}</div>
     </div>
   );
 }

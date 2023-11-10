@@ -3,6 +3,8 @@ import style from "./findPwPage.module.css";
 import LargeButton, { SmallButton } from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
+import emailIcon from "../../../img/member/email.png";
+import passwordIcon from "../../../img/member/password.png";
 
 function FindPwPage() {
   const navigate = useNavigate();
@@ -42,8 +44,8 @@ function FindPwPage() {
       <div className={style.memberBox}>
         <div className={style.imgWrap}>
           <img
-            src="/memberIcon/email.png"
-            alt="emailImg"
+            src={emailIcon}
+            alt="emailIcon"
             className={style.memberImg}
           />
         </div>
@@ -69,8 +71,8 @@ function FindPwPage() {
         <div className={style.memberBox}>
           <div className={style.imgWrap}>
             <img
-              src="/memberIcon/password.png"
-              alt="passworImg"
+              src={passwordIcon}
+              alt="passworIcon"
               className={style.memberImg}
             />
           </div>

@@ -1,14 +1,3 @@
-.menu {
-  margin-bottom: 25px;
-  padding: 0px;
-  align-self: flex-start;
-}
-
-.memberWrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .memberBox {
   width: 90%;
@@ -29,11 +18,13 @@
 }
 
 .memberImg {
+  width: 22px;
+  height: 19px;
   margin: 10px;
 }
 
 .memberInput {
-  width: calc(100% - 80px);
+  width: calc(100% - 130px);
   height: 35px;
   border: none;
   padding: 0px 10px;
@@ -41,14 +32,18 @@
 
 .checkIdBtn {
   border: none;
-  font-size: 11px;
+  margin: 0px px;
+  font-size: 14px;
+  color: #45cb85;
   background-color: white;
 }
 
 .nicknameCheckResult {
-  font-size: 11px;
+  font-size: 15px;
   color: red;
   margin: 0px 30px;
+  display: flex;
+  justify-content: center;
 }
 
 .signupBtn {

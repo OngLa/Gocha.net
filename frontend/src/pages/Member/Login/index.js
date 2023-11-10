@@ -3,6 +3,8 @@ import style from "./login.module.css";
 import ContentHeader from "../../../components/ContentHeader";
 import { useState } from "react";
 import LargeButton, { SmallButton } from "../../../components/Button";
+import emailIcon from "../../../img/member/email.png";
+import passwordIcon from "../../../img/member/password.png";
 
 function Login() {
   const navigate = useNavigate();
@@ -40,11 +42,7 @@ function Login() {
       <ContentHeader menuName="로그인"></ContentHeader>
       <div className={style.memberBox}>
         <div className={style.imgWrap}>
-          <img
-            src="/memberIcon/email.png"
-            alt="emailImg"
-            className={style.memberImg}
-          />
+          <img src={emailIcon} alt="emailIcon" className={style.memberImg} />
         </div>
         <input
           className={style.memberInput}
@@ -60,8 +58,8 @@ function Login() {
       <div className={style.memberBox}>
         <div className={style.imgWrap}>
           <img
-            src="/memberIcon/password.png"
-            alt="passworImg"
+            src={passwordIcon}
+            alt="passwordIcon"
             className={style.memberImg}
           />
         </div>
@@ -76,36 +74,32 @@ function Login() {
           }}
         />
       </div>
-      <div className={style.SmallButtonWrap}>
-        <SmallButton
-          children="비밀번호 수정"
-          onClick={handleEditPw}
-          style={{ width: "110px" }}
-        ></SmallButton>
+      <div className={style.tempButton}>
+        <Link to="/member/findpw">
+          <SmallButton
+            children="비밀번호 찾기"
+            style={{ width: "110px" }}
+          ></SmallButton>
+        </Link>
       </div>
       <div className={style.LargeButtonWrap}>
         <LargeButton children="로그인" onClick={handleLogin}></LargeButton>
       </div>
       <div>
-        [임시 버튼]
-        <div className={style.tempButton}>
-        <Link to="/member/findpw"><SmallButton
-            children="비밀번호 찾기"
-            style={{ width: "110px" }}
-          ></SmallButton></Link>
+        <div className={style.signupLinkBox}>
+          아이디가 없으신분은
+          <Link to="/member/emailCheck" className={style.signupLink}>
+            회원가입
+          </Link>
+          후 이용해 주세요.
+          <div><Link to="/member/mypage">마이페이지</Link></div>
         </div>
-        <div className={style.tempButton}>
-        <Link to="/member/emailCheck"><SmallButton
-            children="회원가입"
-            style={{ width: "110px" }}
-          ></SmallButton></Link>
-        </div>
-        <div className={style.tempButton}>
+        {/* <div className={style.tempButton}>
         <Link to="/member/mypage"><SmallButton
             children="마이페이지"
             style={{ width: "110px" }}
           ></SmallButton></Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

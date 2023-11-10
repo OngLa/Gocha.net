@@ -3,6 +3,8 @@ import ContentHeader from "../../../components/ContentHeader";
 import style from "./editPw.module.css";
 import LargeButton from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
+import passworIcon from "../../../img/member/password.png";
+import confirmPasswordIcon from "../../../img/member/password.png";
 
 function EditPw() {
   const navigate = useNavigate();
@@ -36,8 +38,8 @@ function EditPw() {
       <div className={style.memberBox}>
         <div className={style.imgWrap}>
           <img
-            src="/memberIcon/password.png"
-            alt="passworImg"
+            src={passworIcon}
+            alt="passworIcon"
             className={style.memberImg}
           />
         </div>
@@ -55,8 +57,8 @@ function EditPw() {
       <div className={style.memberBox}>
         <div className={style.imgWrap}>
           <img
-            src="/memberIcon/password.png"
-            alt="confirmPasswordImage"
+            src={confirmPasswordIcon}
+            alt="confirmPasswordIcon"
             className={style.memberImg}
           />
         </div>

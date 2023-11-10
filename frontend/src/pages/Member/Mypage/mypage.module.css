@@ -1,23 +1,9 @@
-.menu {
-  margin-bottom: 25px;
-  padding: 0px;
-  align-self: flex-start;
-}
-
-.mypageWrap {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
-  
-}
-
 .mypageBox {
-  width: 270px;
+  width: 90%;
   height: 40px;
   display: flex;
   align-items: center;
-  margin: 7px;
+  margin: 20px;
   border: solid 1px #A4DABE;
   background-color: #5D707F;
   color: white;
@@ -25,29 +11,14 @@
 }
 
 .mypageImg {
+  width: 22px;
+  height: 19px;
   margin: 10px;
-  
 }
 
 .text {
-  width: 150px;
+  width: calc(100% - 140px);
   margin-left: 10px;
-}
-
-.mypageReservation {
-  text-decoration: none;
-  color: white;
-  margin-left: 10px;
-}
-
-.mypageSelect {
-  width: 80px;
-  height: 25px;
-  margin-left: 5px;
-  color: white;
-  background-color: #5D707F;
-  border: solid 1px white;
-  border-radius: 5px;
 }
 
 .withdrawalBox {

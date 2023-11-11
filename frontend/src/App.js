@@ -13,13 +13,13 @@ function App() {
       <div className='AppRouteWrap'>
         <AppRoute />
       </div>
-      <div>
-        <AppNav />
-      </div>
-      {/* 정비소Home의 Nav */}
       {/* <div>
-        <AppNavHome2 />
+        <AppNav />
       </div> */}
+      {/* 정비소Home의 Nav */}
+      <div>
+        <AppNavHome2 />
+      </div>
     </div>
   );
 }

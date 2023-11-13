@@ -1,6 +1,6 @@
-package kosa.afnica.backend.api.member.service.impl;
+package kosa.afnica.backend.api.service.impl;
 
-import kosa.afnica.backend.api.member.service.MemberService;
+import kosa.afnica.backend.api.service.MemberService;
 import kosa.afnica.backend.db.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

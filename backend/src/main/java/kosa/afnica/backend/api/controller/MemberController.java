@@ -1,6 +1,6 @@
-package kosa.afnica.backend.api.member.controller;
+package kosa.afnica.backend.api.controller;
 
-import kosa.afnica.backend.api.member.service.MemberService;
+import kosa.afnica.backend.api.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 

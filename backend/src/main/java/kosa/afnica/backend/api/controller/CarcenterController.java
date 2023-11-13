@@ -1,6 +1,6 @@
-package kosa.afnica.backend.api.carcenter.controller;
+package kosa.afnica.backend.api.controller;
 
-import kosa.afnica.backend.api.carcenter.service.CarcenterService;
+import kosa.afnica.backend.api.service.CarcenterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 

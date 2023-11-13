@@ -3,8 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
     <typeAliases>
         <!-- <typeAlias alias="{여기수정}" type="kosa.afnica.backend.db.entity.{여기수정}" /> -->
-         <typeAlias alias="{member}" type="kosa.afnica.backend.db.entity.Member" />
+         <typeAlias alias="member" type="kosa.afnica.backend.db.entity.Member" />
+         <typeAlias alias="carBrand" type="kosa.afnica.backend.db.entity.CarBrand" />
     </typeAliases>
 </configuration>

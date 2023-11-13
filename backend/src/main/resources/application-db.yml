@@ -5,6 +5,11 @@ spring:
     driver-class-name: oracle.jdbc.OracleDriver
     username: user_gasam_team2
     password: oracle
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 15MB
+      enabled: true
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml

@@ -32,7 +32,6 @@ public enum ErrorCode {
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "Method Not Allowed"),
 
     CONFLICT(HttpStatus.CONFLICT, "Conflict"),
-    DUPLICATE_EMAIL(HttpStatus.CONFLICT, "존재하는 Email 입니다"),
 
     // 5xx Server Errors
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"),

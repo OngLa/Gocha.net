@@ -38,7 +38,7 @@ function AppNavHome2() {
             className={style.navImgStyle}
           />
         </Link>
-        <div>예약하기</div>
+        <div>예약관리</div>
       </div>
       <div className={style.menuBox}>
         <Link to="/parts">

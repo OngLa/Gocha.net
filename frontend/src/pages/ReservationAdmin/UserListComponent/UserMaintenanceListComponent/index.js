@@ -7,12 +7,12 @@ function UserMaintenanceList(props) {
 
   return (
     <div className={styles.UserMaintenanceList}>
-      <CardHead nickname={nickname} phone_number={phone_number} />
+      <CardHead nickname={nickname} state={state} />
       <CardBody
         car_type_id={car_type_id}
         breakdown_id={breakdown_id}
         reserved_date={reserved_date}
-        state={state}
+        phone_number={phone_number}
       />
     </div>
   );

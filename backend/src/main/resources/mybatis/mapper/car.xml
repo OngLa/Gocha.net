@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosa.afnica.backend.db.mapper.CarMapper">
+    <insert id="insertBrand" parameterType="carBrand">
+        INSERT INTO BRAND (ID, NAME, PHOTO)
+        VALUES (#{id}, #{brandName}, #{brandPhotoData, jdbcType=BLOB})
+    </insert>
+
+    <select id="getBrandList" resultType="carBrand">
+        SELECT ID, NAME, PHOTO
+        FROM BRAND
+    </select>
+
+
+
+
+
+</mapper>

@@ -9,7 +9,6 @@
 
 .checked {
   border: 3px solid #45cb85;
-;
   border-radius: 8px;
 }
 
@@ -21,6 +20,17 @@
 }
 
 .image {
+  display: flex;
+  height: 100px;
+  align-items: center;
+  background-color: #5d707f;
+  border-radius: 12px;
+  margin-bottom: 7px;
+}
+
+.image img {
+  width: 100px;
+  padding: 10px;
 }
 
 .text {

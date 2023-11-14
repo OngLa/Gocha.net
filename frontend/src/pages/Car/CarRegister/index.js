@@ -5,6 +5,7 @@ import ToggleList from "./ToggleList";
 
 import styles from "./style.module.css";
 import LargeButton from "../../../components/Button";
+import { getBrands } from "../../../apis/car";
 
 function CarRegister() {
   const [selectedBrand, setSelectedBrand] = useState();
@@ -28,7 +29,7 @@ function CarRegister() {
 
   const handleCarInfo = () => {
     console.log(
-      brandList[selectedBrand].name,
+      brands[selectedBrand].name,
       carList[selectedCar].name,
       carNumber
     );
@@ -38,11 +39,6 @@ function CarRegister() {
     setCarNumber(e.target.value);
   };
 
-  const brandList = [
-    { id: 0, src: "https://via.placeholder.com/100", name: "현대" },
-    { id: 1, src: "https://via.placeholder.com/100", name: "기아" },
-  ];
-
   const carList = [
     { id: 0, src: "https://via.placeholder.com/100x60", name: "아이오닉" },
     { id: 1, src: "https://via.placeholder.com/100x60", name: "코나" },
@@ -51,6 +47,22 @@ function CarRegister() {
     { id: 4, src: "https://via.placeholder.com/100x60", name: "투싼" },
     { id: 5, src: "https://via.placeholder.com/100x60", name: "K5" },
   ];
+
+  // brandList 출력하기
+  const [brands, setBrands] = useState([]);
+
+  useEffect(() => {
+    const work = async () => {
+      try {
+        const brandsData = await getBrands();
+        setBrands(brandsData);
+      } catch (error) {
+        console.error("Failed to fetch brands:", error);
+      }
+    };
+
+    work();
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -63,7 +75,7 @@ function CarRegister() {
           title_children={"Brand"}
           content_children={
             <ImgRadio
-              items={brandList}
+              items={brands}
               name={"brand"}
               selected={selectedBrand}
               setSelected={setSelectedBrand}
@@ -89,8 +101,8 @@ function CarRegister() {
       </div>
 
       <div className={styles.resWrapper}>
-        <div>{(selectedBrand != null)?brandList[selectedBrand].name:""}</div>
-        <div>{(selectedCar!=null)?carList[selectedCar].name:""}</div>
+        <div>{selectedBrand != null ? brands[selectedBrand - 1].name : ""}</div>
+        <div>{selectedCar != null ? carList[selectedCar].name : ""}</div>
       </div>
 
       <div className={styles.inputWrapper}>

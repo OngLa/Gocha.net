@@ -74,6 +74,7 @@ function Login() {
           }}
         />
       </div>
+
       <div className={style.tempButton}>
         <Link to="/member/findpw">
           <SmallButton
@@ -82,6 +83,7 @@ function Login() {
           ></SmallButton>
         </Link>
       </div>
+
       <div className={style.LargeButtonWrap}>
         <LargeButton children="로그인" onClick={handleLogin}></LargeButton>
       </div>

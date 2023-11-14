@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { SmallButton } from "../../../components/Button";
-import styels from "./Registration.module.css";
+import styels from "./MainRepairshopComponent.module.css";
 
 function CardBody(props) {
   
@@ -9,7 +9,7 @@ const navigate= useNavigate();
   const handleRegisterClick = () => {
     alert("테스트");
     navigate(-1);
-    // post로 데이터를 보내야지
+    // post로 데이터를 보내야지(name,adress)
   };
   
   return (

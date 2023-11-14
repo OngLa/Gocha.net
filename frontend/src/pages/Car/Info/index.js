@@ -1,12 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ContentHeader from "../../../components/ContentHeader";
 import CustomSelect from "../../../components/CustomSelect";
 import LargeButton from "../../../components/Button";
-import MycarInfo from "./MycarInfo";
+import GridCarInfo from "../../../components/GridCarInfo";
 
 import styles from "./style.module.css";
-import { useNavigate } from "react-router-dom";
 
 function Info() {
   const [value, setValue] = useState(0);
@@ -16,46 +16,44 @@ function Info() {
     {
       value: 0,
       name: "Sonata",
-      distance: 1,
-      tire: 1,
-      battery: 1,
-      status: 1,
-      breakOil: 1,
-      engineOil: 1,
-      washer: 1,
+      cango_distance: 300,
+      distance: 100000,
+      car_battery: 5,
+      charge_status: true,
+      oil: true,
+      washer: true,
+      tire: true,
+      lampwire: true,
+      break: true,
+      engine: true,
     },
     {
       value: 1,
       name: "Avante",
-      distance: 2,
-      tire: 2,
-      battery: 2,
-      status: 2,
-      breakOil: 2,
-      engineOil: 2,
-      washer: 2,
+      cango_distance: 200,
+      distance: 1000000,
+      car_battery: 100,
+      charge_status: false,
+      oil: false,
+      washer: false,
+      tire: false,
+      lampwire: false,
+      break: false,
+      engine: false,
     },
     {
       value: 2,
       name: "Tucson",
-      distance: 3,
-      tire: 3,
-      battery: 3,
-      status: 3,
-      breakOil: 3,
-      engineOil: 3,
-      washer: 3,
-    },
-    {
-      value: 3,
-      name: "Santa fe",
-      distance: 4,
-      tire: 4,
-      battery: 4,
-      status: 4,
-      breakOil: 4,
-      engineOil: 4,
-      washer: 4,
+      cango_distance: 10,
+      distance: 100,
+      car_battery: 5,
+      charge_status: true,
+      oil: false,
+      washer: true,
+      tire: false,
+      lampwire: true,
+      break: false,
+      engine: true,
     },
   ];
 
@@ -91,7 +89,7 @@ function Info() {
 
       {/* 내 자동차 정보 출력 */}
       <div>
-        <MycarInfo item={myCarList[value]} />
+        <GridCarInfo item={myCarList[value]} layoutType="A" fontSize='20px'/>
       </div>
     </div>
   );

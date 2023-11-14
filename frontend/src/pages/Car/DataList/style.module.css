@@ -13,11 +13,16 @@
   margin-bottom: 30px;
 }
 
+.customSelect {
+  align-self: flex-end;
+  margin-bottom: 10px;
+}
+
 .dateFormWrapper {
   width: 100%;
   border: 1px solid #45cb85;
   border-radius: 8px;
-  padding: 20px 0px;
+  padding: 30px 0px;
   margin-bottom: 25px;
   display: flex;
   flex-direction: column;
@@ -25,7 +30,7 @@
 }
 
 .dateForm {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .cardList {

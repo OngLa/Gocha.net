@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SmallButton } from "../../../components/Button";
-import styels from "./repairshopList.module.css";
-import Sidepanel from "../Sidepanel";
+import styels from "./repairshopcomponent.module.css";
+import Sidepanel from "./Sidepanel";
 
 function CardBody(props) {
   const [openSidepanel, setOpenSidepanel] = useState(false);

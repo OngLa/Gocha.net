@@ -1,14 +1,14 @@
 import CardBody from "./CardBody";
 import CardHead from "./CardHead";
-import styles from "./repairshopList.module.css"
+import styles from "./repairshopcomponent.module.css"
 
-function RepairshopList(props) {
+function RepairshopComponent(props) {
 
   const { id, address, name } = props;
 
 
   return (
-    <div className={styles.RepairshopList}>
+    <div className={styles.RepairshopComponent}>
       <div className={styles.cardHeader}>
         <CardHead id={id} name={name}/>
       </div>
@@ -20,4 +20,4 @@ function RepairshopList(props) {
     </div>
   );
 }
-export default RepairshopList;
+export default RepairshopComponent;

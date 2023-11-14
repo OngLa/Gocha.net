@@ -49,18 +49,18 @@ public class JwtUtil {
     }
 
 	//JWT 토큰에서 사용자 아이디 얻기
-	public static String getUserId(String token) {
-		String userId = null;
+	public static String getId(String token) {
+		String id = null;
 		try {
 			JwtParser parser = Jwts.parser();
 			parser.setSigningKey(secretKey.getBytes("UTF-8"));
 			Jws<Claims> jws = parser.parseClaimsJws(token);
 			Claims claims = jws.getBody();
-			userId = claims.get("userId", String.class);
+			id = claims.get("id", String.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return userId;
+		return id;
 	}
 	
 	//JWT 토큰 유효성 검사: 만료일자 확인 
@@ -90,7 +90,7 @@ public class JwtUtil {
 		
 		//토큰 정보 얻기
 		if(validateToken(jwt)) {
-			String uid = getUserId(jwt);
+			String uid = getId(jwt);
 			log.info(uid);
 		}
 	}*/

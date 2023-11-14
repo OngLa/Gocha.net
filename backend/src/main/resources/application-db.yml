@@ -3,8 +3,8 @@ spring:
   datasource:
     url: jdbc:oracle:thin:@kosa402.iptime.org:1521:ORCL
     driver-class-name: oracle.jdbc.OracleDriver
-    username: 
-    password: 
+    username: user_gasan_team2
+    password: oracle
   servlet:
     multipart:
       max-file-size: 10MB

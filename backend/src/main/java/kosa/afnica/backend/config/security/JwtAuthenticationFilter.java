@@ -8,7 +8,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,9 +18,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
 @Component
+@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean {
-   @Autowired
-   private UserDetailsService userDetailsService;
+   private final UserDetailsService userDetailsService;
 
    @Override
    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -36,18 +36,18 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
       } else {
          // QueryString에 형태로 넘어왔을 경우
          // <img src="battach/3?accessToken=xxx">
-         accessToken = request.getParameter("aceessToken");
+         accessToken = request.getParameter("accessToken");
     }         
       
       //유효한 토큰인지 확인
       if(accessToken != null && !accessToken.trim().equals("")) {
          if(JwtUtil.validateToken(accessToken)) {
             //토큰에서 userId 얻기
-            String userId = JwtUtil.getUserId(accessToken);
+            String id = JwtUtil.getId(accessToken);
             //DB에서 userId에 해당하는 정보를 가져오기
-            UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(id);
             //인증 객체 생성
-            Authentication authentication = new UsernamePasswordAuthenticationToken(userId, "", userDetails.getAuthorities());
+            Authentication authentication = new UsernamePasswordAuthenticationToken(id, "", userDetails.getAuthorities());
             //Spring Security에 인증 객체 등록
             SecurityContextHolder.getContext().setAuthentication(authentication);
          }

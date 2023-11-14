@@ -2,11 +2,13 @@ package kosa.afnica.backend.config.security;
 
 import java.util.List;
 import kosa.afnica.backend.db.entity.Member;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+@Getter
 public class AppUserDetails extends User {
-	private Member member;
+	private final Member member;
 
 	public AppUserDetails(Member member, List<GrantedAuthority> authorities) {
 		super(
@@ -20,8 +22,5 @@ public class AppUserDetails extends User {
 		);
 		this.member = member;
 	}
-	
-	public Member getMember() {
-		return member;
-	}
+
 }

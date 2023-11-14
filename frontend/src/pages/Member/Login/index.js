@@ -129,10 +129,8 @@ function Login() {
             회원가입
           </Link>
           후 이용해 주세요.
-          <div>
-            <Link to="/member/mypage">마이페이지</Link>
-          </div>
         </div>
+        <div><Link to="/member/mypage">마이페이지</Link></div>
         {/* <div className={style.tempButton}>
         <Link to="/member/mypage"><SmallButton
             children="마이페이지"

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import styles from "./style.module.css";
 
 function ImgRadio(props) {
@@ -12,8 +10,12 @@ function ImgRadio(props) {
   return (
     <div className={styles.wrapper}>
       {items.map((item) => (
-        
-        <label className={`${styles.option} ${selected===item.id?styles.checked:''}`}>
+        <label
+          className={`${styles.option} ${
+            selected === item.id ? styles.checked : ""
+          }`}
+          key={item.id}
+        >
           <input
             type="radio"
             value={item.id}
@@ -24,11 +26,10 @@ function ImgRadio(props) {
           />
           <div className={styles.content}>
             <div className={styles.image}>
-              <img src={item.src} alt={`${item.name}로고`} />
+              <img src={`data:image/png;base64,${item.logo}`} alt={item.name} />
             </div>
             <div className={styles.text}>{item.name}</div>
           </div>
-          
         </label>
       ))}
     </div>

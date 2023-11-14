@@ -8,6 +8,9 @@ import passwordIcon from "../../../img/member/password-white.png";
 import nicknameIcon from "../../../img/member/nickname-white.png";
 import phoneIcon from "../../../img/member/phone-white.png";
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { setUser, setRole, setAccessToken, setRefreshToken } from "../../../redux/authReducer";
+import { removeAuthHeader } from "../../../service/axiosConfig";
 
 function Mypage() {
   const navigate = useNavigate();
@@ -40,8 +43,38 @@ function Mypage() {
           confirmButtonColor: '#45CB85'
         });
       }
+      navigate('/');
     });
   };
+
+  const dispatch = useDispatch();
+  const handleLogout = (e) => {
+    return Swal.fire({
+      icon: "question",
+      title: "로그아웃 하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "예",
+      confirmButtonColor: '#45CB85',
+      cancelButtonText: "아니오",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // globalstate & localstorage 초기화
+        dispatch(setUser({ user: "" }));
+        dispatch(setRole({ role: "" }));
+        dispatch(setAccessToken({ accessToken: "" }));
+        dispatch(setRefreshToken({ refreshToken: "" }));
+        localStorage.clear();
+        removeAuthHeader()
+
+        Swal.fire({
+          icon: "success",
+          title: "정상적으로 로그아웃 되었습니다.",
+          confirmButtonColor: '#45CB85'
+        });
+      }
+      navigate('/');
+    });
+  }
 
   return (
     <div>
@@ -83,6 +116,11 @@ function Mypage() {
         <div className={style.withdrawalBox}>
           <button className={style.withdrawalBtn} onClick={handleWithdrawal}>
             회원탈퇴
+          </button>
+        </div>
+        <div className={style.withdrawalBox}>
+          <button className={style.withdrawalBtn} onClick={handleLogout}>
+            로그아웃
           </button>
         </div>
       </div>

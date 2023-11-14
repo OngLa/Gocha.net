@@ -47,7 +47,7 @@ function Login() {
         addAuthHeader(response.data.accessToken);
 
         //Rudux에 인증 내용 저장
-        dispatch(gSetUser({ member: response.data.email }));
+        dispatch(gSetUser({ user: response.data.email }));
         dispatch(gSetRole({ role: response.data.role }));
         dispatch(setAccessToken({ accessToken: response.data.accessToken }));
 

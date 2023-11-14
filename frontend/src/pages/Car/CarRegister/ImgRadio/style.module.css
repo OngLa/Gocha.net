@@ -21,16 +21,16 @@
 
 .image {
   display: flex;
-  height: 100px;
+  height: 90px;
   align-items: center;
-  background-color: #5d707f;
+  background-color: #ffffff;
   border-radius: 12px;
   margin-bottom: 7px;
 }
 
 .image img {
-  width: 100px;
-  padding: 10px;
+  width: 90px;
+  padding: 5px;
 }
 
 .text {

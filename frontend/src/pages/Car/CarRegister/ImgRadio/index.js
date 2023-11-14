@@ -9,19 +9,19 @@ function ImgRadio(props) {
 
   return (
     <div className={styles.wrapper}>
-      {items.map((item) => (
+      {items.map((item, idx) => (
         <label
           className={`${styles.option} ${
-            selected === item.id ? styles.checked : ""
+            selected === idx ? styles.checked : ""
           }`}
-          key={item.id}
+          key={idx}
         >
           <input
             type="radio"
-            value={item.id}
+            value={idx}
             name={name}
             className={styles.radioBtn}
-            checked={selected === item.id}
+            checked={selected === idx}
             onChange={handleChange}
           />
           <div className={styles.content}>

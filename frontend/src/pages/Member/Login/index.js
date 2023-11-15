@@ -2,26 +2,31 @@ import { Link, useNavigate } from "react-router-dom";
 import style from "./login.module.css";
 import ContentHeader from "../../../components/ContentHeader";
 import { useCallback, useEffect, useState } from "react";
-import LargeButton, { SmallButton } from "../../../components/Button";
+import LargeButton, { SmallButton, SmallButton2 } from "../../../components/Button";
 import emailIcon from "../../../img/member/email.png";
 import passwordIcon from "../../../img/member/password.png";
 import { useDispatch, useSelector } from "react-redux";
-import { addAuthHeader, removeAuthHeader } from "../../../service/axiosConfig";
-import { setUser as gSetUser, setRole as gSetRole, setAccessToken } from "../../../redux/authReducer";
+import { addAuthHeader } from "../../../service/axiosConfig";
+import {
+  setUser as gSetUser,
+  setRole as gSetRole,
+  setAccessToken,
+} from "../../../redux/authReducer";
 import { login } from "../../../service/auth";
+import Swal from "sweetalert2";
 
 function Login() {
+  // 로그인 페이지
+  // ㄴ로그인 & 토큰 생성 및 localstorage/redux등록
+  // ㄴ비밀번호 찾기 페이지 이동
+
   const navigate = useNavigate();
 
+  // Login Page Input
   const [member, setUser] = useState({
     email: "",
     password: "",
   });
-
-  //Redux 이용
-  const dispatch = useDispatch();
-  const gUser = useSelector((state) => state.authReducer.user);
-  const gRole = useSelector((state) => state.authReducer.role);
 
   const onChange = (e) => {
     setUser({
@@ -30,17 +35,25 @@ function Login() {
     });
   };
 
-  const handleEditPw = async (event) => {
-    navigate("/member/editpw");
-  };
+  // 로그인 시 user, role, token을 redux에 등록시켜주기 위해 dispatch 생성.
+  const dispatch = useDispatch();
+  // 로그인 시 console에 email, role을 찍어주기 위해 Redux에서 user, role을 받아옴.
+  const gUser = useSelector((state) => state.authReducer.user);
+  const gRole = useSelector((state) => state.authReducer.role);
 
+  //로그인 시 Redux에 로그인 정보(email, role)가 수정되면 console에서 확인.
+  useEffect(() => {
+    console.log("Login Result = email: " + gUser + " / role: " + gRole);
+  }, [gUser, gRole]);
+
+  // 로그인 버튼 클릭 시 handle
   const handleLogin = useCallback(async (event) => {
     // 항목 전부 입력해야 회원가입 가능
     if (!member.email || !member.password) {
       return alert("모든 항목을 입력해주세요.");
     } else {
       try {
-        //로그인 요청
+        // axios 로그인 요청
         const response = await login(member);
 
         //요청 공통 헤더인 Authorization 추가
@@ -51,26 +64,30 @@ function Login() {
         dispatch(gSetRole({ role: response.data.role }));
         dispatch(setAccessToken({ accessToken: response.data.accessToken }));
 
-        //상태 재초기화
+        //상태 재초기화(input값 비워주기)
         setUser({
           email: "",
           password: "",
         });
 
-        alert("로그인이 완료되었습니다.");
+        //Alert 이쁘게
+        Swal.fire({
+          icon: "success",
+          title: "로그인이 완료되었습니다.",
+          confirmButtonColor: "#45CB85",
+        });
         navigate("/");
-
       } catch (error) {
         console.log(error);
-        return alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+
+        return Swal.fire({
+          icon: "error",
+          title: "아이디 또는 비밀번호가 일치하지 않습니다.",
+          confirmButtonColor: "#45CB85",
+        });
       }
     }
   });
-
-  //로그인 후 Redux에 로그인 정보(email, role)을 업데이트하고 console에서 확인.
-  useEffect(() => {
-    console.log("Login Result = email: " + gUser + " / role: " + gRole);
-  }, [gUser, gRole]);
 
   return (
     <div>
@@ -130,13 +147,14 @@ function Login() {
           </Link>
           후 이용해 주세요.
         </div>
-        <div><Link to="/member/mypage">마이페이지</Link></div>
-        {/* <div className={style.tempButton}>
-        <Link to="/member/mypage"><SmallButton
-            children="마이페이지"
-            style={{ width: "110px" }}
-          ></SmallButton></Link>
-        </div> */}
+        <div className={style.tempButton}>
+          <Link to="/member/mypage">
+            <SmallButton2
+              children="마이페이지(임시)"
+              style={{ width: "130px" }}
+            ></SmallButton2>
+          </Link>
+        </div>
       </div>
     </div>
   );

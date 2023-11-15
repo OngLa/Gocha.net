@@ -1,8 +1,16 @@
 package kosa.afnica.backend.api.service;
 
-public interface MemberService {
+import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 
-    //FE에서 로그인한 멤버의 권한을 확인할 수 있도록 Role찾기
+public interface MemberService {
+    boolean existEmail(String email);
+
+    boolean existName(String name);
+
+    public void createMember(MemberSignupReqDto memberSignupReqDto);
+
+    public void creatAdminMember(MemberSignupReqDto memberSignupReqDto);
+
     String findRole(String email);
 
 }

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface MemberMapper {
+
     void save(Member member);
 
     void saveAdmin(Member member);
@@ -20,4 +21,5 @@ public interface MemberMapper {
     int existByName(String name);
 
     void update(Member member);
+
 }

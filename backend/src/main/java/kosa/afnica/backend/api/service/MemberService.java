@@ -12,4 +12,5 @@ public interface MemberService {
     public void creatAdminMember(MemberSignupReqDto memberSignupReqDto);
 
     String findRole(String email);
+
 }

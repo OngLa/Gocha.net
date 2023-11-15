@@ -24,6 +24,7 @@ public enum ErrorCode {
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "잘못된 토큰입니다."),
 
     FORBIDDEN(HttpStatus.FORBIDDEN, "Forbidden"),
+    INVALID_ACCOUNTS(HttpStatus.FORBIDDEN, "존재하지 않는 계정입니다."), // 로그인 실패 시
 
     NOT_FOUND(HttpStatus.NOT_FOUND, "Not Found"),
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다"),

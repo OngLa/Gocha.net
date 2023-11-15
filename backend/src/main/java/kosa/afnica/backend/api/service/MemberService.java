@@ -1,8 +1,8 @@
 package kosa.afnica.backend.api.service;
 
-import kosa.afnica.backend.db.entity.CarBrand;
-import org.springframework.web.multipart.MultipartFile;
-
 public interface MemberService {
+
+    //FE에서 로그인한 멤버의 권한을 확인할 수 있도록 Role찾기
     String findRole(String email);
+
 }

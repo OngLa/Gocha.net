@@ -10,8 +10,10 @@ import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class JwtUtil {
 	
 	//비밀키(누출되면 안됨)
@@ -81,6 +83,8 @@ public class JwtUtil {
 		}
 		return validate;
 	}
+
+
 	
 	//테스트
 	/*public static void main(String[] args) {

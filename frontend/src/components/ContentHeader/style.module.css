@@ -1,0 +1,34 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 10vh;
+  margin-bottom: 15px;
+  background-color: #334E58;
+  width: 95vw;
+  height: 55px;
+  margin-left: -2vw;
+
+  @media (min-width: 1171px) {
+    width: 34vw;
+  };
+}
+
+.wrapper button {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: none;
+}
+
+.wrapper img {
+  width: 24px; /* Size of the left arrow icon */
+  height: 24px; /* Size of the left arrow icon */
+}
+
+.menuName {
+  color: #47F6C1;
+  font-size: 20px;
+  font-weight: 100;
+}

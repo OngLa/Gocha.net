@@ -1,0 +1,38 @@
+.mypageBox {
+  width: 90%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  border: solid 1px #A4DABE;
+  background-color: #5D707F;
+  color: white;
+  border-radius: 10px;
+}
+
+.mypageImg {
+  width: 22px;
+  height: 19px;
+  margin: 10px;
+}
+
+.text {
+  width: calc(100% - 140px);
+  margin-left: 10px;
+}
+
+.withdrawalBox {
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+}
+
+.withdrawalBtn {
+  border: none;
+  color: white;
+  background-color: #334E58;
+  display: flex;
+  justify-content: end;
+}
+
+

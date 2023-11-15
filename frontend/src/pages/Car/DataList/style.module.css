@@ -1,0 +1,46 @@
+.wrapper {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu {
+  align-self: flex-start;
+}
+
+.addCardBtn {
+  margin-bottom: 30px;
+}
+
+.customSelect {
+  align-self: flex-end;
+  margin-bottom: 10px;
+}
+
+.dateFormWrapper {
+  width: 100%;
+  border: 1px solid #45cb85;
+  border-radius: 8px;
+  padding: 30px 0px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dateForm {
+  margin-bottom: 20px;
+}
+
+.cardList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.card {
+  width: 100%;
+}

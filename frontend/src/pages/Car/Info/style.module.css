@@ -1,0 +1,17 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contentHeader {
+  align-self: flex-start;
+}
+
+.customSelect {
+  align-self: flex-end;
+}
+
+.mb {
+  margin-bottom: 15px;
+}

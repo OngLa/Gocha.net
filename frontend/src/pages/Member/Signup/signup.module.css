@@ -1,0 +1,53 @@
+
+.memberBox {
+  width: 90%;
+  height: 40px;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.imgWrap {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memberImg {
+  width: 22px;
+  height: 19px;
+  margin: 10px;
+}
+
+.memberInput {
+  width: calc(100% - 130px);
+  height: 35px;
+  border: none;
+  padding: 0px 10px;
+}
+
+.checkIdBtn {
+  border: none;
+  margin: 0px px;
+  font-size: 14px;
+  color: #45cb85;
+  background-color: white;
+}
+
+.nicknameCheckResult {
+  font-size: 15px;
+  color: red;
+  margin: 0px 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.signupBtn {
+  margin: 50px 0px;
+  display: flex;
+  justify-content: center;
+}

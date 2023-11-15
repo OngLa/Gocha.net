@@ -5,48 +5,21 @@ import ToggleList from "./ToggleList";
 
 import styles from "./style.module.css";
 import LargeButton from "../../../components/Button";
-import { getBrands } from "../../../apis/car";
+import { getBrands, getCarTypes } from "../../../apis/car";
 
 function CarRegister() {
-  const [selectedBrand, setSelectedBrand] = useState();
-  const [selectedCar, setSelectedCar] = useState();
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedCar, setSelectedCar] = useState("");
   const [carNumber, setCarNumber] = useState("");
 
   const toggleBrandRef = useRef();
   const toggleCarRef = useRef();
 
   useEffect(() => {
-    toggleBrandRef.current.toggleIsActive();
-
-    if (!toggleCarRef.current.getIsActive()) {
+    if(selectedCar !== "") {
       toggleCarRef.current.toggleIsActive();
     }
-  }, [selectedBrand]);
-
-  useEffect(() => {
-    toggleCarRef.current.toggleIsActive();
   }, [selectedCar]);
-
-  const handleCarInfo = () => {
-    console.log(
-      brands[selectedBrand].name,
-      carList[selectedCar].name,
-      carNumber
-    );
-  };
-
-  const handleCarNumber = (e) => {
-    setCarNumber(e.target.value);
-  };
-
-  const carList = [
-    { id: 0, src: "https://via.placeholder.com/100x60", name: "아이오닉" },
-    { id: 1, src: "https://via.placeholder.com/100x60", name: "코나" },
-    { id: 2, src: "https://via.placeholder.com/100x60", name: "넥소" },
-    { id: 3, src: "https://via.placeholder.com/100x60", name: "포터" },
-    { id: 4, src: "https://via.placeholder.com/100x60", name: "투싼" },
-    { id: 5, src: "https://via.placeholder.com/100x60", name: "K5" },
-  ];
 
   // brandList 출력하기
   const [brands, setBrands] = useState([]);
@@ -56,6 +29,7 @@ function CarRegister() {
       try {
         const brandsData = await getBrands();
         setBrands(brandsData);
+        console.log(brandsData);
       } catch (error) {
         console.error("Failed to fetch brands:", error);
       }
@@ -63,6 +37,42 @@ function CarRegister() {
 
     work();
   }, []);
+
+  // CarTypeList 출력하기
+  const [carTypes, setCarTypes] = useState([]);
+
+  useEffect(() => {
+    setSelectedCar("");
+    toggleCarRef.current.handleToggle(true);
+
+    const work = async () => {
+      try {
+        const carTypeData = await getCarTypes(brands[selectedBrand].id);
+        setCarTypes(carTypeData);
+      } catch (error) {
+        console.error("Failed to fetch brands:", error);
+      }
+    };
+
+    toggleBrandRef.current.toggleIsActive();
+
+    work();
+
+    // if (!toggleCarRef.current.getIsActive()) {
+    //   toggleCarRef.current.toggleIsActive();
+    // }
+  }, [selectedBrand]);
+
+  const handleCarNumber = (e) => {
+    setCarNumber(e.target.value);
+  };
+  const handleCarInfo = () => {
+    console.log(
+      brands[selectedBrand].name,
+      carTypes[selectedCar].name,
+      carNumber
+    );
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -89,7 +99,7 @@ function CarRegister() {
           title_children={"Car"}
           content_children={
             <ImgRadio
-              items={carList}
+              items={carTypes}
               name={"car"}
               selected={selectedCar}
               setSelected={setSelectedCar}
@@ -101,8 +111,8 @@ function CarRegister() {
       </div>
 
       <div className={styles.resWrapper}>
-        <div>{selectedBrand != null ? brands[selectedBrand - 1].name : ""}</div>
-        <div>{selectedCar != null ? carList[selectedCar].name : ""}</div>
+        <div>{selectedBrand !== "" ? brands[selectedBrand].name : ""}</div>
+        <div>{selectedCar !== "" ? carTypes[selectedCar].name : ""}</div>
       </div>
 
       <div className={styles.inputWrapper}>

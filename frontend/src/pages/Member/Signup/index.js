@@ -9,6 +9,7 @@ import confirmPasswordIcon from "../../../img/member/password.png";
 import nicknameIcon from "../../../img/member/nickname.png";
 import phoneIcon from "../../../img/member/phone.png";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 function Signup() {
   /* 회원가입*/
@@ -18,7 +19,7 @@ function Signup() {
     email: "",
     password: "",
     confirmPassword: "",
-    nickname: "",
+    name: "",
     phoneNumber: "",
   });
 
@@ -37,7 +38,6 @@ function Signup() {
             /(\d{3})(\d{4})(\d{4})/,
             "010-$2-$3"
           );
-
           setMember({
             ...member,
             [name]: formattedPhoneNumber,
@@ -60,41 +60,42 @@ function Signup() {
 
   const [nicknameCheckResult, setNicknameCheckResult] = useState("");
 
-  const handleCheckId = async () => {
-    // //클라이언트에서 서버로 POST 요청을 보냅니다.
-    // try {
-    //   const response = await fetch('/', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ nickname: member.nickname }), // member.nickname를 서버로 전송
-    //   });
-  
-    //   if (response.ok) {
-    //     const data = await response.json();
-           const data = ["user1", "user2"]
-  
-        if (member.nickname === "") {
-          setNicknameCheckResult('닉네임을 입력해주세요');
-        } 
-        else if (data.isNicknameAvailable) {
-          setNicknameCheckResult('닉네임 사용 가능');
-        } else {
-          setNicknameCheckResult('이미 사용 중인 닉네임입니다.');
-        }
-    //   } else {
-    //     // 요청이 실패한 경우에 대한 처리
-    //     console.error('서버 요청 실패');
-    //   }
-    // } catch (error) {
-    //   console.error('오류 발생', error);
-    // }
-  };  
+  // 닉네임 중복 체크
+  const handleCheckName = async (name) => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/member/name-check", { params: { name } });
 
-  const hadleSignupComp = async (event) => {
-    // console.log("test");
-    if (
+      if (member.name === "") {
+        setNicknameCheckResult("닉네임을 입력해주세요");
+      } else{
+          if (response.data.available) {
+            setNicknameCheckResult("사용 가능한 닉네임입니다.");
+          } else {
+            setNicknameCheckResult("이미 사용 중인 닉네임입니다.");
+          }
+        }
+    } catch (error) {
+      console.error('닉네임 중복 체크 실패:', error);
+      throw error;
+    }
+  };
+
+  // 서버에 회워가입 요청
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post('/api/signup', member)
+        console.log('회원가입 성공: ', response.data);
+    } catch (error) {
+      console.log('회원가입 실패: ', error);
+    }
+  };
+
+  // 회원가입 완료 버튼 클릭
+  const hadleSignupComp = (event) => {
+    
+      if (
       !member.email ||
       !member.password ||
       !member.confirmPassword ||
@@ -104,38 +105,26 @@ function Signup() {
       return Swal.fire({
         icon: "warning",
         title: "모든 항목을 입력해주세요.",
-        confirmButtonColor: '#45CB85',
+        confirmButtonColor: "#45CB85",
       });
     } else if (member.password !== member.confirmPassword) {
       return Swal.fire({
         icon: "warning",
         title: "비밀번호와 비밀번호 확인이 일치하지 않습니다.",
-        confirmButtonColor: '#45CB85',
+        confirmButtonColor: "#45CB85",
       });
     } else {
       Swal.fire({
         icon: "success",
         title: "회원가입이 완료되었습니다.",
-        confirmButtonColor: '#45CB85',
+        confirmButtonColor: "#45CB85",
       });
       navigate("/member/login");
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const signupData = {
-      email: member.email,
-      password: member.password,
-      confirmPassword: member.confirmPassword,
-      nickname: member.nickname,
-      phoneNumber: member.phoneNumber,
-    };
-  };
-
   return (
-    <>
+    <div>
       <div className={style.menu}>
         <ContentHeader menuName="회원가입" />
       </div>
@@ -216,7 +205,7 @@ function Signup() {
                 handleOnChange(e);
               }}
             />
-            <button className={style.checkIdBtn} onClick={handleCheckId}>
+            <button className={style.checkIdBtn} onClick={handleCheckName}>
               중복체크
             </button>
           </div>
@@ -245,7 +234,7 @@ function Signup() {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 

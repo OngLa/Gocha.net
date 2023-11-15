@@ -1,16 +1,13 @@
 package kosa.afnica.backend.db.dto.member;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class MemberLoginReqDto {
-    private String email;
-    private String password;
 
-    @Builder
-    public MemberLoginReqDto(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
+    String email;
+    String password;
+
 }

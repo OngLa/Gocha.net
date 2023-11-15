@@ -2,31 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kosa.afnica.backend.db.mapper.MemberMapper">
-    <insert id="insert" parameterType="member">
+    <insert id="save" parameterType="member">
         insert into member(id, email, password, name, phone_number, address, enabled, role)
-        values (#{id}, #{email}, #{password}, #{name}, #{phone_number}, null, 1, 'ROLE_USER')
+        values (member_seq.nextval, #{email}, #{password}, #{name}, #{phoneNumber}, null, 1, 'ROLE_USER')
     </insert>
 
-    <insert id="insertAdmin" parameterType="member">
+    <insert id="saveAdmin" parameterType="member">
         insert into member(id, email, password, name, phone_number, address, enabled, role)
-        values (#{id}, #{email}, #{password}, #{name}, #{phone_number}, #{address}, 1, 'ROLE_CARCENTER')
+        values (carcenter_seq.nextval, #{email}, #{password}, #{name}, #{phoneNumber}, #{address}, 1, 'ROLE_CARCENTER')
     </insert>
 
-    <update id="update" parameterType="member">
-        update member set password=#{password}
-        where id = #{id}
-    </update>
-
-    <select id="selectById" parameterType="String" resultType="member">
-        select id, email, password, name, phone_number, address, enabled, role
-        from member
-        where id = #{id}
-    </select>
-
-    <select id="selectByEmail" parameterType="String" resultType="member">
-        select id, email, password, name, phone_number, address, enabled, role
+    <select id="findByEmail" parameterType="String" resultType="member">
+        select id,
+               email,
+               password,
+               name,
+               phone_number,
+               address,
+               enabled,
+               role
         from member
         where email = #{email}
+    </select>
+
+    <select id="findById" parameterType="String" resultType="member">
+        select id,
+               email,
+               password,
+               name,
+               phone_number,
+               address,
+               enabled,
+               role
+        from member
+        where id = #{id}
     </select>
 
     <select id="findRoleByEmail" parameterType="String" resultType="String">
@@ -35,6 +44,24 @@
         where email = #{email}
     </select>
 
+    <!-- 이메일 중복 검사 -->
+    <select id="existByEmail" resultType="int">
+        select count(*)
+        from member
+        where email = #{email}
+    </select>
 
+    <!-- 닉네임 중복 검사 -->
+    <select id="existByName" resultType="int">
+        select count(*)
+        from member
+        where name = #{name}
+    </select>
+
+    <update id="update" parameterType="member">
+        update member
+        set password=#{password}
+        where id = #{id}
+    </update>
 
 </mapper>

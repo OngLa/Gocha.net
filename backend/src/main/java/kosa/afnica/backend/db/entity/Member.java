@@ -1,28 +1,28 @@
 package kosa.afnica.backend.db.entity;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
 public class Member {
-    private long id;
+    private Long id;
     private String email;
-    private String password;
     private String name;
+    private String password;
     private String phoneNumber;
     private String address;
     private boolean enabled;
     private String role;
 
     @Builder
-    public Member(long id, String email, String password, String name, String phoneNumber, String address, boolean enabled, String role) {
-        this.id = id;
+    public Member(String email, String name, String password, String phoneNumber, String address, String role) {
         this.email = email;
-        this.password = password;
         this.name = name;
+        this.password = password;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.enabled = enabled;
         this.role = role;
     }
 }

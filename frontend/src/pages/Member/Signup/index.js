@@ -16,7 +16,7 @@ function Signup() {
   const navigate = useNavigate();
 
   // 각 항목의 초기 상태 설정
-  const [email, setEmail] = useState("test1@test.com");
+  const [email, setEmail] = useState("test2@test.com");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [nickname, setNickname] = useState("");
@@ -37,10 +37,11 @@ function Signup() {
   // 상태 및 유효성 검사 결과를 저장하는 변수들
   const [confirmPwdMsgColor, setConfirmPwdMsgColor] = useState("");
   const [phoneNumberMsgColor, setPhoneNumberMsgColor] = useState("");
+  const [nameMsgColor, setNAmeMsgColor] = useState("");
   const isPwdValid = validatePwd(password);
   const isconfirmPwdValid = password === confirmPassword;
   const isNameValid = validateName(nickname);
-  const isPhoneNumber = password.length === 13;
+  const isPhoneNumber = phoneNumber.length === 13;
 
   // 각 항목에 대한 유효성 검사 메시지를 저장하는 변수들
   const [PwdMsg, setPwdMsg] = useState("");
@@ -83,40 +84,43 @@ function Signup() {
     const curNickname = e.target.value;
     setNickname(curNickname);
 
-    if (!validateName(curNickname)) {
-      setNicknameMsg("1글자 이상 9글자 미만으로 입력해주세요.(특수 문자 제외)");
-    } else {
-      setNicknameMsg("사용 가능한 닉넴임입니다.");
-    }
+    setNicknameMsg("1글자 이상 9글자 미만으로 입력해주세요.(특수 문자 제외)");
+    setNAmeMsgColor("red");
   }, []);
 
   // 전화번호
-  const handleOnChangePhonNumber = (e) => {
-    const curPhoneNumber = e.target.value;
-    const regex = /^[0-9\b -]{0,13}$/;
-    if (regex.test(curPhoneNumber)) {
-      setPhoneNumber(curPhoneNumber);
+  const formatPhoneNumber = (input) => {
+    // 숫자가 아닌 문자를 제거합니다.
+    const phoneNumber = input.replace(/\D/g, "");
+
+    // 전화번호의 길이에 따라 형식을 적용합니다.
+    if (phoneNumber.length <= 3) {
+      return phoneNumber;
+    } else if (phoneNumber.length <= 7) {
+      return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+    } else {
+      return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(
+        3,
+        7
+      )}-${phoneNumber.slice(7, 11)}`;
+    }
+  };
+
+  const handleOnChangePhonNumber = useCallback((e) => {
+    const rawPhoneNumber = e.target.value;
+    const formattedNumber = formatPhoneNumber(rawPhoneNumber);
+    setPhoneNumber(formattedNumber);
+
+    if (rawPhoneNumber.length === 13 || rawPhoneNumber.length === 14) {
       setPhoneNumberMsg("사용 가능한 전화번호입니다.");
       setPhoneNumberMsgColor("green");
     } else {
       setPhoneNumberMsg("올바른 전화번호 형식이 아닙니다.");
       setPhoneNumberMsgColor("red");
     }
-  };
 
-  // 전화번호 자동 하이픈 설정
-  useEffect(() => {
-    if (phoneNumber.length === 10) {
-      setPhoneNumber(phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"));
-    }
-    if (phoneNumber.length === 13) {
-      setPhoneNumber(
-        phoneNumber
-          .replace(/-/g, "")
-          .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")
-      );
-    }
-  }, [phoneNumber]);
+    setPhoneNumber(formattedNumber); // 필요한 경우 원시 전화번호를 상태로 설정합니다.
+  }, []);
 
   // 닉네임 중복 검사
   const handleCheckName = async (event) => {
@@ -125,13 +129,16 @@ function Signup() {
     try {
       if (nickname === "") {
         setNicknameMsg("닉네임을 입력해주세요.");
+        setNAmeMsgColor("red");
       } else {
         await nameCheck(nickname);
 
         setNicknameMsg("사용 가능한 닉네임입니다.");
+        setNAmeMsgColor("green");
       }
     } catch (error) {
       setNicknameMsg("이미 사용 중인 닉네임입니다.");
+      setNAmeMsgColor("red");
     }
   };
 
@@ -144,6 +151,7 @@ function Signup() {
         confirmPassword: confirmPassword,
         name: nickname,
         phoneNumber: phoneNumber,
+        role: "ROLE_USER",
       };
 
       const response = await createMember(requestData);
@@ -282,7 +290,7 @@ function Signup() {
               중복체크
             </button>
           </div>
-          <div className={validateName(nickname) ? style.valid : style.invalid}>
+          <div style={{ color: nameMsgColor, textAlign: "center" }}>
             {nicknameMsg}
           </div>
 

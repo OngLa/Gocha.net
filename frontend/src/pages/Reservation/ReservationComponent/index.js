@@ -1,11 +1,13 @@
 import CardBody from "./CardBody";
 
-function ReservationComponent() {
+function ReservationComponent({list}) {
 
   return (
     
       <div>
-          <CardBody />       
+         {list.map((reservationList) => (
+        <CardBody key={reservationList.id} reservationList={reservationList} />
+      ))}      
       </div>
   
   );

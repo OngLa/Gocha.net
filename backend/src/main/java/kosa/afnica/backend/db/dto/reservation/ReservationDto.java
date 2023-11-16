@@ -11,7 +11,7 @@ import java.util.Date;
 public class ReservationDto {
     private Long id;
     private Long memberId;
-    private String state;
+    private Long state;
     private Date reservedDate;
     private Long carcenterId;
 

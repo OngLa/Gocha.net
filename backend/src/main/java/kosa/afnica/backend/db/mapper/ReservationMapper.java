@@ -1,5 +1,6 @@
 package kosa.afnica.backend.db.mapper;
 
+import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import kosa.afnica.backend.db.entity.Reservation;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,5 +14,7 @@ import java.util.List;
 public interface ReservationMapper {
     public List<Reservation> findReservationByMemberId(Long memberId); //memberId를 entity타입으로 저장하는 메소드
     public Long findIdByEmail(String email); //에메일을 저장하는 메소드
-//    public int insert(Reservation reservation);
+    public void saveReservation(ReservationReqDto reservationreqdto);
+
+//    public int deleteById(Long id); //예약목록삭제 메소드
 }

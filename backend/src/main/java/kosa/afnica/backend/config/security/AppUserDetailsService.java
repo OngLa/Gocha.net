@@ -24,13 +24,8 @@ public class AppUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberMapper.findByEmail(username);
-
-        // email에 대한 계정정보가 DB에 없으면 403에러 띄우기
-        if (member == null) {
-            //throw new UsernameNotFoundException(username);
-            throw new CustomException(ErrorCode.INVALID_ACCOUNTS);
-        }
+        Member member = memberMapper.findByEmail(username)
+                .orElseThrow(() -> new CustomException(ErrorCode.INVALID_ACCOUNTS));
 
         //Member객체와 권한을 가진 객체 생성
         List<GrantedAuthority> authorities = new ArrayList<>();

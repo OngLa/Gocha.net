@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import kosa.afnica.backend.api.service.CarService;
+import kosa.afnica.backend.config.exception.ErrorResponse;
 import kosa.afnica.backend.db.dto.car.BrandResDto;
 import kosa.afnica.backend.db.dto.car.CarReqDto;
 import kosa.afnica.backend.db.dto.car.CarTypeResDto;
@@ -81,7 +82,8 @@ public class CarController {
     @Operation(summary = "Car 등록하기 API", description = "차 등록하기 API - 내 차량 등록 페이지 설정값들 저장")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = CarTypeResDto.class))))
+                    content = @Content(schema = @Schema(implementation = Map.class))),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @PostMapping("")
     public ResponseEntity<Map<String, Long>> postCar(HttpServletRequest request, @RequestBody CarReqDto reqDto) {

@@ -1,20 +1,28 @@
 package kosa.afnica.backend.api.service.impl;
 
 import kosa.afnica.backend.api.service.CarService;
+import kosa.afnica.backend.config.security.JwtUtil;
 import kosa.afnica.backend.db.dto.car.BrandResDto;
+import kosa.afnica.backend.db.dto.car.CarReqDto;
 import kosa.afnica.backend.db.dto.car.CarTypeResDto;
 import kosa.afnica.backend.db.entity.Brand;
+import kosa.afnica.backend.db.entity.Car;
 import kosa.afnica.backend.db.entity.CarType;
+import kosa.afnica.backend.db.entity.Member;
 import kosa.afnica.backend.db.mapper.CarMapper;
+import kosa.afnica.backend.db.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -23,6 +31,7 @@ import java.util.List;
 public class CarServiceImpl implements CarService {
 
     private final CarMapper carMapper;
+    private final MemberMapper memberMapper;
 
     @Override
     public void createBrand(MultipartFile file, Brand brand) {
@@ -76,6 +85,23 @@ public class CarServiceImpl implements CarService {
         }
 
         return resDtoList;
+    }
+
+    @Override
+    public Map<String, Long> createCar(HttpServletRequest request, CarReqDto reqDto) {
+        // Token으로부터 Member 얻어오기
+        String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
+        Member member = memberMapper.findByEmail(userEmail);
+
+        // 내 차 등록
+        Car car = new Car(reqDto, member.getId());
+        carMapper.saveCar(car);
+
+        // 등록된 차량 id 반환
+        Map<String, Long> map = new HashMap<>();
+        map.put("carId", car.getId());
+
+        return map;
     }
 
 }

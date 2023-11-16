@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosa.afnica.backend.db.mapper.ReservationMapper">
+    <!--###############################################################################################-->
+
+    <!-- 예약목록 조회를 위한 select 쿼리 -->
+    <select id="findReservationByMemberId" parameterType="Long" resultType="reservation">
+        SELECT ID, RESERVED_DATE, STATE, CARDATA_ID, CARCENTER_ID, MEMBER_ID
+        FROM RESERVATION
+        where MEMBER_ID = #{memberId}
+        order By ID desc
+    </select>
+
+    <!-- EMAIL에서 id 추출하는 쿼리 -->
+    <select id="findIdByEmail" parameterType="String" resultType="Long">
+        SELECT ID
+        FROM MEMBER
+        where EMAIL = #{email}
+    </select>
+    <!--#############################################################################################-->
+
+    <!-- 예약목록 삭제를 위한 delete 쿼리 -->
+<!--    <delete id="deleteById" parameterType="Long">-->
+<!--        delete-->
+<!--        from reservation-->
+<!--        where id = #{id}-->
+<!--    </delete>-->
+    <!--#############################################################################################-->
+
+<!--        예약하기를 위한 insert 쿼리-->
+<!--    <insert id="insert" parameterType="reservation">-->
+<!--        <selectKey keyProperty="id" resultType="Long" order="BEFORE">-->
+<!--            select RESERVATION_SEQ.nextval from dual-->
+<!--        </selectKey>-->
+<!--        INSERT INTO RESERVATION-->
+<!--        (ID, RESERVED_DATE, STATE, CARDATA_ID, CARCENTER_ID, MEMBER_ID)-->
+<!--        VALUES(-->
+<!--        #{id, jdbcType="NUMERIC"},-->
+<!--        #{memberId, jdbcType="NUMERIC"},-->
+<!--        #{carcenterId, jdbcType="NUMERIC"},-->
+<!--        #{state, jdbcType="VARCHAR"},-->
+<!--        #{reservedDate, jdbcType="TIMESTAMP"},-->
+<!--        #{carDataId}-->
+<!--        )-->
+<!--    </insert>-->
+
+
+
+</mapper>

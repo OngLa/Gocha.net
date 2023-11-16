@@ -8,6 +8,7 @@ import emailCheckIcon from "../../../img/member/emailcheck.png";
 import Swal from "sweetalert2";
 
 function EmailCheck() {
+  // 이메일 인증
   const navigate = useNavigate();
 
   const [email, setEmail] = useState({
@@ -31,21 +32,24 @@ function EmailCheck() {
   };
 
   const handleEmailCheckApply = () => {
-    const emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const emailRegex =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
-    if (emailRegex.test(email.email) === true) {
-      setEmailCheckApplyResult("올바른 이메일 형식이 아닙니다.");
-      setIsEmailCheckApplied(false);
-    } else if (email.email === "") {
+    if (email.email === "") {
       setEmailCheckApplyResult("이메일을 입력해주세요.");
     } else {
-      Swal.fire({
-        icon: "success",
-        title: "인증 번호가 발송되었습니다.",
-        text: "인증 번호를 확인하신 후 아래 입력창에 입력해주세요.",
-        confirmButtonColor: '#45CB85',
-      })
-      setIsEmailCheckApplied(true);
+      if (!emailRegex.test(email.email) === true) {
+        setEmailCheckApplyResult("올바른 이메일 형식이 아닙니다.");
+        setIsEmailCheckApplied(false);
+      } else {
+        Swal.fire({
+          icon: "success",
+          title: "인증 번호가 발송되었습니다.",
+          text: "인증 번호를 확인하신 후 아래 입력창에 입력해주세요.",
+          confirmButtonColor: "#45CB85",
+        });
+        setIsEmailCheckApplied(true);
+      }
     }
   };
 

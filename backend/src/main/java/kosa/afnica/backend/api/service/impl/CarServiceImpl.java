@@ -1,6 +1,8 @@
 package kosa.afnica.backend.api.service.impl;
 
 import kosa.afnica.backend.api.service.CarService;
+import kosa.afnica.backend.config.exception.CustomException;
+import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.security.JwtUtil;
 import kosa.afnica.backend.db.dto.car.BrandResDto;
 import kosa.afnica.backend.db.dto.car.CarReqDto;
@@ -19,10 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -91,7 +90,9 @@ public class CarServiceImpl implements CarService {
     public Map<String, Long> createCar(HttpServletRequest request, CarReqDto reqDto) {
         // Token으로부터 Member 얻어오기
         String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
-        Member member = memberMapper.findByEmail(userEmail);
+
+        Member member = memberMapper.findByEmail(userEmail)
+                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
 
         // 내 차 등록
         Car car = new Car(reqDto, member.getId());

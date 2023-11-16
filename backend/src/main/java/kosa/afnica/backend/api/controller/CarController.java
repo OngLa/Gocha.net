@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import kosa.afnica.backend.api.service.CarService;
 import kosa.afnica.backend.db.dto.car.BrandResDto;
+import kosa.afnica.backend.db.dto.car.CarReqDto;
 import kosa.afnica.backend.db.dto.car.CarTypeResDto;
 import kosa.afnica.backend.db.entity.Brand;
 import kosa.afnica.backend.db.entity.CarType;
@@ -18,13 +19,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/cars")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class CarController {
 
     private final CarService carService;
@@ -39,6 +42,7 @@ public class CarController {
 
         return ResponseEntity.ok().build();
     }
+
     @Operation(summary = "Brand 불러오기 API", description = "브랜드 불러오기 API - 내 차량 등록 페이지 랜더링 시에 실행되는 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
@@ -61,6 +65,7 @@ public class CarController {
 
         return ResponseEntity.ok().build();
     }
+
     @Operation(summary = "CarTyoe 불러오기 API", description = "차 종류 불러오기 API - 내 차량 등록 페이지 랜더링 시에 실행되는 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
@@ -71,6 +76,18 @@ public class CarController {
         List<CarTypeResDto> resDtoList = carService.findAllCarTypeByBrandId(brandId);
 
         return ResponseEntity.ok(resDtoList);
+    }
+
+    @Operation(summary = "Car 등록하기 API", description = "차 등록하기 API - 내 차량 등록 페이지 설정값들 저장")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = CarTypeResDto.class))))
+    })
+    @PostMapping("")
+    public ResponseEntity<Map<String, Long>> postCar(HttpServletRequest request, @RequestBody CarReqDto reqDto) {
+        Map<String, Long> resMap = carService.createCar(request, reqDto);
+
+        return ResponseEntity.ok(resMap);
     }
 
 }

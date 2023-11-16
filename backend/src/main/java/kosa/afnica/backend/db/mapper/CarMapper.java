@@ -1,6 +1,7 @@
 package kosa.afnica.backend.db.mapper;
 
 import kosa.afnica.backend.db.entity.Brand;
+import kosa.afnica.backend.db.entity.Car;
 import kosa.afnica.backend.db.entity.CarType;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,4 +20,7 @@ public interface CarMapper {
 
     // BrandId를 기반으로 모든 CarType 조회
     List<CarType> findAllCarTypeByBrandId(Long brandId);
+
+    // 내 차량 등록
+    void saveCar(Car car);
 }

@@ -1,6 +1,8 @@
 package kosa.afnica.backend.api.service.impl;
 
 import kosa.afnica.backend.api.service.ReservationService;
+import kosa.afnica.backend.config.exception.CustomException;
+import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.security.JwtUtil;
 import kosa.afnica.backend.db.dto.reservation.CreateReservationDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationDto;
@@ -29,6 +31,10 @@ public class ReservationServiceImpl implements ReservationService {
 
 
         List<Reservation> reservationList = reservationMapper.findReservationByMemberId(memberId);
+
+        if(reservationList.isEmpty()) {
+            throw new CustomException(ErrorCode.RESERVATIONS_NOT_FOUND);
+        }
         //DB에서 유저와 일치하는 정보 reservationList에 저장
 
         List<ReservationDto> reservationDtoList = new ArrayList<>();

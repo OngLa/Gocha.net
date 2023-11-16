@@ -11,18 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface ReservationMapper {
-//###############################################################################################
-
-    public List<Reservation> findReservationByMemberId(Long memberId);
-    //memberId를 entity타입으로 저장하는 메소드
-    public Long findIdByEmail(String email);
-    //에메일을 저장하는 메소드
-
-//###############################################################################################
-
-//    int deleteById(Long id);
-
-//###############################################################################################
-
+    public List<Reservation> findReservationByMemberId(Long memberId); //memberId를 entity타입으로 저장하는 메소드
+    public Long findIdByEmail(String email); //에메일을 저장하는 메소드
 //    public int insert(Reservation reservation);
 }

@@ -32,18 +32,30 @@
 
 .checkIdBtn {
   border: none;
-  margin: 0px px;
+  margin: 0px 3px;
   font-size: 14px;
   color: #45cb85;
   background-color: white;
 }
 
-.nicknameCheckResult {
+.valid {
+  font-size: 15px;
+  color: green;
+  margin: 0px 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.invalid {
   font-size: 15px;
   color: red;
   margin: 0px 30px;
   display: flex;
   justify-content: center;
+}
+
+.available-nickname {
+  color: #47f6c1;
 }
 
 .signupBtn {

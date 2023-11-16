@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
       if(accessToken != null && !accessToken.trim().equals("")) {
          if(JwtUtil.validateToken(accessToken)) {
             //토큰에서 userId 얻기
-            String id = JwtUtil.getId(accessToken);
+            String id = JwtUtil.getEmail(accessToken);
             //DB에서 userId에 해당하는 정보를 가져오기
             UserDetails userDetails = userDetailsService.loadUserByUsername(id);
             //인증 객체 생성
@@ -52,7 +52,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             SecurityContextHolder.getContext().setAuthentication(authentication);
          }
       }
-      
+
       chain.doFilter(request, response);
    }
 }

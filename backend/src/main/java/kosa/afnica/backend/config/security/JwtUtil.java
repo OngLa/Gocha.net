@@ -51,18 +51,19 @@ public class JwtUtil {
     }
 
 	//JWT 토큰에서 사용자 아이디 얻기
-	public static String getId(String token) {
-		String id = null;
+	//Token 풀어줘서 eamil 얻고 이걸 가지고 id 조회하여 리턴하기
+	public static String getEmail(String token) {
+		String email = null;
 		try {
 			JwtParser parser = Jwts.parser();
 			parser.setSigningKey(secretKey.getBytes("UTF-8"));
 			Jws<Claims> jws = parser.parseClaimsJws(token);
 			Claims claims = jws.getBody();
-			id = claims.get("id", String.class);
+			email = claims.get("userId", String.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return id;
+		return email;
 	}
 	
 	//JWT 토큰 유효성 검사: 만료일자 확인 

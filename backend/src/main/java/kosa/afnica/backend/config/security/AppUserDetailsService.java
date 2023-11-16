@@ -24,7 +24,7 @@ public class AppUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberMapper.selectByEmail(username);
+        Member member = memberMapper.findByEmail(username);
 
         // email에 대한 계정정보가 DB에 없으면 403에러 띄우기
         if (member == null) {

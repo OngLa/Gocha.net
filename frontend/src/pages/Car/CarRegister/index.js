@@ -5,7 +5,7 @@ import ToggleList from "./ToggleList";
 
 import styles from "./style.module.css";
 import LargeButton from "../../../components/Button";
-import { getBrands, getCarTypes } from "../../../apis/car";
+import { getBrands, getCarTypes, postCar } from "../../../apis/car";
 
 function CarRegister() {
   const [selectedBrand, setSelectedBrand] = useState("");
@@ -16,7 +16,7 @@ function CarRegister() {
   const toggleCarRef = useRef();
 
   useEffect(() => {
-    if(selectedCar !== "") {
+    if (selectedCar !== "") {
       toggleCarRef.current.toggleIsActive();
     }
   }, [selectedCar]);
@@ -29,7 +29,6 @@ function CarRegister() {
       try {
         const brandsData = await getBrands();
         setBrands(brandsData);
-        console.log(brandsData);
       } catch (error) {
         console.error("Failed to fetch brands:", error);
       }
@@ -57,21 +56,20 @@ function CarRegister() {
     toggleBrandRef.current.toggleIsActive();
 
     work();
-
-    // if (!toggleCarRef.current.getIsActive()) {
-    //   toggleCarRef.current.toggleIsActive();
-    // }
   }, [selectedBrand]);
 
   const handleCarNumber = (e) => {
     setCarNumber(e.target.value);
   };
-  const handleCarInfo = () => {
-    console.log(
-      brands[selectedBrand].name,
-      carTypes[selectedCar].name,
-      carNumber
-    );
+
+  const handleCarInfo = async () => {
+    const data = {
+      carNumber: carNumber,
+      cartypeId: carTypes[selectedCar].id,
+    };
+
+    const response = await postCar(data);
+    console.log(response);
   };
 
   return (
@@ -119,7 +117,7 @@ function CarRegister() {
         <div className={styles.tag}>차량 번호</div>
         <input
           type="text"
-          placeholder="50 우 1934"
+          placeholder="ex) 50 우 1934"
           value={carNumber}
           onChange={handleCarNumber}
         />

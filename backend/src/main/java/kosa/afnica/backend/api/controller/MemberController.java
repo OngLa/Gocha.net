@@ -9,11 +9,14 @@ import kosa.afnica.backend.api.service.MemberService;
 import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.exception.ErrorResponse;
+import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestController
@@ -41,7 +44,7 @@ public class MemberController {
             @ApiResponse(responseCode = "409", description = "존재하는 Name 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @GetMapping("/name-check")
-    public ResponseEntity<Void> getUserName(@RequestParam String name) {
+    public ResponseEntity<Void> getUserName(@RequestParam("nickname") String name) {
         if (memberService.existName(name)) {
         } else {
             throw new CustomException(ErrorCode.DUPLICATE_NAME);
@@ -49,7 +52,7 @@ public class MemberController {
         return ResponseEntity.ok(null);
     }
 
-    @Operation(summary = "유저 회원가입 API", description = "유저 회원가입 진행")
+    @Operation(summary = "유저 회원가입 API", description = "요청받은 회원 정보를 기반으로 회원가입 진행")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "409", description = "존재하는 user 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
@@ -60,7 +63,7 @@ public class MemberController {
         return ResponseEntity.ok(null);
     }
 
-    @Operation(summary = " 정비소 회원가입 API", description = "정비소 회원가입 진행")
+/*    @Operation(summary = " 정비소 회원가입 API", description = "정비소 회원가입 진행")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "409", description = "존재하는 user 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
@@ -69,5 +72,17 @@ public class MemberController {
         memberService.creatAdminMember(memberSignupReqDto);
 
         return ResponseEntity.ok(null);
+    }*/
+
+    @Operation(summary = "유저 마이페이지 API", description = "마이페이지에서 이메일 기반으로 회원 정보 조회")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = MemberMypageResDto.class)))
+    })
+    @GetMapping("/mypage")
+    public ResponseEntity<MemberMypageResDto> getMypage(HttpServletRequest request) {
+
+        MemberMypageResDto memberMypageResDto = memberService.findMypage(request);
+
+        return ResponseEntity.ok(memberMypageResDto);
     }
 }

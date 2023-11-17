@@ -22,7 +22,6 @@ useEffect(()=>{
     try {
       const response = await readReservationList();
       setList(response.data);
-      console.log("데이터 성공적으로 가져옴")
     }catch(error) {
 console.log(error);
     }

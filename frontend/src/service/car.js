@@ -51,3 +51,13 @@ export const getRecentCarData = async (carId) => {
     throw error;
   }
 };
+
+export const deleteCar = async (carId) => {
+  try {
+    const response = await axios.delete("/cars", {params: {carId}});
+    return response.data;
+  } catch (error) {
+    console.error("Error get Brands, ", error);
+    throw error;
+  }
+};

@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import ContentHeader from "../../../components/ContentHeader";
 import CustomSelect from "../../../components/CustomSelect";
-import LargeButton from "../../../components/Button";
+import LargeButton, { SmallButton2 } from "../../../components/Button";
 import GridCarInfo from "../../../components/GridCarInfo";
 
 import styles from "./style.module.css";
-import { getMyCar, getRecentCarData } from "../../../service/car";
+import { deleteCar, getMyCar, getRecentCarData } from "../../../service/car";
 
 function Info() {
   // 내 차량 종류 Selector 데이터 추가
@@ -50,7 +50,7 @@ function Info() {
     const work = async () => {
       try {
         setImgSrc(carList[value].photo);
-        
+
         const recentCarData = await getRecentCarData(carList[value].carId);
         setCarData(recentCarData);
       } catch (error) {
@@ -65,6 +65,13 @@ function Info() {
 
   const handleRegisterCar = () => {
     navigate("/car/registration");
+  };
+
+  const handleDelete = async () => {
+    //
+    const deleteCarName = await deleteCar(carList[value].carId);
+    console.log(deleteCarName.name);
+    window.location.reload();
   };
 
   return (
@@ -94,8 +101,17 @@ function Info() {
       </div>
 
       {/* 내 자동차 정보 출력 */}
-      <div>
+      <div className={styles.mb}>
         <GridCarInfo item={carData} layoutType="A" fontSize="20px" />
+      </div>
+
+      {/* 내 차 삭제하기 버튼 */}
+      <div className={styles.delBtn}>
+        <SmallButton2
+          name="delete"
+          children="내 차 삭제"
+          onClick={handleDelete}
+        />
       </div>
     </div>
   );

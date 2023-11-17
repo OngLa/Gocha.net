@@ -10,6 +10,7 @@ import kosa.afnica.backend.api.service.CarService;
 import kosa.afnica.backend.config.exception.ErrorResponse;
 import kosa.afnica.backend.db.dto.car.BrandResDto;
 import kosa.afnica.backend.db.dto.car.CarReqDto;
+import kosa.afnica.backend.db.dto.car.CarResDto;
 import kosa.afnica.backend.db.dto.car.CarTypeResDto;
 import kosa.afnica.backend.db.entity.Brand;
 import kosa.afnica.backend.db.entity.CarType;
@@ -91,5 +92,18 @@ public class CarController {
 
         return ResponseEntity.ok(resMap);
     }
+
+    @Operation(summary = "등록된 Car List 불러오기 API", description = "등록된 차량 종류 불러오기 API - 차량 데이터, 내 차 정보 페이지에 렌더링 시 호출될 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = CarResDto.class))))
+    })
+    @GetMapping("/car-list")
+    public ResponseEntity<List<CarResDto>> getCarList(HttpServletRequest request) {
+        List<CarResDto> resDtoList = carService.findAllCarByMemberId(request);
+
+        return ResponseEntity.ok(resDtoList);
+    }
+
 
 }

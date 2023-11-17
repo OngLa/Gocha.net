@@ -1,5 +1,6 @@
 package kosa.afnica.backend.db.mapper;
 
+import kosa.afnica.backend.db.dto.car.CarResDto;
 import kosa.afnica.backend.db.entity.Brand;
 import kosa.afnica.backend.db.entity.Car;
 import kosa.afnica.backend.db.entity.CarType;
@@ -23,4 +24,6 @@ public interface CarMapper {
 
     // 내 차량 등록
     void saveCar(Car car);
+
+    List<CarResDto> findAllCarByMemberId(Long memberId);
 }

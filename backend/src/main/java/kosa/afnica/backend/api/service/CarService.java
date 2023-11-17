@@ -2,6 +2,7 @@ package kosa.afnica.backend.api.service;
 
 import kosa.afnica.backend.db.dto.car.BrandResDto;
 import kosa.afnica.backend.db.dto.car.CarReqDto;
+import kosa.afnica.backend.db.dto.car.CarResDto;
 import kosa.afnica.backend.db.dto.car.CarTypeResDto;
 import kosa.afnica.backend.db.entity.Brand;
 import kosa.afnica.backend.db.entity.CarType;
@@ -27,5 +28,8 @@ public interface CarService {
 
     // token과 입력받은 값을 기반으로 내 차량 등록
     Map<String, Long> createCar(HttpServletRequest request, CarReqDto reqDto);
+
+    // MemberId를 기반으로 모든 CarId, CartypeName, Car Photo 조회
+    List<CarResDto> findAllCarByMemberId(HttpServletRequest request);
 
 }

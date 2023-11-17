@@ -7,7 +7,7 @@ import LargeButton from "../../../components/Button";
 import GridCarInfo from "../../../components/GridCarInfo";
 
 import styles from "./style.module.css";
-import { getMyCar } from "../../../service/car";
+import { getMyCar, getRecentCarData } from "../../../service/car";
 
 function Info() {
   // 내 차량 종류 Selector 데이터 추가
@@ -23,7 +23,6 @@ function Info() {
         setCarList(carListData);
         setValue(0);
         setImgSrc(carList[value].photo);
-        console.log(carListData);
       } catch (error) {
         console.error("Failed to fetch CarList:", error);
       }
@@ -33,33 +32,36 @@ function Info() {
   }, []);
 
   // carList 값이나 value값이 바뀌는 경우
+  // Car Data 불러오기
+  const [carData, setCarData] = useState({
+    canGoDistance: 0,
+    distance: 0,
+    carBattery: 0,
+    batteryCharge: true,
+    breakOil: true,
+    engineOil: true,
+    oil: true,
+    tire: true,
+    washer: true,
+    lampWire: true,
+  });
+
   useEffect(() => {
     const work = async () => {
       try {
         setImgSrc(carList[value].photo);
+        
+        const recentCarData = await getRecentCarData(carList[value].carId);
+        setCarData(recentCarData);
       } catch (error) {
-        console.error("Failed to fetch CarList:", error);
+        console.log("리다이렉트");
       }
     };
 
     work();
-  }, [value]);
-
+  }, [carList, value]);
 
   const navigate = useNavigate();
-
-  const myCarList = {
-    cango_distance: 300,
-    distance: 100000,
-    car_battery: 5,
-    charge_status: true,
-    oil: true,
-    washer: true,
-    tire: true,
-    lampwire: true,
-    break: true,
-    engine: true,
-  };
 
   const handleRegisterCar = () => {
     navigate("/car/registration");
@@ -74,12 +76,7 @@ function Info() {
 
       {/* 내 차량 종류 Selector */}
       <div className={`${styles.mb} ${styles.customSelect}`}>
-        <CustomSelect
-          items={carList}
-          value={value}
-          setValue={setValue}
-          setImgSrc={setImgSrc}
-        />
+        <CustomSelect items={carList} value={value} setValue={setValue} />
       </div>
 
       {/* 차량 이미지 출력 */}
@@ -98,7 +95,7 @@ function Info() {
 
       {/* 내 자동차 정보 출력 */}
       <div>
-        <GridCarInfo item={myCarList} layoutType="A" fontSize="20px" />
+        <GridCarInfo item={carData} layoutType="A" fontSize="20px" />
       </div>
     </div>
   );

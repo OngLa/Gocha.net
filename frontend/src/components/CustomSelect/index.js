@@ -1,11 +1,10 @@
 import styles from "./style.module.css";
 
 function CustomSelect(props) {
-  const { items, value, setValue, setImgSrc } = props;
+  const { items, value, setValue } = props;
 
   const handleValue = (e) => {
     setValue(e.target.value);
-    setImgSrc(items[e.target.value].photo);
   };
 
   return (

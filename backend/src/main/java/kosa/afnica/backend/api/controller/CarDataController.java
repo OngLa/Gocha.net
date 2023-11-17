@@ -36,9 +36,9 @@ public class CarDataController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = CarDataResDto.class)))
     })
-    @GetMapping("/car-list")
-    public ResponseEntity<CarDataResDto> getCarList(@RequestParam Long carID) {
-        CarDataResDto resDto = carDataService.findAllCarDataByCarId(carID);
+    @GetMapping("/recent-data")
+    public ResponseEntity<CarDataResDto> getCarList(@RequestParam Long carId) {
+        CarDataResDto resDto = carDataService.findAllCarDataByCarId(carId);
 
         return ResponseEntity.ok(resDto);
     }

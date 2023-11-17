@@ -1,6 +1,8 @@
 package kosa.afnica.backend.api.service.impl;
 
 import kosa.afnica.backend.api.service.CarDataService;
+import kosa.afnica.backend.config.exception.CustomException;
+import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.db.dto.carData.CarDataResDto;
 import kosa.afnica.backend.db.entity.CarData;
 import kosa.afnica.backend.db.mapper.CarDataMapper;
@@ -71,6 +73,9 @@ public class CarDataServiceImpl implements CarDataService {
     public CarDataResDto findAllCarDataByCarId(Long carId) {
 
         List<CarData> carDataList = carDataMapper.findAllCarDataByCarId(carId);
+        if(carDataList.isEmpty()) {
+            throw new CustomException(ErrorCode.CARDATA_NOT_FOUND);
+        }
 
         return new CarDataResDto(carDataList.get(carDataList.size() - 1));
     }

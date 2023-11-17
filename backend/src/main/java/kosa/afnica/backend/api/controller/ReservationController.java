@@ -42,7 +42,6 @@ public class ReservationController {
 
     @GetMapping("/list")
     public List<ReservationDto> getReservaionList(HttpServletRequest request) {
-        log.info(request.getHeader("Authorization").substring(7));
 
         List<ReservationDto> reservationList = reservationService.readReservationList(request);
 
@@ -56,9 +55,9 @@ public class ReservationController {
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationDto.class)))),
     })
     @PostMapping("")
-    public ResponseEntity<Void> postReservation(HttpServletRequest request, @RequestBody ReservationReqDto reservationreqdto){
+    public ResponseEntity<Void> postReservation(HttpServletRequest request, @RequestBody ReservationReqDto reservationReqDto){
 
-        reservationService.createReservation(request,reservationreqdto);
+        reservationService.createReservation(request,reservationReqDto);
         return ResponseEntity.ok(null);
     }
 

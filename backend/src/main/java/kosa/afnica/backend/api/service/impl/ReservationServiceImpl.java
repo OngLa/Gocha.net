@@ -52,20 +52,18 @@ public class ReservationServiceImpl implements ReservationService {
 //########################################################################################################################
 
     @Override
-    public ReservationReqDto createReservation(HttpServletRequest request, ReservationReqDto reservationreqdto){
+    public ReservationReqDto createReservation(HttpServletRequest request, ReservationReqDto reservationReqDto){
 
         String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
         Long memberId = reservationMapper.findIdByEmail(userEmail);
         //HTTP 헤더에 있는 유저이메일에서 ID를 추출 하는 로직
 
-        reservationreqdto.setMemberId(memberId);
+        reservationReqDto.setMemberId(memberId);
 
-       reservationMapper.saveReservation(reservationreqdto);
+       reservationMapper.saveReservation(reservationReqDto);
 
 
-        //reservationList에서 필요한정보만 필터링 해서 reservationDtoList에 저장
-
-        return reservationreqdto;
+        return reservationReqDto;
     }
 
 

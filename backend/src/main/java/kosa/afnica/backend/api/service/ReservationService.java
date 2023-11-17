@@ -10,6 +10,6 @@ import java.util.List;
 public interface ReservationService {
 
      public List<ReservationDto> readReservationList(HttpServletRequest request);
-     public ReservationReqDto createReservation(HttpServletRequest request, ReservationReqDto reservationreqdto);
+     public ReservationReqDto createReservation(HttpServletRequest request, ReservationReqDto reservationReqDto);
 
 }

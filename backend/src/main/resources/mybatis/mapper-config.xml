@@ -21,6 +21,8 @@
         <typeAlias alias="car" type="kosa.afnica.backend.db.entity.Car"/>
         <typeAlias alias="carResDto" type="kosa.afnica.backend.db.dto.car.CarResDto"/>
 
+        <!--  CarData  -->
+        <typeAlias alias="carData" type="kosa.afnica.backend.db.entity.CarData"/>
 
     </typeAliases>
 </configuration>

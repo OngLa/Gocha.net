@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosa.afnica.backend.db.mapper.CarDataMapper">
+
+<!--    <insert id="insertCarData" parameterType="map">-->
+<!--        <selectKey keyProperty="id" resultType="int" order="BEFORE">-->
+<!--            SELECT CAR_DATA_SEQ.NEXTVAL FROM DUAL-->
+<!--        </selectKey>-->
+<!--        INSERT INTO CAR_DATA-->
+<!--        (ID, BATTERY_CHARGE, BREAK_OIL, CAN_GO_DISTANCE, CAR_BATTERY, DISTANCE, ENGINE_OIL, LAMP_WIRE, LAST_UPDATE, OIL, TIRE, WASHER, CAR_ID)-->
+<!--        VALUES-->
+<!--        (#{id}, #{batteryCharge}, #{breakOil}, #{canGoDistance}, #{carBattery}, #{distance}, #{engineOil}, #{lampWire}, SYSDATE, #{oil}, #{tire}, #{washer}, #{carId});-->
+<!--    </insert>-->
+
+    <!--  CarId 기반으로 모든 자동차 데이터 불러오기  -->
+    <select id="findAllCarDataByCarId" resultType="carData">
+        SELECT ID,
+               CAN_GO_DISTANCE,
+               DISTANCE,
+               CAR_BATTERY,
+               BATTERY_CHARGE,
+               BREAK_OIL,
+               ENGINE_OIL,
+               OIL,
+               TIRE,
+               WASHER,
+               LAMP_WIRE,
+               LAST_UPDATE,
+               CAR_ID
+        FROM CAR_DATA
+        WHERE CAR_ID = #{carId}
+    </select>
+
+</mapper>

@@ -3,6 +3,8 @@ package kosa.afnica.backend.db.mapper;
 import kosa.afnica.backend.db.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Optional;
+
 @Mapper
 public interface MemberMapper {
 
@@ -10,9 +12,9 @@ public interface MemberMapper {
 
     void saveAdmin(Member member);
 
-    Member findById(String id);
+    Optional<Member> findById(Long id);
 
-    Member findByEmail(String email);
+    Optional<Member> findByEmail(String email);
 
     String findRoleByEmail(String email);
 

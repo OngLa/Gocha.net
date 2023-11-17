@@ -9,7 +9,7 @@
         values (member_seq.nextval, #{email}, #{password}, #{name}, #{phoneNumber}, null, 1, 'ROLE_USER')
     </insert>
 
-     <!--  카센터 회원가입(아직 구현x)  -->
+    <!--  카센터 회원가입(아직 구현x)  -->
     <insert id="saveAdmin" parameterType="member">
         insert into member(id, email, password, name, phone_number, address, enabled, role)
         values (carcenter_seq.nextval, #{email}, #{password}, #{name}, #{phoneNumber}, #{address}, 1, 'ROLE_CARCENTER')
@@ -29,7 +29,7 @@
         where email = #{email}
     </select>
 
-    <select id="findById" parameterType="String" resultType="member">
+    <select id="findById" parameterType="Long" resultType="member">
         select id,
                email,
                password,
@@ -41,7 +41,7 @@
         from member
         where id = #{id}
     </select>
-  
+
     <!--  FE에서 멤버 권한 확인하기 위해 Select Role  -->
     <select id="findRoleByEmail" parameterType="String" resultType="String">
         select role
@@ -55,7 +55,7 @@
         from member
         where name = #{name}
     </select>
-      
+
     <!-- 닉네임 중복 검사 -->
     <select id="existByName" resultType="int">
         select count(*)

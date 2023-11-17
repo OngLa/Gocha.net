@@ -5,7 +5,7 @@ import ToggleList from "./ToggleList";
 
 import styles from "./style.module.css";
 import LargeButton from "../../../components/Button";
-import { getBrands, getCarTypes, postCar } from "../../../apis/car";
+import { getBrands, getCarTypes, postCar } from "../../../service/car";
 
 function CarRegister() {
   const [selectedBrand, setSelectedBrand] = useState("");

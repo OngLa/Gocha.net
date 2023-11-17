@@ -1,20 +1,22 @@
-import styles from './style.module.css'
+import styles from "./style.module.css";
 
 function CustomSelect(props) {
-
-  const {items, value, setValue} = props;
+  const { items, value, setValue, setImgSrc } = props;
 
   const handleValue = (e) => {
     setValue(e.target.value);
-  }
+    setImgSrc(items[e.target.value].photo);
+  };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.tagName}>내 차종</div>
       <div className={styles.customSelect}>
-        <select value={value} onChange={handleValue} >
-          {items.map((item) => (
-            <option key={item.value} value={item.value}>{item.name}</option>
+        <select value={value} onChange={handleValue}>
+          {items.map((item, idx) => (
+            <option key={idx} value={idx}>
+              {item.carName}
+            </option>
           ))}
         </select>
       </div>
@@ -23,3 +25,14 @@ function CustomSelect(props) {
 }
 
 export default CustomSelect;
+
+// [
+//   {
+//     "carId": 0,
+//     "carName": "string",
+//     "logo": [
+//       "string"
+//     ],
+//     "photo": "string"
+//   }
+// ]

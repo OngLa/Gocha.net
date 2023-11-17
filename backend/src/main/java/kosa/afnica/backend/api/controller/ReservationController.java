@@ -31,8 +31,8 @@ public class ReservationController {
     private final ReservationService reservationService;
 
 //######################################################################################################################
-
     //유저 예약목록 출력
+
     @Operation(summary = "예약목록 불러오기 API", description = "얘약목록 불러오기 API - 예약관리 클릭시 랜더링되는 예약목록 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
@@ -48,6 +48,7 @@ public class ReservationController {
         return reservationList;
     }
 //######################################################################################################################
+//예약하기
 
     @Operation(summary = "예약하기 API", description = "예약하기 클릭시 db에 저장되는 API")
     @ApiResponses({
@@ -60,5 +61,20 @@ public class ReservationController {
         reservationService.createReservation(request,reservationReqDto);
         return ResponseEntity.ok(null);
     }
+//######################################################################################################################
+//예약취소
+
+    @Operation(summary = "예약취소 API", description = "예약취소 클릭시 db의 예약목록 삭제 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Reservation.class)))),
+            @ApiResponse(responseCode = "404", description = "이미 삭제된 예약입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
+    @DeleteMapping("/{id}")
+    public void deleteOrder(@PathVariable Long id) {
+        reservationService.deleteReservation(id);
+    }
+
+
 
 }

@@ -17,7 +17,7 @@ public class ReservationReqDto {
     private Long carDataId;
 
     public ReservationReqDto(Long id, Long memberId, Date reservedDate, Long carcenterId, Long carDataId) {
-        this.id = id;
+//        this.id = id;    //데이터 save에사용안함(시퀀스로 자동입력됨)
         this.memberId = memberId;
         this.reservedDate = reservedDate;
         this.carcenterId = carcenterId;

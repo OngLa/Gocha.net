@@ -27,8 +27,10 @@ public enum ErrorCode {
     INVALID_ACCOUNTS(HttpStatus.FORBIDDEN, "존재하지 않는 계정입니다."), // 로그인 실패 시
 
     NOT_FOUND(HttpStatus.NOT_FOUND, "Not Found"),
-    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다"),
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다."),
     EMAIL_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 Email 입니다"),
+    RESERVATIONS_NOT_FOUND(HttpStatus.NOT_FOUND, "예약 목록이 존재하지 않습니다."),
+    CARDATA_NOT_FOUND(HttpStatus.NOT_FOUND, "데이터가 존재하지 않습니다."),
 
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "Method Not Allowed"),
 

@@ -12,9 +12,20 @@
     <typeAliases>
         <!-- <typeAlias alias="{여기수정}" type="kosa.afnica.backend.db.entity.{여기수정}" /> -->
         <typeAlias alias="member" type="kosa.afnica.backend.db.entity.Member"/>
+
+        <typeAlias alias="reservation" type="kosa.afnica.backend.db.entity.Reservation"/>
+        <typeAlias alias="reservationDto" type="kosa.afnica.backend.db.dto.reservation.ReservationReqDto"/>
+
+        <!--  Car  -->
         <typeAlias alias="brand" type="kosa.afnica.backend.db.entity.Brand"/>
         <typeAlias alias="carType" type="kosa.afnica.backend.db.entity.CarType"/>
         <typeAlias alias="ChattingResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingResDto"/>
         <typeAlias alias="MessageResDto" type="kosa.afnica.backend.db.dto.chatting.MessageResDto"/>
+        <typeAlias alias="car" type="kosa.afnica.backend.db.entity.Car"/>
+        <typeAlias alias="carResDto" type="kosa.afnica.backend.db.dto.car.CarResDto"/>
+
+        <!--  CarData  -->
+        <typeAlias alias="carData" type="kosa.afnica.backend.db.entity.CarData"/>
+
     </typeAliases>
 </configuration>

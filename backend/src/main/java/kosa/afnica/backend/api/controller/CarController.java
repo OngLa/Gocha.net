@@ -105,5 +105,20 @@ public class CarController {
         return ResponseEntity.ok(resDtoList);
     }
 
+    @Operation(summary = "등록된 차량 삭제 API", description = "등록된 차량 삭제 API - 내 차 정보 페이지 삭제하기 버튼 클릭시 호출되는 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공",
+                    content = @Content(schema = @Schema(implementation = Map.class))),
+            @ApiResponse(responseCode = "403", description = "이 게시물을 삭제할 권한이 없습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "등록된 차량이 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
 
+    })
+    @DeleteMapping("")
+    public ResponseEntity<Map<String, String>> deleteCar(HttpServletRequest request, Long carId) {
+
+        Map<String, String> resMap = carService.deleteCarById(request, carId);
+
+        return ResponseEntity.ok(resMap);
+    }
 }

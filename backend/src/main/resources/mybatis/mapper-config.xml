@@ -14,5 +14,7 @@
         <typeAlias alias="member" type="kosa.afnica.backend.db.entity.Member"/>
         <typeAlias alias="brand" type="kosa.afnica.backend.db.entity.Brand"/>
         <typeAlias alias="carType" type="kosa.afnica.backend.db.entity.CarType"/>
+        <typeAlias alias="ChattingResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingResDto"/>
+        <typeAlias alias="MessageResDto" type="kosa.afnica.backend.db.dto.chatting.MessageResDto"/>
     </typeAliases>
 </configuration>

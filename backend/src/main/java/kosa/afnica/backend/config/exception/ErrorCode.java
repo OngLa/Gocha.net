@@ -25,12 +25,14 @@ public enum ErrorCode {
 
     FORBIDDEN(HttpStatus.FORBIDDEN, "Forbidden"),
     INVALID_ACCOUNTS(HttpStatus.FORBIDDEN, "존재하지 않는 계정입니다."), // 로그인 실패 시
+    DELETE_PERMISSION_DENIED(HttpStatus.FORBIDDEN, "이 게시물을 삭제할 권한이 없습니다."),
 
     NOT_FOUND(HttpStatus.NOT_FOUND, "Not Found"),
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다."),
     EMAIL_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 Email 입니다"),
     RESERVATIONS_NOT_FOUND(HttpStatus.NOT_FOUND, "예약 목록이 존재하지 않습니다."),
-    CARDATA_NOT_FOUND(HttpStatus.NOT_FOUND, "데이터가 존재하지 않습니다."),
+    CARDATA_NOT_FOUND(HttpStatus.NOT_FOUND, "차량 데이터가 존재하지 않습니다."),
+    CAR_NOT_FOUND(HttpStatus.NOT_FOUND, "등록된 차량이 존재하지 않습니다."),
 
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "Method Not Allowed"),
 

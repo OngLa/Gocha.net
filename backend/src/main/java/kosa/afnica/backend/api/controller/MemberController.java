@@ -9,10 +9,10 @@ import kosa.afnica.backend.api.service.MemberService;
 import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.exception.ErrorResponse;
+import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,4 +74,15 @@ public class MemberController {
         return ResponseEntity.ok(null);
     }*/
 
+    @Operation(summary = "유저 마이페이지 API", description = "마이페이지에서 이메일 기반으로 회원 정보 조회")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = MemberMypageResDto.class)))
+    })
+    @GetMapping("/mypage")
+    public ResponseEntity<MemberMypageResDto> getMypage(HttpServletRequest request) {
+
+        MemberMypageResDto memberMypageResDto = memberService.findMypage(request);
+
+        return ResponseEntity.ok(memberMypageResDto);
+    }
 }

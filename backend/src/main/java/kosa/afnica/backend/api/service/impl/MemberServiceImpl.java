@@ -4,6 +4,7 @@ import kosa.afnica.backend.api.service.MemberService;
 import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.security.JwtUtil;
+import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 import kosa.afnica.backend.db.entity.Member;
 
@@ -73,5 +74,17 @@ public class MemberServiceImpl implements MemberService {
         //FE에서 로그인한 멤버의 권한을 확인할 수 있도록 Role찾기
         return memberMapper.findRoleByEmail(email);
     }
+
+    @Override
+    public MemberMypageResDto findMypage(HttpServletRequest request) {
+        // Token으로부터 Member 얻어오기
+        String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
+
+        Member member = memberMapper.findByEmail(userEmail)
+                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+
+        return new MemberMypageResDto(member);
+    }
+
 
 }

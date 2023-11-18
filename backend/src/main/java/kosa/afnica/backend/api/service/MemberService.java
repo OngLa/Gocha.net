@@ -1,5 +1,6 @@
 package kosa.afnica.backend.api.service;
 
+import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,5 +19,7 @@ public interface MemberService {
 //    public void creatAdminMember(MemberSignupReqDto memberSignupReqDto);
 
     String findRole(String email);
+
+    MemberMypageResDto findMypage(HttpServletRequest request);
 
 }

@@ -1,30 +1,44 @@
 import { useNavigate } from "react-router-dom";
 import ContentHeader from "../../components/ContentHeader";
-import ReservationComponent from "./ReservationComponent";
 import LargeButton from "../../components/Button";
+import ReservationComponent from "./ReservationComponent";
+import { useEffect, useState } from "react";
+import { readReservationList } from "../../apis/reservation";
 
 function ReservationList() {
+  // //예약목록 출력 페이지
 
-  //예약목록페이지
+  const navigate = useNavigate();
+  const handleNavOnClick = () => {
+    navigate("repairshoplist");
+  };
+  //등록하기 누르면 정비소 목록으로 이동
 
-const navigate= useNavigate();
+  const [list, setList] = useState([]);
+//서버에서 가져온 데이터 저장하는 상태
 
-const handleNavOnClick=()=>{
-  navigate("repairshoplist")
-}
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await readReservationList();
+        setList(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [list]);
+//서버 데이터가 수정되면 페이지가 리랜더링됨
+
 
   return (
     <div>
-        <div><ContentHeader menuName="예약목록"/></div>
-
-        <div  style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-          <div>
-            <ReservationComponent />
-          </div>
-          <div style={{marginTop:"20px"}}>
-            <LargeButton onClick={handleNavOnClick}>예약하기</LargeButton></div>
+      <div><ContentHeader menuName="예약목록" /></div>
+      <div style={{display: "flex", flexDirection: "column", alignItems: "center",}}>
+        <div><ReservationComponent list={list} /></div>
+        <div style={{ marginTop: "20px" }}><LargeButton onClick={handleNavOnClick}>새 예약 등록</LargeButton></div>
       </div>
-        </div>
+    </div>
   );
 }
 export default ReservationList;

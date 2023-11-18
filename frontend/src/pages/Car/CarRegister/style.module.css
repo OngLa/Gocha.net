@@ -23,7 +23,7 @@
 
 .inputWrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   background-color: white;
   border: none;
   border-radius: 8px;

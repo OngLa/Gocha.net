@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./mypage.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
-import { SmallButton } from "../../../components/Button";
+import { SmallButton, SmallButton2 } from "../../../components/Button";
 import emailIcon from "../../../img/member/email-white.png";
 import passwordIcon from "../../../img/member/password-white.png";
 import nicknameIcon from "../../../img/member/nickname-white.png";
@@ -19,6 +19,10 @@ import { removeAuthHeader } from "../../../service/axiosConfig";
 import { getMypage } from "../../../service/member";
 
 function Mypage() {
+  // 마이페이지
+  // ㄴ비밀번호 수정 페이지 이동
+  // ㄴ회원탈퇴 & 로그아웃
+
   const navigate = useNavigate();
 
   // 사용자 정보 상태 변수
@@ -77,7 +81,7 @@ function Mypage() {
     });
   };
 
-  // 로그아웃 처리
+  // 로그아웃 시 redux 변수를 초기화 시켜주기 위해 dispatch 생성
   const dispatch = useDispatch();
   const handleLogout = (e) => {
     return Swal.fire({
@@ -94,6 +98,7 @@ function Mypage() {
         dispatch(setRole({ role: "" }));
         dispatch(setAccessToken({ accessToken: "" }));
         dispatch(setRefreshToken({ refreshToken: "" }));
+        // localstorage & header 제거
         localStorage.clear();
         removeAuthHeader();
 
@@ -102,6 +107,7 @@ function Mypage() {
           title: "정상적으로 로그아웃 되었습니다.",
           confirmButtonColor: "#45CB85",
         });
+        navigate("/");
       }
       navigate("/");
     });
@@ -137,6 +143,15 @@ function Mypage() {
           >
             수정하기
           </SmallButton>
+          <div className={style.text}>{mypage.password}</div>
+          <Link to="/member/emailCheck">
+            <SmallButton
+              className={style.editpasswordBtn}
+              style={{ width: "80px", height: "25px" }}
+            >
+              수정하기
+            </SmallButton>
+          </Link>
         </div>
 
         {/* 이름 정보 */}
@@ -157,16 +172,20 @@ function Mypage() {
 
         {/* 회원탈퇴 버튼 */}
         <div className={style.withdrawalBox}>
-          <button className={style.withdrawalBtn} onClick={handleWithdrawal}>
-            회원탈퇴
-          </button>
+          <SmallButton2
+            children="회원탈퇴"
+            className={style.withdrawalBtn}
+            onClick={handleWithdrawal}
+          ></SmallButton2>
         </div>
 
         {/* 로그아웃 버튼 */}
         <div className={style.withdrawalBox}>
-          <button className={style.withdrawalBtn} onClick={handleLogout}>
-            로그아웃
-          </button>
+          <SmallButton2
+            children="로그아웃"
+            className={style.withdrawalBtn}
+            onClick={handleLogout}
+          ></SmallButton2>
         </div>
       </div>
     </div>

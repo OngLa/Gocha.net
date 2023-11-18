@@ -1,64 +1,77 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import ContentHeader from "../../../components/ContentHeader";
 import CustomSelect from "../../../components/CustomSelect";
-import LargeButton from "../../../components/Button";
+import LargeButton, { SmallButton2 } from "../../../components/Button";
 import GridCarInfo from "../../../components/GridCarInfo";
 
 import styles from "./style.module.css";
+import { deleteCar, getMyCar, getRecentCarData } from "../../../service/car";
 
 function Info() {
-  const [value, setValue] = useState(0);
-  const navigate = useNavigate();
+  // 내 차량 종류 Selector 데이터 추가
+  const [carList, setCarList] = useState([]);
+  const [imgSrc, setImgSrc] = useState("");
+  const [value, setValue] = useState();
 
-  const myCarList = [
-    {
-      value: 0,
-      name: "Sonata",
-      cango_distance: 300,
-      distance: 100000,
-      car_battery: 5,
-      charge_status: true,
-      oil: true,
-      washer: true,
-      tire: true,
-      lampwire: true,
-      break: true,
-      engine: true,
-    },
-    {
-      value: 1,
-      name: "Avante",
-      cango_distance: 200,
-      distance: 1000000,
-      car_battery: 100,
-      charge_status: false,
-      oil: false,
-      washer: false,
-      tire: false,
-      lampwire: false,
-      break: false,
-      engine: false,
-    },
-    {
-      value: 2,
-      name: "Tucson",
-      cango_distance: 10,
-      distance: 100,
-      car_battery: 5,
-      charge_status: true,
-      oil: false,
-      washer: true,
-      tire: false,
-      lampwire: true,
-      break: false,
-      engine: true,
-    },
-  ];
+  // 페이지 렌더링 시 동작하는 부분
+  useEffect(() => {
+    const work = async () => {
+      try {
+        const carListData = await getMyCar();
+        setCarList(carListData);
+        setValue(0);
+        setImgSrc(carList[value].photo);
+      } catch (error) {
+        console.error("Failed to fetch CarList:", error);
+      }
+    };
+
+    work();
+  }, []);
+
+  // carList 값이나 value값이 바뀌는 경우
+  // Car Data 불러오기
+  const [carData, setCarData] = useState({
+    canGoDistance: 0,
+    distance: 0,
+    carBattery: 0,
+    batteryCharge: true,
+    breakOil: true,
+    engineOil: true,
+    oil: true,
+    tire: true,
+    washer: true,
+    lampWire: true,
+  });
+
+  useEffect(() => {
+    const work = async () => {
+      try {
+        setImgSrc(carList[value].photo);
+
+        const recentCarData = await getRecentCarData(carList[value].carId);
+        setCarData(recentCarData);
+      } catch (error) {
+        console.log("리다이렉트");
+      }
+    };
+
+    work();
+  }, [carList, value]);
+
+  const navigate = useNavigate();
 
   const handleRegisterCar = () => {
     navigate("/car/registration");
+  };
+
+  const handleDelete = async () => {
+    //
+    const deleteCarName = await deleteCar(carList[value].carId);
+    console.log(deleteCarName.name);
+    window.location.reload();
   };
 
   return (
@@ -70,12 +83,12 @@ function Info() {
 
       {/* 내 차량 종류 Selector */}
       <div className={`${styles.mb} ${styles.customSelect}`}>
-        <CustomSelect items={myCarList} value={value} setValue={setValue} />
+        <CustomSelect items={carList} value={value} setValue={setValue} />
       </div>
 
       {/* 차량 이미지 출력 */}
-      <div className={styles.mb}>
-        <img src="https://via.placeholder.com/370x230" alt="sample" />
+      <div className={`${styles.mb} ${styles.img}`}>
+        <img src={`data:image/png;base64,${imgSrc}`} alt="sample" />
       </div>
 
       {/* 내 차 등록하기 버튼 > 차량 등록 페이지로 이동 */}
@@ -88,8 +101,17 @@ function Info() {
       </div>
 
       {/* 내 자동차 정보 출력 */}
-      <div>
-        <GridCarInfo item={myCarList[value]} layoutType="A" fontSize='20px'/>
+      <div className={styles.mb}>
+        <GridCarInfo item={carData} layoutType="A" fontSize="20px" />
+      </div>
+
+      {/* 내 차 삭제하기 버튼 */}
+      <div className={styles.delBtn}>
+        <SmallButton2
+          name="delete"
+          children="내 차 삭제"
+          onClick={handleDelete}
+        />
       </div>
     </div>
   );

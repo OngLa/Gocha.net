@@ -13,8 +13,8 @@ function RepairshopComponent(props) {
         <CardHead id={id} name={name}/>
       </div>
       <div className="card-body">
-        <CardBody address={address}
-          buttonText={props.buttonText} // 버튼 텍스트 prop 추가
+        <CardBody id={id} address={address}
+          buttonText={props.buttonText}
           />
       </div>
     </div>

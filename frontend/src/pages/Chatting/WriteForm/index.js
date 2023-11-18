@@ -3,6 +3,7 @@ import style from "./writeForm.module.css";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import ChatPartnerProfile from "../components/ChatPartnerProfile";
 import LargeButton from "../../../components/Button/index";
+import { createMessage, sendMessage } from "../../../apis/chatting";
 
 function WriteForm(props) {
   // [고객 메세지 작성 페이지]
@@ -13,39 +14,80 @@ function WriteForm(props) {
 
   const cno = parseInt(useParams().cno);
   const [searchParams] = useSearchParams();
+  let carcenterId = searchParams.get("carcenterId");
   let carcenterName = searchParams.get("carcenterName");
 
   // message 객체 상태
   const [message, setMessage] = useState({
+    carcenterId: carcenterId,
     title: "",
     content: "",
+    selectCar: "",
     selectData: "",
   });
 
-  const carDataList = [
+  const carList = [
     {
-      id: "3",
-      last_update: "2023/11/06",
+      id: "16",
+      car_number:"16가 6666"
     },
     {
-      id: "3",
-      last_update: "2023/11/05",
+      id: "17",
+      car_number:"17가 7777"
     },
     {
-      id: "2",
-      last_update: "2023/11/04",
-    },
-    {
-      id: "1",
-      last_update: "2023/11/03",
+      id: "18",
+      car_number:"18가 8888"
     },
   ];
 
+  const carDataList = [
+    {
+      id: "9",
+      car_id: "16",
+      last_update: "2023/11/06",
+    },
+    {
+      id: "10",
+      car_id: "16",
+      last_update: "2023/11/07",
+    },
+    {
+      id: "11",
+      car_id: "17",
+      last_update: "2023/11/08",
+    },
+    {
+      id: "12",
+      car_id: "18",
+      last_update: "2023/11/09",
+    },
+    {
+      id: "21",
+      car_id: "18",
+      last_update: "2023/11/10",
+    },
+    {
+      id: "22",
+      car_id: "18",
+      last_update: "2023/11/11",
+    },
+    {
+      id: "23",
+      car_id: "18",
+      last_update: "2023/11/12",
+    }
+  ];
+
   const navigate = useNavigate(); // useNavigate 훅을 사용
-  const sendMessage = (cno) => {
-    // message 객체를 이동할 경로로 전달
-    // api(`/usersendmessage/${cno}/?title=${message.title}&content=${message.content}&selectedData=${message.selectData}`);
-    navigate(`/chatting/chatroom/${cno}?carcenterName=${carcenterName}`);
+  const handleMessage = async () => {
+    try {
+      await sendMessage(message);
+      navigate(`/chatting/chatroom?carcenterId=${carcenterId}&carcenterName=${carcenterName}`)
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   return (
@@ -78,8 +120,30 @@ function WriteForm(props) {
       </div>
 
       <div className={style.selectData}>
+        <div for="car" className={style.selectDataLabel}>
+          차량 선택 :
+        </div>
+        <select
+          className={style.dataSelectBox}
+          id="car"
+          name="car"
+          value={message.selectCar}
+          onChange={(e) =>
+            setMessage({ ...message, selectCar: e.target.value })
+          }
+        >
+          <option value="">선택</option>
+          {carList.map((car) => (
+            <option value={car.car_number}>
+              차량 선택 : {car.car_number}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className={style.selectData}>
         <div for="carData" className={style.selectDataLabel}>
-          데이터 선택 :{" "}
+          데이터 선택 :
         </div>
         <select
           className={style.dataSelectBox}
@@ -102,7 +166,7 @@ function WriteForm(props) {
       <div className={style.LargeButtonWrap}>
         <LargeButton
           children="전송하기"
-          onClick={() => sendMessage(cno)}
+          onClick={() => handleMessage()}
         ></LargeButton>
       </div>
     </div>

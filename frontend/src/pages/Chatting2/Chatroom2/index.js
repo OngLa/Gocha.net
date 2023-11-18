@@ -24,7 +24,7 @@ function Chatroom2(props) {
       carcenter_id: null,
       send_date: new Date().toLocaleDateString(),
       title: "고객:문의입니다.",
-      contents: "내용1입니다.",
+      content: "내용1입니다.",
       is_reservation: "0",
       breakdown_id: "0",
       cardata_id: 1
@@ -36,7 +36,7 @@ function Chatroom2(props) {
       carcenter_id: "1",
       send_date: new Date().toLocaleDateString(),
       title: "정비소:답변입니다.",
-      contents: "내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.",
+      content: "내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.",
       is_reservation: "1",
       breakdown_id: "0",
       cardata_id: null
@@ -48,7 +48,7 @@ function Chatroom2(props) {
       carcenter_id: "1",
       send_date: new Date().toLocaleDateString(),
       title: "정비소:답변입니다.",
-      contents: "내용2입니다.",
+      content: "내용2입니다.",
       is_reservation: "0",
       breakdown_id: "0",
       cardata_id: null
@@ -68,7 +68,7 @@ function Chatroom2(props) {
           <div className={style.ChatboxSenderWrap}>
             <ChatBox2
               title={message.title}
-              contents={message.contents}
+              content={message.content}
               send_date={message.send_date}
               is_reservation={message.is_reservation}
               // cardata_id={message.cardata_id} 정비소는 데이터 첨부 버튼 필요x
@@ -79,7 +79,7 @@ function Chatroom2(props) {
           <div className={style.ChatboxWrap}>
             <ChatBox2
               title={message.title}
-              contents={message.contents}
+              content={message.content}
               send_date={message.send_date}
               // is_reservation={message.is_reservation} 고객은 예약 활성화 버튼 필요x
               cardata_id={message.cardata_id}

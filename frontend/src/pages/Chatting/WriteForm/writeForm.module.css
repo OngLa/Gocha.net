@@ -20,13 +20,14 @@
 .selectData {
   display: flex;
   align-items: center;
-  margin-top: 10px;
-  margin-bottom: 50px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .selectDataLabel {
   color: white;
-  font-size: 20px;
+  width: 100px;
+  font-size: 18px;
 }
 
 .dataSelectBox {
@@ -39,4 +40,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 40px;
 }

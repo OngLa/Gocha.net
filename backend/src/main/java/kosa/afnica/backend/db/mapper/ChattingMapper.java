@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import javax.swing.text.html.Option;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +18,9 @@ public interface ChattingMapper {
     // 모든 Brand 조회
     List<ChattingResDto> findAllCarcenter();
 
-    Long findIdByEmail(String email);
-
     Optional<Long> findChatroom(@Param("userId") Long userId, @Param("carcenterId") Long carcenterId);
+
+    Long saveChatroom(@Param("userId") Long userId, @Param("carcenterId") Long carcenterId, @Param("createDate") Timestamp createDate);
 
     List<MessageResDto> findAllMessageByChatroomID(Long chattingId);
 

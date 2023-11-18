@@ -10,13 +10,6 @@
             AND enabled = '1'
     </select>
 
-    <!--  이메일로 ID 찾기  -->
-    <select id="findIdByEmail" parameterType="String" resultType="Long">
-        SELECT ID
-        FROM MEMBER
-        WHERE EMAIL = #{email}
-    </select>
-
     <!--  채팅방 Id 찾기  -->
     <select id="findChatroom" parameterType="map" resultType="Long">
         SELECT ID
@@ -24,9 +17,18 @@
         WHERE USER_ID = #{userId} AND CARCENTER_ID = #{carcenterId}
     </select>
 
+    <!--  채팅방 생성  -->
+    <insert id="saveChatroom" parameterType="map">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT CHATTING_SEQ.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO CHATTING (ID, CREATE_DATE, CARCENTER_ID, USER_ID)
+        VALUES (#{id}, #{createDate}, #{carcenterId}, #{userId})
+    </insert>
+
     <!--  해당 채팅방 메세지 찾기  -->
     <select id="findAllMessageByChatroomID" parameterType="Long" resultType="MessageResDto">
-        SELECT ID, memberId, sendDate, title, content, isReservation, cardataId
+        SELECT ID, member_id, send_date, title, content, is_reservation, cardata_id
         FROM MESSAGE
         WHERE CHATTING_ID = #{chattingId}
     </select>

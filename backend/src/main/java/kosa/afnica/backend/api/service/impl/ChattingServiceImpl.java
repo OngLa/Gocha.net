@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,11 +29,6 @@ public class ChattingServiceImpl implements ChattingService {
     };
 
     @Override
-    public Long findIdByEmail(String email) {
-        return chattingMapper.findIdByEmail(email);
-    }
-
-    @Override
     public Long findChatroom(Long userId, Long carcenterId) {
         // 숫자가 작은게 user, 숫자가 큰게 carcenter이다.
         Long temp = 0L;
@@ -41,16 +38,14 @@ public class ChattingServiceImpl implements ChattingService {
             carcenterId = temp;
         }
         
-        // 여기서 두사람의 채팅방 존재 여부를 조회하고 있으면 그대로 리턴, 없으면 새로 만들고 id를 조회해서 그 id를 리턴
+        // 여기서 두사람의 채팅방 존재 여부를 조회하고 있으면 그대로 리턴, 없으면 새로 만들고 그 id를 리턴
         Optional<Long> existChatroom = chattingMapper.findChatroom(userId, carcenterId);
         if(existChatroom.isPresent()) {
             return existChatroom.get();
         } else {
-            chattingMapper.saveChatroom(userId, carcenterId);
-
-            return chattingMapper.findChatroom(userId, carcenterId).get();
+            Timestamp createDate = new Timestamp(System.currentTimeMillis());
+            return  chattingMapper.saveChatroom(userId, carcenterId, createDate);
         }
-
     }
 
     @Override

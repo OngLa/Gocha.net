@@ -24,4 +24,6 @@ public interface MemberMapper {
 
     void update(Member member);
 
+
+
 }

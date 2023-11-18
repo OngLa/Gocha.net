@@ -1,6 +1,9 @@
 package kosa.afnica.backend.api.service.impl;
 
 import kosa.afnica.backend.api.service.MemberService;
+import kosa.afnica.backend.config.exception.CustomException;
+import kosa.afnica.backend.config.exception.ErrorCode;
+import kosa.afnica.backend.config.security.JwtUtil;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 import kosa.afnica.backend.db.entity.Member;
 
@@ -10,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @Service
@@ -47,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.save(member);
     }
 
-    @Override
+  /*  @Override
     public void creatAdminMember(MemberSignupReqDto memberSignupReqDto) {
 
         Member member = Member.builder()
@@ -61,13 +66,12 @@ public class MemberServiceImpl implements MemberService {
 
         memberMapper.saveAdmin(member);
 
-    }
+    }*/
 
     @Override
     public String findRole(String email) {
         //FE에서 로그인한 멤버의 권한을 확인할 수 있도록 Role찾기
         return memberMapper.findRoleByEmail(email);
     }
-
 
 }

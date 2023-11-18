@@ -44,8 +44,10 @@ public enum ErrorCode {
 
     NOT_IMPLEMENTED(HttpStatus.NOT_IMPLEMENTED, "Not Implemented"),
 
-    BAD_GATEWAY(HttpStatus.BAD_GATEWAY, "Bad Gateway");
+    BAD_GATEWAY(HttpStatus.BAD_GATEWAY, "Bad Gateway"),
 
+    UNABLE_TO_SEND_EMAIL(HttpStatus.BAD_REQUEST, "이메일 전송이 불가능합니다."),
+    NO_SUCH_ALGORITHM(HttpStatus.BAD_REQUEST, "해당 알고리즘이 사용 가능하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final String message;

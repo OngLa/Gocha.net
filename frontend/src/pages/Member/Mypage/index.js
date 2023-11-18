@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./mypage.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
-import { SmallButton, SmallButton2 } from "../../../components/Button";
+import { SmallButton } from "../../../components/Button";
 import emailIcon from "../../../img/member/email-white.png";
 import passwordIcon from "../../../img/member/password-white.png";
 import nicknameIcon from "../../../img/member/nickname-white.png";
@@ -109,7 +109,6 @@ function Mypage() {
         });
         navigate("/");
       }
-      navigate("/");
     });
   };
 
@@ -137,21 +136,16 @@ function Mypage() {
           />
           <div className={style.text}>{maskPassword("비밀번호")}</div>
           <SmallButton
-            className={style.editpasswordBtn}
             onClick={handleEditPassword}
-            style={{ width: "80px", height: "25px" }}
+            style={{
+              width: "55px",
+              height: "25px",
+              margin: "0px 5px",
+              paddingLeft: "9px",
+            }}
           >
             수정하기
           </SmallButton>
-          <div className={style.text}>{mypage.password}</div>
-          <Link to="/member/emailCheck">
-            <SmallButton
-              className={style.editpasswordBtn}
-              style={{ width: "80px", height: "25px" }}
-            >
-              수정하기
-            </SmallButton>
-          </Link>
         </div>
 
         {/* 이름 정보 */}
@@ -172,20 +166,16 @@ function Mypage() {
 
         {/* 회원탈퇴 버튼 */}
         <div className={style.withdrawalBox}>
-          <SmallButton2
-            children="회원탈퇴"
-            className={style.withdrawalBtn}
-            onClick={handleWithdrawal}
-          ></SmallButton2>
+          <button className={style.withdrawalBtn} onClick={handleWithdrawal}>
+            회원탈퇴
+          </button>
         </div>
 
         {/* 로그아웃 버튼 */}
         <div className={style.withdrawalBox}>
-          <SmallButton2
-            children="로그아웃"
-            className={style.withdrawalBtn}
-            onClick={handleLogout}
-          ></SmallButton2>
+          <button className={style.withdrawalBtn} onClick={handleLogout}>
+            로그아웃
+          </button>
         </div>
       </div>
     </div>

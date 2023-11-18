@@ -79,6 +79,11 @@ function WriteForm(props) {
     }
   ];
 
+  // 선택한 차량 ID를 기반으로 carDataList를 필터링하는 함수
+  const getFilteredCarData = (selectedCarId) => {
+    return carDataList.filter((carData) => carData.car_id === selectedCarId);
+  };
+
   const navigate = useNavigate(); // useNavigate 훅을 사용
   const handleMessage = async () => {
     try {
@@ -121,21 +126,33 @@ function WriteForm(props) {
 
       <div className={style.selectData}>
         <div for="car" className={style.selectDataLabel}>
-          차량 선택 :
+          차량 선택:
         </div>
         <select
           className={style.dataSelectBox}
           id="car"
           name="car"
           value={message.selectCar}
-          onChange={(e) =>
-            setMessage({ ...message, selectCar: e.target.value })
-          }
+          onChange={(e) => {
+            const selectedCarId = e.target.value;
+            const filteredCarData = getFilteredCarData(selectedCarId);
+
+            // 선택된 차량으로 메시지 상태를 업데이트하고 선택된 데이터를 지웁니다.
+            setMessage({
+              ...message,
+              selectCar: selectedCarId,
+              selectData: "",
+            });
+
+            // 상태나 컴포넌트에 carDataList를 업데이트하거나 직접 셀렉트 박스에 전달합니다.
+            // (애플리케이션 구조에 따라 달라집니다.)
+            // setCarDataList(filteredCarData);
+          }}
         >
           <option value="">선택</option>
           {carList.map((car) => (
-            <option value={car.car_number}>
-              차량 선택 : {car.car_number}
+            <option key={car.id} value={car.id}>
+              {car.car_number}
             </option>
           ))}
         </select>
@@ -143,7 +160,7 @@ function WriteForm(props) {
 
       <div className={style.selectData}>
         <div for="carData" className={style.selectDataLabel}>
-          데이터 선택 :
+          데이터 선택:
         </div>
         <select
           className={style.dataSelectBox}
@@ -155,9 +172,9 @@ function WriteForm(props) {
           }
         >
           <option value="">선택</option>
-          {carDataList.map((carData) => (
-            <option value={carData.id}>
-              데이터{carData.id} ({carData.last_update})
+          {getFilteredCarData(message.selectCar).map((carData) => (
+            <option key={carData.id} value={carData.id}>
+              Update - {carData.last_update}
             </option>
           ))}
         </select>

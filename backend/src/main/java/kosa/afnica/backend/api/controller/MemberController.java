@@ -1,6 +1,7 @@
 package kosa.afnica.backend.api.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -11,12 +12,14 @@ import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.exception.ErrorResponse;
 import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
+import kosa.afnica.backend.db.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -84,5 +87,17 @@ public class MemberController {
         MemberMypageResDto memberMypageResDto = memberService.findMypage(request);
 
         return ResponseEntity.ok(memberMypageResDto);
+    }
+
+    //정비소 목록 출력
+    @Operation(summary = "정비소목록 출력 API", description = "정비소 목록 출력시키는 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Member.class)))),
+    })
+    @GetMapping("/reservation/carcenter")
+    public ResponseEntity<List<Member>> getCarcenter() {
+        List<Member> members = memberService.readCarcenter();
+        return ResponseEntity.ok(members);
     }
 }

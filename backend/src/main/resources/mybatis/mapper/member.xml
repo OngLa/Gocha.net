@@ -68,4 +68,11 @@
         where id = #{id}
     </update>
 
+    <!-- 정비소 목록 출력 -->
+    <select id="findCarcenterByRole" resultType="member">
+        SELECT *
+        FROM member
+        WHERE role = 'ROLE_CARCENTER'
+    </select>
+
 </mapper>

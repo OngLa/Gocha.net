@@ -8,8 +8,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import kosa.afnica.backend.api.service.ReservationService;
 import kosa.afnica.backend.config.exception.ErrorResponse;
-import kosa.afnica.backend.config.security.JwtUtil;
-import kosa.afnica.backend.db.dto.car.CarTypeResDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import kosa.afnica.backend.db.entity.Reservation;
@@ -74,7 +72,5 @@ public class ReservationController {
     public void deleteOrder(@PathVariable Long id) {
         reservationService.deleteReservation(id);
     }
-
-
 
 }

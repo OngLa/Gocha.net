@@ -31,9 +31,9 @@ public class CarData {
         long seed = System.currentTimeMillis();
         Random random = new Random(seed);
 
-        this.canGoDistance = random.nextInt();
-        this.distance = (int)(Math.random() * 100000);
-        this.carBattery = (int)(Math.random() * 100);
+        this.canGoDistance = random.nextInt(500);
+        this.distance = random.nextInt(100000);
+        this.carBattery = random.nextInt(100);
         this.batteryCharge = random.nextBoolean();
         this.breakOil = random.nextBoolean();
         this.engineOil = random.nextBoolean();

@@ -15,7 +15,7 @@
     </insert>
 
     <!--  CarId 기반으로 모든 자동차 데이터 불러오기  -->
-    <select id="findAllCarDataByCarId" resultType="carData">
+    <select id="findRecentCarDataByCarId" resultType="carData">
         SELECT ID,
                CAN_GO_DISTANCE,
                DISTANCE,
@@ -31,6 +31,32 @@
                CAR_ID
         FROM CAR_DATA
         WHERE CAR_ID = #{carId}
+        ORDER BY LAST_UPDATE DESC
+            FETCH FIRST 1 ROW ONLY
+    </select>
+
+    <!--  CarId 기반으로 모든 자동차 데이터 불러오기  -->
+    <select id="findAllCarDataByCarId" parameterType="carDataReqDto" resultType="carData">
+        <![CDATA[
+        SELECT ID,
+               CAN_GO_DISTANCE,
+               DISTANCE,
+               CAR_BATTERY,
+               BATTERY_CHARGE,
+               BREAK_OIL,
+               ENGINE_OIL,
+               OIL,
+               TIRE,
+               WASHER,
+               LAMP_WIRE,
+               LAST_UPDATE,
+               CAR_ID
+        FROM CAR_DATA
+        WHERE CAR_ID = #{carId}
+          AND (#{startDate} IS NULL OR LAST_UPDATE >= #{startDate})
+          AND (#{endDate} IS NULL OR LAST_UPDATE <= #{endDate})
+        ORDER BY LAST_UPDATE DESC
+        ]]>
     </select>
 
 </mapper>

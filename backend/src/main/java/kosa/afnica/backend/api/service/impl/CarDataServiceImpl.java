@@ -11,9 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -82,15 +82,28 @@ public class CarDataServiceImpl implements CarDataService {
         carDataMapper.saveCarData(carData);
     }
 
+    // CarId 기반으로 최신 자동차 데이터 불러오기
     @Override
-    public CarDataResDto findAllCarDataByCarId(Long carId) {
+    public CarDataResDto findRecentCarDataByCarId(Long carId) {
 
-        List<CarData> carDataList = carDataMapper.findAllCarDataByCarId(carId);
+        CarData carData = carDataMapper.findRecentCarDataByCarId(carId)
+                .orElseThrow(() -> new CustomException(ErrorCode.CARDATA_NOT_FOUND));
+
+        return new CarDataResDto(carData);
+    }
+
+    // CarId 기반으로 모든 자동차 데이터 불러오기
+    @Override
+    public List<CarDataResDto> findAllCarDataByCarId(CarDataReqDto reqDto) {
+        List<CarData> carDataList = carDataMapper.findAllCarDataByCarId(reqDto);
         if (carDataList.isEmpty()) {
             throw new CustomException(ErrorCode.CARDATA_NOT_FOUND);
         }
 
-        return new CarDataResDto(carDataList.get(carDataList.size() - 1));
+        return carDataList.stream()
+                .map(CarDataResDto::new)
+                .collect(Collectors.toList());
     }
+
 
 }

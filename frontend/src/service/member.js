@@ -3,7 +3,7 @@ import qs from "qs";
 
 // 이메일 인증
 export function emailCheck(email) {
-  return axios.get("/member/email_check", { params: { email } });
+  return axios.get("/member/email-check", { params: { email } });
 }
 
 // 닉네임 중복
@@ -12,6 +12,11 @@ export function nameCheck(nickname) {
 }  
 
 // 회원가입
-export function createMember(memberData) {
-  return axios.post("/member/signup", memberData);
+export function createMember(member) {
+  return axios.post("/member/signup", member);
+}
+
+// 마이페이지
+export function getMypage(email) {
+  return axios.get("/member/mypage")
 }

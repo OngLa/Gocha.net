@@ -24,6 +24,10 @@
   width: 80%;
 }
 
+.delBtn {
+  align-self: flex-end;
+}
+
 .mb {
   margin-bottom: 15px;
 }

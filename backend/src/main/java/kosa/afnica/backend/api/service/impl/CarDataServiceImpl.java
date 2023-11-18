@@ -3,6 +3,7 @@ package kosa.afnica.backend.api.service.impl;
 import kosa.afnica.backend.api.service.CarDataService;
 import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
+import kosa.afnica.backend.db.dto.carData.CarDataReqDto;
 import kosa.afnica.backend.db.dto.carData.CarDataResDto;
 import kosa.afnica.backend.db.entity.CarData;
 import kosa.afnica.backend.db.mapper.CarDataMapper;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -21,8 +23,9 @@ public class CarDataServiceImpl implements CarDataService {
 
     private final CarDataMapper carDataMapper;
 
+//    // 데이터 불러오기, 현대 API를 통해 데이터 불러오기
+//    // 현대 측 Auth 문의중, 문의 해결되면 해당 코드 사용할 예정
 //    private final WebClient carWebClient;
-//    private final WebClient authWebClient;
 //
 //    private final String[] carId = {
 //            "6d97337b-eb53-467b-baf4-7faec6d7065e",
@@ -31,8 +34,7 @@ public class CarDataServiceImpl implements CarDataService {
 //            "b23f1cd3-517c-4ac0-b574-cfc8eeca5fed",
 //            "10cc6538-82b5-48aa-9d85-16416b8e07fb"
 //    };
-//
-//    private final String[] urls = {
+//    private final String[] uris = {
 //            "/{carId}/dte",             // 주행 가능 거리
 //            "/{carId}/odometer",        // 누적 운행 거리
 //            "/{carId}/ev/charging",     // 전기차 충전 상태
@@ -46,39 +48,49 @@ public class CarDataServiceImpl implements CarDataService {
 //    };
 //
 //    @Override
-//    public Map<String, Long> createCarData() {
-//        List<Mono<HDResDto>> res = new ArrayList<>();
+//    public List<Object> createCarData(CarDataReqDto reqDto) {
 //
-//        for (String url : urls) {
-//            Mono<HDResDto> result = carWebClient.get()
-//                    .uri(uriBuilder -> uriBuilder
-//                            .path(url)
-//                            .build(carId[0])
-//                    )
-//                    .retrieve()
-//                    .bodyToMono(HDResDto.class);
-//            res.add(result);
-//        }
+//        List<Mono<Object>> monoList = Arrays.stream(uris)
+//                .map(uri -> {
+//                    UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance();
+//                    URI completedUri = uriBuilder.path(uri).build(carId[0]);
 //
-//        for (Mono<HDResDto> mono : res) {
-//            mono.subscribe(HDResDto -> {
-//                log.info(HDResDto.toString());
-//            });
-//        }
+//                    log.info(completedUri.toString());
+//                    return callExternalApi(completedUri);
+//                })
+//                .collect(Collectors.toList());
 //
-//        return null;
+//        return monoList.stream()
+//                .map(mono -> {
+//                    log.info(mono.toString());
+//                    return mono.block();
+//                })
+//                .collect(Collectors.toList());
 //    }
+//
+//    private Mono<Object> callExternalApi(URI uri) {
+//        return carWebClient.get()
+//                .uri(uri)
+//                .retrieve()
+//                .bodyToMono(Object.class);
+//    }
+
+    // 데이터 불러오기, 임시 난수 생성
+    @Override
+    public void createCarData(CarDataReqDto reqDto) {
+        CarData carData = new CarData(reqDto);
+        carDataMapper.saveCarData(carData);
+    }
 
     @Override
     public CarDataResDto findAllCarDataByCarId(Long carId) {
 
         List<CarData> carDataList = carDataMapper.findAllCarDataByCarId(carId);
-        if(carDataList.isEmpty()) {
+        if (carDataList.isEmpty()) {
             throw new CustomException(ErrorCode.CARDATA_NOT_FOUND);
         }
 
         return new CarDataResDto(carDataList.get(carDataList.size() - 1));
     }
-
 
 }

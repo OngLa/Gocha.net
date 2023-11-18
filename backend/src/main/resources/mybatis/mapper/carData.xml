@@ -3,15 +3,16 @@
 
 <mapper namespace="kosa.afnica.backend.db.mapper.CarDataMapper">
 
-<!--    <insert id="insertCarData" parameterType="map">-->
-<!--        <selectKey keyProperty="id" resultType="int" order="BEFORE">-->
-<!--            SELECT CAR_DATA_SEQ.NEXTVAL FROM DUAL-->
-<!--        </selectKey>-->
-<!--        INSERT INTO CAR_DATA-->
-<!--        (ID, BATTERY_CHARGE, BREAK_OIL, CAN_GO_DISTANCE, CAR_BATTERY, DISTANCE, ENGINE_OIL, LAMP_WIRE, LAST_UPDATE, OIL, TIRE, WASHER, CAR_ID)-->
-<!--        VALUES-->
-<!--        (#{id}, #{batteryCharge}, #{breakOil}, #{canGoDistance}, #{carBattery}, #{distance}, #{engineOil}, #{lampWire}, SYSDATE, #{oil}, #{tire}, #{washer}, #{carId});-->
-<!--    </insert>-->
+    <!--  자동차 데이터 DB에 저장하기  -->
+    <insert id="saveCarData" parameterType="carData">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT CAR_DATA_SEQ.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO CAR_DATA
+        (ID, BATTERY_CHARGE, BREAK_OIL, CAN_GO_DISTANCE, CAR_BATTERY, DISTANCE, ENGINE_OIL, LAMP_WIRE, LAST_UPDATE, OIL, TIRE, WASHER, CAR_ID)
+        VALUES
+        (#{id}, #{batteryCharge}, #{breakOil}, #{canGoDistance}, #{carBattery}, #{distance}, #{engineOil}, #{lampWire}, SYSDATE, #{oil}, #{tire}, #{washer}, #{carId})
+    </insert>
 
     <!--  CarId 기반으로 모든 자동차 데이터 불러오기  -->
     <select id="findAllCarDataByCarId" resultType="carData">

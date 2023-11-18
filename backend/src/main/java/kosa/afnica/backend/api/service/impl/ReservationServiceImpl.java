@@ -25,7 +25,7 @@ public class ReservationServiceImpl implements ReservationService {
     private final ReservationMapper reservationMapper;
 
 //########################################################################################################################
-
+//예약목록조회
     @Override
     public List<ReservationDto> readReservationList(HttpServletRequest request) {
 
@@ -50,22 +50,24 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationDtoList;
     }
 //########################################################################################################################
-
+//예약하기
     @Override
-    public ReservationReqDto createReservation(HttpServletRequest request, ReservationReqDto reservationReqDto){
+    public ReservationReqDto createReservation(HttpServletRequest request, ReservationReqDto reservationReqDto) {
 
         String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
         Long memberId = reservationMapper.findIdByEmail(userEmail);
-        //HTTP 헤더에 있는 유저이메일에서 ID를 추출 하는 로직
+        //HTTP 헤더에 있는 유저이메일에서 memberId를 추출 하는 로직
 
         reservationReqDto.setMemberId(memberId);
-
-       reservationMapper.saveReservation(reservationReqDto);
-
+        reservationMapper.saveReservation(reservationReqDto);
 
         return reservationReqDto;
     }
+//########################################################################################################################
+//예약삭제
 
-
+        public Long deleteReservation(Long id){
+            return reservationMapper.deleteById(id);
+    }
 }
 

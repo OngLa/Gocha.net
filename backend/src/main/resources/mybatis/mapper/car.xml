@@ -44,4 +44,18 @@
         WHERE c.MEMBER_ID = #{memberId}
     </select>
 
+    <!--  CarId 기반으로 등록된 차량 삭제   -->
+    <delete id="deleteById" parameterType="Long">
+        DELETE
+        FROM CAR
+        WHERE ID = #{id}
+    </delete>
+
+    <!--  MemberId를 기반으로 모든 CarId, CartypeName, Car Photo 조회  -->
+    <select id="findById" parameterType="Long" resultType="car">
+        SELECT ID, CAR_NUMBER, CARTYPE_ID, MEMBER_ID
+        FROM CAR
+        WHERE ID = #{id}
+    </select>
+
 </mapper>

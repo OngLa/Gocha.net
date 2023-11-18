@@ -32,4 +32,7 @@ public interface CarService {
     // MemberId를 기반으로 모든 CarId, CartypeName, Car Photo 조회
     List<CarResDto> findAllCarByMemberId(HttpServletRequest request);
 
+    // CarId를 해당 Car 삭제
+    Map<String, String> deleteCarById(HttpServletRequest request, Long id);
+
 }

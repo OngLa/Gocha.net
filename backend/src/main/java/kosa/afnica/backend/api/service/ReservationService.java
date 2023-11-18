@@ -11,5 +11,5 @@ public interface ReservationService {
 
      public List<ReservationDto> readReservationList(HttpServletRequest request);
      public ReservationReqDto createReservation(HttpServletRequest request, ReservationReqDto reservationReqDto);
-
+     public Long deleteReservation(Long id);
 }

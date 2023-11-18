@@ -22,10 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -126,6 +123,29 @@ public class CarServiceImpl implements CarService {
         }
 
         return resDtoList;
+    }
+
+    @Override
+    public Map<String, String> deleteCarById(HttpServletRequest request, Long id) {
+        // 로그인한 member와 car member가 같은지 확인
+        String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
+        Member member = memberMapper.findByEmail(userEmail)
+                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+
+        Car car = carMapper.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.CAR_NOT_FOUND));
+
+        // 같으면 삭제, 같지 않으면 에러처리
+        if (Objects.equals(member.getId(), car.getMemberId())) {
+            carMapper.deleteById(id);
+        } else {
+            throw new CustomException(ErrorCode.DELETE_PERMISSION_DENIED);
+        }
+
+        // Car Number 출력
+        return new HashMap<>() {{
+            put("name", car.getCarNumber());
+        }};
     }
 
 }

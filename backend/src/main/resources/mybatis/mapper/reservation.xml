@@ -17,7 +17,7 @@
         #{memberId, jdbcType=NUMERIC},
         #{carcenterId, jdbcType=NUMERIC},
         #{reservedDate, jdbcType=TIMESTAMP},
-        #{carDataId}
+        #{carDataId, jdbcType=NUMERIC}
         )
     </insert>
 
@@ -40,11 +40,11 @@
     <!--#############################################################################################-->
 
     <!-- 예약목록 삭제를 위한 delete 쿼리 -->
-<!--    <delete id="deleteById" parameterType="int">-->
-<!--        delete-->
-<!--        from reservation-->
-<!--        where id = #{id}-->
-<!--    </delete>-->
+    <delete id="deleteById" parameterType="Long">
+        delete
+        from reservation
+        where id = #{id}
+    </delete>
 
 
 </mapper>

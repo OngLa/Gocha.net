@@ -1,12 +1,12 @@
-package kosa.afnica.backend.db.entity;
+package kosa.afnica.backend.db.dto.member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class veriCode {
+public class EmailVerificationDto {
 
-    String toEmail;
+    String veriEmail;
     String veriCode;
 }

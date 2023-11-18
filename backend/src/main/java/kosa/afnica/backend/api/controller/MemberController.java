@@ -9,11 +9,13 @@ import kosa.afnica.backend.api.service.MemberService;
 import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.exception.ErrorResponse;
+import kosa.afnica.backend.db.dto.member.EmailVerificationDto;
 import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.remoting.support.RemoteExporter;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,18 +28,30 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @Operation(summary = "이메일 인증 - 인증요청 API", description = "이메일 중복 검사")
+    @Operation(summary = "이메일 인증 - 인증번호 요청 API", description = "이메일 중복 검사 및 인증번호 이메일로 전송")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "409", description = "존재하는 Email 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @GetMapping("/auth-email")
-    public ResponseEntity<Void> getUserEmail(@RequestParam String email) {
+    @GetMapping("/email")
+    public ResponseEntity<String> applyCode(@RequestParam String email) throws Exception {
         if (memberService.existEmail(email)) {
+            String confirm = memberService.sendMessage(email);
+            return ResponseEntity.ok(confirm);
         } else {
             throw new CustomException(ErrorCode.DUPLICATE_EMAIL);
         }
+    }
+
+    @Operation(summary = "이메일 인증 - 인증번호 비교 API", description = "입력된 인증번호와 생성된 인증번호 비교")
+    @ApiResponses(
+            {@ApiResponse(responseCode = "200", description = "성공")
+    })
+    @PostMapping("/email-veri")
+    public ResponseEntity<Void> compareCode(@RequestBody EmailVerificationDto emailVerificationDto) {
+
         return ResponseEntity.ok(null);
     }
+
 
     @Operation(summary = "회원가입 - 닉네임 중복 검사 API", description = "닉네임 중복 검사")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
@@ -85,4 +99,5 @@ public class MemberController {
 
         return ResponseEntity.ok(memberMypageResDto);
     }
+
 }

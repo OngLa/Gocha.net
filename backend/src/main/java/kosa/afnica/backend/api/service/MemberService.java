@@ -22,4 +22,14 @@ public interface MemberService {
 
     MemberMypageResDto findMypage(HttpServletRequest request);
 
+    String sendMessage(String email) throws Exception;
+
+//    public void sendCodeToemail(String email);
+//
+//    public void checkDuplicateEmail(String email);
+//
+//    public String createCode();
+//
+//    public void verifiedCode(String email, String authCode);
+
 }

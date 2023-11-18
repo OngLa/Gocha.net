@@ -11,7 +11,10 @@
 
     <typeAliases>
         <!-- <typeAlias alias="{여기수정}" type="kosa.afnica.backend.db.entity.{여기수정}" /> -->
+
+        <!--  Member  -->
         <typeAlias alias="member" type="kosa.afnica.backend.db.entity.Member"/>
+        <typeAlias alias="verification" type="kosa.afnica.backend.db.entity.Verification"/>
 
         <typeAlias alias="reservation" type="kosa.afnica.backend.db.entity.Reservation"/>
         <typeAlias alias="reservationDto" type="kosa.afnica.backend.db.dto.reservation.ReservationReqDto"/>

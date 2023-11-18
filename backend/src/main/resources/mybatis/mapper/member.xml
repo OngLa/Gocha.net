@@ -68,4 +68,23 @@
         where id = #{id}
     </update>
 
+    <!-- 인증 번호 저장 -->
+    <insert id="saveCode" parameterType="verification">
+        insert into vericode(veri_email, veri_code)
+        values (#{veriEmail}, #{veriCode})
+    </insert>
+
+    <select id="findCodeByEmail" parameterType="String" resultType="String">
+        select veri_code
+        from verificvericodetion
+        where veri_emvericodeil = #{veriEmail}
+    </select>
+
+    <select id="existCodeByEmail" resultType="int" parameterType="map">
+        select count(*)
+        from vericode
+        where veri_email = #{veriEmail}
+            and veri_code = #{veriCode}
+    </select>
+
 </mapper>

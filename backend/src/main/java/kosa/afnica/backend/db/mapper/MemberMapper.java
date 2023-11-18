@@ -1,6 +1,7 @@
 package kosa.afnica.backend.db.mapper;
 
 import kosa.afnica.backend.db.entity.Member;
+import kosa.afnica.backend.db.entity.Verification;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;
@@ -30,6 +31,13 @@ public interface MemberMapper {
     // 회원 정보 수정
     void update(Member member);
 
+    // 인증 번호 저장
+    void saveCode(Verification verification);
 
+    // 이메일 기반에 따른 인증번호 조회
+    String findCodeByEmail(String email);
 
+//    boolean existCodeByEmail(String veriCode);
+
+    int countVerificationCodeByEmail(String email, String veriCode);
 }

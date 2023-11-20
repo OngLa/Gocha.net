@@ -20,7 +20,7 @@ export function readCarcenterList(){
 }
 //정비소 목록 출력하는 get-api
 
-export function createFavoriteCarcenter(favoritedata){
-  return axios.post("/member/reservation/favoritecarcenter",favoritedata);
+export function createFavoriteCarcenter(carcenterId){
+  return axios.post("/member/reservation/favoritecarcenter",carcenterId);
 }
 //주정비소 등록 api

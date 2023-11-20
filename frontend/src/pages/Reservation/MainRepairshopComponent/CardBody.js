@@ -11,7 +11,7 @@ function CardBody({ carcenter }) {
   const handleRegisterClick = async (event) => {
     try {
       await createFavoriteCarcenter({
-        id: carcenter.id,
+        carcenterId: carcenter.id,
       });
       Swal.fire({
         icon: "success",

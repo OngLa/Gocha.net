@@ -4,25 +4,13 @@ import DateInputForm from "./DateInputForm";
 import style from "./index.module.css";
 import Calendar from "./Calendar";
 
-const DateRangeForm = forwardRef((props, ref) => {
-  const { title } = props;
+const DateRangeForm = (props) => {
+  const { title, startDate, setStartDate, endDate, setEndDate} = props;
 
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
   const [open, setOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState("start");
 
   const dateFormat = "YYYY-MM-DD";
-
-  // 기간 설정 컴포넌트로부터 date값 가져오기
-  useImperativeHandle(ref, () => ({
-    getStartDate: () => {
-      return startDate;
-    },
-    getEndDate: () => {
-      return endDate;
-    },
-  }));
 
   // 달력 아이콘 클릭하면, 달력 select box 나옴
   const clickBtn = (dataType) => {
@@ -72,6 +60,6 @@ const DateRangeForm = forwardRef((props, ref) => {
       )}
     </div>
   );
-});
+}
 
 export default DateRangeForm;

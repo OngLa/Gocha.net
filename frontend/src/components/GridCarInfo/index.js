@@ -1,11 +1,19 @@
 import GirdItemContent from "./GirdItemContent";
 import styleA from "./styleA.module.css";
 import styleB from "./styleB.module.css";
+import styleC from "./styleC.module.css";
 
 function GridCarInfo(props) {
   const { item, layoutType, style } = props;
 
-  const styles = (layoutType ==='A')?styleA:styleB;
+  let styles;
+  if (layoutType ==='A') {
+    styles = styleA;
+  } else if (layoutType === 'B') {
+    styles = styleB;
+  } else {
+    styles = styleC;
+  }
 
   return (
     <div className={styles.wrapper}>

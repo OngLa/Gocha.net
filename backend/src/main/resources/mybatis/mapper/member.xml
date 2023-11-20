@@ -70,7 +70,7 @@
 
     <!-- 정비소 목록 출력 -->
     <select id="findCarcenterByRole" resultType="member">
-        SELECT *
+        SELECT id, address, name
         FROM member
         WHERE role = 'ROLE_CARCENTER'
     </select>

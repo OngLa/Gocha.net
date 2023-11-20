@@ -4,10 +4,11 @@
 <mapper namespace="kosa.afnica.backend.db.mapper.FcMapper">
 
     <!--    주정비소 등록-->
-<insert id="saveFc" parameterType="Long">
-    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
-        select FAVORITE_CARCENTER_SEQ.nextval from dual
-    </selectKey>
-    INSERT INTO FAVORITE_CARCENTER(ID) VALUES(#{id})
-</insert>
+    <insert id="saveFc" parameterType="Long">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            select FAVORITE_CARCENTER_SEQ.nextval from dual
+        </selectKey>
+        INSERT INTO FAVORITE_CARCENTER(ID,CARCENTER_ID,MEMBER_ID) VALUES(#{id},#{carcenterId},#{memberId})
+    </insert>
+
 </mapper>

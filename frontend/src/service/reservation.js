@@ -16,6 +16,11 @@ export function deleteReservation(id){
 //예약취소하는 delete api
 
 export function readCarcenterList(){
-  return axios.get("member/reservation/carcenter");
+  return axios.get("/member/reservation/carcenter");
 }
 //정비소 목록 출력하는 get-api
+
+export function createFavoriteCarcenter(favoritedata){
+  return axios.post("/member/reservation/favoritecarcenter",favoritedata);
+}
+//주정비소 등록 api

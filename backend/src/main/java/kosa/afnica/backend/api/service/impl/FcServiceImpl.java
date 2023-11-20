@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -19,11 +20,26 @@ public class FcServiceImpl implements FcService {
     private final FcMapper fcMapper;
     private final ReservationMapper reservationMapper;
 
-    public void createFc(HttpServletRequest request,  FcDto fcDto) {
+    //주정비소 등록
+    @Override
+    public void createFc(HttpServletRequest request, FcDto fcDto) {
         String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
         Long memberId = reservationMapper.findIdByEmail(userEmail);
-//헤더에서 데이터 파싱 이후 fcDto의 memeberID에 넣어준다
         fcDto.setMemberId(memberId);
         fcMapper.saveFc(fcDto);
+    }
+
+    //주정비소 목록 출력
+    @Override
+    public List<FcDto> readFc(HttpServletRequest request) {
+        String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
+        Long memberId = reservationMapper.findIdByEmail(userEmail);
+
+        return fcMapper.findFavoriteCarcenterByMemberId(memberId);
+    }
+
+    //주정비소 삭제
+    public Long deleteFc(Long id) {
+        return fcMapper.deleteById(id);
     }
 }

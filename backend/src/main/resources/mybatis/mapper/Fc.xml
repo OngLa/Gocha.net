@@ -3,12 +3,26 @@
 
 <mapper namespace="kosa.afnica.backend.db.mapper.FcMapper">
 
-    <!--    주정비소 등록-->
+    <!--주정비소 등록-->
     <insert id="saveFc" parameterType="Long">
         <selectKey keyProperty="id" resultType="Long" order="BEFORE">
             select FAVORITE_CARCENTER_SEQ.nextval from dual
         </selectKey>
         INSERT INTO FAVORITE_CARCENTER(ID,CARCENTER_ID,MEMBER_ID) VALUES(#{id},#{carcenterId},#{memberId})
     </insert>
+
+    <!--주 정비소 출력-->
+    <select id="findFavoriteCarcenterByMemberId" parameterType="Long" resultType="fcDto">
+        SELECT ID, CARCENTER_ID, MEMBER_ID
+        FROM FAVORITE_CARCENTER
+        where MEMBER_ID = #{memberId}
+    </select>
+
+    <!--주정비소 삭제-->
+    <delete id="deleteById" parameterType="Long">
+        delete
+        from FAVORITE_CARCENTER
+        where id = #{id}
+    </delete>
 
 </mapper>

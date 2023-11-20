@@ -34,5 +34,4 @@ public interface MemberMapper {
     //정비소 목록 출력
     List<Member> findCarcenterByRole();
 
-
 }

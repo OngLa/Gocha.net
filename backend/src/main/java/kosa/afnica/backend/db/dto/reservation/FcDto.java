@@ -18,6 +18,4 @@ public class FcDto {
     public void setMemberId(Long memberId) {
         this.memberId = memberId;
     }
-
-
 }

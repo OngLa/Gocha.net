@@ -25,6 +25,6 @@ public interface MemberService {
     MemberMypageResDto findMypage(HttpServletRequest request);
 
     //정비소 목록 출력
-    public List<Member> readCarcenter();
+    List<Member> readCarcenter();
 
 }

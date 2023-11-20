@@ -17,7 +17,4 @@ public class Fc {
         this.memberId = memberId;
         this.carcenterId = carcenterId;
     }
-
-
-
 }

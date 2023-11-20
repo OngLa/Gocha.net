@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class ChattingResDto {
+public class ChattingCarResDto {
     private Long id;
-    private String name;
+    private String carNumber;
 
-    public ChattingResDto(Long id, String name) {
+    public ChattingCarResDto(Long id, String carNumber) {
         this.id = id;
-        this.name = name;
+        this.carNumber = carNumber;
     }
 }

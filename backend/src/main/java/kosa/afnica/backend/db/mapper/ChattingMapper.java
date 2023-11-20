@@ -1,8 +1,8 @@
 package kosa.afnica.backend.db.mapper;
 
-import kosa.afnica.backend.db.dto.chatting.ChattingResDto;
-import kosa.afnica.backend.db.dto.chatting.MessageResDto;
+import kosa.afnica.backend.db.dto.chatting.*;
 import kosa.afnica.backend.db.entity.Brand;
+import kosa.afnica.backend.db.entity.CarData;
 import kosa.afnica.backend.db.entity.CarType;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,11 +17,14 @@ public interface ChattingMapper {
 
     // 모든 Brand 조회
     List<ChattingResDto> findAllCarcenter();
-
     Optional<Long> findChatroom(@Param("userId") Long userId, @Param("carcenterId") Long carcenterId);
-
     Long saveChatroom(@Param("userId") Long userId, @Param("carcenterId") Long carcenterId, @Param("createDate") Timestamp createDate);
+    List<MessageResDto> findAllMessageByChatroomId(Long chattingId);
+    Optional<CarData> findCarDataByCarId(Long cardataId);
+    List<ChattingCarResDto> findAllCarByMemberId(Long memberId);
+    List<ChattingCarDataResDto> findAllCarDataByMemberId(Long memberId);
+    void saveMessage(SendMessageReqDto sendMessageReqDto);
 
-    List<MessageResDto> findAllMessageByChatroomID(Long chattingId);
+
 
 }

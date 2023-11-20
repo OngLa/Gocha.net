@@ -33,8 +33,7 @@ public class WebSecurityConfig {
         http.formLogin(config -> config.disable());
 
         //CORS 설정
-        http.cors(config -> {
-        });
+        http.cors(config -> corsConfigurationSource());
 
         //사이트간 요청 위조 방지 비활성화
         http.csrf(config -> config.disable());

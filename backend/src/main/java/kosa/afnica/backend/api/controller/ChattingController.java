@@ -1,14 +1,19 @@
 package kosa.afnica.backend.api.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import kosa.afnica.backend.api.service.impl.ChattingServiceImpl;
 import kosa.afnica.backend.api.service.impl.MemberServiceImpl;
 import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
+import kosa.afnica.backend.config.exception.ErrorResponse;
 import kosa.afnica.backend.config.security.JwtUtil;
 import kosa.afnica.backend.db.dto.car.BrandResDto;
-import kosa.afnica.backend.db.dto.chatting.ChattingResDto;
-import kosa.afnica.backend.db.dto.chatting.MessageResDto;
+import kosa.afnica.backend.db.dto.carData.CarDataResDto;
+import kosa.afnica.backend.db.dto.chatting.*;
 import kosa.afnica.backend.db.dto.member.MemberLoginReqDto;
 import kosa.afnica.backend.db.dto.member.MemberLoginResDto;
 import kosa.afnica.backend.db.entity.Member;
@@ -62,6 +67,77 @@ public class ChattingController {
         List<MessageResDto> messageList = chattingService.findAllMessage(chattingId);
 
         return ResponseEntity.ok(messageList);
+    }
+
+    @Operation(summary = "Data ID의 해당 Car Data 불러오기 API", description = "Car Data 불러오기 API - 채팅방에서 고객이 데이터 첨부 시 데이터 로딩할 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = CarDataResDto.class))),
+            @ApiResponse(responseCode = "404", description = "차량 데이터가 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
+
+    @GetMapping("/open-cardata")
+    public ResponseEntity<CarDataResDto> getCarData(@RequestParam Long cardataId) {
+        CarDataResDto resDto = chattingService.findCarData(cardataId);
+
+        return ResponseEntity.ok(resDto);
+    }
+
+    @Operation(summary = "Car API", description = "채팅방 - 글 작성 시 본인 자동차 조회(고객)")
+    @GetMapping ("/car")
+    public ResponseEntity<List<ChattingCarResDto>> getChattingCar(HttpServletRequest httpServletRequest) {
+        // 헤더로 Token받고 email얻고 mapper로 id로 변환
+        String email = JwtUtil.getEmail(httpServletRequest.getHeader("Authorization").substring(7));
+        Member member = memberMapper.findByEmail(email)
+                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+        Long memberId = member.getId();
+
+        // 해당 채팅방의 메세지 리턴
+        List<ChattingCarResDto> carList = chattingService.findAllCar(memberId);
+
+        return ResponseEntity.ok(carList);
+    }
+
+    @Operation(summary = "Car API", description = "채팅방 - 글 작성 시 본인 자동차 조회(고객)")
+    @GetMapping ("/cardata")
+    public ResponseEntity<List<ChattingCarDataResDto>> getChattingCarData(HttpServletRequest httpServletRequest) {
+        // 헤더로 Token받고 email얻고 mapper로 id로 변환
+        String email = JwtUtil.getEmail(httpServletRequest.getHeader("Authorization").substring(7));
+        Member member = memberMapper.findByEmail(email)
+                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+        Long memberId = member.getId();
+        log.info("시작");
+
+        // 해당 채팅방의 메세지 리턴
+        List<ChattingCarDataResDto> carDataList = chattingService.findAllCarData(memberId);
+
+        log.info("끝");
+        log.info(carDataList.toString());
+
+        return ResponseEntity.ok(carDataList);
+    }
+
+    @Operation(summary = "SendMessage API", description = "글 작성 - 제목, 내용, 예약활성화여부, 차량데이터id를 받아와 저장. Role에 따라 예약활성화여부 or 차량데이터id 저장여부가 switch됨.")
+    @PostMapping("/sendmessage")
+    public ResponseEntity<Void> postMessage(HttpServletRequest httpServletRequest, @RequestBody SendMessageReqDto sendMessageReqDto) {
+        log.info(String.valueOf(sendMessageReqDto.getIsReservation()));
+        log.info(String.valueOf(sendMessageReqDto.getCardataId()));
+        log.info(String.valueOf(sendMessageReqDto.getToMemberId()));
+
+        String email = JwtUtil.getEmail(httpServletRequest.getHeader("Authorization").substring(7));
+        Member member = memberMapper.findByEmail(email)
+                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+        Long memberId = member.getId();
+        log.info("시작");
+
+        Long chattingId = chattingService.findChatroom(memberId, sendMessageReqDto.getToMemberId());
+
+        sendMessageReqDto.setMemberId(memberId);
+        sendMessageReqDto.setChattingId(chattingId);
+        sendMessageReqDto.setSendDate();
+
+        chattingService.insertMessage(sendMessageReqDto);
+
+        return ResponseEntity.ok(null);
     }
 
 }

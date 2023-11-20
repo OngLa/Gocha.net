@@ -3,8 +3,9 @@ package kosa.afnica.backend.api.service.impl;
 import kosa.afnica.backend.api.service.ChattingService;
 import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
-import kosa.afnica.backend.db.dto.chatting.ChattingResDto;
-import kosa.afnica.backend.db.dto.chatting.MessageResDto;
+import kosa.afnica.backend.db.dto.carData.CarDataResDto;
+import kosa.afnica.backend.db.dto.chatting.*;
+import kosa.afnica.backend.db.entity.CarData;
 import kosa.afnica.backend.db.mapper.ChattingMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,12 +51,31 @@ public class ChattingServiceImpl implements ChattingService {
 
     @Override
     public List<MessageResDto> findAllMessage(Long chattingId) {
-        return chattingMapper.findAllMessageByChatroomID(chattingId);
+        return chattingMapper.findAllMessageByChatroomId(chattingId);
     }
 
-    ;
+    @Override
+    public CarDataResDto findCarData(Long cardataId) {
+        CarData carData = chattingMapper.findCarDataByCarId(cardataId)
+                .orElseThrow(() -> new CustomException(ErrorCode.CARDATA_NOT_FOUND));
 
+        return new CarDataResDto(carData);
+    }
 
+    @Override
+    public List<ChattingCarResDto> findAllCar(Long memberId) {
+        return chattingMapper.findAllCarByMemberId(memberId);
+    }
+
+    @Override
+    public List<ChattingCarDataResDto> findAllCarData(Long memberId) {
+        return chattingMapper.findAllCarDataByMemberId(memberId);
+    }
+
+    @Override
+    public void insertMessage(SendMessageReqDto sendMessageReqDto) {
+        chattingMapper.saveMessage(sendMessageReqDto);
+    }
 
 
 }

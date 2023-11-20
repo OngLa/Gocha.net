@@ -20,14 +20,21 @@
         <!--  Car  -->
         <typeAlias alias="brand" type="kosa.afnica.backend.db.entity.Brand"/>
         <typeAlias alias="carType" type="kosa.afnica.backend.db.entity.CarType"/>
-        <typeAlias alias="ChattingResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingResDto"/>
-        <typeAlias alias="MessageResDto" type="kosa.afnica.backend.db.dto.chatting.MessageResDto"/>
         <typeAlias alias="car" type="kosa.afnica.backend.db.entity.Car"/>
         <typeAlias alias="carResDto" type="kosa.afnica.backend.db.dto.car.CarResDto"/>
 
         <!--  CarData  -->
         <typeAlias alias="carData" type="kosa.afnica.backend.db.entity.CarData"/>
         <typeAlias alias="carDataReqDto" type="kosa.afnica.backend.db.dto.carData.CarDataReqDto"/>
+
+        <!--  Chtting  -->
+        <typeAlias alias="ChattingResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingResDto"/>
+        <typeAlias alias="MessageResDto" type="kosa.afnica.backend.db.dto.chatting.MessageResDto"/>
+        <typeAlias alias="ChattingCarResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingCarResDto"/>
+        <typeAlias alias="ChattingCarDataResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingCarDataResDto"/>
+        <typeAlias alias="SendMessageReqDto" type="kosa.afnica.backend.db.dto.chatting.SendMessageReqDto"/>
+
+
 
     </typeAliases>
 </configuration>

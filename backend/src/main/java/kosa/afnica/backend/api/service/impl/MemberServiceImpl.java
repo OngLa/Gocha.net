@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -86,5 +87,10 @@ public class MemberServiceImpl implements MemberService {
         return new MemberMypageResDto(member);
     }
 
+    //정비소 목록 출력
+    @Override
+    public List<Member> readCarcenter() {
+        return memberMapper.findCarcenterByRole();
 
+    }
 }

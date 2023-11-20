@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { SmallButton } from "../../../components/Button";
 import styles from "./reservationComponent.module.css";
-import { deleteReservation } from "../../../apis/reservation";
+import { deleteReservation } from "../../../service/reservation";
 
 function CardBody({ reservationList }) {
 
@@ -43,6 +43,20 @@ const renderStatusText = (status) => {
 };
 //상태값 0,1,2를 문자열 예약대기중,정비중, 정비완료로 바꾸는 로직
 
+const renderCarcenterIdText = (carcenterId) => {
+  switch (carcenterId) {
+    case 100002:
+      return '서울점';
+      case 100003:
+      return '인천점';
+      case 100004:
+      return '경기도점';
+    default:
+      return carcenterId; 
+  }
+};
+//carcenterId값에 따라 지점명 입력
+
   return (
     <div className={styles.cardBody}>
       <div className={styles.imgWrap}>
@@ -51,7 +65,7 @@ const renderStatusText = (status) => {
           alt="User"
         />
         <div>
-          지점명 : {reservationList.carcenterId}
+          지점명 : {renderCarcenterIdText(reservationList.carcenterId)}
           <br/>
           예약날짜 :<br/>{reservationList.reservedDate} 
           <br/>

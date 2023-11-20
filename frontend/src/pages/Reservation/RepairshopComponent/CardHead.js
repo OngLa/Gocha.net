@@ -1,16 +1,13 @@
 import styles from "./repairshopcomponent.module.css";
+import carcenterIcon from "../../../img/chatting/carcenterIcon.png"
 
-function CardHead({ id, name }) {
-  //액시오스로 데이터 받아옴 {id: ""}
+function CardHead({carcenter}) {
   return (
     <div className={styles.cardHead}>
-      <div className={styles.imgWrap}>
-        <img
-          src={`https://source.boringavatars.com/sunset/${name}?colors=F26B7A,F0F2DC,D9EB52,8AC7DE,87796F`}
-          alt="User"
-        />
-        {name}
+      <div className={styles.carcenterIcon}>
+        <img src={carcenterIcon} alt="carcenterIcon"/>
       </div>
+      <div className={styles.carcenterName}>{carcenter.name}</div>
     </div>
   );
 }

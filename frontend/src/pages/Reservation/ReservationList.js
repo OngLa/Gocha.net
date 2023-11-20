@@ -3,7 +3,7 @@ import ContentHeader from "../../components/ContentHeader";
 import LargeButton from "../../components/Button";
 import ReservationComponent from "./ReservationComponent";
 import { useEffect, useState } from "react";
-import { readReservationList } from "../../apis/reservation";
+import { readReservationList } from "../../service/reservation";
 
 function ReservationList() {
   // //예약목록 출력 페이지

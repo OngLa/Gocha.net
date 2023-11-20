@@ -3,10 +3,10 @@ import { SmallButton } from "../../../components/Button/index";
 import Calender from "../../../components/Calender";
 import { useNavigate } from "react-router";
 import { useCallback, useState } from "react";
-import { createReservation } from "../../../apis/reservation";
+import { createReservation } from "../../../service/reservation";
 import Swal from "sweetalert2";
 
-function Sidepanel({ open, toggle, id }) {
+function Sidepanel({ open, toggle, carcenter}) {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(null);
   //날짜데이터 상태
@@ -19,7 +19,7 @@ function Sidepanel({ open, toggle, id }) {
       try {
         await createReservation({
           reservedDate: selectedDate, //예약날짜
-          carcenterId: 100002,        //지점명
+          carcenterId: carcenter.id,  //지점명
           carDataId: selectCardata    //선택한 데이터(null허용)
         });
         console.log("예약하기 동작함");

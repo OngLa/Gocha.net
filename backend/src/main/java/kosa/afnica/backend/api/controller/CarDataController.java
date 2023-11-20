@@ -25,7 +25,7 @@ public class CarDataController {
 
     private final CarDataService carDataService;
 
-    @Operation(summary = "차량 데이터 불러오기 API", description = "차량 데이터 불러오기 API - 현대 API로부터 차량 데이터 불러오기, 차량 데이터 페이지에서 버튼 눌리면 호출되는 API")
+    @Operation(summary = "챠량 데이터 저장 API", description = "챠량 데이터 저장 API - 현대 API 연동, 현재는 난수 데이터 생성, 하루에 데이터 하나만")
     @PostMapping()
     public ResponseEntity<Void> postCarData(@RequestBody CarDataReqDto reqDto) {
         carDataService.createCarData(reqDto);

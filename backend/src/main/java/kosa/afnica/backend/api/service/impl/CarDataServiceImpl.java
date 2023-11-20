@@ -78,8 +78,17 @@ public class CarDataServiceImpl implements CarDataService {
     // 데이터 불러오기, 임시 난수 생성
     @Override
     public void createCarData(CarDataReqDto reqDto) {
-        CarData carData = new CarData(reqDto);
-        carDataMapper.saveCarData(carData);
+
+        carDataMapper.findByCarIdAndLastUpdate(reqDto.getCarId())
+                .ifPresentOrElse(
+                        data -> {
+                            data.updateData();
+                            carDataMapper.updateCarData(data);
+                        },
+                        () -> {
+                            carDataMapper.saveCarData(new CarData(reqDto));
+                        }
+                );
     }
 
     // CarId 기반으로 최신 자동차 데이터 불러오기

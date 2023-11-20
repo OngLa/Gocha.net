@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosa.afnica.backend.db.mapper.FcMapper">
+
+    <!--    주정비소 등록-->
+<insert id="saveFc" parameterType="Long">
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+        select FAVORITE_CARCENTER_SEQ.nextval from dual
+    </selectKey>
+    INSERT INTO FAVORITE_CARCENTER(ID) VALUES(#{id})
+</insert>
+</mapper>

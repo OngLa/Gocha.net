@@ -11,7 +11,6 @@ import kosa.afnica.backend.db.mapper.ReservationMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -70,4 +69,3 @@ public class ReservationServiceImpl implements ReservationService {
             return reservationMapper.deleteById(id);
     }
 }
-

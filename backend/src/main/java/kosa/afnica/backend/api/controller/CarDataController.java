@@ -11,6 +11,7 @@ import kosa.afnica.backend.db.dto.carData.CarDataReqDto;
 import kosa.afnica.backend.db.dto.carData.CarDataResDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,7 +53,10 @@ public class CarDataController {
             @ApiResponse(responseCode = "404", description = "차량 데이터가 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/data-list")
-    public ResponseEntity<List<CarDataResDto>> getCarDataList(@RequestParam Long carId, @RequestParam(required = false) LocalDate startDate, @RequestParam(required = false) LocalDate endDate) {
+    public ResponseEntity<List<CarDataResDto>> getCarDataList(
+            @RequestParam Long carId,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         CarDataReqDto reqDto = new CarDataReqDto(carId, startDate, endDate);
         List<CarDataResDto> resDto = carDataService.findAllCarDataByCarId(reqDto);
 

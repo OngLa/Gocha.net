@@ -2,15 +2,15 @@ import CardBody from "./CardBody";
 import CardHead from "./CardHead";
 import styles from "./MainRepairshopComponent.module.css"
 
-function MainRepairshopComponent({carcenter}) {
+function MainRepairshopComponent({favoriteCarcenter}) {
 
   return (
     <div className={styles.MainRepairshopComponent}>
-      <div className={styles.cardHeader}>
-        <CardHead carcenter={carcenter}/>
+      <div>
+        <CardHead favoriteCarcenter={favoriteCarcenter}/>
       </div>
-      <div className="card-body">
-        <CardBody carcenter={carcenter} 
+      <div>
+        <CardBody favoriteCarcenter={favoriteCarcenter} 
           />
       </div>
     </div>

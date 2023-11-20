@@ -2,7 +2,7 @@ import styles from "./MainRepairshopComponent.module.css"
 import carcenterIcon from "../../../img/chatting/carcenterIcon.png"
 
 
-function CardHead({carcenter}) {
+function CardHead({favoriteCarcenter}) {
 
 
   return(
@@ -10,7 +10,7 @@ function CardHead({carcenter}) {
     <div className={styles.carcenterIcon}>
       <img src={carcenterIcon} alt="carcenterIcon"/>
     </div>
-    <div className={styles.carcenterName}>{carcenter.name}</div>
+    <div className={styles.carcenterName}>{favoriteCarcenter.name}</div>
   </div>
 );
 }

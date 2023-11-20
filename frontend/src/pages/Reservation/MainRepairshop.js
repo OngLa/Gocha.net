@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import ContentHeader from "../../components/ContentHeader";
-import MainRepairshopComponent from "./MainRepairshopComponent";
 import { readCarcenterList } from "../../service/reservation";
 import styles from "./reservation.module.css";
+import RepairshopComponent from "./RepairshopComponent";
 
+//주 정비소 등록하기 페이지
 function MainRepairshop() {
-  //주 정비소 등록하기 페이지
   const [carcenterlist, setCarcenterList] = useState([]);
 
+  //정비소 출력
   useEffect(() => {
     const carcenters = async () => {
       try {
@@ -19,7 +20,6 @@ function MainRepairshop() {
     };
     carcenters();
   }, []);
-  //정비소 목록 서버에서 가져오는 api
   
   return (
     <div className="MainRepairshop">
@@ -27,7 +27,7 @@ function MainRepairshop() {
 
      <div className={styles.RepairshopComponent}>
           {carcenterlist.map((carcenter) => (
-            <MainRepairshopComponent key={carcenter.id} carcenter={carcenter} />
+            <RepairshopComponent key={carcenter.id} carcenter={carcenter} useCardBodyFc={true}/>
           ))}
         </div>
     </div>

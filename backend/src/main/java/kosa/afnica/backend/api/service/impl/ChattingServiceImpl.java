@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -27,18 +25,16 @@ public class ChattingServiceImpl implements ChattingService {
     @Override
     public List<ChattingResDto> findAllChatting() {
         return chattingMapper.findAllCarcenter();
-    };
+    }
+
+    @Override
+    public List<ChattingResDto> findAllChatting2(Long memberId) {
+        List<Long> sendUserList = chattingMapper.findSendUser(memberId); // 나에게 메세지 보낸 유저 목록
+        return chattingMapper.findAllUser(sendUserList);
+    }
 
     @Override
     public Long findChatroom(Long userId, Long carcenterId) {
-        // 숫자가 작은게 user, 숫자가 큰게 carcenter이다.
-        Long temp = 0L;
-        if (userId > userId) {
-            temp = userId;
-            userId = carcenterId;
-            carcenterId = temp;
-        }
-        
         // 여기서 두사람의 채팅방 존재 여부를 조회하고 있으면 그대로 리턴, 없으면 새로 만들고 그 id를 리턴
         Optional<Long> existChatroom = chattingMapper.findChatroom(userId, carcenterId);
         if(existChatroom.isPresent()) {

@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -36,10 +37,11 @@ import java.util.List;
 @RequestMapping("/api/chatting")
 public class ChattingController {
     private final ChattingServiceImpl chattingService;
+    private final MemberServiceImpl memberService;
     private final MemberMapper memberMapper;
 
 
-    @Operation(summary = "Chatting User List API", description = "비대면 진단을 위해 채팅방 목록 출력 - 고객용(모든 카센터 다 출력)")
+    @Operation(summary = "Chatting Carcenter List API", description = "비대면 진단을 위해 채팅방 목록 출력 - 고객용(모든 카센터 다 출력)")
     @GetMapping ("/carcenter")
     public ResponseEntity<List<ChattingResDto>> getChatting() {
         // 헤더로 Token받고 email얻고 mapper로 id로 변환
@@ -51,17 +53,39 @@ public class ChattingController {
         return ResponseEntity.ok(chattingList);
     }
 
+
+    //    public ResponseEntity<List<ChattingResDto>> getChatting2(HttpServletRequest httpServletRequest) {
+    @Operation(summary = "Chatting User List API", description = "비대면 진단을 위해 채팅방 목록 출력 - 카센터용(본인에게 메세지 보낸 고객 다 출력)")
+    @GetMapping ("/user")
+    public ResponseEntity<List<ChattingResDto>> getChatting2(HttpServletRequest httpServletRequest) {
+        String email = JwtUtil.getEmail(httpServletRequest.getHeader("Authorization").substring(7));
+        Member member = memberMapper.findByEmail(email)
+                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+        Long memberId = member.getId();
+
+        // 정비소 id, name을 list로 조회
+        List<ChattingResDto> chattingList = chattingService.findAllChatting2(memberId);
+
+        return ResponseEntity.ok(chattingList);
+    }
+
     @Operation(summary = "Chatroom API", description = "채팅방 - 메세지 전체 조회(공통)")
     @GetMapping ("/chatroom")
-    public ResponseEntity<List<MessageResDto>> getChatting(HttpServletRequest httpServletRequest, @RequestParam(name = "member_id") Long member2Id) {
+    public ResponseEntity<List<MessageResDto>> getChatroom(HttpServletRequest httpServletRequest, @RequestParam(name = "member_id") Long member2Id) {
         // 헤더로 Token받고 email얻고 mapper로 id로 변환
         String email = JwtUtil.getEmail(httpServletRequest.getHeader("Authorization").substring(7));
         Member member = memberMapper.findByEmail(email)
                 .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
         Long member1Id = member.getId();
 
-        // 두사람의 채팅방 id 조회(id는 채팅방에 들어간사람, memberId는 상대방 id)
-        Long chattingId = chattingService.findChatroom(member1Id, member2Id);
+        // 권한에 따라 첫번째 인자는 user, 두번째 인자는 carcenter로 넣기.
+        Long chattingId = null;
+        if (Objects.equals(memberService.findRole(email), "ROLE_CARCENTER")) {
+            // 두사람의 채팅방 id 조회(id는 채팅방에 들어간사람, memberId는 상대방 id)
+            chattingId = chattingService.findChatroom(member2Id, member1Id);
+        } else {
+            chattingId = chattingService.findChatroom(member1Id, member2Id);
+        }
 
         // 해당 채팅방의 메세지 리턴
         List<MessageResDto> messageList = chattingService.findAllMessage(chattingId);

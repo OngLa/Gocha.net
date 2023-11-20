@@ -29,6 +29,7 @@ public class AppUserDetailsService implements UserDetailsService {
 
         //Member객체와 권한을 가진 객체 생성
         List<GrantedAuthority> authorities = new ArrayList<>();
+//        authorities.add(new SimpleGrantedAuthority(member.getRole()));
         authorities.add(new SimpleGrantedAuthority(member.getRole()));
 
         return new AppUserDetails(member, authorities);

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,8 +49,16 @@ public class WebSecurityConfig {
         //요청 경로별 권한 설정
         http.authorizeHttpRequests(customizer -> customizer
                 //방법1
-                .antMatchers("/api/chatting/**").hasAuthority("ROLE_USER")
-                .antMatchers("/api/chatting/**").hasAuthority("ROLE_CARCENTER")
+                // 카센터 전용 API 먼저
+//                .antMatchers(HttpMethod.GET, "/api/chatting/user").hasAuthority("ROLE_CARCENTER")
+//                .antMatchers(HttpMethod.GET, "/api/chatting/chatroom").hasAuthority("ROLE_CARCENTER")
+                // 유저
+//                .antMatchers("/api/chatting/**").hasAuthority("ROLE_USER")
+                // 카센터
+//                .antMatchers("/api/chatting/**").hasAuthority("ROLE_USER")
+
+
+//                .antMatchers("/api/chatting/**").hasAuthority("ROLE_CARCENTER")
 
                 //방법2
                 //.antMatchers(HttpMethod.GET, "/board/list").hasAuthority("ROLE_USER") //ROLE_생략하면 안됨

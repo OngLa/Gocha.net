@@ -9,6 +9,7 @@ import java.util.List;
 public interface ChattingService {
     
     List<ChattingResDto> findAllChatting(); // 정비소 목록 반환
+    List<ChattingResDto> findAllChatting2(Long memberId); // 나에게 메세지 보낸 유저 목록 반환
     Long findChatroom(Long member1Id, Long member2Id);
     List<MessageResDto> findAllMessage(Long chatroomId);
     CarDataResDto findCarData(Long cardataId);

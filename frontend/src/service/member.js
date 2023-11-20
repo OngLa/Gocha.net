@@ -1,9 +1,14 @@
 import axios from "axios";
 import qs from "qs";
 
-// 이메일 인증
-export function emailCheck(email) {
-  return axios.get("/member/email-check", { params: { email } });
+// 이메일 인증번호 요청
+export function getVeriCode(email) {
+  return axios.get("/member/email", { params: { email } });
+}
+
+// 이메일 인증번호 확인
+export function postVeriCode(verification) {
+  return axios.get("/member/email-veri", verification);
 }
 
 // 닉네임 중복

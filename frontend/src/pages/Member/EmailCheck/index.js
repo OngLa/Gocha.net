@@ -6,15 +6,18 @@ import ContentHeader from "../../../components/ContentHeader";
 import emailIcon from "../../../img/member/email.png";
 import emailCheckIcon from "../../../img/member/emailcheck.png";
 import Swal from "sweetalert2";
+import { getVeriCode } from "../../../service/member";
 
 function EmailCheck() {
   // 이메일 인증
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState({
-    email: "",
-    verificationCode: "",
-  });
+  const [email, setEmail] = useState("");
+
+  // const [email, setEmail] = useState({
+  //   email: "",
+  //   verificationCode: "",
+  // });
 
   const [EmailCheckApplyResult, setEmailCheckApplyResult] = useState("");
   const [isEmailCheckApplied, setIsEmailCheckApplied] = useState(false);
@@ -31,17 +34,17 @@ function EmailCheck() {
     navigate("/member/signup");
   };
 
-  const handleEmailCheckApply = () => {
-    const emailRegex =
-      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+  const handleEmailCheckApply = async () => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-    if (email.email === "") {
-      setEmailCheckApplyResult("이메일을 입력해주세요.");
-    } else {
-      if (!emailRegex.test(email.email) === true) {
+    try {
+      if (email === "") {
+        setEmailCheckApplyResult("이메일을 입력해주세요.");
+      } else if (!emailRegex.test(email)) {
         setEmailCheckApplyResult("올바른 이메일 형식이 아닙니다.");
-        setIsEmailCheckApplied(false);
+        // setIsEmailCheckApplied(false);
       } else {
+        await getVeriCode(email);
         Swal.fire({
           icon: "success",
           title: "인증 번호가 발송되었습니다.",
@@ -50,8 +53,30 @@ function EmailCheck() {
         });
         setIsEmailCheckApplied(true);
       }
+      console.log("이메일 인증 성공", email);
+    } catch (error) {
+      setEmailCheckApplyResult("이미 사용 중인 이메일입니다.");
+      console.log("이메일 인증 실패", error);
     }
   };
+
+  //     if (email.email === "") {
+  //     setEmailCheckApplyResult("이메일을 입력해주세요.");
+  //   } else {
+  //     if (!emailRegex.test(email.email) === true) {
+  //       setEmailCheckApplyResult("올바른 이메일 형식이 아닙니다.");
+  //       setIsEmailCheckApplied(false);
+  //     } else if(){
+  //       Swal.fire({
+  //         icon: "success",
+  //         title: "인증 번호가 발송되었습니다.",
+  //         text: "인증 번호를 확인하신 후 아래 입력창에 입력해주세요.",
+  //         confirmButtonColor: "#45CB85",
+  //       });
+  //       setIsEmailCheckApplied(true);
+  //     }
+  //   }
+  // };
 
   const handleEmailCheckNum = () => {
     setEmailCheckResult("인증 번호가 일치하지 않습니다.");
@@ -70,7 +95,7 @@ function EmailCheck() {
             type="email"
             placeholder="이메일"
             name="email"
-            value={email.email}
+            value={email}
             onChange={(e) => {
               handleOnChange(e);
             }}
@@ -92,7 +117,6 @@ function EmailCheck() {
               type="text"
               placeholder="인증번호 입력"
               name="verificationCode"
-              value={email.verificationCode}
               onChange={(e) => {
                 handleOnChange(e);
               }}

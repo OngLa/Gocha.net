@@ -9,9 +9,18 @@ export function getChattingCarcenter() {
   }
 };
 
-export function getChatroom(carcenterId) {
+export function getChattingUser() {
   try {
-    return axios.get('http://localhost:8080/api/chatting/chatroom', { params: { member_id : carcenterId } });
+    return axios.get('http://localhost:8080/api/chatting/user');
+  } catch (error) {
+    console.error("Error get ChattingUser, ", error);
+    throw error;
+  }
+};
+
+export function getChatroom(memberId) {
+  try {
+    return axios.get('http://localhost:8080/api/chatting/chatroom', { params: { member_id : memberId } });
 
   } catch (error) {
     console.error("Error get Chatroom, ", error);

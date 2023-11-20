@@ -9,8 +9,8 @@ function Chatting2(props) {
   return (
     <Routes>
       <Route path="" Component={ChattingList2} />
-      <Route path="chatroom2/:uno" Component={Chatroom2} />
-      <Route path="writeform2/:uno" Component={WriteForm2} />
+      <Route path="chatroom2" Component={Chatroom2} />
+      <Route path="writeform2" Component={WriteForm2} />
     </Routes>
   );
 }

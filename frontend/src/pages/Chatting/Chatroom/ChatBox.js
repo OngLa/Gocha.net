@@ -29,7 +29,7 @@ function ChatBox(props) {
           <div className={style.titleUser}>{props.title}</div>
           <hr className={style.hrLineUser} />
           <div className={style.content}>{props.content}</div>
-
+          {/* 데이터 보기 */}
           {props.cardataId !== undefined && props.cardataId !== null ? (
             <div>
               <div className={style.is_reservation}>

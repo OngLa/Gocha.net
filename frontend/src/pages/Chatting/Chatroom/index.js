@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import style from "./chatroom.module.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ChatBox from "./ChatBox";
@@ -31,6 +31,13 @@ function Chatroom(props) {
     loadingChatroom();
   }
   , []);
+
+  
+  const chatroomRef = useRef();
+  useEffect(() => {
+    // chatroomRef 요소의 맨 아래로 스크롤
+    chatroomRef.current.scrollTop = chatroomRef.current.scrollHeight;
+  }, [messageList]);
 
   useEffect(() => {
     console.log(messageList);
@@ -100,7 +107,9 @@ function Chatroom(props) {
   };
 
   return (
-    <div className={style.ChatroomWrap}>
+    
+    // chatroomRef 요소의 맨 아래로 스크롤
+    <div className={style.ChatroomWrap} ref={chatroomRef}>
       <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
       {messageList.map((message) =>
         message.memberId < 100000 ? (

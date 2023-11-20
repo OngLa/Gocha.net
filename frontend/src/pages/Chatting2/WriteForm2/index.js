@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import style from "./writeForm2.module.css";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import LargeButton from "../../../components/Button/index";
 import ChatPartnerProfile2 from "../components/ChatPartnerProfile2";
+import { sendMessage } from "../../../service/chatting";
+import Swal from "sweetalert2";
 
 function WriteForm2(props) {
   // [정비소 메세지 작성 페이지]
@@ -11,22 +13,38 @@ function WriteForm2(props) {
   // (고객은 정비소와 다르게 데이터 선택 입력란이 있다.)
   // 데이터 전송 시 채팅방으로 돌아간다.(이 때 url에 고객 이름도 같이 넘기도록함.)
 
-  const uno = parseInt(useParams().uno);
   const [searchParams] = useSearchParams();
+  let userId = searchParams.get("userId");
   let userName = searchParams.get("userName");
 
   // message 객체 상태
   const [message, setMessage] = useState({
+    userId: userId,
     title: "",
     content: "",
-    selectSevervation: "0", // "0"은 체크 안함, "1"은 체크 함
+    selectCar: "",
+    isReservation: 0,
+    cardataId: null,
   });
 
   const navigate = useNavigate(); // useNavigate 훅을 사용
-  const sendMessage = (uno) => {
-    // message 객체를 이동할 경로로 전달
-    // api(`/carcentersendmessage/${uno}/?title=${message.title}&content=${message.content}&selectedData=${message.selectSevervation}`);
-    navigate(`/chatting2/chatroom2/${uno}?userName=${userName}`);
+  const handleMessage = async () => {
+    // title과 content가 모두 공백이 아닌 경우에만 전송
+    if (message.title.trim() !== "" && message.content.trim() !== "") {
+      try {
+        await sendMessage(message);
+        navigate(`/chatting2/chatroom2?userId=${userId}&userName=${userName}`);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      // title 또는 content가 공백인 경우 경고 메시지 또는 필요한 처리를 추가할 수 있습니다.
+      Swal.fire({
+        icon: "info",
+        title: "제목과 내용을 입력하세요.",
+        confirmButtonColor: "#45CB85",
+      });
+    }
   };
 
   return (
@@ -58,28 +76,28 @@ function WriteForm2(props) {
         ></textarea>
       </div>
 
-      <div className={style.selectSevervation}>
+      <div className={style.isReservation}>
         <label>
           <input
             className={style.checkBoxInput}
             type="checkbox"
             name="reservation"
-            checked={message.selectSevervation === "1"}
+            checked={message.isReservation === true}
             onChange={() => {
               const newSelectData =
-                message.selectSevervation === "1" ? "0" : "1";
-              setMessage({ ...message, selectSevervation: newSelectData });
+                message.isReservation === true ? false : true;
+              setMessage({ ...message, isReservation: newSelectData });
             }}
           />
           <span className={style.checkBoxLabel}></span>
         </label>
-        <div className={style.selectSevervationText}>예약하기 활성화</div>
+        <div className={style.isReservationText}>예약하기 활성화</div>
       </div>
 
       <div className={style.LargeButtonWrap}>
         <LargeButton
           children="전송하기"
-          onClick={() => sendMessage(uno)}
+          onClick={() => handleMessage()}
         ></LargeButton>
       </div>
     </div>

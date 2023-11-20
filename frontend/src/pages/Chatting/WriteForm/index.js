@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./writeForm.module.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ChatPartnerProfile from "../components/ChatPartnerProfile";
 import LargeButton from "../../../components/Button/index";
 import { sendMessage } from "../../../service/chatting";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function WriteForm(props) {
   // [고객 메세지 작성 페이지]
@@ -27,6 +28,7 @@ function WriteForm(props) {
     cardataId: null,
   });
 
+  // 본인의 차량과 차데이터 가져오기
   const [carList, setCarList] = useState([]);
   const [carDataList, setCarDataList] = useState([]);
   useEffect(() => {
@@ -109,13 +111,21 @@ function WriteForm(props) {
 
   const navigate = useNavigate(); // useNavigate 훅을 사용
   const handleMessage = async () => {
-    try {
-      await sendMessage(message);
-      navigate(
-        `/chatting/chatroom?carcenterId=${carcenterId}&carcenterName=${carcenterName}`
-      );
-    } catch (error) {
-      console.log(error);
+    // title과 content가 모두 공백이 아닌 경우에만 전송
+    if (message.title.trim() !== "" && message.content.trim() !== "") {
+      try {
+        await sendMessage(message);
+        navigate(`/chatting/chatroom?carcenterId=${carcenterId}&carcenterName=${carcenterName}`);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      // title 또는 content가 공백인 경우 경고 메시지 또는 필요한 처리를 추가할 수 있습니다.
+      Swal.fire({
+        icon: "info",
+        title: "제목과 내용을 입력하세요.",
+        confirmButtonColor: "#45CB85",
+      });
     }
   };
 

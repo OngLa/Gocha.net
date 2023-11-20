@@ -3,6 +3,7 @@ import { SmallButton, SmallButton2 } from "../../../components/Button";
 import style from "./chatBox2.module.css";
 import { useState } from "react";
 import Sidepanel from "./Sidepanel";
+import Swal from "sweetalert2";
 
 function ChatBox2(props) {
   // ChatBox는 채팅방에 사용되는 제목&내용을 포함한 박스이다.
@@ -11,10 +12,13 @@ function ChatBox2(props) {
   // *sender에는 Carcenter 또는 User를 넣어주어 sender를 구분해준다.
   // 참고로 박스 왼쪽, 오른쪽 배치는 여기서 조정하는게 아니라. chatroom 컴포넌트에서 className으로 조정하는 것임에 주의.
 
-  const navigate = useNavigate(); // useNavigate 훅을 사용
   const moveReservation = () => {
-    // navigate(`/reservation?cardata_id=${props.cardata_id}`);
-    alert("고객만이 사용 가능합니다.")
+    //Alert 이쁘게
+    Swal.fire({
+      icon: "info",
+      title: "고객만 사용 가능합니다.",
+      confirmButtonColor: "#45CB85",
+    });
   };
 
   const [openSidepanel, setOpenSidepanel] = useState(false);
@@ -30,14 +34,14 @@ function ChatBox2(props) {
           <div className={style.titleUser}>{props.title}</div>
           <hr className={style.hrLineUser} />
           <div className={style.content}>{props.content}</div>
-          {props.is_reservation === "1" ? (
+          {props.isReservation === true ? (
             <div className={style.is_reservation}>
-              <SmallButton2 children="예약하기" onClick={moveReservation} />
+              <SmallButton2 children="예약하기(고객용)" style={{ width: "130px" }} onClick={moveReservation} />
             </div>
           ) : null}
         </div>
         <div className={style.send_dateUser}>
-          <div>{props.send_date}</div>
+          <div>{props.sendDate}</div>
         </div>
       </div>
     );
@@ -48,8 +52,8 @@ function ChatBox2(props) {
           <div className={style.titleCarcenter}>{props.title}</div>
           <hr className={style.hrLineCarcenter} />
           <div className={style.content}>{props.content}</div>
-          <div className={style.content}>{props.content}</div>
-          {props.cardata_id !== null ? (
+          {/* 데이터 보기 */}
+          {props.cardataId !== undefined && props.cardataId !== null ? (
             <div>
               <div className={style.is_reservation}>
                 <SmallButton
@@ -60,14 +64,14 @@ function ChatBox2(props) {
               </div>
               <div>
                 {openSidepanel && (
-                  <Sidepanel open={openSidepanel} toggle={toggleSidepanel} cardata_id={props.cardata_id} />
+                  <Sidepanel open={openSidepanel} toggle={toggleSidepanel} cardataId={props.cardataId} />
                 )}
               </div>
             </div>
           ) : null}
         </div>
         <div className={style.send_dateCarcenter}>
-          <div>{props.send_date}</div>
+          <div>{props.sendDate}</div>
         </div>
       </div>
     );

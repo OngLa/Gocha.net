@@ -1,7 +1,7 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 85px 85px 85px 85px;
-  justify-content: space-between;
+  grid-template-columns: 80px 80px 80px 80px;
+  justify-content: space-around;
   gap: 10px;
 }
 

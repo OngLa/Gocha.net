@@ -19,8 +19,8 @@ function Info() {
   useEffect(() => {
     const work = async () => {
       try {
-        const carListData = await getMyCar();
-        setCarList(carListData);
+        const response = await getMyCar();
+        setCarList(response);
         setValue(0);
         setImgSrc(carList[value].photo);
       } catch (error) {

@@ -1,68 +1,100 @@
 import Card from "../../../components/Card";
 import ContentHeader from "../../../components/ContentHeader";
 import LargeButton, { SmallButton } from "../../../components/Button";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import DateRangeForm from "../../../components/DateRangeForm";
 
 import styles from "./style.module.css";
 import CustomSelect from "../../../components/CustomSelect";
+import { getCarDataList, getMyCar, postCarData } from "../../../service/car";
+import GridCarInfo from "../../../components/GridCarInfo";
 
 function DataList() {
-  const [cards, setCards] = useState([
-    { date: "2023-11-08", content: "차량 데이터1" },
-    { date: "2023-11-09", content: "차량 데이터2" },
-  ]);
-  const myCarList = [
-    {
-      value: 0,
-      name: "Sonata",
-    },
-    {
-      value: 1,
-      name: "Avante",
-    },
-    {
-      value: 2,
-      name: "Tucson",
-    },
-    {
-      value: 3,
-      name: "Santa fe",
-    },
-  ];
-  const [card, setCard] = useState({
-    date: "",
-    content: "",
-  });
-  const [id, setId] = useState(3);
-  const [value, setValue] = useState(0);
+  // 내 차량 종류 Selector 데이터 추가
+  const [carList, setCarList] = useState([]);
+  const [value, setValue] = useState();
 
-  const dateRangeRef = useRef();
-
-  const addCard = (event) => {
-    const newCard = {
-      ...card,
-      date: "2023-11-20",
-      content: "차량데이터" + id,
-      id: id,
+  // 페이지 렌더링 시 동작하는 부분
+  useEffect(() => {
+    const work = async () => {
+      try {
+        const carListData = await getMyCar();
+        setCarList(carListData);
+        setValue(0);
+      } catch (error) {
+        console.error("Failed to fetch CarList:", error);
+      }
     };
 
-    setCards(cards.concat(newCard));
+    work();
+  }, []);
 
-    setId(id + 1);
-    setCard({
-      date: "",
-      content: "",
-    });
+  // 차 종류에 따른 다른 데이터 출력
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [cards, setCards] = useState([]);
 
-    console.log(cards);
+  // 데이터 불러오기
+  const getDataList = async (start, end) => {
+    try {
+      const req = {
+        carId: carList[value].carId,
+        startDate: start,
+        endDate: end,
+      };
+
+      // api 호출
+      const response = await getCarDataList(req);
+
+      // 각 호출 결과 card에 저장
+      const newCards = response.map((item) => ({
+        date: item.lastUpdate,
+        content: {
+          canGoDistance: item.canGoDistance,
+          distance: item.distance,
+          carBattery: item.carBattery,
+          batteryCharge: item.batteryCharge,
+          breakOil: item.breakOil,
+          engineOil: item.engineOil,
+          oil: item.oil,
+          tire: item.tire,
+          washer: item.washer,
+          lampWire: item.lampWire,
+        },
+      }));
+
+      // card list 저장
+      setCards(newCards);
+    } catch (error) {
+      console.log("리다이렉트");
+    }
   };
 
-  const filterDate = () => {
-    const startDate = dateRangeRef.current.getStartDate();
-    const endDate = dateRangeRef.current.getEndDate();
+  // 필터 초기화 및 데이터 출력
+  useEffect(() => {
+    const start = "";
+    const end = "";
+    setStartDate(start);
+    setEndDate(end);
+    getDataList(start, end);
+  }, [carList, value]);
 
-    console.log(startDate, endDate);
+  // 
+  const handlefilter = () => {
+    getDataList(startDate, endDate);
+  };
+
+  // 최신 데이터 업데이트 버튼
+  const handleCards = async () => {
+    const req = {
+      carId: carList[value].carId,
+    };
+
+    const work = async () => {
+      await postCarData(req);
+    };
+
+    work();
   };
 
   return (
@@ -77,24 +109,30 @@ function DataList() {
         <LargeButton
           name="update"
           children="최신 데이터 업데이트"
-          onClick={addCard}
+          onClick={handleCards}
         />
       </div>
 
       {/* 내 차량 종류 Selector */}
       <div className={styles.customSelect}>
-        <CustomSelect items={myCarList} value={value} setValue={setValue} />
+        <CustomSelect items={carList} value={value} setValue={setValue} />
       </div>
 
       {/* 날짜 필터 폼 */}
       <div className={styles.dateFormWrapper}>
         <div className={styles.dateForm}>
-          <DateRangeForm title="검색 날짜" ref={dateRangeRef} />
+          <DateRangeForm
+            title="검색 날짜"
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+          />
         </div>
         <SmallButton
           name="filterDate"
           children="검색하기"
-          onClick={filterDate}
+          onClick={handlefilter}
         />
       </div>
 
@@ -110,7 +148,13 @@ function DataList() {
                   <div style={{ marginLeft: "5px" }}>{item.date}</div>
                 </>
               }
-              content_children={item.content}
+              content_children={
+                <GridCarInfo
+                  item={item.content}
+                  layoutType="C"
+                  fontSize="15px"
+                />
+              }
             />
           </div>
         ))}

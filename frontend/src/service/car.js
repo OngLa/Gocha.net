@@ -12,7 +12,7 @@ export const getCarTypes = async (brandId) => {
 
 export const postCar = async (car) => {
   try {
-    const response = await axios.get("/cars", car);
+    const response = await axios.post("/cars", car);
     return response.data;
   } catch (error) {
     console.error("Error get Brands, ", error);
@@ -54,8 +54,35 @@ export const getRecentCarData = async (carId) => {
 
 export const deleteCar = async (carId) => {
   try {
-    const response = await axios.delete("/cars", {params: {carId}});
+    const response = await axios.delete("/cars", { params: { carId } });
     return response.data;
+  } catch (error) {
+    console.error("Error get Brands, ", error);
+    throw error;
+  }
+};
+
+export const getCarDataList = async (req) => {
+  try {
+    console.log(req);
+    const response = await axios.get("/car-data/data-list", {
+      params: {
+        carId: req.carId,
+        startDate: req.startDate,
+        endDate: req.endDate,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const postCarData = async (req) => {
+  try {
+    const response = await axios.post("/car-data", req);
+    return response;
   } catch (error) {
     console.error("Error get Brands, ", error);
     throw error;

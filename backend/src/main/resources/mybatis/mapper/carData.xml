@@ -14,6 +14,31 @@
         (#{id}, #{batteryCharge}, #{breakOil}, #{canGoDistance}, #{carBattery}, #{distance}, #{engineOil}, #{lampWire}, SYSDATE, #{oil}, #{tire}, #{washer}, #{carId})
     </insert>
 
+    <!--  자동차 데이터 DB에 업데이트  -->
+    <update id="updateCarData" parameterType="carData">
+        UPDATE CAR_DATA
+        SET BATTERY_CHARGE=#{batteryCharge},
+            BREAK_OIL=#{breakOil},
+            CAN_GO_DISTANCE=#{canGoDistance},
+            CAR_BATTERY=#{carBattery},
+            DISTANCE=#{distance},
+            ENGINE_OIL=#{engineOil},
+            LAMP_WIRE=#{lampWire},
+            LAST_UPDATE=SYSDATE,
+            OIL=#{oil},
+            TIRE=#{tire},
+            WASHER=#{washer}
+        WHERE ID = #{id}
+    </update>
+
+    <!--  CarId, 오늘 날짜 기반 DB에 저장된 값이 있는지 조회  -->
+    <select id="findByCarIdAndLastUpdate" parameterType="Long" resultType="carData">
+        SELECT ID, BATTERY_CHARGE, BREAK_OIL, CAN_GO_DISTANCE, CAR_BATTERY, DISTANCE, ENGINE_OIL, LAMP_WIRE, LAST_UPDATE, OIL, TIRE, WASHER, CAR_ID
+        FROM CAR_DATA
+        WHERE CAR_ID = #{carId}
+          AND TRUNC(LAST_UPDATE) = TRUNC(SYSDATE)
+    </select>
+
     <!--  CarId 기반으로 모든 자동차 데이터 불러오기  -->
     <select id="findRecentCarDataByCarId" resultType="carData">
         SELECT ID,

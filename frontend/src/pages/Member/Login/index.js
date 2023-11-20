@@ -131,7 +131,7 @@ function Login() {
         <Link to="/member/findpw">
           <SmallButton
             children="비밀번호 찾기"
-            style={{ width: "110px" }}
+            style={{ width: "130px" }}
           ></SmallButton>
         </Link>
       </div>
@@ -151,7 +151,7 @@ function Login() {
           <Link to="/member/mypage">
             <SmallButton2
               children="마이페이지(임시)"
-              style={{ width: "130px" }}
+              style={{ width: "150px" }}
             ></SmallButton2>
           </Link>
         </div>

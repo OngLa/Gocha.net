@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { SmallButton, SmallButton2 } from "../../../components/Button";
 import style from "./chatBox.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Sidepanel from "./Sidepanel";
 
 function ChatBox(props) {
@@ -13,7 +13,7 @@ function ChatBox(props) {
 
   const navigate = useNavigate(); // useNavigate 훅을 사용
   const moveReservation = () => {
-    navigate(`/reservation?cardata_id=${props.cardata_id}`);
+    navigate(`/reservation?cardata_id=${props.cardataId}`);
   };
 
   const [openSidepanel, setOpenSidepanel] = useState(false);
@@ -30,7 +30,7 @@ function ChatBox(props) {
           <hr className={style.hrLineUser} />
           <div className={style.content}>{props.content}</div>
 
-          {props.cardata_id !== undefined ? (
+          {props.cardataId !== undefined && props.cardataId !== null ? (
             <div>
               <div className={style.is_reservation}>
                 <SmallButton2
@@ -41,14 +41,14 @@ function ChatBox(props) {
               </div>
               <div>
                 {openSidepanel && (
-                  <Sidepanel open={openSidepanel} toggle={toggleSidepanel} cardata_id={props.cardata_id} />
+                  <Sidepanel open={openSidepanel} toggle={toggleSidepanel} cardataId={props.cardataId} />
                 )}
               </div>
             </div>
           ) : null}
         </div>
         <div className={style.send_dateUser}>
-          <div>{props.send_date}</div>
+          <div>{props.sendDate}</div>
         </div>
       </div>
     );
@@ -59,14 +59,14 @@ function ChatBox(props) {
           <div className={style.titleCarcenter}>{props.title}</div>
           <hr className={style.hrLineCarcenter} />
           <div className={style.content}>{props.content}</div>
-          {props.is_reservation === true ? (
+          {props.isReservation === true ? (
             <div className={style.is_reservation}>
               <SmallButton children="예약하기" onClick={moveReservation} />
             </div>
           ) : null}
         </div>
         <div className={style.send_dateCarcenter}>
-          <div>{props.send_date}</div>
+          <div>{props.sendDate}</div>
         </div>
       </div>
     );

@@ -12,7 +12,7 @@ export const getCarTypes = async (brandId) => {
 
 export const postCar = async (car) => {
   try {
-    const response = await axios.get("/cars", car);
+    const response = await axios.post("/cars", car);
     return response.data;
   } catch (error) {
     console.error("Error get Brands, ", error);

@@ -6,14 +6,14 @@ import happy from "../../../img/icon/happy.png";
 import sad from "../../../img/icon/sad.png";
 
 function GirdItemContent(props) {
-  const { tag, value, style } = props;
+  const { tag, value, style, style2 } = props;
 
   let content = value;
   const setContent = () => {
     if (typeof value === "boolean") {
       content = (
         <img
-          className={styles.image}
+        className={styles.image}
           src={value ? happy : sad}
           alt={value ? happy : sad}
         />

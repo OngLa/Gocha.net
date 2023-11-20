@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import style from "./chatroom.module.css";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import ChatBox from "./ChatBox";
 import LargeButton from "../../../components/Button/index";
 import ChatPartnerProfile from "../components/ChatPartnerProfile";
-import { getChatroom } from "../../../apis/chatting";
+import { getChatroom } from "../../../service/chatting";
 
 // /chatting/chatroom?carcenterId=${carcenter.id}&carcenterName=${carcenter.name}`
 function Chatroom(props) {
@@ -23,7 +23,6 @@ function Chatroom(props) {
     const loadingChatroom = async () => {
       try {
         const response = await getChatroom(carcenterId);
-        console.log(response.data);
         setMessageList(response.data);
       } catch (error) {
         console.log(error);
@@ -64,34 +63,34 @@ function Chatroom(props) {
   //     id: "1",
   //     chatting_id: "1",
   //     member_id: 10,
-  //     send_date: new Date().toLocaleDateString(),
+  //     sendDate: new Date().toLocaleDateString(),
   //     title: "고객:문의입니다.",
   //     content: "내용1입니다.",
-  //     is_reservation: "0",
+  //     isReservation: "0",
   //     breakdown_id: "0",
-  //     cardata_id: "1"
+  //     cardataId: "1"
   //   },
   //   {
   //     id: "2",
   //     chatting_id: "100002",
   //     member_id: null,
-  //     send_date: new Date().toLocaleDateString(),
+  //     sendDate: new Date().toLocaleDateString(),
   //     title: "정비소:답변입니다.",
   //     content: "내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.내용2입니다.",
-  //     is_reservation: "1",
+  //     isReservation: "1",
   //     breakdown_id: "0",
-  //     cardata_id: null
+  //     cardataId: null
   //   },
   //   {
   //     id: "3",
   //     chatting_id: "1",
   //     member_id: "100002",
-  //     send_date: new Date().toLocaleDateString(),
+  //     sendDate: new Date().toLocaleDateString(),
   //     title: "정비소:답변입니다.",
   //     content: "내용3입니다.",
-  //     is_reservation: "1",
+  //     isReservation: "1",
   //     breakdown_id: "0",
-  //     cardata_id: null
+  //     cardataId: null
   //   },
   // ];
 
@@ -109,9 +108,9 @@ function Chatroom(props) {
             <ChatBox
               title={message.title}
               content={message.content}
-              send_date={message.send_date}
-              // is_reservation={message.is_reservation} 고객은 예약 활성화 버튼 필요x
-              cardata_id={message.cardata_id}
+              sendDate={message.sendDate}
+              // isReservation={message.isReservation} 고객은 예약 활성화 버튼 필요x
+              cardataId={message.cardataId}
               issender="1"
             ></ChatBox>
           </div>
@@ -120,9 +119,9 @@ function Chatroom(props) {
             <ChatBox
               title={message.title}
               content={message.content}
-              send_date={message.send_date}
-              is_reservation={message.is_reservation}
-              // cardata_id={message.cardata_id} 정비소는 데이터 첨부 버튼 필요x
+              sendDate={message.sendDate}
+              isReservation={message.isReservation}
+              // cardataId={message.cardataId} 정비소는 데이터 첨부 버튼 필요x
               issender="0"
             ></ChatBox>
           </div>

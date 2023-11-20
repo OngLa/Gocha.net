@@ -1,10 +1,10 @@
 import style from "./chattingList.module.css";
 import ChatMemberBox from "./ChatMemberBox";
 import { Link } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ContentHeader from "../../../components/ContentHeader";
 import searchIcon from "../../../img/chatting/searchIcon.png";
-import { getChattingCarcenter } from "../../../apis/chatting";
+import { getChattingCarcenter } from "../../../service/chatting";
 
 function ChattingList() {
   // [고객 채팅목록 페이지]

@@ -19,23 +19,21 @@ export function getChatroom(carcenterId) {
   }
 };
 
-
-// api(`/usersendmessage/${cno}/?title=${message.title}&content=${message.content}&selectedData=${message.selectData}`);
 export function sendMessage(message) {
   try {
-    return axios.get('http://localhost:8080/api/chatting/sendmessage',
-      new URLSearchParams({
-        member_id: message.carcenterId,
-        title: message.title,
-        content: message.content,
-        is_reservation: null,
-        cardata_id: message.selectData
-    }
-    ));
-    // return axios.get('http://localhost:8080/api/chatting/chatroom', { params: { member_id : carcenterId } });
+    return axios.post('http://localhost:8080/api/chatting/sendmessage', message);
 
   } catch (error) {
-    console.error("Error get Chatroom, ", error);
+    console.error("Error insert Message, ", error);
+    throw error;
+  }
+};
+
+export function getCarData(cardataId) {
+  try {
+    return axios.get('http://localhost:8080/api/chatting/open-cardata', { params: { cardataId :cardataId } } );
+  } catch (error) {
+    console.error("Error get cardata, ", error);
     throw error;
   }
 };

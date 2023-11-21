@@ -23,6 +23,16 @@ public class CarDataServiceImpl implements CarDataService {
 
     private final CarDataMapper carDataMapper;
 
+    // CarId 기반으로 최신 자동차 데이터 불러오기
+    @Override
+    public CarDataResDto findRecentCarDataByCarId(Long carId) {
+
+        CarData carData = carDataMapper.findRecentCarDataByCarId(carId)
+                .orElseThrow(() -> new CustomException(ErrorCode.CARDATA_NOT_FOUND));
+
+        return new CarDataResDto(carData);
+    }
+
 //    // 데이터 불러오기, 현대 API를 통해 데이터 불러오기
 //    // 현대 측 Auth 문의중, 문의 해결되면 해당 코드 사용할 예정
 //    private final WebClient carWebClient;
@@ -85,20 +95,8 @@ public class CarDataServiceImpl implements CarDataService {
                             data.updateData();
                             carDataMapper.updateCarData(data);
                         },
-                        () -> {
-                            carDataMapper.saveCarData(new CarData(reqDto));
-                        }
+                        () -> carDataMapper.saveCarData(new CarData(reqDto))
                 );
-    }
-
-    // CarId 기반으로 최신 자동차 데이터 불러오기
-    @Override
-    public CarDataResDto findRecentCarDataByCarId(Long carId) {
-
-        CarData carData = carDataMapper.findRecentCarDataByCarId(carId)
-                .orElseThrow(() -> new CustomException(ErrorCode.CARDATA_NOT_FOUND));
-
-        return new CarDataResDto(carData);
     }
 
     // CarId 기반으로 모든 자동차 데이터 불러오기

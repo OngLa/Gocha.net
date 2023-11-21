@@ -39,7 +39,7 @@ public class FcServiceImpl implements FcService {
         String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
         Long memberId = reservationMapper.findIdByEmail(userEmail);
 
-        List<FcCarcenterDto> fcCarcenterDto =fcMapper.findCarcenterIdByMemberId(memberId);
+        List<FcCarcenterDto> fcCarcenterDto =fcMapper.findCarcenterByMemberId(memberId);
 
         return fcCarcenterDto;
     }

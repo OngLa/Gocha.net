@@ -25,7 +25,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     //예약 출력
     @Override
-    public List<ReservationDto> readReservationList(HttpServletRequest request) {
+    public List<ReservationDto> findReservationList(HttpServletRequest request) {
 
         String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
         Long memberId = reservationMapper.findIdByEmail(userEmail);

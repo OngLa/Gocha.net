@@ -12,7 +12,7 @@
     </insert>
 
     <!--주 정비소 출력-->
-    <select id="findCarcenterIdByMemberId" parameterType="Long" resultType="fcCarcenterDto">
+    <select id="findCarcenterByMemberId" parameterType="Long" resultType="fcCarcenterDto">
         SELECT fc.ID, fc.CARCENTER_ID, m.ADDRESS, m.PHONE_NUMBER
         FROM MEMBER m
                  join FAVORITE_CARCENTER fc on m.id = fc.CARCENTER_ID

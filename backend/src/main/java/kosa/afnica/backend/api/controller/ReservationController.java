@@ -39,7 +39,7 @@ public class ReservationController {
     @GetMapping("/list")
     public List<ReservationDto> getReservaionList(HttpServletRequest request) {
 
-        List<ReservationDto> reservationList = reservationService.readReservationList(request);
+        List<ReservationDto> reservationList = reservationService.findReservationList(request);
 
         return reservationList;
     }

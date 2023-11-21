@@ -93,6 +93,7 @@
     select count(*)
     from vericode
     where veri_email = #{veriEmail}
+    </select>
 
     <!-- 정비소 목록 출력 -->
     <select id="findCarcenterByRole" resultType="member">

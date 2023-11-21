@@ -4,7 +4,5 @@ import org.springframework.mail.SimpleMailMessage;
 
 public interface MailService {
 
-    public void sendEmail(String toEmail, String title, String text);
-
-    public SimpleMailMessage createEmailForm(String toEmail, String title, String text);
+    void sendMessage(String email) throws Exception;
 }

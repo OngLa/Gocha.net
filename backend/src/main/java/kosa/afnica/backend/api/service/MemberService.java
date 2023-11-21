@@ -1,5 +1,6 @@
 package kosa.afnica.backend.api.service;
 
+import kosa.afnica.backend.db.dto.member.EmailVerificationDto;
 import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 
@@ -22,14 +23,9 @@ public interface MemberService {
 
     MemberMypageResDto findMypage(HttpServletRequest request);
 
-    String sendMessage(String email) throws Exception;
+    // veriCode 테이블 이메일 중복 검사
+    boolean existVeriEmail(String veriEmail);
 
-//    public void sendCodeToemail(String email);
-//
-//    public void checkDuplicateEmail(String email);
-//
-//    public String createCode();
-//
-//    public void verifiedCode(String email, String authCode);
+    void findCode(String veriEmail, String veriCode);
 
 }

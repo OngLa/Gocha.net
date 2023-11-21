@@ -33,6 +33,7 @@ public enum ErrorCode {
     RESERVATIONS_NOT_FOUND(HttpStatus.NOT_FOUND, "예약 목록이 존재하지 않습니다."),
     CARDATA_NOT_FOUND(HttpStatus.NOT_FOUND, "차량 데이터가 존재하지 않습니다."),
     CAR_NOT_FOUND(HttpStatus.NOT_FOUND, "등록된 차량이 존재하지 않습니다."),
+    CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 인증 번호입니다."),
 
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "Method Not Allowed"),
 
@@ -48,7 +49,7 @@ public enum ErrorCode {
 
     BAD_GATEWAY(HttpStatus.BAD_GATEWAY, "Bad Gateway"),
 
-    UNABLE_TO_SEND_EMAIL(HttpStatus.BAD_REQUEST, "이메일 전송이 불가능합니다."),
+    UNABLE_TO_SEND_EMAIL(HttpStatus.BAD_REQUEST, "이메일 전송에 실패했습니다."),
     NO_SUCH_ALGORITHM(HttpStatus.BAD_REQUEST, "해당 알고리즘이 사용 가능하지 않습니다.");
 
     private final HttpStatus httpStatus;

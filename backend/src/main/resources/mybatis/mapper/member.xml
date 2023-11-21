@@ -70,21 +70,29 @@
 
     <!-- 인증 번호 저장 -->
     <insert id="saveCode" parameterType="verification">
-        insert into vericode(veri_email, veri_code)
-        values (#{veriEmail}, #{veriCode})
+        insert into vericode(id, veri_email, veri_code)
+        values (member_verification_seq.nextval, #{veriEmail}, #{veriCode})
     </insert>
 
+    <!-- 이메일 기반에 따른 인증 번호 조회 -->
     <select id="findCodeByEmail" parameterType="String" resultType="String">
         select veri_code
-        from verificvericodetion
-        where veri_emvericodeil = #{veriEmail}
-    </select>
-
-    <select id="existCodeByEmail" resultType="int" parameterType="map">
-        select count(*)
         from vericode
         where veri_email = #{veriEmail}
-            and veri_code = #{veriCode}
+    </select>
+
+    <!-- 이메일 중복일 경우 인증 번호 갱신 -->
+    <update id="updateCode" parameterType="map">
+        update vericode
+        set veri_code = #{veriCode}
+        where veri_email = #{veriEmail}
+    </update>
+
+    <!-- 중복되는 인증용 이메일 조회 -->
+    <select id="existByVeriEmail" resultType="int">
+    select count(*)
+    from vericode
+    where veri_email = #{veriEmail}
     </select>
 
 </mapper>

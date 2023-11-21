@@ -8,5 +8,4 @@ import lombok.NoArgsConstructor;
 public class EmailVerificationDto {
 
     String veriEmail;
-    String veriCode;
 }

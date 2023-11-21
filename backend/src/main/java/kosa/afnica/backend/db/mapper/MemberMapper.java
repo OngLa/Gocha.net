@@ -34,10 +34,12 @@ public interface MemberMapper {
     // 인증 번호 저장
     void saveCode(Verification verification);
 
-    // 이메일 기반에 따른 인증번호 조회
+    // 이메일 기반에 따른 인증 번호 조회
     String findCodeByEmail(String email);
 
-//    boolean existCodeByEmail(String veriCode);
+    // 이메일 중복일 경우 인증 번호 갱신
+    void updateCode(String veriEmail, String veriCode);
 
-    int countVerificationCodeByEmail(String email, String veriCode);
+    // 중복되는 인증용 이메일 조회
+    int existByVeriEmail(String veriEmail);
 }

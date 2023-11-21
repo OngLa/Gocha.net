@@ -26,14 +26,6 @@ public class CarDataController {
 
     private final CarDataService carDataService;
 
-    @Operation(summary = "챠량 데이터 저장 API", description = "챠량 데이터 저장 API - 현대 API 연동, 현재는 난수 데이터 생성, 하루에 데이터 하나만")
-    @PostMapping()
-    public ResponseEntity<Void> postCarData(@RequestBody CarDataReqDto reqDto) {
-        carDataService.createCarData(reqDto);
-
-        return ResponseEntity.ok(null);
-    }
-
     @Operation(summary = "Car ID 기반으로 등록된 최신 Car Data 불러오기 API", description = "Car Data 불러오기 API - 내 차 정보 페이지에 렌더링 시 호출될 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = CarDataResDto.class))),
@@ -44,6 +36,14 @@ public class CarDataController {
         CarDataResDto resDto = carDataService.findRecentCarDataByCarId(carId);
 
         return ResponseEntity.ok(resDto);
+    }
+
+    @Operation(summary = "챠량 데이터 저장 API", description = "챠량 데이터 저장 API - 현대 API 연동, 현재는 난수 데이터 생성, 하루에 데이터 하나만")
+    @PostMapping()
+    public ResponseEntity<Void> postCarData(@RequestBody CarDataReqDto reqDto) {
+        carDataService.createCarData(reqDto);
+
+        return ResponseEntity.ok(null);
     }
 
     @Operation(summary = "Car ID 기반으로 등록된 모든 Car Data 불러오기 API", description = "Car Data 불러오기 API - 차량 데이터 페이지 렌더링 시 호출될 API")

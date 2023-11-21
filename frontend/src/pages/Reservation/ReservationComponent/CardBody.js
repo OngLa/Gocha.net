@@ -4,7 +4,8 @@ import styles from "./reservationComponent.module.css";
 import { deleteReservation } from "../../../service/reservation";
 
 function CardBody({ reservationList }) {
-
+  
+  //예약 삭제 
   async function handelCancleButton() {
   try {
     const result = await Swal.fire({
@@ -16,7 +17,6 @@ function CardBody({ reservationList }) {
       confirmButtonColor: "#45CB85",
       cancelButtonText: "아니오",
     });
-
     if (result.isConfirmed) {
       await deleteReservation(reservationList.id);
       Swal.fire({
@@ -30,9 +30,9 @@ function CardBody({ reservationList }) {
     console.error("예약 취소 중 오류 발생:", error);
   }
 }
-//예약취소 버튼 클릭시 axio.delete작동 
  
 
+//상태값 0,1,2를 문자열 예약대기중,정비중, 정비완료로 바꾸는 로직
 const renderStatusText = (status) => {
   switch (status) {
     case 0:
@@ -41,8 +41,8 @@ const renderStatusText = (status) => {
       return status; 
   }
 };
-//상태값 0,1,2를 문자열 예약대기중,정비중, 정비완료로 바꾸는 로직
 
+//carcenterId값에 따라 지점명 입력
 const renderCarcenterIdText = (carcenterId) => {
   switch (carcenterId) {
     case 100002:
@@ -55,7 +55,6 @@ const renderCarcenterIdText = (carcenterId) => {
       return carcenterId; 
   }
 };
-//carcenterId값에 따라 지점명 입력
 
   return (
     <div className={styles.cardBody}>

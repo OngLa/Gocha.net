@@ -5,18 +5,18 @@ import ReservationComponent from "./ReservationComponent";
 import { useEffect, useState } from "react";
 import { readReservationList } from "../../service/reservation";
 
+// //예약목록 출력 페이지
 function ReservationList() {
-  // //예약목록 출력 페이지
 
   const navigate = useNavigate();
+  //정비소 목록으로 이동
   const handleNavOnClick = () => {
     navigate("repairshoplist");
   };
-  //등록하기 누르면 정비소 목록으로 이동
 
   const [list, setList] = useState([]);
-//서버에서 가져온 데이터 저장하는 상태
 
+  //예약 출력
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,7 +28,6 @@ function ReservationList() {
     };
     fetchData();
   }, [list]);
-//서버 데이터가 수정되면 페이지가 리랜더링됨
 
 
   return (

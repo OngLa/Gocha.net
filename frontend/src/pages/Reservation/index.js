@@ -14,7 +14,6 @@ function Reservation() {
             <Route path="/" Component={ReservationList}/>
             <Route path="repairshoplist" Component={RepairshopList}/>
             <Route path="mainrepairshop" Component={MainRepairshop}/>
-
           </Routes>
     </div>
     );

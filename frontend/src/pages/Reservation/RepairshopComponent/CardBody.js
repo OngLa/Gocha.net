@@ -6,12 +6,11 @@ import Sidepanel from "./Sidepanel";
 function CardBody({carcenter}) {
 
   const [openSidepanel, setOpenSidepanel] = useState(false);
-  //사이드패널 on/off 상태
 
+  //예약하기 버튼 클릭시 패널 on/off동작
   const toggleSidepanel = () => {
     setOpenSidepanel(!openSidepanel);
   };
-//예약하기 버튼 클릭시 패널 on/off동작
 
   return (
     <div>

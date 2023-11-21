@@ -18,7 +18,8 @@
   display: flex;
   align-items: center; /* 수직 중앙 정렬 */
   width: 100%; /* 너비를 100%로 설정하거나 필요한 대로 조절 */
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 100;
   color: #fff;
   padding: 10px;
 }

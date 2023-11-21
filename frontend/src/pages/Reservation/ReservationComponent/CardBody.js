@@ -1,5 +1,7 @@
 import Swal from "sweetalert2";
-import { SmallButton, SmallButton2 } from "../../../components/Button";
+import { SmallButton2 } from "../../../components/Button";
+import searchIcon from "../../../img/chatting/searchIcon.png";
+import carcenterIcon from "../../../img/chatting/carcenterIcon.png";
 import styles from "./reservationComponent.module.css";
 import { deleteReservation } from "../../../service/reservation";
 import { Link } from "react-router-dom";
@@ -55,7 +57,8 @@ function CardBody({ reservationList }) {
       <div className={styles.cardBody}>
         <div className={styles.imgWrap}>
           <img
-            src={`https://source.boringavatars.com/beam/${reservationList.id}?colors=4D433D,525C5A,56877D,8CCC81,BADE57`}
+            // src={`https://source.boringavatars.com/beam/${reservationList.id}?colors=4D433D,525C5A,56877D,8CCC81,BADE57`}
+            src={carcenterIcon}
             alt="User"
           />
           <div>

@@ -7,8 +7,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import kosa.afnica.backend.api.service.FcService;
+import kosa.afnica.backend.db.dto.reservation.FcCarcenterDto;
 import kosa.afnica.backend.db.dto.reservation.FcDto;
-import kosa.afnica.backend.db.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -41,11 +41,12 @@ public class FcController {
     @Operation(summary = "주 정비소목록 출력 API", description = "주 정비소 목록 출력시키는 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Member.class)))),
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = FcDto.class)))),
     })
     @GetMapping("")
-    public List<FcDto> getFc(HttpServletRequest request) {
-        return fcService.readFc(request);
+    public List<FcCarcenterDto> getFc(HttpServletRequest request) {
+
+        return fcService.findFcListByMemberId(request);
     }
 
     //주정비소 삭제
@@ -55,7 +56,7 @@ public class FcController {
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = FcDto.class)))),
     })
     @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable Long id) {
+    public void deleteFc(@PathVariable Long id) {
         fcService.deleteFc(id);
     }
 }

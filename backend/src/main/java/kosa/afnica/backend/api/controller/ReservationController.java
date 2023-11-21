@@ -68,4 +68,19 @@ public class ReservationController {
     public void deleteOrder(@PathVariable Long id) {
         reservationService.deleteReservation(id);
     }
+
+    //ADMIN 예약자 출력
+//    @Operation(summary = "예약자 목록 불러오기 API", description = "얘약자 목록 불러오기 API")
+//    @ApiResponses({
+//            @ApiResponse(responseCode = "200", description = "성공",
+//                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationDto.class)))),
+//            @ApiResponse(responseCode = "404", description = "예약 목록이 존재하지 않습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+//    })
+//
+//    @GetMapping("/bookerlist")
+//    public List<Reservation> getReservaionUserList(HttpServletRequest request) {
+//
+//       return reservationService.readReservationUserList(request);
+//
+//    }
 }

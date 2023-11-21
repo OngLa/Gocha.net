@@ -19,4 +19,7 @@ public interface ReservationMapper {
 
     //이메일에서 id 파싱
     public Long findIdByEmail(String email);
+
+    //ADMIN 예약자 출력
+//    public List<Reservation> findReservationBycarcenterId(Long carcenterId);
 }

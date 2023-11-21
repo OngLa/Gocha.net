@@ -40,4 +40,12 @@
         FROM MEMBER
         where EMAIL = #{email}
     </select>
+
+    <!-- ADMIN 예약자 출력 -->
+<!--    <select id="findReservationBycarcenterId" parameterType="Long" resultType="reservation">-->
+<!--        SELECT ID, RESERVED_DATE, STATE, CARDATA_ID, CARCENTER_ID, MEMBER_ID-->
+<!--        FROM RESERVATION-->
+<!--        where CARCENTER_ID = #{carcenterId}-->
+<!--    </select>-->
+
 </mapper>

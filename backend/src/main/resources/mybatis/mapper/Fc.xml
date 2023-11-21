@@ -12,17 +12,18 @@
     </insert>
 
     <!--주 정비소 출력-->
-    <select id="findFavoriteCarcenterByMemberId" parameterType="Long" resultType="fcDto">
-        SELECT ID, CARCENTER_ID, MEMBER_ID
-        FROM FAVORITE_CARCENTER
-        where MEMBER_ID = #{memberId}
+    <select id="findCarcenterIdByMemberId" parameterType="Long" resultType="fcCarcenterDto">
+        SELECT fc.ID, fc.CARCENTER_ID, m.ADDRESS, m.PHONE_NUMBER
+        FROM MEMBER m
+                 join FAVORITE_CARCENTER fc on m.id = fc.CARCENTER_ID
+        where fc.MEMBER_ID = #{memberId}
     </select>
 
     <!--주정비소 삭제-->
     <delete id="deleteById" parameterType="Long">
         delete
         from FAVORITE_CARCENTER
-        where id = #{id}
+        where ID = #{id}
     </delete>
 
 </mapper>

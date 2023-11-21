@@ -61,8 +61,17 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationReqDto;
     }
 //예약 삭제
-
     public Long deleteReservation(Long id) {
         return reservationMapper.deleteById(id);
     }
+
+    //ADMIN 예약자 출력
+//    @Override
+//    public List<Reservation> readReservationUserList(HttpServletRequest request) {
+//
+//        String adminEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
+//        Long carcenterId = reservationMapper.findIdByEmail(adminEmail);
+//
+//        return reservationMapper.findReservationBycarcenterId(carcenterId);
+//    }
 }

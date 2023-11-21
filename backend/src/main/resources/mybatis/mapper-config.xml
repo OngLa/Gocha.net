@@ -18,6 +18,7 @@
         <typeAlias alias="reservation" type="kosa.afnica.backend.db.entity.Reservation"/>
         <typeAlias alias="reservationDto" type="kosa.afnica.backend.db.dto.reservation.ReservationReqDto"/>
         <typeAlias alias="fcDto" type="kosa.afnica.backend.db.dto.reservation.FcDto"/>
+        <typeAlias alias="fcCarcenterDto" type="kosa.afnica.backend.db.dto.reservation.FcCarcenterDto"/>
 
         <!--  Car  -->
         <typeAlias alias="brand" type="kosa.afnica.backend.db.entity.Brand"/>

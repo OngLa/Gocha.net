@@ -36,6 +36,7 @@ export function deleteFavoriteCarcenter(id){
 }
 
 //ADMIN예약자 출력
- export function readReservationUserList(){
-   return axios.get("/member/reservation/bookerlist");
- }
+export function readReservationUserList(){
+  return axios.get("/member/reservation/bookerlist");
+}
+

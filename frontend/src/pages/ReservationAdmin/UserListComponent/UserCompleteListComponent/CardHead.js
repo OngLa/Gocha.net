@@ -17,11 +17,11 @@ const renderStatusText = (status) => {
     <div className={styles.cardHead}>
     <div className={styles.imgWrap}>
     <img
-      src={`https://source.boringavatars.com/beam/${list.memberId}?colors=F26B7A,F0F2DC,D9EB52,8AC7DE,87796F`}
+      src={`https://source.boringavatars.com/beam/${list.name}?colors=F26B7A,F0F2DC,D9EB52,8AC7DE,87796F`}
       alt="User"
     />
     <div>
-      이름: {list.memberId} <br/>  
+      이름: {list.name} <br/>  
       상태:<span style={{color:"#FFA500"}}>{renderStatusText(list.state)}</span>
     </div>
   </div>

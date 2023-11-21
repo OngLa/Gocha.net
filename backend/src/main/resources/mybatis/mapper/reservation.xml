@@ -3,8 +3,10 @@
 
 <mapper namespace="kosa.afnica.backend.db.mapper.ReservationMapper">
 
-    <!-- 예약 하기 -->
-    <insert id="saveReservation" parameterType="reservationDto">
+    <!--#############################################################################################-->
+    <!-- 예약하기 insert -->
+    
+    <insert id="saveReservation" parameterType="ReservationReqDto">
         <selectKey keyProperty="id" resultType="Long" order="BEFORE">
             select RESERVATION_SEQ.nextval from dual
         </selectKey>
@@ -19,11 +21,12 @@
         )
     </insert>
 
-    <!-- 예약 출력 -->
-    <select id="findReservationByMemberId" parameterType="Long" resultType="reservation">
-        SELECT ID, RESERVED_DATE, STATE, CARDATA_ID, CARCENTER_ID, MEMBER_ID
-        FROM RESERVATION
-        where MEMBER_ID = #{memberId}
+    <!--###############################################################################################-->
+    <!-- 예약목록 select -->
+    <select id="findReservationByMemberId" parameterType="Long" resultType="ReservationResDto">
+        SELECT A.ID, A.RESERVED_DATE, A.STATE, A.CARDATA_ID, A.CARCENTER_ID, B.NAME AS carcenter_name
+        FROM RESERVATION A INNER JOIN MEMBER B ON A.carcenter_id = B.id
+        where A.MEMBER_ID = #{memberId}
         order By ID desc
     </select>
 

@@ -7,6 +7,7 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="lazyLoadingEnabled" value="true"/>
         <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
 
     <typeAliases>
@@ -16,8 +17,12 @@
         <typeAlias alias="member" type="kosa.afnica.backend.db.entity.Member"/>
         <typeAlias alias="verification" type="kosa.afnica.backend.db.entity.Verification"/>
 
+        <!--reservation-->
         <typeAlias alias="reservation" type="kosa.afnica.backend.db.entity.Reservation"/>
         <typeAlias alias="reservationDto" type="kosa.afnica.backend.db.dto.reservation.ReservationReqDto"/>
+        <typeAlias alias="fcDto" type="kosa.afnica.backend.db.dto.reservation.FcDto"/>
+        <typeAlias alias="fcCarcenterDto" type="kosa.afnica.backend.db.dto.reservation.FcCarcenterDto"/>
+        <typeAlias alias="adminDto" type="kosa.afnica.backend.db.dto.reservation.AdminDto"/>
 
         <!--  Car  -->
         <typeAlias alias="brand" type="kosa.afnica.backend.db.entity.Brand"/>
@@ -27,6 +32,7 @@
 
         <!--  CarData  -->
         <typeAlias alias="carData" type="kosa.afnica.backend.db.entity.CarData"/>
+        <typeAlias alias="carDataReqDto" type="kosa.afnica.backend.db.dto.carData.CarDataReqDto"/>
 
     </typeAliases>
 </configuration>

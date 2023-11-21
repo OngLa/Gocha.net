@@ -96,7 +96,10 @@ public class CarController {
     @Operation(summary = "등록된 Car List 불러오기 API", description = "등록된 차량 종류 불러오기 API - 차량 데이터, 내 차 정보 페이지에 렌더링 시 호출될 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = CarResDto.class))))
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = CarResDto.class)))),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "등록된 차량이 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+
     })
     @GetMapping("/car-list")
     public ResponseEntity<List<CarResDto>> getCarList(HttpServletRequest request) {

@@ -4,6 +4,7 @@ import kosa.afnica.backend.db.entity.Member;
 import kosa.afnica.backend.db.entity.Verification;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper
@@ -42,4 +43,9 @@ public interface MemberMapper {
 
     // 중복되는 인증용 이메일 조회
     int existByVeriEmail(String veriEmail);
+
+    //정비소 목록 출력
+    List<Member> findCarcenterByRole();
+
+
 }

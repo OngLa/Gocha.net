@@ -4,6 +4,8 @@ import kosa.afnica.backend.db.entity.CarData;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.text.SimpleDateFormat;
+
 @Getter
 @NoArgsConstructor
 public class CarDataResDto {
@@ -19,6 +21,8 @@ public class CarDataResDto {
     Boolean washer;
     Boolean lampWire;
 
+    String lastUpdate;
+
     public CarDataResDto(CarData carData) {
         this.canGoDistance = carData.getCanGoDistance();
         this.distance = carData.getDistance();
@@ -30,5 +34,8 @@ public class CarDataResDto {
         this.tire = carData.getTire();
         this.washer = carData.getWasher();
         this.lampWire = carData.getLampWire();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        this.lastUpdate = format.format(carData.getLastUpdate());
     }
 }

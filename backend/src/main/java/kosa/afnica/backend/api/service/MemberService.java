@@ -3,8 +3,10 @@ package kosa.afnica.backend.api.service;
 import kosa.afnica.backend.db.dto.member.EmailVerificationDto;
 import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
+import kosa.afnica.backend.db.entity.Member;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public interface MemberService {
 
@@ -27,5 +29,9 @@ public interface MemberService {
     boolean existVeriEmail(String veriEmail);
 
     void findCode(String veriEmail, String veriCode);
+
+    //정비소 목록 출력
+    List<Member> findCarcenter();
+
 
 }

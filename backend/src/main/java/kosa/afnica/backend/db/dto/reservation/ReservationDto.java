@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Getter
 @NoArgsConstructor
@@ -24,6 +23,5 @@ public class ReservationDto {
         this.reservedDate = format.format(reservation.getReservedDate());
         this.carcenterId = reservation.getCarcenterId();
     }
-    //data 출력형식 변환
 }
 

@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 @Slf4j
@@ -104,6 +105,13 @@ public class MemberServiceImpl implements MemberService {
             }
         }
     }
+
+    //정비소 목록 출력
+    @Override
+    public List<Member> findCarcenter() {
+        return memberMapper.findCarcenterByRole();
+    }
+
 }
 
 

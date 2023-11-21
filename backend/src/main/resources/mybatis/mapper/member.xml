@@ -68,6 +68,32 @@
         where id = #{id}
     </update>
 
+    <!-- 인증 번호 저장 -->
+    <insert id="saveCode" parameterType="verification">
+        insert into vericode(id, veri_email, veri_code)
+        values (member_verification_seq.nextval, #{veriEmail}, #{veriCode})
+    </insert>
+
+    <!-- 이메일 기반에 따른 인증 번호 조회 -->
+    <select id="findCodeByEmail" parameterType="String" resultType="String">
+        select veri_code
+        from vericode
+        where veri_email = #{veriEmail}
+    </select>
+
+    <!-- 이메일 중복일 경우 인증 번호 갱신 -->
+    <update id="updateCode" parameterType="map">
+        update vericode
+        set veri_code = #{veriCode}
+        where veri_email = #{veriEmail}
+    </update>
+
+    <!-- 중복되는 인증용 이메일 조회 -->
+    <select id="existByVeriEmail" resultType="int">
+    select count(*)
+    from vericode
+    where veri_email = #{veriEmail}
+
     <!-- 정비소 목록 출력 -->
     <select id="findCarcenterByRole" resultType="member">
         SELECT id, address, name

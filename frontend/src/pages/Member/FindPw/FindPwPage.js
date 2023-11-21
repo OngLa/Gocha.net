@@ -64,7 +64,7 @@ function FindPwPage() {
         <SmallButton
           children="인증번호 발송"
           onClick={handleSendCheckCode}
-          style={{ width: "110px" }}
+          style={{ width: "130px" }}
         ></SmallButton>
       </div>
       {showCheckCodeBlock && ( // 인증번호 블록 보여주기

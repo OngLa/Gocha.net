@@ -27,8 +27,11 @@ function ReservationList() {
       }
     };
     fetchData();
-  }, [list]);
+  }, []);
 
+//   useEffect(() => {
+//     console.log(list);
+//   }, [list]);
 
   return (
     <div>

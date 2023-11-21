@@ -4,16 +4,16 @@
   border-radius: 5px;
   margin-bottom: 20px;
   padding-bottom: 10px;
+  min-width: 90%;
 }
 
 .RepairshopComponent:hover {
-  /* background-color: none; */
   border: 2px solid #A4DABE;
 }
 
 .cardHead {
   border-bottom: 1px solid #45cb85;
-  height: 50px;
+  height: 55px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -27,18 +27,22 @@
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
-.carcenterIcon img {
-  max-width: 100%; /* 이미지가 컨테이너를 벗어나지 않도록 */
-  max-height: 100%; /* 이미지가 컨테이너를 벗어나지 않도록 */
+.carcenterIcon > img {
+  border: 1.5px solid #A4DABE;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+
+  width: 35px;
+  height: 35px;
 }
 
 .carcenterName {
   font-size: 1.2rem; 
   color: #45cb85; 
-  margin-left: 10px; 
+  margin-left: 0px;
 }
 
 .cardBody{

@@ -5,6 +5,16 @@
   font-weight: 800;
 }
 
+.btn:active {
+  transform: translateY(2px);
+  background-color: #A4DABE
+}
+
+.btn2:active {
+  transform: translateY(2px);
+  background-color: #A4DABE
+}
+
 .largeBtn {
   width: 240px;
   height: 45px;

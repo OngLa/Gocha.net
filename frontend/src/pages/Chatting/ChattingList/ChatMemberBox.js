@@ -11,7 +11,8 @@ function ChatMemberBox(props) {
     <div className={style.ChatMemberBoxWrap}>
       <div className={style.imgWrap}>
         <img
-          src={`https://source.boringavatars.com/sunset/${props.carcenterName}?colors=F26B7A,F0F2DC,D9EB52,8AC7DE,87796F`}
+          // src={`https://source.boringavatars.com/sunset/${props.carcenterName}?colors=F26B7A,F0F2DC,D9EB52,8AC7DE,87796F`}
+          src={carcenterIcon}
           alt="User"
         />
       </div>

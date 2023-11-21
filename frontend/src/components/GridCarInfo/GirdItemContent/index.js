@@ -6,8 +6,8 @@ import happy from "../../../img/icon/happy.png";
 import sad from "../../../img/icon/sad.png";
 
 function GirdItemContent(props) {
-  // tag, value : 데이터 이름, 값
-  const { tag, value, style } = props;
+  const { tag, value, style, style2 } = props;
+
 
   let content = value;
   const setContent = () => {
@@ -18,6 +18,7 @@ function GirdItemContent(props) {
         className={styles.image}
         src={value ? happy : sad}
         alt={value ? happy : sad}
+
         />
         );
         return value ? 2 : 3;

@@ -97,7 +97,7 @@ public class MemberController {
     })
     @GetMapping("/reservation/carcenter")
     public ResponseEntity<List<Member>> getCarcenter() {
-        List<Member> members = memberService.readCarcenter();
+        List<Member> members = memberService.findCarcenter();
         return ResponseEntity.ok(members);
     }
 }

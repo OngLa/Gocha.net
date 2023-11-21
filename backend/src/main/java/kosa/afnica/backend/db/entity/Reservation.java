@@ -1,6 +1,9 @@
 package kosa.afnica.backend.db.entity;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
-import lombok.*;
 
 @Getter
 @NoArgsConstructor
@@ -12,6 +15,7 @@ public class Reservation {
     private Long memberId;
     private Long carcenterId;
     private Long carDataId;
+
     public Reservation(Long id, Long state, Date reservedDate, Long memberId, Long carcenterId, Long carDataId) {
         this.id = id;
         this.state = state;

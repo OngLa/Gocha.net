@@ -89,8 +89,8 @@ public class MemberServiceImpl implements MemberService {
 
     //정비소 목록 출력
     @Override
-    public List<Member> readCarcenter() {
+    public List<Member> findCarcenter() {
         return memberMapper.findCarcenterByRole();
-
     }
+
 }

@@ -38,7 +38,16 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: calc(10%);
   font-size: 10px;
   color: #fff;
 }
+
+.button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+

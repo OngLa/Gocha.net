@@ -13,7 +13,7 @@ function ChatBox(props) {
 
   const navigate = useNavigate(); // useNavigate 훅을 사용
   const moveReservation = () => {
-    navigate(`/reservation?cardata_id=${props.cardataId}`);
+    navigate(`/reservation/repairshoplist?carcenterName=${props.carcenterName}`);
   };
 
   const [openSidepanel, setOpenSidepanel] = useState(false);

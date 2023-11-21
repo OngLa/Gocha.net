@@ -11,16 +11,18 @@ function WriteForm(props) {
   // [고객 메세지 작성 페이지]
   // 제목/내용입력이 가능하며
   // 고객은 정비소와 다르게 데이터 선택 입력란이 있다.
-  // selectbox로 구성되어 있으며 데이터번호&날짜로 구분한다.
+  // selectbox로 구성되어 있으며 차량&데이터를 각각 선택한다.
   // 데이터 전송 시 채팅방으로 돌아간다.(이 때 url에 정비소 이름도 같이 넘기도록함.)
 
+  // 얘내들을 계속 주고 받는 이유는 채팅방에서 상대방이 누군지 알기 위해서이다.
+  // id는 메세지 받는 사람을 Be에 넘겨주기 위해서, Name은 좌측 상단에 상대방을 표시하기 위해서이다.
   const [searchParams] = useSearchParams();
   let carcenterId = searchParams.get("carcenterId");
   let carcenterName = searchParams.get("carcenterName");
 
   // message 객체 상태
   const [message, setMessage] = useState({
-    carcenterId: carcenterId,
+    toMemberId: carcenterId,
     title: "",
     content: "",
     selectCar: "",
@@ -51,9 +53,9 @@ function WriteForm(props) {
   }, []);
 
   // 데이터 확인
-  useEffect(() => {
-    console.log(message);
-  }, [message]);
+  // useEffect(() => {
+  //   console.log(message);
+  // }, [message]);
 
   //예제 데이터
   // const carList = [
@@ -114,13 +116,16 @@ function WriteForm(props) {
     // title과 content가 모두 공백이 아닌 경우에만 전송
     if (message.title.trim() !== "" && message.content.trim() !== "") {
       try {
+        // 데이터 전송
         await sendMessage(message);
-        navigate(`/chatting/chatroom?carcenterId=${carcenterId}&carcenterName=${carcenterName}`);
+        navigate(
+          `/chatting/chatroom?carcenterId=${carcenterId}&carcenterName=${carcenterName}`
+        );
       } catch (error) {
         console.log(error);
       }
     } else {
-      // title 또는 content가 공백인 경우 경고 메시지 또는 필요한 처리를 추가할 수 있습니다.
+      // 이쁜 Alert
       Swal.fire({
         icon: "info",
         title: "제목과 내용을 입력하세요.",

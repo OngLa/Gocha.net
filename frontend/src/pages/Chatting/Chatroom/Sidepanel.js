@@ -10,6 +10,7 @@ function Sidepanel({ open, toggle, cardataId }) {
   useEffect(() => {
     const loadingData = async () => {
       try {
+        // 데이터 load
         const response = await getCarData(cardataId);
         setCardata(response.data);
       } catch (error) {

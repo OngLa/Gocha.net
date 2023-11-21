@@ -3,7 +3,7 @@
   height: 80px;
   display: flex;
   border-radius: 10px;
-  background-color: none;
+  background-color: #5D707F;
   border: 1px solid #45cb85;
   margin-bottom: 10px;
 }
@@ -23,10 +23,16 @@
   padding: 10px;
 }
 
-.imgWrap img {
+.imgWrap > img {
   height: 100%; /* 이미지 높이를 .imgWrap 높이에 맞춤 */
-  padding-right: 20px; /* 이미지와 텍스트 사이의 간격 조절 */
-  
+  margin-right: 20px; /* 이미지와 텍스트 사이의 간격 조절*/
+  margin-left: 5px; /* 이미지와 텍스트 사이의 간격 조절*/
+  border: 1.5px solid #A4DABE;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+
+  width: 50px;
+  height: 50px;
 }
 
 

@@ -8,7 +8,6 @@ import { getChattingUser } from "../../../service/chatting";
 
 function ChattingList2() {
   // [정비소 채팅목록 페이지]
-  // 고객 데이터 더미를 임시로 생성하였음.
   // 검색칸에 고객명을 입력하면 실시간으로 필터링 됌.
   // 해당 고객을 클릭하면 채팅방으로 이동
   // *정비소는 자신에게 메시지를 보낸 기록이 있는 채팅방만 표시한다.
@@ -19,6 +18,7 @@ function ChattingList2() {
   useEffect(() => {
     const lodingChatting = async () => {
       try {
+        // 나에게 메세지 보낸 유저 목록 load
         const response = await getChattingUser();
         setUserList(response.data);
       } catch (error) {
@@ -83,6 +83,7 @@ function ChattingList2() {
           (user) =>
             (
               <div key={user.id}>
+                {/* 해당 유저와의 채팅방으로 입장 */}
                 <Link
                   to={`/chatting2/chatroom2?userId=${user.id}&userName=${user.name}`}
                   style={{ textDecoration: "none" }}

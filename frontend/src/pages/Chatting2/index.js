@@ -4,13 +4,13 @@ import Chatroom2 from "./Chatroom2/index";
 import WriteForm2 from "./WriteForm2/index";
 
 
-// http://localhost:3000/chatting/chatroom2/1?userName=%EA%B9%80%EC%A7%80%EC%84%A0
 function Chatting2(props) {
+  // Chatting2 : 카센터 전용 비대면 진단 페이지.
   return (
     <Routes>
-      <Route path="" Component={ChattingList2} />
-      <Route path="chatroom2" Component={Chatroom2} />
-      <Route path="writeform2" Component={WriteForm2} />
+      <Route path="" Component={ChattingList2} /> {/* 채팅방목록 */}
+      <Route path="chatroom2" Component={Chatroom2} /> {/* 채팅방 */}
+      <Route path="writeform2" Component={WriteForm2} /> {/* 글작성 */}
     </Routes>
   );
 }

@@ -8,7 +8,6 @@ import { getChattingCarcenter } from "../../../service/chatting";
 
 function ChattingList() {
   // [고객 채팅목록 페이지]
-  // 정비소 데이터 더미를 임시로 생성하였음.
   // 검색칸에 정비소명을 입력하면 실시간으로 필터링 됌.
   // 해당 지점을 클릭하면 채팅방으로 이동
   // *고객의 채팅목록 페이지는 모든 정비소를 다 보여준다.
@@ -27,7 +26,7 @@ function ChattingList() {
     lodingChatting();
   }, []);
 
-  // 예제 데이터(추후에 삭제 예정)
+  // 예제 데이터
   // const carcenterList = [
   //   {
   //     id: "1",
@@ -47,8 +46,8 @@ function ChattingList() {
   const [searchTerm, setSearchTerm] = useState("");
 
   // 검색어 입력 시 해당 검색어와 일치하는 사용자만 필터링
-  const filteredUserList = carcenterList.filter((carcenterList) => {
-    return carcenterList.name.includes(searchTerm);
+  const filteredUserList = carcenterList.filter((carcenter) => {
+    return carcenter.name.includes(searchTerm);
   });
 
   return (
@@ -72,8 +71,9 @@ function ChattingList() {
       <div className={style.ChatMemberBoxWrap}>
         {filteredUserList.map((carcenter) => (
           <div key={carcenter.id}>
+            {/* 멤버가 보여지는 Box */}
             <Link
-              to={`/chatting/chatroom?carcenterId=${carcenter.id}&carcenterName=${carcenter.name}`}
+              to={`/chatting/chatroominfo?carcenterId=${carcenter.id}&carcenterName=${carcenter.name}`}
               style={{ textDecoration: "none" }}
             >
               <ChatMemberBox carcenterName={carcenter.name} />

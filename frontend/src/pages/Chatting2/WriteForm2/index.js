@@ -13,13 +13,15 @@ function WriteForm2(props) {
   // (고객은 정비소와 다르게 데이터 선택 입력란이 있다.)
   // 데이터 전송 시 채팅방으로 돌아간다.(이 때 url에 고객 이름도 같이 넘기도록함.)
 
+  // 얘내들을 계속 주고 받는 이유는 채팅방에서 상대방이 누군지 알기 위해서이다.
+  // id는 메세지 받는 사람을 Be에 넘겨주기 위해서, Name은 좌측 상단에 상대방을 표시하기 위해서이다.
   const [searchParams] = useSearchParams();
   let userId = searchParams.get("userId");
   let userName = searchParams.get("userName");
 
   // message 객체 상태
   const [message, setMessage] = useState({
-    userId: userId,
+    toMemberId: userId,
     title: "",
     content: "",
     selectCar: "",
@@ -32,13 +34,13 @@ function WriteForm2(props) {
     // title과 content가 모두 공백이 아닌 경우에만 전송
     if (message.title.trim() !== "" && message.content.trim() !== "") {
       try {
+        // 데이터 전송
         await sendMessage(message);
         navigate(`/chatting2/chatroom2?userId=${userId}&userName=${userName}`);
       } catch (error) {
         console.log(error);
       }
     } else {
-      // title 또는 content가 공백인 경우 경고 메시지 또는 필요한 처리를 추가할 수 있습니다.
       Swal.fire({
         icon: "info",
         title: "제목과 내용을 입력하세요.",

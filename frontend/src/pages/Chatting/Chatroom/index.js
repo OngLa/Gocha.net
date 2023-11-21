@@ -6,7 +6,6 @@ import LargeButton from "../../../components/Button/index";
 import ChatPartnerProfile from "../components/ChatPartnerProfile";
 import { getChatroom } from "../../../service/chatting";
 
-// /chatting/chatroom?carcenterId=${carcenter.id}&carcenterName=${carcenter.name}`
 function Chatroom(props) {
   // [고객과 정비소의 채팅방]
   // 고객의 메세지는 우측 초록색 박스로 표현
@@ -21,6 +20,7 @@ function Chatroom(props) {
 
   useEffect(() => {
     const loadingChatroom = async () => {
+      // 채팅방 메세지 조회
       try {
         const response = await getChatroom(carcenterId);
         setMessageList(response.data);
@@ -29,41 +29,40 @@ function Chatroom(props) {
       }
     };
     loadingChatroom();
-  }
-  , []);
+  }, []);
 
-  
   const chatroomRef = useRef();
   useEffect(() => {
-    // chatroomRef 요소의 맨 아래로 스크롤
+    // chatroomRef 요소의 맨 아래로 스크롤(아직 작동 x)
     chatroomRef.current.scrollTop = chatroomRef.current.scrollHeight;
   }, [messageList]);
 
-  useEffect(() => {
-    console.log(messageList);
-  }, [messageList]);
+  // 데이터 확인
+  // useEffect(() => {
+  //   console.log(messageList);
+  // }, [messageList]);
 
-
-//   [
-//     {
-//         "id": 1,
-//         "memberId": "10",
-//         "sendDate": "2023-11-15T03:33:33.000+00:00",
-//         "title": "고객:문의요",
-//         "content": "고객 문의 내용입니다.",
-//         "isReservation": false,
-//         "cardataId": null
-//     },
-//     {
-//         "id": 2,
-//         "memberId": "100002",
-//         "sendDate": "2023-11-15T03:36:33.000+00:00",
-//         "title": "정비소:답변이요",
-//         "content": "정비소 답변 내용입니다.",
-//         "isReservation": true,
-//         "cardataId": null
-//     }
-// ]
+  // 예제데이터
+  //   [
+  //     {
+  //         "id": 1,
+  //         "memberId": "10",
+  //         "sendDate": "2023-11-15T03:33:33.000+00:00",
+  //         "title": "고객:문의요",
+  //         "content": "고객 문의 내용입니다.",
+  //         "isReservation": false,
+  //         "cardataId": null
+  //     },
+  //     {
+  //         "id": 2,
+  //         "memberId": "100002",
+  //         "sendDate": "2023-11-15T03:36:33.000+00:00",
+  //         "title": "정비소:답변이요",
+  //         "content": "정비소 답변 내용입니다.",
+  //         "isReservation": true,
+  //         "cardataId": null
+  //     }
+  // ]
 
   // const messageList = [
   //   {
@@ -101,19 +100,24 @@ function Chatroom(props) {
   //   },
   // ];
 
+  // 작성 폼으로 이동
   const navigate = useNavigate(); // useNavigate 훅을 사용
   const moveWrite = () => {
-    navigate(`/chatting/writeform?carcenterId=${carcenterId}&carcenterName=${carcenterName}`);
+    navigate(
+      `/chatting/writeform?carcenterId=${carcenterId}&carcenterName=${carcenterName}`
+    );
   };
 
   return (
-    
     // chatroomRef 요소의 맨 아래로 스크롤
     <div className={style.ChatroomWrap} ref={chatroomRef}>
       <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
       {messageList.map((message) =>
+        // 현재는 고객페이지이기에 memberId가 100000보다 작으면 내가 보낸 메세지로 보이기 위해 우측 정렬한다.(isSender로 자기 메세지 구분)
         message.memberId < 100000 ? (
-          <div className={style.ChatboxSenderWrap}>
+          // 고객
+          <div className={style.ChatboxSenderWrap} key={message.id}>
+            {/* ChatBox는 메세지가 보여지는 box단위이다. sender가 1이면 우측정렬로 초록색으로표시됨 */}
             <ChatBox
               title={message.title}
               content={message.content}
@@ -124,12 +128,14 @@ function Chatroom(props) {
             ></ChatBox>
           </div>
         ) : (
-          <div className={style.ChatboxWrap}>
+          // 정비소
+          <div className={style.ChatboxWrap} key={message.id}>
             <ChatBox
               title={message.title}
               content={message.content}
               sendDate={message.sendDate}
               isReservation={message.isReservation}
+              carcenterName={carcenterName}
               // cardataId={message.cardataId} 정비소는 데이터 첨부 버튼 필요x
               issender="0"
             ></ChatBox>

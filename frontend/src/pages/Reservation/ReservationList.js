@@ -27,9 +27,11 @@ function ReservationList() {
       }
     };
     fetchData();
-  }, [list]);
-//서버 데이터가 수정되면 페이지가 리랜더링됨
+  }, []);
 
+  useEffect(() => {
+    console.log(list);
+  }, [list]);
 
   return (
     <div>

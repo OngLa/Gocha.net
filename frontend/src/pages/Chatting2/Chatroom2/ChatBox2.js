@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { SmallButton, SmallButton2 } from "../../../components/Button";
 import style from "./chatBox2.module.css";
 import { useState } from "react";

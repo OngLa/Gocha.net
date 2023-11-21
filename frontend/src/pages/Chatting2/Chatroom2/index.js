@@ -21,6 +21,7 @@ function Chatroom2(props) {
   useEffect(() => {
     const loadingChatroom = async () => {
       try {
+        // (해당 유저와의) 채팅방 메세지 조회
         const response = await getChatroom(userId);
         setMessageList(response.data);
       } catch (error) {
@@ -28,13 +29,14 @@ function Chatroom2(props) {
       }
     };
     loadingChatroom();
-  }
-  , []);
+  }, []);
 
-  useEffect(() => {
-    console.log(messageList);
-  }, [messageList]);
+  // 데이터 확인
+  // useEffect(() => {
+  //   console.log(messageList);
+  // }, [messageList]);
 
+  // 예제 데이터
   // const messageList = [
   //   {
   //     id: "1",
@@ -74,6 +76,7 @@ function Chatroom2(props) {
   //   },
   // ];
 
+  // 작성 Form으로 이동
   const navigate = useNavigate(); // useNavigate 훅을 사용
   const moveWrite = () => {
     navigate(`/chatting2/writeform2?userId=${userId}&userName=${userName}`);
@@ -83,8 +86,11 @@ function Chatroom2(props) {
     <div className={style.ChatroomWrap}>
       <ChatPartnerProfile2 userName={userName}></ChatPartnerProfile2>
       {messageList.map((message) =>
+        // 현재는 카센터페이지이기에 memberId가 100000보다 크면 내가 보낸 메세지로 보이기 위해 우측 정렬한다.(isSender로 자기 메세지 구분)
         message.memberId >= 100000 ? (
-          <div className={style.ChatboxSenderWrap}>
+          // 정비소
+          <div className={style.ChatboxSenderWrap} key={message.id}>
+            {/* ChatBox는 메세지가 보여지는 box단위이다. sender가 1이면 우측정렬로 초록색으로표시됨 */}
             <ChatBox2
               title={message.title}
               content={message.content}
@@ -95,7 +101,8 @@ function Chatroom2(props) {
             ></ChatBox2>
           </div>
         ) : (
-          <div className={style.ChatboxWrap}>
+          // 고객
+          <div className={style.ChatboxWrap}  key={message.id}>
             <ChatBox2
               title={message.title}
               content={message.content}

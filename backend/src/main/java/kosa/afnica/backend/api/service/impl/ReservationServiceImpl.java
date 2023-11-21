@@ -4,6 +4,7 @@ import kosa.afnica.backend.api.service.ReservationService;
 import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.security.JwtUtil;
+import kosa.afnica.backend.db.dto.reservation.AdminDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import kosa.afnica.backend.db.entity.Reservation;
@@ -66,12 +67,14 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     //ADMIN 예약자 출력
-//    @Override
-//    public List<Reservation> readReservationUserList(HttpServletRequest request) {
-//
-//        String adminEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
-//        Long carcenterId = reservationMapper.findIdByEmail(adminEmail);
-//
-//        return reservationMapper.findReservationBycarcenterId(carcenterId);
-//    }
+    @Override
+    public List<AdminDto> findReservationUserList(HttpServletRequest request) {
+
+        String adminEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
+        Long carcenterId = reservationMapper.findIdByEmail(adminEmail);
+
+        List<AdminDto> adminDtos=reservationMapper.findReservationBycarcenter(carcenterId);
+
+        return adminDtos;
+    }
 }

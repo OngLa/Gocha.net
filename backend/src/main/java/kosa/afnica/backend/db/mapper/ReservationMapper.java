@@ -1,5 +1,6 @@
 package kosa.afnica.backend.db.mapper;
 
+import kosa.afnica.backend.db.dto.reservation.AdminDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import kosa.afnica.backend.db.entity.Reservation;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,5 +22,5 @@ public interface ReservationMapper {
     public Long findIdByEmail(String email);
 
     //ADMIN 예약자 출력
-//    public List<Reservation> findReservationBycarcenterId(Long carcenterId);
+    public List<AdminDto> findReservationBycarcenter(Long carcenterId);
 }

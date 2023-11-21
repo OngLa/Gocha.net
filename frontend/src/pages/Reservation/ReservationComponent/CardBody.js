@@ -37,7 +37,7 @@ function CardBody({ reservationList }) {
           confirmButtonColor: "#45CB85",
         });
       }
-    } catch (error) {
+    }} catch (error) {
       console.error("예약 취소 중 오류 발생:", error);
     }
   }

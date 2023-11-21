@@ -6,13 +6,15 @@ import { useCallback, useState } from "react";
 import { createReservation } from "../../../service/reservation";
 import Swal from "sweetalert2";
 
+//사이드패널
 function Sidepanel({ open, toggle, carcenter}) {
-  const navigate = useNavigate();
-  const [selectedDate, setSelectedDate] = useState(null);
-  //날짜데이터 상태
-  const [selectCardata, setSelectCardata] = useState(null);
-  //차데이터 상태
 
+  const navigate = useNavigate();
+
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectCardata, setSelectCardata] = useState(null);
+
+  // 예약하기
   const postReservationData = useCallback(
     async (event) => {
       console.log("선택된 날짜", selectedDate);
@@ -22,7 +24,6 @@ function Sidepanel({ open, toggle, carcenter}) {
           carcenterId: carcenter.id,  //지점명
           carDataId: selectCardata    //선택한 데이터(null허용)
         });
-        console.log("예약하기 동작함");
         Swal.fire({
           icon: "success",
           title: "요청이 정상 처리 되었습니다.",
@@ -35,12 +36,11 @@ function Sidepanel({ open, toggle, carcenter}) {
     },
     [selectedDate, selectCardata]
   );
-// 서버에 axios.post 전송 로직
 
+  //임시 차량 데이터
   const carDataList = [
     {id: "3",last_update: "2023/11/06",},{id: "3",last_update: "2023/11/05",},
     {id: "2",last_update: "2023/11/04",},{id: "1",last_update: "2023/11/03",},];
-  //임시 차량 데이터
 
   return (
     <div className={`${styles.sidePanel} ${open ? styles.open : ""}`}>

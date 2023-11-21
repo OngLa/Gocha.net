@@ -3,22 +3,43 @@ import LargeButton from "../../components/Button";
 import { useEffect, useState } from "react";
 import ContentHeader from "../../components/ContentHeader";
 import RepairshopComponent from "./RepairshopComponent";
-import { readCarcenterList } from "../../service/reservation";
+import {
+  readCarcenterList,
+  readFavoriteCarcenter,
+} from "../../service/reservation";
 import styles from "./reservation.module.css";
 import searchIcon from "../../img/chatting/searchIcon.png";
 import { useSearchParams } from "react-router-dom";
+import MainRepairshopComponent from "./MainRepairshopComponent";
 
+
+//정비소 목록페이지
 function RepairshopList() {
-  //정비소 목록페이지
 
   const navigate = useNavigate();
+
+  //주정비소 등록페이지로 이동
   const handleOnclick = () => {
     navigate("../mainrepairshop");
   };
-  //주정비소 등록페이지로 이동
-
   const [carcenterlist, setCarcenterList] = useState([]);
+  const [favoriteCarcenterList, setFavoriteCarcenterList] = useState([]);
 
+  //주정비소 출력
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await readFavoriteCarcenter();
+        setFavoriteCarcenterList(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  //정비소 출력
   useEffect(() => {
     const carcenters = async () => {
       try {
@@ -30,7 +51,7 @@ function RepairshopList() {
       }
     };
     carcenters();
-  }, [carcenterlist]);
+  }, []);
 
 
   // 비대면 진단 채팅방에서 예약하기를 누르면 navigate로 이동하면서 carcenterName을 받아옴.
@@ -52,6 +73,15 @@ function RepairshopList() {
         <ContentHeader menuName="정비소 목록" />
       </div>
       <div className={styles.RepairshopList}>
+        <div className={styles.MainRepairshopComponent}>
+          {favoriteCarcenterList.map((favoriteCarcenter) => (
+            <MainRepairshopComponent
+              key={favoriteCarcenter.carcenterId}
+              favoriteCarcenter={favoriteCarcenter}
+            />
+          ))}
+        </div>
+
         <div className={styles.LargeButton}>
           <LargeButton onClick={handleOnclick} style={{ marginTop: "30px" }}>
             주 정비소 등록하기
@@ -72,7 +102,7 @@ function RepairshopList() {
         </div>
         <div className={styles.RepairshopComponent}>
           {filteredUserList.map((carcenter) => (
-            <RepairshopComponent key={carcenter.id} carcenter={carcenter} />
+            <RepairshopComponent key={carcenter.id} carcenter={carcenter} useCardBodyFc={false} />
           ))}
         </div>
       </div>

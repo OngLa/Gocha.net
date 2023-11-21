@@ -24,8 +24,16 @@
   width: 80%;
 }
 
-.delBtn {
-  align-self: flex-end;
+.btnWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .mb {

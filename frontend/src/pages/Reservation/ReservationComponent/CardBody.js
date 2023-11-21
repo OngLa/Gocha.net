@@ -7,14 +7,24 @@ import { deleteReservation } from "../../../service/reservation";
 import { Link } from "react-router-dom";
 
 function CardBody({ reservationList }) {
+
+  //예약 삭제 
   async function handelCancleButton() {
-    try {
-      const result = await Swal.fire({
-        icon: "question",
-        title: "정말로 예약취소하시겠습니까?",
-        text: "취소 시, 예약정보가 사라집니다.",
-        showCancelButton: true,
-        confirmButtonText: "예",
+  try {
+    const result = await Swal.fire({
+      icon: "question",
+      title: "정말로 예약취소하시겠습니까?",
+      text: "취소 시, 예약정보가 사라집니다.",
+      showCancelButton: true,
+      confirmButtonText: "예",
+      confirmButtonColor: "#45CB85",
+      cancelButtonText: "아니오",
+    });
+    if (result.isConfirmed) {
+      await deleteReservation(reservationList.id);
+      Swal.fire({
+        icon: "success",
+        title: "요청이 정상 처리 되었습니다.",
         confirmButtonColor: "#45CB85",
         cancelButtonText: "아니오",
       });

@@ -1,8 +1,9 @@
 import CardBody from "./CardBody";
+import CardBodyFC from "./CardBodyFC";
 import CardHead from "./CardHead";
 import styles from "./repairshopcomponent.module.css"
 
-function RepairshopComponent({carcenter}) {
+function RepairshopComponent({carcenter,useCardBodyFc}) {
 
   return (
     <div className={styles.RepairshopComponent}>
@@ -10,7 +11,11 @@ function RepairshopComponent({carcenter}) {
         <CardHead carcenter={carcenter}/>
       </div>
       <div className="card-body">
-        <CardBody carcenter={carcenter}/>
+      {
+          useCardBodyFc ? 
+          <CardBodyFC carcenter={carcenter}/> :
+          <CardBody carcenter={carcenter}/>
+        }
       </div>
     </div>
   );

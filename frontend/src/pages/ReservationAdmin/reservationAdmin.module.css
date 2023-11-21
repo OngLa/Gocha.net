@@ -1,0 +1,25 @@
+.Refusepage {
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  color: #fff;
+}
+h3 {
+  color: #47f6c1;
+}
+
+textarea {
+  width: 100%;
+  height: 300px;
+  background-color: #5d707f;
+  border: 1px solid #45cb85;
+  border-radius: 15px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

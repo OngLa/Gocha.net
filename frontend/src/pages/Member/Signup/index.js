@@ -1,7 +1,7 @@
 import LargeButton from "../../../components/Button";
 import style from "./signup.module.css";
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
 import emailIcon from "../../../img/member/email.png";
 import passwordIcon from "../../../img/member/password.png";
@@ -11,12 +11,15 @@ import phoneIcon from "../../../img/member/phone.png";
 import Swal from "sweetalert2";
 import { createMember, nameCheck } from "../../../service/member";
 
+// 회원가입 컴포넌트
 function Signup() {
   // React Router의 navigate 훅을 사용하기 위한 초기 설정
   const navigate = useNavigate();
+  const location = useLocation();
+  const veriEmail = location.state && location.state.veriEmail;
 
   // 각 항목의 초기 상태 설정
-  const [email, setEmail] = useState("test2@test.com");
+  const [email, setEmail] = useState(veriEmail);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [nickname, setNickname] = useState("");
@@ -37,7 +40,7 @@ function Signup() {
   // 상태 및 유효성 검사 결과를 저장하는 변수들
   const [confirmPwdMsgColor, setConfirmPwdMsgColor] = useState("");
   const [phoneNumberMsgColor, setPhoneNumberMsgColor] = useState("");
-  const [nameMsgColor, setNAmeMsgColor] = useState("");
+  const [nameMsgColor, setNameMsgColor] = useState("");
   const isPwdValid = validatePwd(password);
   const isconfirmPwdValid = password === confirmPassword;
   const isNameValid = validateName(nickname);
@@ -85,7 +88,7 @@ function Signup() {
     setNickname(curNickname);
 
     setNicknameMsg("1글자 이상 9글자 미만으로 입력해주세요.(특수 문자 제외)");
-    setNAmeMsgColor("red");
+    setNameMsgColor("red");
   }, []);
 
   // 전화번호
@@ -129,16 +132,16 @@ function Signup() {
     try {
       if (nickname === "") {
         setNicknameMsg("닉네임을 입력해주세요.");
-        setNAmeMsgColor("red");
+        setNameMsgColor("red");
       } else {
         await nameCheck(nickname);
 
         setNicknameMsg("사용 가능한 닉네임입니다.");
-        setNAmeMsgColor("green");
+        setNameMsgColor("green");
       }
     } catch (error) {
       setNicknameMsg("이미 사용 중인 닉네임입니다.");
-      setNAmeMsgColor("red");
+      setNameMsgColor("red");
     }
   };
 

@@ -10,7 +10,6 @@ import kosa.afnica.backend.api.service.ReservationService;
 import kosa.afnica.backend.config.exception.ErrorResponse;
 import kosa.afnica.backend.db.dto.reservation.ReservationResDto;
 import kosa.afnica.backend.db.dto.reservation.AdminDto;
-import kosa.afnica.backend.db.dto.reservation.ReservationDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import kosa.afnica.backend.db.entity.Reservation;
 import lombok.RequiredArgsConstructor;
@@ -78,7 +77,7 @@ public class ReservationController {
     @Operation(summary = "예약자 목록 불러오기 API", description = "얘약자 목록 불러오기 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationDto.class)))),
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationResDto.class)))),
             @ApiResponse(responseCode = "404", description = "예약 목록이 존재하지 않습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
 

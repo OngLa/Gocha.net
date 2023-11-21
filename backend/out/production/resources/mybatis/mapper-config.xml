@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+
+    <typeAliases>
+        <!-- <typeAlias alias="{여기수정}" type="kosa.afnica.backend.db.entity.{여기수정}" /> -->
+
+        <!--  Member  -->
+        <typeAlias alias="member" type="kosa.afnica.backend.db.entity.Member"/>
+        <typeAlias alias="verification" type="kosa.afnica.backend.db.entity.Verification"/>
+
+        <!--  Reservation  -->
+        <typeAlias alias="reservation" type="kosa.afnica.backend.db.entity.Reservation"/>
+        <typeAlias alias="ReservationReqDto" type="kosa.afnica.backend.db.dto.reservation.ReservationReqDto"/>
+        <typeAlias alias="ReservationResDto" type="kosa.afnica.backend.db.dto.reservation.ReservationResDto"/>
+        <typeAlias alias="fcDto" type="kosa.afnica.backend.db.dto.reservation.FcDto"/>
+        <typeAlias alias="fcCarcenterDto" type="kosa.afnica.backend.db.dto.reservation.FcCarcenterDto"/>
+        <typeAlias alias="adminDto" type="kosa.afnica.backend.db.dto.reservation.AdminDto"/>
+
+        <!--  Car  -->
+        <typeAlias alias="brand" type="kosa.afnica.backend.db.entity.Brand"/>
+        <typeAlias alias="carType" type="kosa.afnica.backend.db.entity.CarType"/>
+        <typeAlias alias="car" type="kosa.afnica.backend.db.entity.Car"/>
+        <typeAlias alias="carResDto" type="kosa.afnica.backend.db.dto.car.CarResDto"/>
+
+        <!--  CarData  -->
+        <typeAlias alias="carData" type="kosa.afnica.backend.db.entity.CarData"/>
+        <typeAlias alias="carDataReqDto" type="kosa.afnica.backend.db.dto.carData.CarDataReqDto"/>
+
+        <!--  Chatting  -->
+        <typeAlias alias="ChattingResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingResDto"/>
+        <typeAlias alias="MessageResDto" type="kosa.afnica.backend.db.dto.chatting.MessageResDto"/>
+        <typeAlias alias="ChattingCarResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingCarResDto"/>
+        <typeAlias alias="ChattingCarDataResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingCarDataResDto"/>
+        <typeAlias alias="SendMessageReqDto" type="kosa.afnica.backend.db.dto.chatting.SendMessageReqDto"/>
+        <typeAlias alias="CarcenterInfoResDto" type="kosa.afnica.backend.db.dto.chatting.CarcenterInfoResDto"/>
+    </typeAliases>
+</configuration>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosa.afnica.backend.db.mapper.ReservationMapper">
+
+    <!--#############################################################################################-->
+    <!-- 예약하기 insert -->
+    
+    <insert id="saveReservation" parameterType="ReservationReqDto">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            select RESERVATION_SEQ.nextval from dual
+        </selectKey>
+        INSERT INTO RESERVATION
+        (ID, MEMBER_ID, CARCENTER_ID, RESERVED_DATE, CARDATA_ID)
+        VALUES(
+        #{id, jdbcType=NUMERIC},
+        #{memberId, jdbcType=NUMERIC},
+        #{carcenterId, jdbcType=NUMERIC},
+        #{reservedDate, jdbcType=TIMESTAMP},
+        #{carDataId, jdbcType=NUMERIC}
+        )
+    </insert>
+
+    <!--###############################################################################################-->
+    <!-- 예약목록 select -->
+    <select id="findReservationByMemberId" parameterType="Long" resultType="ReservationResDto">
+        SELECT A.ID, A.RESERVED_DATE, A.STATE, A.CARDATA_ID, A.CARCENTER_ID, B.NAME AS carcenter_name
+        FROM RESERVATION A INNER JOIN MEMBER B ON A.carcenter_id = B.id
+        where A.MEMBER_ID = #{memberId}
+        order By ID desc
+    </select>
+
+    <!-- 예약 삭제 -->
+    <delete id="deleteById" parameterType="Long">
+        delete
+        from reservation
+        where id = #{id}
+    </delete>
+
+    <!-- EMAIL에서 id파싱 -->
+    <select id="findIdByEmail" parameterType="String" resultType="Long">
+        SELECT ID
+        FROM MEMBER
+        where EMAIL = #{email}
+    </select>
+
+<!--     ADMIN 예약자 출력 -->
+    <select id="findReservationBycarcenter" parameterType="Long" resultType="adminDto">
+        SELECT r.ID, r.RESERVED_DATE, r.STATE, r.CARDATA_ID, r.CARCENTER_ID, r.MEMBER_ID, m.PHONE_NUMBER, m.NAME
+        FROM RESERVATION r
+        join MEMBER m on r.MEMBER_ID =m.ID
+        where CARCENTER_ID = #{carcenterId}
+    </select>
+
+</mapper>

@@ -1,4 +1,3 @@
-import Refusepage from "../../Refusepage";
 import CardBody from "./CardBody";
 import CardHead from "./CardHead";
 import styles from "./userwaitlistcomponent.module.css";

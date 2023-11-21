@@ -1,13 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { SmallButton } from "../../../../components/Button";
 import styles from "./userwaitlistcomponent.module.css";
+import { updateState } from "../../../../service/reservation";
 
 function CardBody({ list }) {
+
   const navigate = useNavigate();
-  const handleStateChange = () => {};
   const hadleDeleteOnclick = () => {
     navigate("refusepage", { state: { list } });
   };
+
+  //진행상태변경
+const handleUpdateClick = async (reservationId) =>{
+  try{
+const response =await updateState(); 
+  }catch(error){
+console.log(error);
+  }
+}
 
   return (
     <div className={styles.cardBody}>
@@ -18,7 +28,7 @@ function CardBody({ list }) {
       </div>
 
       <div className={styles.button}>
-        <SmallButton onClick={handleStateChange}>예약승인</SmallButton>
+        <SmallButton  onClick={() => handleUpdateClick(list.reservationId)}>예약승인</SmallButton>
         <SmallButton onClick={hadleDeleteOnclick}>예약거절</SmallButton>
       </div>
     </div>

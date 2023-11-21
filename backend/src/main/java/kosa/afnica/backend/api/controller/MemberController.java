@@ -6,20 +6,24 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import kosa.afnica.backend.api.service.MailService;
 import kosa.afnica.backend.api.service.MemberService;
 import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.exception.ErrorResponse;
+import kosa.afnica.backend.db.dto.member.EmailVerificationDto;
 import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 import kosa.afnica.backend.db.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.remoting.support.RemoteExporter;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -28,17 +32,30 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService memberService;
+    private final MailService mailService;
 
-    @Operation(summary = "이메일 인증 - 인증요청 API", description = "이메일 중복 검사")
+    @Operation(summary = "이메일 인증 - 인증번호 요청 API", description = "이메일 중복 검사 및 인증번호 이메일로 전송")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "409", description = "존재하는 Email 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @GetMapping("/auth-email")
-    public ResponseEntity<Void> getUserEmail(@RequestParam String email) {
-        if (memberService.existEmail(email)) {
+    @PostMapping("/email")
+    public ResponseEntity<Void> getVeriCode(@RequestBody EmailVerificationDto emailVerificationDto) throws Exception {
+
+        if (memberService.existEmail(emailVerificationDto.getVeriEmail())) {
+            mailService.sendMessage(emailVerificationDto.getVeriEmail());
+            return ResponseEntity.ok(null);
         } else {
             throw new CustomException(ErrorCode.DUPLICATE_EMAIL);
         }
+    }
+
+    @Operation(summary = "이메일 인증 - 인증번호 비교 API", description = "입력된 인증번호와 생성된 인증번호 비교")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 인증 번호입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    @GetMapping("/email-veri")
+    public ResponseEntity<Void> compareVeriCode(@RequestParam String veriEmail, @RequestParam String veriCode) {
+        memberService.findCode(veriEmail, veriCode);
         return ResponseEntity.ok(null);
     }
 
@@ -97,7 +114,7 @@ public class MemberController {
     })
     @GetMapping("/reservation/carcenter")
     public ResponseEntity<List<Member>> getCarcenter() {
-        List<Member> members = memberService.readCarcenter();
+        List<Member> members = memberService.findCarcenter();
         return ResponseEntity.ok(members);
     }
 }

@@ -117,6 +117,11 @@ public class CarServiceImpl implements CarService {
         // MemberID로 부터 필요한 값 불러오기
         List<CarResDto> resDtoList = carMapper.findAllCarByMemberId(member.getId());
 
+        // 등록된 차량이 없는경우 예외처리
+        if(resDtoList.isEmpty()) {
+            throw new CustomException(ErrorCode.CAR_NOT_FOUND);
+        }
+
         // Byte -> String 으로 Base64 Encode
         for (CarResDto resDto : resDtoList) {
             resDto.setPhoto();

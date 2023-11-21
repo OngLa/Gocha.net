@@ -44,4 +44,21 @@ public class CarData {
 
         this.carId = reqDto.getCarId();
     }
+
+    // 하루에 데이터 하나, 기존 데이터가 있으면 덮어쓰기
+    public void updateData() {
+        long seed = System.currentTimeMillis();
+        Random random = new Random(seed);
+
+        this.canGoDistance = random.nextInt(500);
+        this.distance = random.nextInt(100000);
+        this.carBattery = random.nextInt(100);
+        this.batteryCharge = random.nextBoolean();
+        this.breakOil = random.nextBoolean();
+        this.engineOil = random.nextBoolean();
+        this.oil = random.nextBoolean();
+        this.tire = random.nextBoolean();
+        this.washer = random.nextBoolean();
+        this.lampWire = random.nextBoolean();
+    }
 }

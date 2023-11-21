@@ -4,7 +4,8 @@ import kosa.afnica.backend.api.service.ReservationService;
 import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.security.JwtUtil;
-import kosa.afnica.backend.db.dto.reservation.ReservationResDto;
+import kosa.afnica.backend.db.dto.reservation.AdminDto;
+import kosa.afnica.backend.db.dto.reservation.ReservationDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import kosa.afnica.backend.db.mapper.ReservationMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationMapper reservationMapper;
 
-//########################################################################################################################
-//예약목록조회
+    //예약 출력
     @Override
     public List<ReservationResDto> readReservationList(HttpServletRequest request) {
         //HTTP 헤더에 있는 유저이메일에서 ID를 추출 하는 로직
@@ -47,11 +47,21 @@ public class ReservationServiceImpl implements ReservationService {
         reservationReqDto.setMemberId(memberId);
         reservationMapper.saveReservation(reservationReqDto);
     }
-//########################################################################################################################
-//예약삭제
+    
+    //예약 삭제
+    public Long deleteReservation(Long id) {
+        return reservationMapper.deleteById(id);
+    }
 
-        public void deleteReservation(Long id){
-            reservationMapper.deleteById(id);
-        }
+    //ADMIN 예약자 출력
+    @Override
+    public List<AdminDto> findReservationUserList(HttpServletRequest request) {
+
+        String adminEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
+        Long carcenterId = reservationMapper.findIdByEmail(adminEmail);
+
+        List<AdminDto> adminDtos=reservationMapper.findReservationBycarcenter(carcenterId);
+
+        return adminDtos;
+    }
 }
-

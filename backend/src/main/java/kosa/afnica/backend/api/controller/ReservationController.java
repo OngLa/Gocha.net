@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import kosa.afnica.backend.api.service.ReservationService;
 import kosa.afnica.backend.config.exception.ErrorResponse;
 import kosa.afnica.backend.db.dto.reservation.ReservationResDto;
+import kosa.afnica.backend.db.dto.reservation.AdminDto;
+import kosa.afnica.backend.db.dto.reservation.ReservationDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import kosa.afnica.backend.db.entity.Reservation;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,7 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
+    //예약 출력
     @Operation(summary = "예약목록 불러오기 API", description = "얘약목록 불러오기 API - 예약관리 클릭시 랜더링되는 예약목록 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
@@ -46,6 +49,7 @@ public class ReservationController {
 //######################################################################################################################
 //예약하기
 
+    //예약 하기
     @Operation(summary = "예약하기 API", description = "예약하기 클릭시 db에 저장되는 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
@@ -57,9 +61,8 @@ public class ReservationController {
 
         return ResponseEntity.ok(null);
     }
-//######################################################################################################################
-//예약취소
 
+    //예약 삭제
     @Operation(summary = "예약취소 API", description = "예약취소 클릭시 db의 예약목록 삭제 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
@@ -71,4 +74,17 @@ public class ReservationController {
         reservationService.deleteReservation(id);
     }
 
+    //ADMIN 예약자 출력
+    @Operation(summary = "예약자 목록 불러오기 API", description = "얘약자 목록 불러오기 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationDto.class)))),
+            @ApiResponse(responseCode = "404", description = "예약 목록이 존재하지 않습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
+
+    @GetMapping("/bookerlist")
+    public List<AdminDto> getReservaionUserList(HttpServletRequest request) {
+
+        return reservationService.findReservationUserList(request);
+    }
 }

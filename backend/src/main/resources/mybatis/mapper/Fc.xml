@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosa.afnica.backend.db.mapper.FcMapper">
+
+    <!--주정비소 등록-->
+    <insert id="saveFc" parameterType="Long">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            select FAVORITE_CARCENTER_SEQ.nextval from dual
+        </selectKey>
+        INSERT INTO FAVORITE_CARCENTER(ID,CARCENTER_ID,MEMBER_ID) VALUES(#{id},#{carcenterId},#{memberId})
+    </insert>
+
+    <!--주 정비소 출력-->
+    <select id="findCarcenterByMemberId" parameterType="Long" resultType="fcCarcenterDto">
+        SELECT fc.ID, fc.CARCENTER_ID, m.ADDRESS, m.PHONE_NUMBER
+        FROM MEMBER m
+                 join FAVORITE_CARCENTER fc on m.id = fc.CARCENTER_ID
+        where fc.MEMBER_ID = #{memberId}
+    </select>
+
+    <!--주정비소 삭제-->
+    <delete id="deleteById" parameterType="Long">
+        delete
+        from FAVORITE_CARCENTER
+        where ID = #{id}
+    </delete>
+
+</mapper>

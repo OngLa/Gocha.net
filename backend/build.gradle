@@ -43,6 +43,10 @@ dependencies {
 
 	// swagger
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
+
+	// 이메일 인증
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.7.0'
+
 }
 
 tasks.named('test') {

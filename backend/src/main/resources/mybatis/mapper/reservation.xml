@@ -30,21 +30,26 @@
         order By ID desc
     </select>
 
-    <!-- EMAIL에서 id 추출하는 쿼리 -->
-    <select id="findIdByEmail" parameterType="String" resultType="Long">
-        SELECT ID
-        FROM MEMBER
-        where EMAIL = #{email}
-    </select>
-    <!--#############################################################################################-->
-    <!-- 예약목록 delete -->
-    
+    <!-- 예약 삭제 -->
     <delete id="deleteById" parameterType="Long">
         delete
         from reservation
         where id = #{id}
     </delete>
-    <!--#############################################################################################-->
 
+    <!-- EMAIL에서 id파싱 -->
+    <select id="findIdByEmail" parameterType="String" resultType="Long">
+        SELECT ID
+        FROM MEMBER
+        where EMAIL = #{email}
+    </select>
+
+<!--     ADMIN 예약자 출력 -->
+    <select id="findReservationBycarcenter" parameterType="Long" resultType="adminDto">
+        SELECT r.ID, r.RESERVED_DATE, r.STATE, r.CARDATA_ID, r.CARCENTER_ID, r.MEMBER_ID, m.PHONE_NUMBER, m.NAME
+        FROM RESERVATION r
+        join MEMBER m on r.MEMBER_ID =m.ID
+        where CARCENTER_ID = #{carcenterId}
+    </select>
 
 </mapper>

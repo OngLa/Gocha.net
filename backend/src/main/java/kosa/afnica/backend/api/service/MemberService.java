@@ -20,6 +20,7 @@ public interface MemberService {
 
 //    public void creatAdminMember(MemberSignupReqDto memberSignupReqDto);
 
+    // 이메일로 권한 찾기
     String findRole(String email);
 
     MemberMypageResDto findMypage(HttpServletRequest request);

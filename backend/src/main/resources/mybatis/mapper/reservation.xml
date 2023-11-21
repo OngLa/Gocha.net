@@ -6,7 +6,7 @@
     <!--#############################################################################################-->
     <!-- 예약하기 insert -->
     
-    <insert id="saveReservation" parameterType="reservationDto">
+    <insert id="saveReservation" parameterType="ReservationReqDto">
         <selectKey keyProperty="id" resultType="Long" order="BEFORE">
             select RESERVATION_SEQ.nextval from dual
         </selectKey>
@@ -23,11 +23,10 @@
 
     <!--###############################################################################################-->
     <!-- 예약목록 select -->
-    
-    <select id="findReservationByMemberId" parameterType="Long" resultType="reservation">
-        SELECT ID, RESERVED_DATE, STATE, CARDATA_ID, CARCENTER_ID, MEMBER_ID
-        FROM RESERVATION
-        where MEMBER_ID = #{memberId}
+    <select id="findReservationByMemberId" parameterType="Long" resultType="ReservationResDto">
+        SELECT A.ID, A.RESERVED_DATE, A.STATE, A.CARDATA_ID, A.CARCENTER_ID, B.NAME AS carcenter_name
+        FROM RESERVATION A INNER JOIN MEMBER B ON A.carcenter_id = B.id
+        where A.MEMBER_ID = #{memberId}
         order By ID desc
     </select>
 

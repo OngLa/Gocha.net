@@ -12,10 +12,14 @@
 
     <typeAliases>
         <!-- <typeAlias alias="{여기수정}" type="kosa.afnica.backend.db.entity.{여기수정}" /> -->
+
+        <!--  Member  -->
         <typeAlias alias="member" type="kosa.afnica.backend.db.entity.Member"/>
 
+        <!--  Reservation  -->
         <typeAlias alias="reservation" type="kosa.afnica.backend.db.entity.Reservation"/>
-        <typeAlias alias="reservationDto" type="kosa.afnica.backend.db.dto.reservation.ReservationReqDto"/>
+        <typeAlias alias="ReservationReqDto" type="kosa.afnica.backend.db.dto.reservation.ReservationReqDto"/>
+        <typeAlias alias="ReservationResDto" type="kosa.afnica.backend.db.dto.reservation.ReservationResDto"/>
 
         <!--  Car  -->
         <typeAlias alias="brand" type="kosa.afnica.backend.db.entity.Brand"/>
@@ -27,14 +31,12 @@
         <typeAlias alias="carData" type="kosa.afnica.backend.db.entity.CarData"/>
         <typeAlias alias="carDataReqDto" type="kosa.afnica.backend.db.dto.carData.CarDataReqDto"/>
 
-        <!--  Chtting  -->
+        <!--  Chatting  -->
         <typeAlias alias="ChattingResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingResDto"/>
         <typeAlias alias="MessageResDto" type="kosa.afnica.backend.db.dto.chatting.MessageResDto"/>
         <typeAlias alias="ChattingCarResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingCarResDto"/>
         <typeAlias alias="ChattingCarDataResDto" type="kosa.afnica.backend.db.dto.chatting.ChattingCarDataResDto"/>
         <typeAlias alias="SendMessageReqDto" type="kosa.afnica.backend.db.dto.chatting.SendMessageReqDto"/>
-
-
-
+        <typeAlias alias="CarcenterInfoResDto" type="kosa.afnica.backend.db.dto.chatting.CarcenterInfoResDto"/>
     </typeAliases>
 </configuration>

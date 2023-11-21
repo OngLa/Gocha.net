@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import kosa.afnica.backend.api.service.ReservationService;
 import kosa.afnica.backend.config.exception.ErrorResponse;
+import kosa.afnica.backend.db.dto.reservation.AdminDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import kosa.afnica.backend.db.entity.Reservation;
@@ -70,17 +71,16 @@ public class ReservationController {
     }
 
     //ADMIN 예약자 출력
-//    @Operation(summary = "예약자 목록 불러오기 API", description = "얘약자 목록 불러오기 API")
-//    @ApiResponses({
-//            @ApiResponse(responseCode = "200", description = "성공",
-//                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationDto.class)))),
-//            @ApiResponse(responseCode = "404", description = "예약 목록이 존재하지 않습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
-//    })
-//
-//    @GetMapping("/bookerlist")
-//    public List<Reservation> getReservaionUserList(HttpServletRequest request) {
-//
-//       return reservationService.readReservationUserList(request);
-//
-//    }
+    @Operation(summary = "예약자 목록 불러오기 API", description = "얘약자 목록 불러오기 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationDto.class)))),
+            @ApiResponse(responseCode = "404", description = "예약 목록이 존재하지 않습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
+
+    @GetMapping("/bookerlist")
+    public List<AdminDto> getReservaionUserList(HttpServletRequest request) {
+
+        return reservationService.findReservationUserList(request);
+    }
 }

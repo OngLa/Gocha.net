@@ -73,6 +73,11 @@ function RepairshopList() {
         <ContentHeader menuName="정비소 목록" />
       </div>
       <div className={styles.RepairshopList}>
+        <div className={styles.LargeButton}>
+          <LargeButton onClick={handleOnclick} style={{ marginBottom: "40px" }}>
+            주 정비소 등록하기
+          </LargeButton>
+        </div>
         <div className={styles.MainRepairshopComponent}>
           {favoriteCarcenterList.map((favoriteCarcenter) => (
             <MainRepairshopComponent
@@ -81,12 +86,8 @@ function RepairshopList() {
             />
           ))}
         </div>
-
-        <div className={styles.LargeButton}>
-          <LargeButton onClick={handleOnclick} style={{ marginTop: "30px" }}>
-            주 정비소 등록하기
-          </LargeButton>
-        </div>
+        {/* 중간 분리 */}
+        <hr className={styles.hrLine}></hr>
         <div className={styles.searchWrap}>
           <div className={styles.searchImgWrap}>
             <img className={styles.searchImg} src={searchIcon} alt="User" />

@@ -10,7 +10,7 @@ function CardHead({favoriteCarcenter}) {
     <div className={styles.carcenterIcon}>
       <img src={carcenterIcon} alt="carcenterIcon"/>
     </div>
-    <div className={styles.carcenterName}>{favoriteCarcenter.name}</div>
+    <div className={styles.carcenterName}>{favoriteCarcenter.carcenterName}</div>
   </div>
 );
 }

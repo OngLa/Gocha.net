@@ -1,10 +1,15 @@
+.flexCenter {
+  display: flex;
+  justify-content: center;
+}
+
 .MainRepairshopComponent {
   border: 1px solid #45cb85;
   background-color: #5d707f;
   border-radius: 5px;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  width: 100%;
+  width: 90%;
 }
 
 .MainRepairshopComponent:hover {

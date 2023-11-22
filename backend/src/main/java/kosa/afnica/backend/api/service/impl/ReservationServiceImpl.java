@@ -33,13 +33,12 @@ public class ReservationServiceImpl implements ReservationService {
         if(reservationList.isEmpty()) {
             throw new CustomException(ErrorCode.RESERVATIONS_NOT_FOUND);
         }
-
         return reservationList;
     }
 
+    //예약하기
     @Override
     public void createReservation(HttpServletRequest request, ReservationReqDto reservationReqDto) {
-        //예약하기
         //HTTP 헤더에 있는 유저이메일에서 memberId를 추출 하는 로직
         String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
         Long memberId = reservationMapper.findIdByEmail(userEmail);

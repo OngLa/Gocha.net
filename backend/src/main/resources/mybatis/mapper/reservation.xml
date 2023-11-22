@@ -3,9 +3,7 @@
 
 <mapper namespace="kosa.afnica.backend.db.mapper.ReservationMapper">
 
-    <!--#############################################################################################-->
     <!-- 예약하기 insert -->
-    
     <insert id="saveReservation" parameterType="ReservationReqDto">
         <selectKey keyProperty="id" resultType="Long" order="BEFORE">
             select RESERVATION_SEQ.nextval from dual
@@ -21,7 +19,6 @@
         )
     </insert>
 
-    <!--###############################################################################################-->
     <!-- 예약목록 select -->
     <select id="findReservationByMemberId" parameterType="Long" resultType="ReservationResDto">
         SELECT A.ID, A.RESERVED_DATE, A.STATE, A.CARDATA_ID, A.CARCENTER_ID, B.NAME AS carcenter_name

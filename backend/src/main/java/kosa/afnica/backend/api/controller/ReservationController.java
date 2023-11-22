@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import kosa.afnica.backend.api.service.ReservationService;
 import kosa.afnica.backend.config.exception.ErrorResponse;
+import kosa.afnica.backend.db.dto.reservation.AdminDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationResDto;
 import kosa.afnica.backend.db.dto.reservation.AdminDto;

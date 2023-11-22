@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./chatroom.module.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ChatBox from "./ChatBox";
 import LargeButton from "../../../components/Button/index";
 import ChatPartnerProfile from "../components/ChatPartnerProfile";
 import { getChatroom } from "../../../service/chatting";
+import imgMoveBottom from "../../../img/icon/Caret_Down_MD.png";
+import imgMoveTop from "../../../img/icon/Caret_Up_MD.png";
 
 function Chatroom(props) {
   // [고객과 정비소의 채팅방]
@@ -30,7 +32,6 @@ function Chatroom(props) {
     };
     loadingChatroom();
   }, []);
-
 
   // 화면 로딩 시 최하단 화면으로 시작
   function scrollToBottom() {
@@ -112,6 +113,26 @@ function Chatroom(props) {
     );
   };
 
+  function moveToTop() {
+    // 부드럽게 스크롤 애니메이션
+    // document.body.scrollHeight
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+
+  function moveToBottom() {
+    // 부드럽게 스크롤 애니메이션
+    // document.body.scrollHeight
+    window.scroll({
+      top: document.body.scrollHeight,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <div className={style.ChatroomWrap}>
       <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
@@ -151,6 +172,18 @@ function Chatroom(props) {
           onClick={() => moveWrite()}
         ></LargeButton>
       </div>
+      <img
+        src={imgMoveTop}
+        alt="scroll"
+        className={style.scrollToTop}
+        onClick={moveToTop}
+      />
+      <img
+        src={imgMoveBottom}
+        alt="scroll"
+        className={style.scrollToBottom}
+        onClick={moveToBottom}
+      />
     </div>
   );
 }

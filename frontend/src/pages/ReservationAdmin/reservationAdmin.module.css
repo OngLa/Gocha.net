@@ -23,3 +23,23 @@ h3 {
   justify-content: center;
   margin-top: 20px;
 }
+
+.scrollToTop {
+  position: fixed;
+  bottom: 20.5%;
+  right: 16px;
+  cursor: pointer;
+  background-color: rgba(171, 171, 171, 0.6); 
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.scrollToBottom {
+  position: fixed;
+  bottom: 14%;
+  right: 16px;
+  cursor: pointer;
+  background-color: rgba(171, 171, 171, 0.6); 
+  border-radius: 50%;
+  padding: 5px;
+}

@@ -1,6 +1,6 @@
 import LargeButton from "../../../components/Button";
 import style from "./signup.module.css";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
 import emailIcon from "../../../img/member/email.png";
@@ -14,6 +14,7 @@ import { createMember, nameCheck } from "../../../service/member";
 // 회원가입 컴포넌트
 function Signup() {
   // React Router의 navigate 훅을 사용하기 위한 초기 설정
+
   const navigate = useNavigate();
   const location = useLocation();
   const veriEmail = location.state && location.state.veriEmail;
@@ -93,10 +94,10 @@ function Signup() {
 
   // 전화번호
   const formatPhoneNumber = (input) => {
-    // 숫자가 아닌 문자를 제거합니다.
+    // 숫자가 아닌 문자를 제거
     const phoneNumber = input.replace(/\D/g, "");
 
-    // 전화번호의 길이에 따라 형식을 적용합니다.
+    // 전화번호의 길이에 따라 형식을 적용
     if (phoneNumber.length <= 3) {
       return phoneNumber;
     } else if (phoneNumber.length <= 7) {
@@ -179,7 +180,8 @@ function Signup() {
       !isPwdValid ||
       !isconfirmPwdValid ||
       !isNameValid ||
-      !isPhoneNumber
+      !isPhoneNumber ||
+      nicknameMsg === "red"
     ) {
       return Swal.fire({
         icon: "warning",

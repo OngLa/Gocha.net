@@ -1,20 +1,22 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
-import style from "./emailCheck.module.css";
+import style from "./verification.module.css";
 import LargeButton from "../../../components/Button";
 import ContentHeader from "../../../components/ContentHeader";
 import emailIcon from "../../../img/member/email.png";
 import emailCheckIcon from "../../../img/member/emailcheck.png";
 import Swal from "sweetalert2";
-import { compareVeriCode, getVeriCode } from "../../../service/member";
+import { comparePwVeriCode, getPwVeriCode } from "../../../service/member";
 
 // 이메일 인증 컴포넌트
-function EmailCheck() {
+function Verification() {
   // React Router의 navigate 훅을 사용하기 위한 초기 설정
   const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state && location.state.email;
 
   // 이메일 및 인증 코드를 관리하기 위한 상태 변수
-  const [veriEmail, setVeriEmail] = useState("");
+  const [veriEmail, setVeriEmail] = useState(email);
   const [veriCode, setVeriCode] = useState("");
 
   // 이메일 검증 결과 및 표시를 처리하는 상태 변수
@@ -28,9 +30,7 @@ function EmailCheck() {
     const { name, value } = event.target;
 
     // 입력 필드에 따라 상태 업데이트
-    if (name === "veriEmail") {
-      setVeriEmail(value);
-    } else if (name === "veriCode") {
+    if (name === "veriCode") {
       setVeriCode(value);
     }
   }, []);
@@ -39,7 +39,7 @@ function EmailCheck() {
   const handleOnClick = () => {
     // 이메일이 확인되었으며 코드 메시지 색상이 녹색인 경우
     if (isEmailCheckApplied && codeMsgColor === "green") {
-      navigate("/member/signup", { state: { veriEmail } });
+      navigate("/member/editpw/editpassword");
     } else {
       Swal.fire({
         icon: "warning",
@@ -62,7 +62,7 @@ function EmailCheck() {
         setEmailCheckApplyResult("올바른 이메일 형식이 아닙니다.");
       } else {
         const requestData = { veriEmail: veriEmail };
-        const response = await getVeriCode(requestData);
+        const response = await getPwVeriCode(requestData);
 
         // 인증 코드가 성공적으로 전송되면 성공 메시지 표시
         Swal.fire({
@@ -78,22 +78,22 @@ function EmailCheck() {
       }
     } catch (error) {
       // 이메일 검증 실패시 오류 메시지 표시
-      if (error.response && error.response.status === 409) {
-        // 서버에서 409 코드로 응답했을 때, 이미 사용 중인 이메일임을 나타냄
-        setEmailCheckApplyResult("이미 사용 중인 이메일입니다.");
-      } else {
-        // 기타 오류 처리
-        setEmailCheckApplyResult("이메일 인증에 실패했습니다.");
-        console.log("이메일 인증 실패", error);
-      }
+    if (error.response && error.response.status === 409) {
+      // 서버에서 409 코드로 응답했을 때, 이미 사용 중인 이메일임을 나타냄
+      setEmailCheckApplyResult("이미 사용 중인 이메일입니다.");
+    } else {
+      // 기타 오류 처리
+      setEmailCheckApplyResult("이메일 인증에 실패했습니다.");
+      console.log("이메일 인증 실패", error);
     }
-  };
+  }
+};
 
   // 입력된 인증 코드를 확인하는 이벤트 핸들러
   const handleOnCheckCode = async () => {
     try {
       // 입력된 인증 코드를 비교
-      await compareVeriCode(veriEmail, veriCode);
+      await comparePwVeriCode(veriEmail, veriCode);
       setEmailCheckResult("인증 번호가 일치합니다.");
       setCodeMsgColor("green");
     } catch (error) {
@@ -170,4 +170,4 @@ function EmailCheck() {
   );
 }
 
-export default EmailCheck;
+export default Verification;

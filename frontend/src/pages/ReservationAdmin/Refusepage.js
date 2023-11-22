@@ -41,11 +41,11 @@ function Refusepage() {
     <div className={styles.Refusepage}>
       <ContentHeader menuName="예약관리_예약거절" />
       <div>
-        <h2>가산 디지털점</h2>
-        <h3>거절 사유 내용</h3>
+        <h2 style={{color:"#fff"}}>가산 디지털점</h2>
+        <h3 style={{color:"#47f6c1"}}>거절 사유 내용</h3>
       </div>
       <div>
-        <textarea placeholder="거절사유를 입력해주세요"></textarea>
+        <textarea className={styles.textarea} placeholder="거절사유를 입력해주세요"></textarea>
       </div>
 
       <div className={styles.button}>

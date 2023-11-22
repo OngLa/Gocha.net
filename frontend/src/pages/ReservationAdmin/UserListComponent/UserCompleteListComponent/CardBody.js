@@ -14,6 +14,7 @@ function CardBody({ list }) {
 const handleUpdateClick = async (reservationId) =>{
   try{
 const response =await updateState(); 
+console.log("가지나?")
   }catch(error){
 console.log(error);
   }

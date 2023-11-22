@@ -4,14 +4,21 @@ function CardHead ({list}){
 
 
   //상태값 0,1,2를 문자열 예약대기중,정비중, 정비완료로 바꾸는 로직
-const renderStatusText = (status) => {
+ const renderStatusText = (status) => {
   switch (status) {
     case 0:
-      return '예약 대기중';
+      return "예약 대기중";
+    case 1:
+      return "정비중";
+    case 2:
+      return "정비완료";
+    case 3:
+      return "예약 거절";
     default:
-      return status; 
+      return "error";
   }
 };
+//상태값 0,1,2를 문자열 예약대기중,정비중, 정비완료로 바꾸는 로직
 
   return(
     <div className={styles.cardHead}>

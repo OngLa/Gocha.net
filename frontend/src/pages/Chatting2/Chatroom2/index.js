@@ -31,6 +31,15 @@ function Chatroom2(props) {
     loadingChatroom();
   }, []);
 
+    // 화면 로딩 시 최하단 화면으로 시작
+    function scrollToBottom() {
+      window.scrollTo(0, document.body.scrollHeight); // 수직 스크롤을 문서의 높이로 이동
+    }
+  
+    useEffect(() => {
+      scrollToBottom();
+    }, [messageList]);
+
   // 데이터 확인
   // useEffect(() => {
   //   console.log(messageList);

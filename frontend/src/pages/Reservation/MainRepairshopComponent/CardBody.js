@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { SmallButton } from "../../../components/Button";
+import { SmallButton, SmallButton2 } from "../../../components/Button";
 import { deleteFavoriteCarcenter } from "../../../service/reservation";
 import styels from "./MainRepairshopComponent.module.css";
 
@@ -37,7 +37,7 @@ function CardBody({ favoriteCarcenter }) {
         <h3>{favoriteCarcenter.address}</h3>
 
         <div className="SmallButton">
-          <SmallButton onClick={deleteClick}>삭제하기</SmallButton>
+          <SmallButton2 onClick={deleteClick}>삭제하기</SmallButton2>
         </div>
       </div>
     </div>

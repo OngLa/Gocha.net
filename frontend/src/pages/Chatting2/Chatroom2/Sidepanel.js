@@ -36,9 +36,9 @@ function Sidepanel({ open, toggle, cardataId }) {
     ]
   });
 
-  useEffect(() => {
-    console.log(cardata);
-    }, [cardata]);
+  // useEffect(() => {
+  //   console.log(cardata);
+  //   }, [cardata]);
 
   return (
     <div className={`${style.sidePanel} ${open ? style.open : ""}`}>

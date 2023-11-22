@@ -23,7 +23,7 @@
   background-color: #45CB85;
   border: 2px solid #A4DABE;
   border-radius: 7px;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 5%;
 }
 
@@ -48,4 +48,10 @@
   border-bottom: 1px solid white;
   color: white;
   font-size: 15px;
+}
+
+.hrLine {
+  width: 90%;
+  border:  0.5px solid #45CB85;
+  margin-top: 30px;
 }

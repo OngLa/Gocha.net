@@ -74,7 +74,7 @@ function RepairshopList() {
       </div>
       <div className={styles.RepairshopList}>
         <div className={styles.LargeButton}>
-          <LargeButton onClick={handleOnclick} style={{ marginBottom: "30px" }}>
+          <LargeButton onClick={handleOnclick} style={{ marginBottom: "40px" }}>
             주 정비소 등록하기
           </LargeButton>
         </div>
@@ -86,7 +86,8 @@ function RepairshopList() {
             />
           ))}
         </div>
-
+        {/* 중간 분리 */}
+        <hr className={styles.hrLine}></hr>
         <div className={styles.searchWrap}>
           <div className={styles.searchImgWrap}>
             <img className={styles.searchImg} src={searchIcon} alt="User" />

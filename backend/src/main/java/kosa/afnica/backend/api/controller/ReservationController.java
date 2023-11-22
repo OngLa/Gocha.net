@@ -46,9 +46,6 @@ public class ReservationController {
         return reservationList;
     }
 
-//######################################################################################################################
-//예약하기
-
     //예약 하기
     @Operation(summary = "예약하기 API", description = "예약하기 클릭시 db에 저장되는 API")
     @ApiResponses({
@@ -81,7 +78,6 @@ public class ReservationController {
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationResDto.class)))),
             @ApiResponse(responseCode = "404", description = "예약 목록이 존재하지 않습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
-
     @GetMapping("/bookerlist")
     public List<AdminDto> getReservaionUserList(HttpServletRequest request) {
 

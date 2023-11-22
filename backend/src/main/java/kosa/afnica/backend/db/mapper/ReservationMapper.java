@@ -9,9 +9,19 @@ import java.util.List;
 
 @Mapper
 public interface ReservationMapper {
-    public List<ReservationResDto> findReservationByMemberId(Long memberId); //memberId를 entity타입으로 저장하는 메소드
-    public Long findIdByEmail(String email); //에메일을 저장하는 메소드
-    public void saveReservation(ReservationReqDto reservationReqDto); //예약 하기
-    public void deleteById(Long id); //예약목록삭제 메소드
-    public List<AdminDto> findReservationBycarcenter(Long carcenterId); //ADMIN 예약자 출력
+
+    //예약출력
+    public List<ReservationResDto> findReservationByMemberId(Long memberId);
+
+    //이메일에서 id 파싱
+    public Long findIdByEmail(String email);
+
+    //예약하기
+    public void saveReservation(ReservationReqDto reservationReqDto);
+
+    //예약 삭제
+    public void deleteById(Long id);
+
+    //AdDMIN 예약자 출력
+    public List<AdminDto> findReservationBycarcenter(Long carcenterId);
 }

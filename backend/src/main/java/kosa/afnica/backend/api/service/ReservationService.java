@@ -10,10 +10,15 @@ import java.util.List;
 
 public interface ReservationService {
 
+    //예약 출력
     public List<ReservationResDto> readReservationList(HttpServletRequest request);
+
+    //예약 하기
     public void createReservation(HttpServletRequest request, ReservationReqDto reservationReqDto);
+
+    //예약 삭제
     public void deleteReservation(Long id);
 
-    //     ADMIN 예약자 출력
+    //ADMIN 예약자 출력
     public List<AdminDto> findReservationUserList(HttpServletRequest request);
 }

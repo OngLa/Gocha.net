@@ -78,7 +78,7 @@ function CarRegister() {
         confirmButtonColor: "#3085d6",
         confirmButtonText: "확인",
       }).then(async (result) => {
-        navigate("/car/car-info");
+        navigate("/car/info");
       });
     }
   };

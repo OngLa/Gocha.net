@@ -23,7 +23,7 @@
         SELECT ID, NAME
         FROM MEMBER
         WHERE ID IN
-        <foreach collection="sendUserList" item="item" index="index" separator="," open="(" close=")">#{item}</foreach>
+        <foreach collection="list" item="item" index="index" separator="," open="(" close=")">#{item}</foreach>
         AND ENABLED = 1
     </select>
 

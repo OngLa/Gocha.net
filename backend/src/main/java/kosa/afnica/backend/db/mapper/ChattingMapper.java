@@ -16,7 +16,7 @@ public interface ChattingMapper {
 
     List<Long> findSendUser(Long memberId); // 나에게 메세지 보낸 유저 목록 반환
 
-    List<ChattingResDto> findAllUser(List<Long> sendUserList); // 채팅방 찾기(유저, 카센터)
+    List<ChattingResDto> findAllUser(List<Long> sendUserList); // 유저들의 id, name 반환
 
     CarcenterInfoResDto findCarcenterInfo(Long carcenterId); // 해당 카센터의 정보 반환
 

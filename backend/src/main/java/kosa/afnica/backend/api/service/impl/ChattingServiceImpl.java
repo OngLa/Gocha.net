@@ -33,6 +33,7 @@ public class ChattingServiceImpl implements ChattingService {
     public List<ChattingResDto> findAllChatting2(Long memberId) {
         // 나에게 메세지 보낸 유저 목록 반환
         List<Long> sendUserList = chattingMapper.findSendUser(memberId);
+
         return chattingMapper.findAllUser(sendUserList);
     }
 

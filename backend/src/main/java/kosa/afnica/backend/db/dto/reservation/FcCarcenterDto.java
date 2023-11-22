@@ -10,13 +10,15 @@ public class FcCarcenterDto {
 
     private Long id;
     private Long carcenterId;
+    private String carcenterName;
     private String phoneNumber;
     private String address;
 
-    public FcCarcenterDto(Long id, Long carcenterId, String phoneNumber, String address) {
+    public FcCarcenterDto(Long id, Long carcenterId, String phoneNumber, String address, String carcenterName) {
         this.id = id;
         this.carcenterId = carcenterId;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.carcenterName = carcenterName;
     }
 }

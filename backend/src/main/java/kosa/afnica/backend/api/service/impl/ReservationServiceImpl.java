@@ -5,9 +5,8 @@ import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.security.JwtUtil;
 import kosa.afnica.backend.db.dto.reservation.AdminDto;
-import kosa.afnica.backend.db.dto.reservation.ReservationDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
-import kosa.afnica.backend.db.entity.Reservation;
+import kosa.afnica.backend.db.dto.reservation.ReservationResDto;
 import kosa.afnica.backend.db.mapper.ReservationMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,9 +60,10 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationReqDto;
     }
-//예약 삭제
-    public Long deleteReservation(Long id) {
-        return reservationMapper.deleteById(id);
+    
+    //예약 삭제
+    public void deleteReservation(Long id) {
+        reservationMapper.deleteById(id);
     }
 
     //ADMIN 예약자 출력

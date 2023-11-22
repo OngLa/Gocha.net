@@ -1,8 +1,8 @@
 package kosa.afnica.backend.db.mapper;
 
+import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationResDto;
 import kosa.afnica.backend.db.dto.reservation.AdminDto;
-import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

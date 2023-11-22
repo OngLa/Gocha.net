@@ -1,8 +1,8 @@
 package kosa.afnica.backend.api.service;
 
+import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationResDto;
 import kosa.afnica.backend.db.dto.reservation.AdminDto;
-import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

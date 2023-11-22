@@ -1,28 +1,15 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
 import styles from "./style.module.css";
 import upIocn from "../../../../img/icon/Caret_Up_MD.png";
 import downIocn from "../../../../img/icon/Caret_Down_MD.png";
 
-const ToggleList = forwardRef((props, ref) => {
-  const { title_children, content_children, initActive } = props;
-
-  const [isActive, setIsActive] = useState(initActive);
+const ToggleList = (props) => {
+  // title 내용, content 내용
+  // toggle에 대한 상태변수
+  const { title_children, content_children, toggle, setToggle } = props;
 
   const toggleContent = () => {
-    setIsActive(!isActive);
+    setToggle(!toggle);
   };
-
-  useImperativeHandle(ref, () => ({
-    toggleIsActive: () => {
-      setIsActive(!isActive);
-    },
-    getIsActive: () => {
-      return isActive;
-    },
-    handleToggle: (val) => {
-      setIsActive(val);
-    },
-  }));
 
   return (
     <div className={styles.wrapper}>
@@ -30,19 +17,19 @@ const ToggleList = forwardRef((props, ref) => {
         <div className={styles.title}>{title_children}</div>
         <img
           className={styles.image}
-          src={`${isActive ? upIocn : downIocn}`}
+          src={`${toggle ? upIocn : downIocn}`}
           alt="toggle-icon"
         />
       </button>
       <div
         className={`${styles.content} ${
-          isActive ? styles.active : styles.nonActive
+          toggle ? styles.active : styles.nonActive
         }`}
       >
         {content_children}
       </div>
     </div>
   );
-});
+};
 
 export default ToggleList;

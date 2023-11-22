@@ -5,6 +5,8 @@ import ChatBox2 from "./ChatBox2";
 import LargeButton from "../../../components/Button/index";
 import ChatPartnerProfile2 from "../components/ChatPartnerProfile2";
 import { getChatroom } from "../../../service/chatting";
+import imgMoveBottom from "../../../img/icon/Caret_Down_MD.png";
+import imgMoveTop from "../../../img/icon/Caret_Up_MD.png";
 
 function Chatroom2(props) {
   // [고객과 정비소의 채팅방]
@@ -90,6 +92,26 @@ function Chatroom2(props) {
   const moveWrite = () => {
     navigate(`/chatting2/writeform2?userId=${userId}&userName=${userName}`);
   };
+  
+  function moveToTop() {
+    // 부드럽게 스크롤 애니메이션
+    // document.body.scrollHeight
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+
+  function moveToBottom() {
+    // 부드럽게 스크롤 애니메이션
+    // document.body.scrollHeight
+    window.scroll({
+      top: document.body.scrollHeight,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
 
   return (
     <div className={style.ChatroomWrap}>
@@ -129,6 +151,18 @@ function Chatroom2(props) {
           onClick={() => moveWrite()}
         ></LargeButton>
       </div>
+      <img
+        src={imgMoveTop}
+        alt="scroll"
+        className={style.scrollToTop}
+        onClick={moveToTop}
+      />
+      <img
+        src={imgMoveBottom}
+        alt="scroll"
+        className={style.scrollToBottom}
+        onClick={moveToBottom}
+      />
     </div>
   );
 }

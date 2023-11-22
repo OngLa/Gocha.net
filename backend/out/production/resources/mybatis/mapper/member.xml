@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosa.afnica.backend.db.mapper.MemberMapper">
+    <!-- 회원 정보 저장 -->
+    <insert id="save" parameterType="member">
+        insert into member(id, email, password, name, phone_number, address, enabled, role)
+        values (member_seq.nextval, #{email}, #{password}, #{name}, #{phoneNumber}, null, 1, #{role})
+    </insert>
+
+<!--    <insert id="saveAdmin" parameterType="member">
+        insert into member(id, email, password, name, phone_number, address, enabled, role)
+        values (carcenter_seq.nextval, #{email}, #{password}, #{name}, #{phoneNumber}, #{address}, 1, 'ROLE_CARCENTER')
+    </insert>-->
+
+    <!-- 이메일 기반으로 회원 정보 조회 -->
+    <select id="findByEmail" parameterType="String" resultType="member">
+        select id,
+               email,
+               password,
+               name,
+               phone_number,
+               address,
+               enabled,
+               role
+        from member
+        where email = #{email}
+    </select>
+
+    <!-- ID 기반으로 회원 정보 조회 -->
+    <select id="findById" parameterType="Long" resultType="member">
+        select id,
+               email,
+               password,
+               name,
+               phone_number,
+               address,
+               enabled,
+               role
+        from member
+        where id = #{id}
+    </select>
+
+    <select id="findRoleByEmail" parameterType="String" resultType="String">
+        select role
+        from member
+        where email = #{email}
+    </select>
+
+    <!-- 중복되는 이메일 조회 -->
+    <select id="existByEmail" resultType="int">
+        select count(*)
+        from member
+        where email = #{email}
+    </select>
+
+    <!-- 중복되는 닉네임 조회 -->
+    <select id="existByName" resultType="int">
+        select count(*)
+        from member
+        where name = #{name}
+    </select>
+
+    <!-- 회원 정보 수정 -->
+    <update id="update" parameterType="member">
+        update member
+        set password=#{password}
+        where id = #{id}
+    </update>
+
+    <!-- 인증 번호 저장 -->
+    <insert id="saveCode" parameterType="verification">
+        insert into vericode(id, veri_email, veri_code)
+        values (member_verification_seq.nextval, #{veriEmail}, #{veriCode})
+    </insert>
+
+    <!-- 이메일 기반에 따른 인증 번호 조회 -->
+    <select id="findCodeByEmail" parameterType="String" resultType="String">
+        select veri_code
+        from vericode
+        where veri_email = #{veriEmail}
+    </select>
+
+    <!-- 이메일 중복일 경우 인증 번호 갱신 -->
+    <update id="updateCode" parameterType="map">
+        update vericode
+        set veri_code = #{veriCode}
+        where veri_email = #{veriEmail}
+    </update>
+
+    <!-- 중복되는 인증용 이메일 조회 -->
+    <select id="existByVeriEmail" resultType="int">
+    select count(*)
+    from vericode
+    where veri_email = #{veriEmail}
+    </select>
+
+    <!-- 정비소 목록 출력 -->
+    <select id="findCarcenterByRole" resultType="member">
+        SELECT id, address, name
+        FROM member
+        WHERE role = 'ROLE_CARCENTER'
+    </select>
+
+</mapper>

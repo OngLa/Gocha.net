@@ -31,10 +31,14 @@ function Chatroom(props) {
     loadingChatroom();
   }, []);
 
-  const chatroomRef = useRef();
+
+  // 화면 로딩 시 최하단 화면으로 시작
+  function scrollToBottom() {
+    window.scrollTo(0, document.body.scrollHeight); // 수직 스크롤을 문서의 높이로 이동
+  }
+
   useEffect(() => {
-    // chatroomRef 요소의 맨 아래로 스크롤(아직 작동 x)
-    chatroomRef.current.scrollTop = chatroomRef.current.scrollHeight;
+    scrollToBottom();
   }, [messageList]);
 
   // 데이터 확인
@@ -109,8 +113,7 @@ function Chatroom(props) {
   };
 
   return (
-    // chatroomRef 요소의 맨 아래로 스크롤
-    <div className={style.ChatroomWrap} ref={chatroomRef}>
+    <div className={style.ChatroomWrap}>
       <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
       {messageList.map((message) =>
         // 현재는 고객페이지이기에 memberId가 100000보다 작으면 내가 보낸 메세지로 보이기 위해 우측 정렬한다.(isSender로 자기 메세지 구분)

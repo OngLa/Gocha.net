@@ -1,30 +1,45 @@
-import { useNavigate } from "react-router";
-import { SmallButton } from "../../../components/Button";
+import Swal from "sweetalert2";
+import { SmallButton, SmallButton2 } from "../../../components/Button";
+import { deleteFavoriteCarcenter } from "../../../service/reservation";
 import styels from "./MainRepairshopComponent.module.css";
 
-function CardBody(props) {
-  
-const navigate= useNavigate();
+function CardBody({ favoriteCarcenter }) {
 
-  const handleRegisterClick = () => {
-    alert("테스트");
-    navigate(-1);
-    // post로 데이터를 보내야지(name,adress)
-  };
-  
+  //주 정비소 삭제
+  async function deleteClick() {
+    try {
+      const result = await Swal.fire({
+        icon: "question",
+        title: "정말로 예약취소하시겠습니까?",
+        text: "취소 시, 예약정보가 사라집니다.",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        confirmButtonColor: "#45CB85",
+        cancelButtonText: "아니오",
+      });
+      if (result.isConfirmed) {
+        await deleteFavoriteCarcenter(favoriteCarcenter.id);
+        Swal.fire({
+          icon: "success",
+          title: "요청이 정상 처리 되었습니다.",
+          confirmButtonColor: "#45CB85",
+        });
+      }
+    } catch (error) {
+      console.error("예약 취소 중 오류 발생:", error);
+    }
+  }
+
   return (
-    <div className={styels.cardBody}>
-      <h2>{props.address}</h2>
+    <div>
+      <div className={styels.cardBody}>
+        <h2>주소</h2>
+        <h3>{favoriteCarcenter.address}</h3>
 
-      <div
-        style={{
-          paddingTop: "20px",
-          paddingBottom: "10px",
-        }}
-      >
-        <SmallButton onClick={handleRegisterClick}>등록하기</SmallButton>
+        <div className="SmallButton">
+          <SmallButton2 onClick={deleteClick}>삭제하기</SmallButton2>
+        </div>
       </div>
- 
     </div>
   );
 }

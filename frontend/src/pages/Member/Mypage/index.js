@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "./mypage.module.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
 import { SmallButton } from "../../../components/Button";
 import emailIcon from "../../../img/member/email-white.png";

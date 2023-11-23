@@ -1,42 +1,68 @@
+.flexCenter {
+  display: flex;
+  justify-content: center;
+}
+
 .MainRepairshopComponent {
   border: 1px solid #45cb85;
-  border-radius: 10px;
   background-color: #5d707f;
-  width: 100%;
-  margin-bottom: 20px; /* 하단 간격 추가 */
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  width: 90%;
 }
 
 .MainRepairshopComponent:hover {
-  background-color: #45cb85;
-  border: 2px solid #a4dabe;
+  /* background-color: none; */
+  border: 2px solid #A4DABE;
 }
 
 .cardHead {
-  padding: 0.75rem 1.25rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #45cb85;
   height: 50px;
-}
-
-.imgWrap {
   display: flex;
-  height: 100%;
-  width: 100%;
   align-items: center;
-  font-size: 20px;
-  color: #fff;
+  gap: 10px;
 }
 
-.imgWrap img {
-  height: 100%;
-  margin-right: 20px;
+.carcenterIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  margin-left: 10px;
 }
 
-.cardBody {
-  padding-top: 5px;
+.carcenterIcon img {
+  max-width: 100%; /* 이미지가 컨테이너를 벗어나지 않도록 */
+  max-height: 100%; /* 이미지가 컨테이너를 벗어나지 않도록 */
+}
+
+.carcenterName {
+  font-size: 1.2rem; 
+  color: #45cb85; 
+  margin-left: 10px; 
+}
+
+.cardBody{
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 10px;
   color: #fff;
+  box-sizing: border-box; 
 }
+.cardBody h2,h3{
+  margin: auto;
+}
+
+.SmallButton{
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+

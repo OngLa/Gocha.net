@@ -1,0 +1,78 @@
+/* .RepairshopList {
+} */
+
+.LargeButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.RepairshopComponent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.searchWrap {
+  width: 60%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  background-color: #45CB85;
+  border: 2px solid #A4DABE;
+  border-radius: 7px;
+  margin-top: 20px;
+  margin-left: 5%;
+}
+
+.searchImgWrap {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchImg {
+  width: 22px;
+  height: 22px;
+}
+
+.searchInput {
+  width: 90%;
+  height: 22px;
+  background-color: #45CB85;
+  border: 0px;
+  border-radius: 0px;
+  border-bottom: 1px solid white;
+  color: white;
+  font-size: 15px;
+}
+
+.hrLine {
+  width: 90%;
+  border:  0.5px solid #486f7d;
+  margin-top: 30px;
+}
+
+
+.scrollToTop {
+  position: fixed;
+  bottom: 20.5%;
+  right: 16px;
+  cursor: pointer;
+  background-color: rgba(171, 171, 171, 0.6); 
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.scrollToBottom {
+  position: fixed;
+  bottom: 14%;
+  right: 16px;
+  cursor: pointer;
+  background-color: rgba(171, 171, 171, 0.6); 
+  border-radius: 50%;
+  padding: 5px;
+}

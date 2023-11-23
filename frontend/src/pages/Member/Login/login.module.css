@@ -40,7 +40,7 @@
   justify-content: center;
   width: 90%;
   padding: 0px 20px;
-  margin: 80px 0px;
+  margin: 80px 0px 40px 0px;
 }
 
 .signupLinkBox {
@@ -58,7 +58,7 @@
   margin: 0px 7px;
 }
 
-.tempButton {
+.searchPw {
   display: flex;
   justify-content: flex-end;
   margin: 20px;

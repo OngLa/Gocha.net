@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "./findPwPage.module.css";
-import LargeButton, { SmallButton } from "../../../components/Button";
+import LargeButton, { SmallButton, SmallButton2 } from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
 import emailIcon from "../../../img/member/email.png";
@@ -61,11 +61,11 @@ function FindPwPage() {
         />
       </div>
       <div className={style.SmallButtonWrap}>
-        <SmallButton
+        <SmallButton2
           children="인증번호 발송"
           onClick={handleSendCheckCode}
-          style={{ width: "110px" }}
-        ></SmallButton>
+          style={{ width: "130px" }}
+        ></SmallButton2>
       </div>
       {showCheckCodeBlock && ( // 인증번호 블록 보여주기
         <div className={style.memberBox}>

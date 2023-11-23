@@ -127,12 +127,12 @@ function Login() {
         />
       </div>
 
-      <div className={style.tempButton}>
+      <div className={style.searchPw}>
         <Link to="/member/findpw">
-          <SmallButton
+          <SmallButton2
             children="비밀번호 찾기"
-            style={{ width: "110px" }}
-          ></SmallButton>
+            style={{ width: "130px" }}
+          ></SmallButton2>
         </Link>
       </div>
 
@@ -146,14 +146,6 @@ function Login() {
             회원가입
           </Link>
           후 이용해 주세요.
-        </div>
-        <div className={style.tempButton}>
-          <Link to="/member/mypage">
-            <SmallButton2
-              children="마이페이지(임시)"
-              style={{ width: "130px" }}
-            ></SmallButton2>
-          </Link>
         </div>
       </div>
     </div>

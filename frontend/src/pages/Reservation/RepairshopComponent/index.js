@@ -1,21 +1,21 @@
 import CardBody from "./CardBody";
+import CardBodyFC from "./CardBodyFC";
 import CardHead from "./CardHead";
 import styles from "./repairshopcomponent.module.css"
 
-function RepairshopComponent(props) {
-
-  const { id, address, name } = props;
-
+function RepairshopComponent({carcenter,useCardBodyFc}) {
 
   return (
     <div className={styles.RepairshopComponent}>
       <div className={styles.cardHeader}>
-        <CardHead id={id} name={name}/>
+        <CardHead carcenter={carcenter}/>
       </div>
       <div className="card-body">
-        <CardBody id={id} address={address}
-          buttonText={props.buttonText}
-          />
+      {
+          useCardBodyFc ? 
+          <CardBodyFC carcenter={carcenter}/> :
+          <CardBody carcenter={carcenter}/>
+        }
       </div>
     </div>
   );

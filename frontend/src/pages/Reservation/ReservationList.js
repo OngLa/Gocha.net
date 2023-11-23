@@ -1,22 +1,26 @@
 import { useNavigate } from "react-router-dom";
+import styles from "./reservation.module.css";
 import ContentHeader from "../../components/ContentHeader";
 import LargeButton from "../../components/Button";
 import ReservationComponent from "./ReservationComponent";
 import { useEffect, useState } from "react";
-import { readReservationList } from "../../apis/reservation";
+import { readReservationList } from "../../service/reservation";
+import imgMoveBottom from "../../img/icon/Caret_Down_MD.png";
+import imgMoveTop from "../../img/icon/Caret_Up_MD.png";
 
+
+// //예약목록 출력 페이지
 function ReservationList() {
-  // //예약목록 출력 페이지
 
   const navigate = useNavigate();
+  //정비소 목록으로 이동
   const handleNavOnClick = () => {
     navigate("repairshoplist");
   };
-  //등록하기 누르면 정비소 목록으로 이동
 
   const [list, setList] = useState([]);
-//서버에서 가져온 데이터 저장하는 상태
 
+  //예약 출력
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,9 +31,40 @@ function ReservationList() {
       }
     };
     fetchData();
-  }, [list]);
-//서버 데이터가 수정되면 페이지가 리랜더링됨
+  }, []);
 
+    // 화면 로딩 시 최하단 화면으로 시작
+    function scrollToBottom() {
+      window.scrollTo(0, document.body.scrollHeight); // 수직 스크롤을 문서의 높이로 이동
+    }
+  
+    useEffect(() => {
+      scrollToBottom();
+    }, [list]);
+
+//   useEffect(() => {
+//     console.log(list);
+//   }, [list]);
+
+function moveToTop() {
+  // 부드럽게 스크롤 애니메이션
+  // document.body.scrollHeight
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+}
+
+function moveToBottom() {
+  // 부드럽게 스크롤 애니메이션
+  // document.body.scrollHeight
+  window.scroll({
+    top: document.body.scrollHeight,
+    left: 0,
+    behavior: "smooth",
+  });
+}
 
   return (
     <div>
@@ -38,6 +73,18 @@ function ReservationList() {
         <div><ReservationComponent list={list} /></div>
         <div style={{ marginTop: "20px" }}><LargeButton onClick={handleNavOnClick}>새 예약 등록</LargeButton></div>
       </div>
+      <img
+        src={imgMoveTop}
+        alt="scroll"
+        className={styles.scrollToTop}
+        onClick={moveToTop}
+      />
+      <img
+        src={imgMoveBottom}
+        alt="scroll"
+        className={styles.scrollToBottom}
+        onClick={moveToBottom}
+      />
     </div>
   );
 }

@@ -1,14 +1,13 @@
 import Swal from "sweetalert2";
 import { SmallButton2 } from "../../../components/Button";
-import searchIcon from "../../../img/chatting/searchIcon.png";
 import carcenterIcon from "../../../img/chatting/carcenterIcon.png";
 import styles from "./reservationComponent.module.css";
 import { deleteReservation } from "../../../service/reservation";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
-function CardBody({ reservationList }) {
+function CardBody({ reservationList, refreshList }) {
 
-  //예약 삭제 
+  //예약 취소
   async function handelCancleButton() {
   try {
     const result = await Swal.fire({
@@ -20,15 +19,7 @@ function CardBody({ reservationList }) {
       confirmButtonColor: "#45CB85",
       cancelButtonText: "아니오",
     });
-    if (result.isConfirmed) {
-      await deleteReservation(reservationList.id);
-      Swal.fire({
-        icon: "success",
-        title: "요청이 정상 처리 되었습니다.",
-        confirmButtonColor: "#45CB85",
-        cancelButtonText: "아니오",
-      });
-
+  
       if (result.isConfirmed) {
         await deleteReservation(reservationList.id);
         Swal.fire({
@@ -37,33 +28,47 @@ function CardBody({ reservationList }) {
           confirmButtonColor: "#45CB85",
         });
       }
-    }} catch (error) {
+      await refreshList();
+    } catch (error) {
       console.error("예약 취소 중 오류 발생:", error);
     }
   }
-  //예약취소 버튼 클릭시 axio.delete작동
 
-  const renderStatusText = (status) => {
-    switch (status) {
-      case 0:
-        return "예약 대기중";
-      case 1:
-        return "정비중";
-      case 2:
-        return "정비완료";
-      case 3:
-        return "예약 거절";
-      default:
-        return "error";
-    }
-  };
-  //상태값 0,1,2를 문자열 예약대기중,정비중, 정비완료로 바꾸는 로직
+// 상태값에 따라 문자열과 색상 변경
+const renderStatusText = (state) => {
+  let text;
+  let className;
+
+  switch (state) {
+    case 0:
+      text = "승인대기중";
+      className = styles.statusPending;
+      break;
+    case 1:
+      text = "승인됨";
+      className = styles.statusInProgress;
+      break;
+    case 2:
+      text = "정비완료";
+      className = styles.statusCompleted;
+      break;
+    case 3:
+      text = "취소됨";
+      className = styles.statusRejected;
+      break;
+    default:
+      text = "오류";
+      className = styles.statusError;
+  }
+  // 상태 텍스트와 클래스를 span 엘리먼트에 적용하여 반환
+  return <span className={className}>{text}</span>;
+};
 
   return (
-    <Link
-      to={`/chatting/chatroominfo?carcenterId=${reservationList.carcenterId}&carcenterName=${reservationList.carcenterName}`}
-      style={{ textDecoration: "none" }}
-    >
+    // <Link
+    //   to={`/chatting/chatroominfo?carcenterId=${reservationList.carcenterId}&carcenterName=${reservationList.carcenterName}`}
+    //   style={{ textDecoration: "none" }}
+    // >
       <div className={styles.cardBody}>
         <div className={styles.imgWrap}>
           <img
@@ -94,7 +99,7 @@ function CardBody({ reservationList }) {
           )}
         </div>
       </div>
-    </Link>
+    // </Link>
   );
 }
 export default CardBody;

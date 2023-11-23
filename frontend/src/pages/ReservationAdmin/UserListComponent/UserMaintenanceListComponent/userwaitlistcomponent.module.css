@@ -1,55 +1,21 @@
-
-.UserMaintenanceList {
-  border: 1px solid #45cb85;
-  background-color: #5d707f;
-  border-radius: 10px;
-  width: 100%;
-  margin-bottom: 20px; /* 하단 간격 추가 */
-}
-
-.UserMaintenanceList:hover {
-  /* background-color: none; */
-  border: 2px solid #A4DABE;
-}
-
-
-.cardHead{
-  padding: 0.75rem 1.25rem;
-  border-bottom: 1px solid #45cb85;
-  height: 50px;
-}
-
-.imgWrap {
-  display: flex;
-  align-items: center; /* 수직 중앙 정렬 */
-  justify-content: start; /* 시작점에서 정렬 */
-  width: 100%; /* 너비를 100%로 설정하거나 필요한 대로 조절 */
-  height: 100%; /* 높이를 100%로 설정하거나 필요한 대로 조절 */
-  font-size: 20px;
-  color: #fff;
-}
-
-.imgWrap img {
-  height: 100%; /* 이미지 높이를 .imgWrap 높이에 맞춤 */
-  margin-right: 20px; /* 이미지와 텍스트 사이의 간격 조절 */
-}
 .cardBody{
   padding-top: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-size: 10px;
-  margin-left: calc(10%);
   color: #fff;
 }
 
+.h2 {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
 .button{
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
-
+  gap: 10px;
 }
-
-
-

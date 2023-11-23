@@ -21,4 +21,7 @@ public interface ReservationService {
 
     //ADMIN 예약자 출력
     public List<AdminDto> findReservationUserList(HttpServletRequest request);
+
+    //ADMIN state 업데이트
+    public void updateState(AdminDto adminDto);
 }

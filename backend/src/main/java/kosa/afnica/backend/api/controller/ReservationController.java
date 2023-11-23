@@ -83,4 +83,15 @@ public class ReservationController {
 
         return reservationService.findReservationUserList(request);
     }
+
+    //ADMIN state 업데이트
+    @Operation(summary = "정비상태변경 api", description = "정비상태 변경하기 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationResDto.class)))),
+    })
+    @PutMapping("/bookerlist")
+    public void updateState(@RequestBody AdminDto adminDto){
+        reservationService.updateState(adminDto);
+    }
 }

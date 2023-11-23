@@ -63,4 +63,11 @@ public class ReservationServiceImpl implements ReservationService {
 
         return adminDtos;
     }
+
+    //ADMIN state 업데이트
+    @Override
+    public void updateState(AdminDto adminDto) {
+
+        reservationMapper.updateState(adminDto);
+    }
 }

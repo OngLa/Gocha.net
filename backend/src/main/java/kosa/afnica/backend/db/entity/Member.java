@@ -25,4 +25,8 @@ public class Member {
         this.address = address;
         this.role = role;
     }
+
+    public void updateMember(String password) {
+        this.password = password;
+    }
 }

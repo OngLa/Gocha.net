@@ -49,7 +49,7 @@ function Info() {
         Swal.fire({
           title: error.message,
           text: "차량을 등록하시겠습니까?",
-          icon: "warning",
+          icon: "question",
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "등록",
@@ -88,7 +88,7 @@ function Info() {
         Swal.fire({
           title: error.message,
           text: `${carList[value].carName} 데이터 업데이트하시겠습니까?`,
-          icon: "warning",
+          icon: "question",
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "이동",

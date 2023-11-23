@@ -15,9 +15,9 @@ function CarRegister() {
   const [cToggle, setCToggle] = useState(false);
   const [brands, setBrands] = useState([]);
   const [carTypes, setCarTypes] = useState([]);
-  const [selectedBrand, setSelectedBrand] = useState();
-  const [selectedCar, setSelectedCar] = useState();
-  const [carNumber, setCarNumber] = useState();
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedCar, setSelectedCar] = useState("");
+  const [carNumber, setCarNumber] = useState("");
 
   const navigate = useNavigate();
 
@@ -63,6 +63,45 @@ function CarRegister() {
 
   // 차량 등록
   const handleCarInfo = async () => {
+    // 차량 번호판 형식 검사를 위한 정규 표현식
+    const carNumberRegex = /^[0-9]{2,3}\s[가-힣]{1}\s[0-9]{4}$/;
+
+    // 차 종 선택 안했을 때
+    if (selectedCar === "") {
+      Swal.fire({
+        // 수정x
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+
+        // 커스텀
+        title: "차량이 선택되지 않았습니다.",
+        text: "선택해 주세요",
+        icon: "warning", // 표시할 아이콘(error, info, question, success, warning)
+        confirmButtonText: "등록", // Ok 대신에 쓸 텍스트
+      });
+      return;
+    }
+
+    // 차량 번호판 형식 검사
+    if (!carNumberRegex.test(carNumber)) {
+      Swal.fire({
+        // 수정x
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+
+        // 커스텀
+        title: "차량 번호판 형식이 올바르지 않습니다.",
+        text: "예) 50 우 1934",
+        icon: "warning", // 표시할 아이콘(error, info, question, success, warning)
+        confirmButtonText: "등록", // Ok 대신에 쓸 텍스트
+      });
+      return;
+    }
+
     const data = {
       carNumber: carNumber,
       cartypeId: carTypes[selectedCar].id,

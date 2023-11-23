@@ -36,7 +36,7 @@ function DataList() {
         Swal.fire({
           title: error.message,
           text: "차량을 등록하시겠습니까?",
-          icon: "warning",
+          icon: "question",
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "등록",
@@ -79,11 +79,11 @@ function DataList() {
   };
 
   const handleFilter = async () => {
-    getCarData(startDate, endDate);
+    getCarData(startDate, endDate, false);
   };
 
   // 데이터 불러오기
-  const getCarData = async (start, end) => {
+  const getCarData = async (start, end, showAlert = true) => {
     try {
       setIsLoading(true);
 
@@ -117,23 +117,27 @@ function DataList() {
       // card list 저장
       setCards(newCards);
     } catch (error) {
-      Swal.fire({
-        title: error.message,
-        text: "데이터를 등록하시겠습니까?",
-        icon: "warning",
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "등록",
-        cancelButtonText: "취소",
+      if (showAlert) {
+        Swal.fire({
+          title: error.message,
+          text: "데이터를 등록하시겠습니까?",
+          icon: "question",
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "등록",
+          cancelButtonText: "취소",
 
-        showCancelButton: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          createCarData();
-        } else if (result.isDismissed) {
-          setCards([]);
-        }
-      });
+          showCancelButton: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            createCarData();
+          } else if (result.isDismissed) {
+            setCards([]);
+          }
+        });
+      } else {
+        setCards([]);
+      }
     } finally {
       setIsLoading(false);
     }

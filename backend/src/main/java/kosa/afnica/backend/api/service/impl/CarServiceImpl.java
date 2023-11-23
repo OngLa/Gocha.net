@@ -107,15 +107,14 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<CarResDto> findAllCarByMemberId(HttpServletRequest request) {
+    public List<CarResDto> findAllCarByMemberId(String email) {
 
-        // Token으로부터 Member 얻어오기
-        String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
-        Member member = memberMapper.findByEmail(userEmail)
+        // email 정보로 memberId 가져오기
+        Long memberId = memberMapper.findIdByEmail(email)
                 .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
 
         // MemberID로 부터 필요한 값 불러오기
-        List<CarResDto> resDtoList = carMapper.findAllCarByMemberId(member.getId());
+        List<CarResDto> resDtoList = carMapper.findAllCarByMemberId(memberId);
 
         // 등록된 차량이 없는경우 예외처리
         if(resDtoList.isEmpty()) {

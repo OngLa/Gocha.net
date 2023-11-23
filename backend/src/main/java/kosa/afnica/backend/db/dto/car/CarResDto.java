@@ -11,6 +11,7 @@ public class CarResDto {
 
     private Long carId;
     private String carName;
+    private String carNumber;
     private byte[] logo;
     private String photo;
 

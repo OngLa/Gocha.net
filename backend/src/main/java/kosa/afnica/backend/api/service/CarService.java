@@ -29,8 +29,8 @@ public interface CarService {
     // token과 입력받은 값을 기반으로 내 차량 등록
     Map<String, Long> createCar(HttpServletRequest request, CarReqDto reqDto);
 
-    // MemberId를 기반으로 모든 CarId, CartypeName, Car Photo 조회
-    List<CarResDto> findAllCarByMemberId(HttpServletRequest request);
+    // MemberId를 기반으로 모든 CarId, CarNumber, CartypeName, Car Photo 조회
+    List<CarResDto> findAllCarByMemberId(String email);
 
     // CarId를 해당 Car 삭제
     Map<String, String> deleteCarById(HttpServletRequest request, Long id);

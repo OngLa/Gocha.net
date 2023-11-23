@@ -1,8 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import style from "./home.module.css";
-import homeBackground from "../../img/homeBackground_wide.png";
+import homeBackground from "../../img/homeBackground.png";
 
 function Home() {
+  useEffect(() => {
+    // 스크롤 비활성화
+    document.body.style.overflow = "hidden";
+
+    // 컴포넌트가 언마운트될 때 스크롤 활성화
+    return () => {
+      document.body.style.overflow = "visible";
+    };
+  }, []); // 빈 종속성 배열은 컴포넌트가 마운트될 때 한 번만 실행되도록 보장
+
 
   return (
     <div className={style.homeWrap}>

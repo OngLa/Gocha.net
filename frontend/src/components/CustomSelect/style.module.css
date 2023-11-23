@@ -12,6 +12,7 @@
 }
 
 .customSelect {
+  width: 175px;
   border: 2px solid #a4dabe;
   border-radius: 8px;
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);

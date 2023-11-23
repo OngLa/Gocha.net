@@ -25,18 +25,51 @@ useEffect(() => {
 const refreshList = () => {
   fetchData();
 };
+  function moveToTop() {
+    // 부드럽게 스크롤 애니메이션
+    // document.body.scrollHeight
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
 
-  return(
-    <div>
-      <ContentHeader menuName="예약관리"/>
-    <div>
-      {userlist.map((list)=>(
-      <UserListComponent key={list.id} list={list} refreshList={refreshList}/>
-      ))}
-      
-    </div>
+  function moveToBottom() {
+    // 부드럽게 스크롤 애니메이션
+    // document.body.scrollHeight
+    window.scroll({
+      top: document.body.scrollHeight,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
 
+  return (
+    <div>
+      <ContentHeader menuName="예약관리" />
+      <div>
+        {userlist.map((list) => (
+          <UserListComponent
+            key={list.id}
+            list={list}
+            refreshList={refreshList}
+          />
+        ))}
+      </div>
+      <img
+        src={imgMoveTop}
+        alt="scroll"
+        className={styles.scrollToTop}
+        onClick={moveToTop}
+      />
+      <img
+        src={imgMoveBottom}
+        alt="scroll"
+        className={styles.scrollToBottom}
+        onClick={moveToBottom}
+      />
     </div>
   );
 }
-export default Home
+export default Home;

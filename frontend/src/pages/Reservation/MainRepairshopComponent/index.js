@@ -1,17 +1,17 @@
 import CardBody from "./CardBody";
 import CardHead from "./CardHead";
-import styles from "./MainRepairshopComponent.module.css"
+import styles from "./MainRepairshopComponent.module.css";
 
-function MainRepairshopComponent({favoriteCarcenter}) {
-
+function MainRepairshopComponent({ favoriteCarcenter }) {
   return (
-    <div className={styles.MainRepairshopComponent}>
-      <div>
-        <CardHead favoriteCarcenter={favoriteCarcenter}/>
-      </div>
-      <div>
-        <CardBody favoriteCarcenter={favoriteCarcenter} 
-          />
+    <div  className={styles.flexCenter}>
+      <div className={styles.MainRepairshopComponent}>
+        <div>
+          <CardHead favoriteCarcenter={favoriteCarcenter} />
+        </div>
+        <div>
+          <CardBody favoriteCarcenter={favoriteCarcenter} />
+        </div>
       </div>
     </div>
   );

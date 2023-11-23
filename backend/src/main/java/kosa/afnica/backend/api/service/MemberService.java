@@ -33,6 +33,6 @@ public interface MemberService {
     //정비소 목록 출력
     List<Member> findCarcenter();
 
-    void updatePw(HttpServletRequest request, MemberEditPwReqDto memberEditPwResDto);
+    void updatePw(MemberEditPwReqDto memberEditPwResDto);
 
 }

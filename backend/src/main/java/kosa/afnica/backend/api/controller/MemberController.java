@@ -120,14 +120,18 @@ public class MemberController {
 
     @Operation(summary = "(비밀번호) 이메일 인증 - 인증번호 요청 API", description = "이메일 중복 검사 및 인증번호 이메일로 전송")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 Email 입니다존재하지 않는 Email 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "500", description = "이메일 전송에 실패했습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @PostMapping("/passwoed")
     public ResponseEntity<Void> getPwVeriCode(@RequestBody EmailVerificationDto emailVerificationDto) throws Exception {
 
-        mailService.sendMessage(emailVerificationDto.getVeriEmail());
-
-        return ResponseEntity.ok(null);
+        if(memberService.existEmail(emailVerificationDto.getVeriEmail())) {
+            throw new CustomException(ErrorCode.EMAIL_NOT_FOUND);
+        } else {
+            mailService.sendMessage(emailVerificationDto.getVeriEmail());
+            return ResponseEntity.ok(null);
+        }
     }
 
     @Operation(summary = "(비밀번호) 이메일 인증 - 인증번호 비교 API", description = "입력된 인증번호와 생성된 인증번호 비교")
@@ -141,10 +145,8 @@ public class MemberController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Void> updatePw(HttpServletRequest request, @RequestBody MemberEditPwReqDto memberEditPwReqDto) {
-        memberService.updatePw(request, memberEditPwReqDto);
+    public ResponseEntity<Void> updatePw(@RequestBody MemberEditPwReqDto memberEditPwReqDto) {
+        memberService.updatePw(memberEditPwReqDto);
         return ResponseEntity.ok(null);
-
-
     }
 }

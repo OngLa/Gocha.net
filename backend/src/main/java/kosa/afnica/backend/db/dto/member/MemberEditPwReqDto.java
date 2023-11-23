@@ -7,5 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemberEditPwReqDto {
 
+    private String email;
     private String password;
 }

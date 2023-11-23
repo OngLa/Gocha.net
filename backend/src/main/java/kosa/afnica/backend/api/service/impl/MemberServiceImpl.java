@@ -114,9 +114,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void updatePw(HttpServletRequest request, MemberEditPwReqDto memberEditPwReqDto) {
-        String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
-        Member member = memberMapper.findByEmail(userEmail).get();
+    public void updatePw(MemberEditPwReqDto memberEditPwReqDto) {
+        Member member = memberMapper.findByEmail(memberEditPwReqDto.getEmail()).get();
         String encodePw = passwordEncoder.encode(memberEditPwReqDto.getPassword());
         member.updateMember(encodePw);
         memberMapper.update(member);

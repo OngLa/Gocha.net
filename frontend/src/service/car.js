@@ -59,7 +59,6 @@ export const deleteCar = async (carId) => {
 
 export const getCarDataList = async (req) => {
   try {
-    console.log(req);
     const response = await axios.get("/car-data/data-list", {
       params: {
         carId: req.carId,
@@ -67,10 +66,9 @@ export const getCarDataList = async (req) => {
         endDate: req.endDate,
       },
     });
-
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw error.response.data;
   }
 };
 

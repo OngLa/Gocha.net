@@ -74,7 +74,7 @@ function CarRegister() {
       Swal.fire({
         title: "차량이 등록 되었습니다.",
         text: `${carNumber}, ${carTypes[selectedCar].name}`,
-        icon: "question",
+        icon: "success",
         confirmButtonColor: "#3085d6",
         confirmButtonText: "확인",
       }).then(async (result) => {

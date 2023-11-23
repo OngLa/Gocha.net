@@ -83,4 +83,18 @@ public class ReservationController {
 
         return reservationService.findReservationUserList(request);
     }
+
+    //ADMIN state 업데이트
+    @Operation(summary = "예약자 목록 불러오기 API", description = "얘약자 목록 불러오기 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationResDto.class)))),
+            @ApiResponse(responseCode = "404", description = "예약 목록이 존재하지 않습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
+    @PutMapping("/bookerlist")
+    public void updateState(@RequestBody AdminDto adminDto){
+        log.info("확인");
+        log.info(String.valueOf(adminDto.getId()));
+        reservationService.updateState(adminDto);
+    }
 }

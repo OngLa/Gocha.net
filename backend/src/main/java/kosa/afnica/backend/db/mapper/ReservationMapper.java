@@ -24,4 +24,7 @@ public interface ReservationMapper {
 
     //AdDMIN 예약자 출력
     public List<AdminDto> findReservationBycarcenter(Long carcenterId);
+
+    //AdDMIN state 업데이트
+    void updateState(AdminDto adminDto);
 }

@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import kosa.afnica.backend.api.service.CarService;
 import kosa.afnica.backend.config.exception.ErrorResponse;
+import kosa.afnica.backend.config.security.JwtUtil;
 import kosa.afnica.backend.db.dto.car.BrandResDto;
 import kosa.afnica.backend.db.dto.car.CarReqDto;
 import kosa.afnica.backend.db.dto.car.CarResDto;
@@ -103,7 +104,10 @@ public class CarController {
     })
     @GetMapping("/car-list")
     public ResponseEntity<List<CarResDto>> getCarList(HttpServletRequest request) {
-        List<CarResDto> resDtoList = carService.findAllCarByMemberId(request);
+        // Token으로부터 Email 얻어오기
+        String loginMember = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
+
+        List<CarResDto> resDtoList = carService.findAllCarByMemberId(loginMember);
 
         return ResponseEntity.ok(resDtoList);
     }

@@ -36,9 +36,9 @@
         VALUES (#{id}, #{carNumber}, #{cartypeId}, #{memberId})
     </insert>
 
-    <!--  MemberId를 기반으로 모든 CarId, CartypeName, Car Photo 조회  -->
+    <!--  MemberId를 기반으로 모든 CarId, CarNumber, CartypeName, Car Photo 조회  -->
     <select id="findAllCarByMemberId" parameterType="Long" resultType="carResDto">
-        SELECT c.ID AS CAR_ID, ct.LOGO, ct.NAME AS CAR_NAME
+        SELECT c.ID AS CAR_ID, c.CAR_NUMBER, ct.LOGO, ct.NAME AS CAR_NAME
         FROM CAR c
                  JOIN CAR_TYPE ct ON c.CARTYPE_ID = ct.ID
         WHERE c.MEMBER_ID = #{memberId}

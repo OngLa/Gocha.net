@@ -34,19 +34,3 @@
   padding: 0px 20px;
   margin-top: 50px;
 }
-
-.valid {
-  font-size: 15px;
-  color: green;
-  margin: 0px 30px;
-  display: flex;
-  justify-content: center;
-}
-
-.invalid {
-  font-size: 15px;
-  color: red;
-  margin: 0px 30px;
-  display: flex;
-  justify-content: center;
-}

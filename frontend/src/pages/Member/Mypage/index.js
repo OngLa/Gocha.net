@@ -56,7 +56,7 @@ function Mypage() {
 
   // 비밀번호 수정 페이지로 이동
   const handleEditPassword = () => {
-    navigate("/member/editPw", { state: { email: mypage.email } });
+    navigate("/member/emailCheck");
   };
 
   // 회원탈퇴 처리

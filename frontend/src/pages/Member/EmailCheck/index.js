@@ -78,14 +78,8 @@ function EmailCheck() {
       }
     } catch (error) {
       // 이메일 검증 실패시 오류 메시지 표시
-      if (error.response && error.response.status === 409) {
-        // 서버에서 409 코드로 응답했을 때, 이미 사용 중인 이메일임을 나타냄
-        setEmailCheckApplyResult("이미 사용 중인 이메일입니다.");
-      } else {
-        // 기타 오류 처리
-        setEmailCheckApplyResult("이메일 인증에 실패했습니다.");
-        console.log("이메일 인증 실패", error);
-      }
+      setEmailCheckApplyResult("이미 사용 중인 이메일입니다.");
+      console.log("이메일 인증 실패", error);
     }
   };
 

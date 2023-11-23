@@ -2,13 +2,12 @@ import CardBody from "./CardBody";
 
 
 
-function ReservationComponent({list}) {
+function ReservationComponent({list, refreshList}) {
 
   return (
-       //예약목록 출력
      <div>
          {list.map((reservationList) => (
-        <CardBody key={reservationList.id} reservationList={reservationList} />
+        <CardBody key={reservationList.id} reservationList={reservationList} refreshList={refreshList}/>
       ))}      
       </div>
   );

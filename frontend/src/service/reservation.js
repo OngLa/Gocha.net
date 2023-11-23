@@ -41,7 +41,6 @@ export function readReservationUserList(){
 }
 
   //ADMIN 진행상태 업데이트
-export function updateState(reservationId){
-  return axios.put("/member/reservation/bookerlist"+reservationId);
-}
-
+  export function updateState(data) {
+    return axios.put(`/member/reservation/bookerlist`, data);
+  }

@@ -1,11 +1,13 @@
 import Swal from "sweetalert2";
-import { SmallButton } from "../../../components/Button";
+import { SmallButton2 } from "../../../components/Button";
+import carcenterIcon from "../../../img/chatting/carcenterIcon.png";
 import styles from "./reservationComponent.module.css";
 import { deleteReservation } from "../../../service/reservation";
+// import { Link } from "react-router-dom";
 
-function CardBody({ reservationList }) {
-  
-  //예약 삭제 
+function CardBody({ reservationList, refreshList }) {
+
+  //예약 취소
   async function handelCancleButton() {
   try {
     const result = await Swal.fire({
@@ -17,66 +19,87 @@ function CardBody({ reservationList }) {
       confirmButtonColor: "#45CB85",
       cancelButtonText: "아니오",
     });
-    if (result.isConfirmed) {
-      await deleteReservation(reservationList.id);
-      Swal.fire({
-        icon: "success",
-        title: "요청이 정상 처리 되었습니다.",
-        confirmButtonColor: "#45CB85",
-      });
-      
+  
+      if (result.isConfirmed) {
+        await deleteReservation(reservationList.id);
+        Swal.fire({
+          icon: "success",
+          title: "요청이 정상 처리 되었습니다.",
+          confirmButtonColor: "#45CB85",
+        });
+      }
+      await refreshList();
+    } catch (error) {
+      console.error("예약 취소 중 오류 발생:", error);
     }
-  } catch (error) {
-    console.error("예약 취소 중 오류 발생:", error);
   }
-}
- 
 
-//상태값 0,1,2를 문자열 예약대기중,정비중, 정비완료로 바꾸는 로직
-const renderStatusText = (status) => {
-  switch (status) {
+// 상태값에 따라 문자열과 색상 변경
+const renderStatusText = (state) => {
+  let text;
+  let className;
+
+  switch (state) {
     case 0:
-      return '예약 대기중';
+      text = "승인대기중";
+      className = styles.statusPending;
+      break;
+    case 1:
+      text = "승인됨";
+      className = styles.statusInProgress;
+      break;
+    case 2:
+      text = "정비완료";
+      className = styles.statusCompleted;
+      break;
+    case 3:
+      text = "취소됨";
+      className = styles.statusRejected;
+      break;
     default:
-      return status; 
+      text = "오류";
+      className = styles.statusError;
   }
-};
-
-//carcenterId값에 따라 지점명 입력
-const renderCarcenterIdText = (carcenterId) => {
-  switch (carcenterId) {
-    case 100002:
-      return '서울점';
-      case 100003:
-      return '인천점';
-      case 100004:
-      return '경기도점';
-    default:
-      return carcenterId; 
-  }
+  // 상태 텍스트와 클래스를 span 엘리먼트에 적용하여 반환
+  return <span className={className}>{text}</span>;
 };
 
   return (
-    <div className={styles.cardBody}>
-      <div className={styles.imgWrap}>
-        <img
-          src={`https://source.boringavatars.com/beam/${reservationList.id}?colors=4D433D,525C5A,56877D,8CCC81,BADE57`}
-          alt="User"
-        />
-        <div>
-          지점명 : {renderCarcenterIdText(reservationList.carcenterId)}
-          <br/>
-          예약날짜 :<br/>{reservationList.reservedDate} 
-          <br/>
-          상태 : <span style={{color:"#FFA500"}}>{renderStatusText(reservationList.state)}</span>
+    // <Link
+    //   to={`/chatting/chatroominfo?carcenterId=${reservationList.carcenterId}&carcenterName=${reservationList.carcenterName}`}
+    //   style={{ textDecoration: "none" }}
+    // >
+      <div className={styles.cardBody}>
+        <div className={styles.imgWrap}>
+          <img
+            // src={`https://source.boringavatars.com/beam/${reservationList.id}?colors=4D433D,525C5A,56877D,8CCC81,BADE57`}
+            src={carcenterIcon}
+            alt="User"
+          />
+          <div>
+            지점명 : {reservationList.carcenterName}
+            <br />
+            예약날짜 :<br />
+            {reservationList.reservedDate}
+            <br />
+            상태 :{" "}
+            <span style={{ color: "#FFA500" }}>
+              {renderStatusText(reservationList.state)}
+            </span>
+          </div>
+          {reservationList.state === 0 ? (
+            <SmallButton2
+              style={{ marginLeft: "10px", cursor: "pointer" }}
+              onClick={handelCancleButton}
+            >
+              예약취소
+            </SmallButton2>
+          ) : (
+            <div></div>
+          )}
         </div>
-        <SmallButton
-          style={{ marginLeft: "10px", cursor: "pointer" }}
-          onClick={handelCancleButton}>
-          예약취소
-        </SmallButton>
       </div>
-    </div>
+    // </Link>
   );
 }
 export default CardBody;

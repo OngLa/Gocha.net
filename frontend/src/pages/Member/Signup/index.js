@@ -174,6 +174,9 @@ function Signup() {
       return Swal.fire({
         icon: "warning",
         title: "모든 항목을 입력해주세요.",
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
         confirmButtonColor: "#45CB85",
       });
     } else if (
@@ -187,8 +190,10 @@ function Signup() {
         icon: "warning",
         title: "일치하지 않은 항목이 있습니다.",
         html: "- 비밀번호: 영문, 숫자, 특수기호 조합으로 8자리 이상 입력해 주세요.<br>- 닉네임: 1글자 이상 9글자 미만으로 입력해 주세요.(특수 문자 제외)<br>- 전화번호: 휴대전화번호가 정확한지 확인해 주세요.",
-        confirmButtonColor: "#45CB85",
         width: 600,
+        background: "#334E58",
+        color: "#FFDA47",
+        confirmButtonColor: "#45CB85",
       });
     } else {
       handleSubmit();
@@ -196,6 +201,9 @@ function Signup() {
       Swal.fire({
         icon: "success",
         title: "회원가입이 완료되었습니다.",
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
         confirmButtonColor: "#45CB85",
       });
       navigate("/member/login");

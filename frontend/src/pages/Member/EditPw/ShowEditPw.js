@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import ContentHeader from "../../../components/ContentHeader";
 import style from "./showEditPw.module.css";
 import LargeButton from "../../../components/Button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import passworIcon from "../../../img/member/password.png";
 import confirmPasswordIcon from "../../../img/member/password.png";
 import Swal from "sweetalert2";
@@ -11,12 +11,16 @@ import { editPw } from "../../../service/member";
 // 비밀번호 수정 컴포넌트
 function ShowEditPw() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const initialEmail = location.state && location.state.email;
 
   // 각 항목의 초기 상태 설정
+  const [veriEmail, setVeriEmail] = useState(initialEmail);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   // 비밀번호 유효성 검사 함수
+  
   const validatePwd = (password) => {
     return password.match(
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/
@@ -64,23 +68,37 @@ function ShowEditPw() {
 
   // 수정 완료 버튼 클릭 핸들러
   const handleEditComplete = async () => {
+    console.log("이메일 : ", veriEmail);
     try {
       // 항목 전부 입력해야 수정 가능
       if (!password || !confirmPassword) {
         Swal.fire({
           icon: "warning",
           title: "모든 항목을 입력해주세요.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
         });
       } else if (password !== confirmPassword) {
         Swal.fire({
           icon: "warning",
           title: "비밀번호와 비밀번호 확인이 일치하지 않습니다.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
         });
       } else {
         // 서버에 비밀번호 변경 요청
-        const requestData = { password: password };
+        const requestData = {
+          email: veriEmail,
+          password: password,
+        };
+        
+        console.log(requestData);
         await editPw(requestData);
 
         console.log("비밀번호 변경 성공", requestData.data);
@@ -89,7 +107,11 @@ function ShowEditPw() {
         Swal.fire({
           icon: "success",
           title: "비밀번호가 변경되었습니다.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
         });
 
         navigate("/");
@@ -98,9 +120,13 @@ function ShowEditPw() {
       // 비밀번호 변경 실패 시 오류 메시지 출력
       console.log("비밀번호 변경 실패", error);
       Swal.fire({
-        icon: "success",
+        icon: "warning",
         title: "비밀번호 변경에 실패하였습니다.",
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
         confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
       });
     }
   };
@@ -108,7 +134,7 @@ function ShowEditPw() {
   return (
     <div>
       {/* 페이지 상단에 위치하는 콘텐츠 헤더 */}
-      <ContentHeader menuName="비밀번호 수정"></ContentHeader>
+      <ContentHeader menuName="비밀번호 변경"></ContentHeader>
 
       {/* 비밀번호 입력 부분 */}
       <div className={style.memberBox}>

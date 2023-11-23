@@ -1,4 +1,11 @@
-.memberBox {
+.information{
+  color: white;
+  font-size: 17px;
+  padding: 20px 15px;
+  line-height: 2;
+}
+
+.emailBox {
   width: 90%;
   height: 40px;
   margin: 20px;
@@ -8,37 +15,45 @@
   border-radius: 10px;
 }
 
-.imgWrap {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.memberImg {
+.emailImg {
+  width: 22px;
+  height: 19px;
   margin: 10px;
 }
 
-.memberInput {
-  width: calc(100% - 80px);
+.emailInput {
+  width: calc(100% - 110px);
   height: 35px;
   border: none;
   padding: 0px 10px;
 }
 
-.SmallButtonWrap {
-  display: flex;
-  justify-content: flex-end;
-  width: 90%;
-  padding: 0px 20px;
-  margin-bottom: 50px;
-}
-
-.LargeButtonWrap {
+.EmailCheckApplyBtn, .nextBtn {
+  margin: 50px 0px;
   display: flex;
   justify-content: center;
-  width: 90%;
-  padding: 0px 20px;
-  margin-top: 50px;
+}
+
+.EmailCheckNumBtn {
+  border: none;
+  margin: 0px 5px;
+  font-size: 14px;
+  background-color: white;
+  color: #45cb85;
+}
+
+.result {
+  font-size: 15px;
+  color: red;
+  margin: 0px 30px 50px 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.EmailCheckApplyBtn {
+  margin-bottom: 40px;
+}
+
+.nextBtn {
+  margin: 30px;
 }

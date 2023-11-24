@@ -13,21 +13,38 @@ function CardBody({ reservationList, refreshList }) {
   async function handelCancleButton() {
     try {
       const result = await Swal.fire({
-        icon: "question",
-        title: "정말로 예약취소하시겠습니까?",
-        text: "취소 시, 예약정보가 사라집니다.",
-        showCancelButton: true,
-        confirmButtonText: "예",
+        // 수정x
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
         confirmButtonColor: "#45CB85",
-        cancelButtonText: "아니오",
+        cancelButtonColor: "gray",
+
+        // 커스텀
+        title: "취소하시겠습니까?",
+        text: "예약이 취소됩니다.",
+        icon: "question", // 표시할 아이콘(error, info, question, success, warning)
+        confirmButtonText: "예", // Ok 대신에 쓸 텍스트
+        cancelButtonText: "아니오", // cancel 대신에 쓸 텍스트
+        showCancelButton: true, // cancel 표시 유무
       });
 
       if (result.isConfirmed) {
         await deleteReservation(reservationList.id);
         Swal.fire({
-          icon: "success",
-          title: "요청이 정상 처리 되었습니다.",
-          confirmButtonColor: "#45CB85",
+           // 수정x
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
+        // 커스텀
+        title: "요청이 정상 처리 되었습니다.",
+        icon: "success", // 표시할 아이콘(error, info, question, success, warning)
+        confirmButtonText: "예", // Ok 대신에 쓸 텍스트
+        cancelButtonText: "아니오", // cancel 대신에 쓸 텍스트
+        showCancelButton: true, // cancel 표시 유무
         });
       }
       await refreshList();
@@ -56,7 +73,7 @@ function CardBody({ reservationList, refreshList }) {
         className = styles.statusCompleted;
         break;
       case 3:
-        text = "취소됨";
+        text = "예약거절됨";
         className = styles.statusRejected;
         break;
       default:
@@ -103,15 +120,16 @@ function CardBody({ reservationList, refreshList }) {
         {reservationList.state === 0 ? (
           <div className={styles.button}>
             <SmallButton2 onClick={handelCancleButton}>예약취소</SmallButton2>
-        <div onClick={pageMoveText} className={styles.chatHistory}>
-          상세정보보기
-        </div>
+            <div onClick={pageMoveText} className={styles.chatHistory}>
+              상세정보보기
+            </div>
           </div>
         ) : (
-          <div><SmallButton onClick={pageMoveText}>상세정보</SmallButton></div>
+          <div>
+            <SmallButton onClick={pageMoveText}>상세정보</SmallButton>
+          </div>
         )}
       </div>
-      
     </div>
     // </Link>
   );

@@ -3,26 +3,42 @@ import { SmallButton, SmallButton2 } from "../../../components/Button";
 import { deleteFavoriteCarcenter } from "../../../service/reservation";
 import styels from "./MainRepairshopComponent.module.css";
 
-function CardBody({ favoriteCarcenter, refreshList}) {
-
+function CardBody({ favoriteCarcenter, refreshList }) {
   //주 정비소 삭제
   async function deleteClick() {
     try {
       const result = await Swal.fire({
-        icon: "question",
-        title: "정말로 예약취소하시겠습니까?",
-        text: "취소 시, 예약정보가 사라집니다.",
-        showCancelButton: true,
-        confirmButtonText: "예",
+        // 수정x
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
         confirmButtonColor: "#45CB85",
-        cancelButtonText: "아니오",
+        cancelButtonColor: "gray",
+
+        // 커스텀
+        title: "삭제하시겠습니까?",
+        text: "주정비소에서 삭제됩니다.",
+        icon: "question", // 표시할 아이콘(error, info, question, success, warning)
+        confirmButtonText: "예", // Ok 대신에 쓸 텍스트
+        cancelButtonText: "아니오", // cancel 대신에 쓸 텍스트
+        showCancelButton: true, // cancel 표시 유무
       });
       if (result.isConfirmed) {
         await deleteFavoriteCarcenter(favoriteCarcenter.id);
         Swal.fire({
-          icon: "success",
-          title: "요청이 정상 처리 되었습니다.",
+          // 수정x
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
+
+          // 커스텀
+          title: "요청이 정상 처리 되었습니다.",
+          icon: "success", // 표시할 아이콘(error, info, question, success, warning)
+          confirmButtonText: "예", // Ok 대신에 쓸 텍스트
+          cancelButtonText: "아니오", // cancel 대신에 쓸 텍스트
+          showCancelButton: true, // cancel 표시 유무
         });
       }
       await refreshList();

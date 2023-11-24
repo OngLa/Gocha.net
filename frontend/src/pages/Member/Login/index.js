@@ -89,9 +89,14 @@ function Login() {
         console.log(error);
 
         return Swal.fire({
-          icon: "error",
-          title: "아이디 또는 비밀번호가 일치하지 않습니다.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+  
+          text: "아이디 또는 비밀번호가 일치하지 않습니다.",
+          icon: "error",
+          confirmButtonText: "확인",
         });
       }
     }

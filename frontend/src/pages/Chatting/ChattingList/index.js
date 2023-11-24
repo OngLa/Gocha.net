@@ -28,7 +28,7 @@ function ChattingList() {
           width: "80vw",
           confirmButtonColor: "#45CB85",
   
-          text: error.message,
+          text: error.response.data.message,
           icon: "warning",
           confirmButtonText: "확인",
         });

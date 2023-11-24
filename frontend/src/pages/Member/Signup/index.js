@@ -172,12 +172,15 @@ function Signup() {
 
     if (!email || !password || !confirmPassword || !nickname || !phoneNumber) {
       return Swal.fire({
-        icon: "warning",
-        title: "모든 항목을 입력해주세요.",
         background: "#334E58",
         color: "#FFDA47",
         width: "80vw",
         confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
+        icon: "warning",
+        text: "모든 항목을 입력해주세요.",
+        confirmButtonText: "확인",
       });
     } else if (
       !isPwdValid ||
@@ -187,24 +190,30 @@ function Signup() {
       nicknameMsg === "red"
     ) {
       return Swal.fire({
-        icon: "warning",
-        title: "일치하지 않은 항목이 있습니다.",
-        html: "- 비밀번호: 영문, 숫자, 특수기호 조합으로 8자리 이상 입력해 주세요.<br>- 닉네임: 1글자 이상 9글자 미만으로 입력해 주세요.(특수 문자 제외)<br>- 전화번호: 휴대전화번호가 정확한지 확인해 주세요.",
-        width: 600,
         background: "#334E58",
         color: "#FFDA47",
+        width: "80vw",
         confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
+        icon: "warning",
+        text: "일치하지 않은 항목이 있습니다.",
+        html: "- 비밀번호: 영문, 숫자, 특수기호 조합으로 8자리 이상 입력해 주세요.<br>- 닉네임: 1글자 이상 9글자 미만으로 입력해 주세요.(특수 문자 제외)<br>- 전화번호: 휴대전화번호가 정확한지 확인해 주세요.",
+        confirmButtonText: "확인"
       });
     } else {
       handleSubmit();
 
       Swal.fire({
-        icon: "success",
-        title: "회원가입이 완료되었습니다.",
         background: "#334E58",
         color: "#FFDA47",
         width: "80vw",
         confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
+        icon: "success",
+        text: "회원가입이 완료되었습니다.",
+        confirmButtonText: "확인"
       });
       navigate("/member/login");
     }

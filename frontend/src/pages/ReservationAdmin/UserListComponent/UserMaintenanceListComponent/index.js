@@ -49,8 +49,19 @@ function UserMaintenanceList({ list, refreshList }) {
         await refreshList();
       }
     } catch (error) {
-      console.error("상태 업데이트 중 오류 발생:", error);
-      Swal.fire("오류", "상태 업데이트 중 오류가 발생했습니다.", "error");
+      Swal.fire({
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
+        text: "상태 업데이트 중 오류가 발생했습니다.",
+        icon: "error",
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+        showCancelButton: true,
+        });
     }
   }
 
@@ -59,15 +70,15 @@ function UserMaintenanceList({ list, refreshList }) {
     try {
       const result = await Swal.fire({
          // 수정x
-         background: "#334E58",
-         color: "#FFDA47",
-         width: "80vw",
-         confirmButtonColor: "#45CB85",
-         cancelButtonColor: "gray",
- 
-         // 커스텀
-         title: "취소 하시겠습니까",
-         text: "취소사유 작성 페이지로 이동됩니다",
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
+        // 커스텀
+        title: "취소 하시겠습니까",
+        text: "취소사유 작성 페이지로 이동됩니다",
          icon: "question", // 표시할 아이콘(error, info, question, success, warning)
          confirmButtonText: "거절", // Ok 대신에 쓸 텍스트
          cancelButtonText: "취소", // cancel 대신에 쓸 텍스트
@@ -98,8 +109,19 @@ function UserMaintenanceList({ list, refreshList }) {
         );
       }
     } catch (error) {
-      console.error("상태 업데이트 중 오류 발생:", error);
-      Swal.fire("오류", "상태 업데이트 중 오류가 발생했습니다.", "error");
+      Swal.fire({
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
+        text: "상태 업데이트 중 오류가 발생했습니다.",
+        icon: "error",
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+        showCancelButton: true,
+        });
     }
   }
 

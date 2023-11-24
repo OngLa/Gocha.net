@@ -34,30 +34,30 @@ function Home() {
   //랜더링 화면위치, 스크롤 로직
 
   // 화면 로딩 시 최하단 화면으로 시작
-  function scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight); // 수직 스크롤을 문서의 높이로 이동
-  }
+  // function scrollToBottom() {
+  //   window.scrollTo(0, document.body.scrollHeight); // 수직 스크롤을 문서의 높이로 이동
+  // }
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [userlist]);
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [userlist]);
 
-  //스크롤 로직
-  function moveToTop() {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  }
+  // //스크롤 로직
+  // function moveToTop() {
+  //   window.scroll({
+  //     top: 0,
+  //     left: 0,
+  //     behavior: "smooth",
+  //   });
+  // }
 
-  function moveToBottom() {
-    window.scroll({
-      top: document.body.scrollHeight,
-      left: 0,
-      behavior: "smooth",
-    });
-  }
+  // function moveToBottom() {
+  //   window.scroll({
+  //     top: document.body.scrollHeight,
+  //     left: 0,
+  //     behavior: "smooth",
+  //   });
+  // }
   // ================================================================//
   //필터
 
@@ -174,7 +174,7 @@ function Home() {
       {/* ================================================================ */}
       {/* 스크롤 로직 */}
 
-      <img
+      {/* <img
         src={imgMoveTop}
         alt="scroll"
         className={styles.scrollToTop}
@@ -185,7 +185,7 @@ function Home() {
         alt="scroll"
         className={styles.scrollToBottom}
         onClick={moveToBottom}
-      />
+      /> */}
       {/* ================================================================ */}
     </div>
   );

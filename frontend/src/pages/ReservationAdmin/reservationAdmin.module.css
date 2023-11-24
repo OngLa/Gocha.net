@@ -48,7 +48,7 @@
   flex-wrap: wrap;
   gap: 15px;
   margin-bottom: 15px;
-  border: 2px solid #45cb85;;
+  border: 1.5px solid #45cb85;;
   padding: 10px;
 }
 
@@ -63,16 +63,14 @@
 .statusFilter {
   padding: 10px 0;
   border: 1px solid #45cb85;
-  background-color: transparent;
-  color: #fff;
+  background-color: #4e5f6f;
 }
 
 /* 검색 필드 스타일 */
 .searchInput {
   padding: 10px 0; /* 패딩 조정 */
   border: 1px solid #45cb85; /* 녹색 테두리 */
-  background-color: transparent; /* 배경색 투명 */
-  color: white; /* 텍스트 색상 */
+  background-color: #4e5f6f; /* 배경색 투명 */
   font-size: 15px; /* 글자 크기 */
 }
 
@@ -80,9 +78,8 @@
 .dateInput {
   padding: 10px 10px; /* 패딩 조정 */
   border: 1px solid #45cb85; /* 녹색 테두리 */
-  background-color: transparent;
+  background-color: #4e5f6f;
   font-size: 16px; /* 글자 크기 */
-  color: white; /* 텍스트 색상 */
   
 }
 

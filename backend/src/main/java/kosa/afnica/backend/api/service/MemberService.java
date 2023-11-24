@@ -34,6 +34,10 @@ public interface MemberService {
     //정비소 목록 출력
     List<Member> findCarcenter();
 
+    // 인증번호 갱신
     void updatePw(MemberEditPwReqDto memberEditPwResDto);
+
+    // 회원탈퇴
+    void deleteMember(HttpServletRequest request);
 
 }

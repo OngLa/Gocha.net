@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ContentHeader from "../../../components/ContentHeader";
 import searchIcon from "../../../img/chatting/searchIcon.png";
 import { getChattingCarcenter } from "../../../service/chatting";
+import Swal from "sweetalert2";
 
 function ChattingList() {
   // [고객 채팅목록 페이지]
@@ -21,6 +22,16 @@ function ChattingList() {
         setCarcenterList(response.data);
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+  
+          text: error.message,
+          icon: "warning",
+          confirmButtonText: "확인",
+        });
       }
     };
     lodingChatting();

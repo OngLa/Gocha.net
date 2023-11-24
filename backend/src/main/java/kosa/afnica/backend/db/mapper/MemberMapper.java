@@ -47,5 +47,8 @@ public interface MemberMapper {
     //정비소 목록 출력
     List<Member> findCarcenterByRole();
 
+    // Email 기반으로 ID 찾기
+    Optional<Long> findIdByEmail(String email);
+
 
 }

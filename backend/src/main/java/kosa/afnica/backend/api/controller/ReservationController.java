@@ -9,8 +9,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import kosa.afnica.backend.api.service.ReservationService;
 import kosa.afnica.backend.config.exception.ErrorResponse;
 import kosa.afnica.backend.db.dto.reservation.AdminDto;
-import kosa.afnica.backend.db.dto.reservation.ReservationDto;
 import kosa.afnica.backend.db.dto.reservation.ReservationReqDto;
+import kosa.afnica.backend.db.dto.reservation.ReservationResDto;
+import kosa.afnica.backend.db.dto.reservation.AdminDto;
 import kosa.afnica.backend.db.entity.Reservation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,14 +34,14 @@ public class ReservationController {
     @Operation(summary = "예약목록 불러오기 API", description = "얘약목록 불러오기 API - 예약관리 클릭시 랜더링되는 예약목록 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationDto.class)))),
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationResDto.class)))),
             @ApiResponse(responseCode = "404", description = "예약 목록이 존재하지 않습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
 
     @GetMapping("/list")
-    public List<ReservationDto> getReservaionList(HttpServletRequest request) {
-
-        List<ReservationDto> reservationList = reservationService.findReservationList(request);
+    public List<ReservationResDto> getReservaionList(HttpServletRequest request) {
+        //유저 예약목록 출력
+        List<ReservationResDto> reservationList = reservationService.readReservationList(request);
 
         return reservationList;
     }
@@ -49,12 +50,12 @@ public class ReservationController {
     @Operation(summary = "예약하기 API", description = "예약하기 클릭시 db에 저장되는 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationDto.class)))),
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationResDto.class)))),
     })
     @PostMapping("")
-    public ResponseEntity<Void> postReservation(HttpServletRequest request, @RequestBody ReservationReqDto reservationReqDto) {
+    public ResponseEntity<Void> postReservation(HttpServletRequest request, @RequestBody ReservationReqDto reservationReqDto){
+        reservationService.createReservation(request,reservationReqDto);
 
-        reservationService.createReservation(request, reservationReqDto);
         return ResponseEntity.ok(null);
     }
 
@@ -74,13 +75,23 @@ public class ReservationController {
     @Operation(summary = "예약자 목록 불러오기 API", description = "얘약자 목록 불러오기 API")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationDto.class)))),
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationResDto.class)))),
             @ApiResponse(responseCode = "404", description = "예약 목록이 존재하지 않습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
-
     @GetMapping("/bookerlist")
     public List<AdminDto> getReservaionUserList(HttpServletRequest request) {
 
         return reservationService.findReservationUserList(request);
+    }
+
+    //ADMIN state 업데이트
+    @Operation(summary = "정비상태변경 api", description = "정비상태 변경하기 API")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationResDto.class)))),
+    })
+    @PutMapping("/bookerlist")
+    public void updateState(@RequestBody AdminDto adminDto){
+        reservationService.updateState(adminDto);
     }
 }

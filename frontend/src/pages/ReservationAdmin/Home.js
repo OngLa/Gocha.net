@@ -19,6 +19,15 @@ function Home() {
     }
   };
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // useEffect 리랜더링 함수
+  const refreshList = () => {
+    fetchData();
+  };
+
   // 화면 로딩 시 최하단 화면으로 시작
   function scrollToBottom() {
     window.scrollTo(0, document.body.scrollHeight); // 수직 스크롤을 문서의 높이로 이동
@@ -28,14 +37,6 @@ function Home() {
     scrollToBottom();
   }, [userlist]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  // useEffect 리랜더링 함수
-  const refreshList = () => {
-    fetchData();
-  };
   function moveToTop() {
     window.scroll({
       top: 0,

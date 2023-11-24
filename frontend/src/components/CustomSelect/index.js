@@ -1,11 +1,13 @@
+// import
+import React from "react";
 import styles from "./style.module.css";
 
+// CustomSelect Component
+// Props : items(출력할 List), value(Selector의 선택한 값의 상태), setValue(상태 처리 함수)
 function CustomSelect(props) {
-  // item : 출력할 List
-  // value : 선택받은 item의 key값
   const { items, value, setValue } = props;
 
-  // selector 선택에 따른 value 상태 변경
+  // selector 선택 시 호출되는 이벤트 헨들러 -> 선택된 값에 따른 value 상태 변경
   const handleValue = (e) => {
     setValue(e.target.value);
   };
@@ -26,15 +28,5 @@ function CustomSelect(props) {
   );
 }
 
-export default CustomSelect;
-
-// [
-//   {
-//     "carId": 0,
-//     "carName": "string",
-//     "logo": [
-//       "string"
-//     ],
-//     "photo": "string"
-//   }
-// ]
+// Component 최적화, Props 값의 변화에 따른 리랜더링 방지
+export default React.memo(CustomSelect);

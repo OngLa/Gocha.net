@@ -41,3 +41,8 @@ export function editPw(password) {
   return axios.put("/member/update", password);
 }
 
+// 회원탈퇴
+export function deleteMember() {
+  return axios.delete("/member/");
+}
+

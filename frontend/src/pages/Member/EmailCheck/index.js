@@ -90,7 +90,14 @@ function EmailCheck() {
       // 이메일 검증 실패시 오류 메시지 표시
       if (error.response && error.response.status === 409) {
         // 서버에서 409 코드로 응답했을 때, 이미 사용 중인 이메일임을 나타냄
-        setEmailCheckApplyResult("이미 사용 중인 이메일입니다.");
+        setEmailCheckApplyResult(
+          <div>
+            <div>이미 사용 중인 이메일입니다.</div>
+            <div>
+              탈퇴하신 계정과 중복되는 이메일인 경우 새로운 이메일 주소를 사용하여 주세요.
+            </div>
+          </div>
+        );
       } else {
         // 기타 오류 처리
         setEmailCheckApplyResult("이메일 인증에 실패했습니다.");
@@ -126,7 +133,11 @@ function EmailCheck() {
           <div className={style.menu}>
             <ContentHeader menuName="이메일 인증" />
           </div>
-
+          <div className={style.information}>
+            회원가입을 진행해 주셔서 감사합니다! <br />
+            이메일 인증에 사용되는 이메일은 회원가입에도 사용됩니다. <br />
+            이메일 주소가 정확한지 확인해주새요.
+          </div>
           {/* 이메일 확인 양식 */}
           <div className={style.emailWrap}>
             {/* 이메일을 입력하는 입력 필드 */}

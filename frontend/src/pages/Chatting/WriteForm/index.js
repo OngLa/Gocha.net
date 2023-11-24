@@ -127,9 +127,14 @@ function WriteForm(props) {
     } else {
       // 이쁜 Alert
       Swal.fire({
-        icon: "info",
-        title: "제목과 내용을 입력하세요.",
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
         confirmButtonColor: "#45CB85",
+
+        text: "제목과 내용을 입력하세요.",
+        icon: "info",
+        confirmButtonText: "확인",
       });
     }
   };

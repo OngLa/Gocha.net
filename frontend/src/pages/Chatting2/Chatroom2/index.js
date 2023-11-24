@@ -94,8 +94,6 @@ function Chatroom2(props) {
   };
   
   function moveToTop() {
-    // 부드럽게 스크롤 애니메이션
-    // document.body.scrollHeight
     window.scroll({
       top: 0,
       left: 0,
@@ -104,8 +102,6 @@ function Chatroom2(props) {
   }
 
   function moveToBottom() {
-    // 부드럽게 스크롤 애니메이션
-    // document.body.scrollHeight
     window.scroll({
       top: document.body.scrollHeight,
       left: 0,
@@ -145,7 +141,7 @@ function Chatroom2(props) {
           </div>
         )
       )}
-      <div className={style.SmallButtonWrap}>
+      <div className={style.largeButtonWrap}>
         <LargeButton
           children="작성하기"
           onClick={() => moveWrite()}

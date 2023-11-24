@@ -47,8 +47,6 @@ function ReservationList() {
 //   }, [list]);
 
 function moveToTop() {
-  // 부드럽게 스크롤 애니메이션
-  // document.body.scrollHeight
   window.scroll({
     top: 0,
     left: 0,
@@ -57,7 +55,6 @@ function moveToTop() {
 }
 
 function moveToBottom() {
-  // 부드럽게 스크롤 애니메이션
   // document.body.scrollHeight
   window.scroll({
     top: document.body.scrollHeight,
@@ -67,11 +64,11 @@ function moveToBottom() {
 }
 
   return (
-    <div>
+    <div className={styles.reservationList}>
       <div><ContentHeader menuName="예약목록" /></div>
       <div style={{display: "flex", flexDirection: "column", alignItems: "center",}}>
         <div><ReservationComponent list={list} /></div>
-        <div style={{ marginTop: "20px" }}><LargeButton onClick={handleNavOnClick}>새 예약 등록</LargeButton></div>
+        <div className={styles.largeButtonWrap}><LargeButton onClick={handleNavOnClick}>새 예약 등록</LargeButton></div>
       </div>
       <img
         src={imgMoveTop}

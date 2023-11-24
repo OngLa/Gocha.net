@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./writeForm2.module.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LargeButton from "../../../components/Button/index";
@@ -18,11 +18,13 @@ function WriteForm2(props) {
   const [searchParams] = useSearchParams();
   let userId = searchParams.get("userId");
   let userName = searchParams.get("userName");
+  let inputTitle = searchParams.get("inputTitle");
+  let noReservation = searchParams.get("noReservation");
 
   // message 객체 상태
   const [message, setMessage] = useState({
     toMemberId: userId,
-    title: "",
+    title: inputTitle || "",
     content: "",
     selectCar: "",
     isReservation: 0,
@@ -42,9 +44,14 @@ function WriteForm2(props) {
       }
     } else {
       Swal.fire({
-        icon: "info",
-        title: "제목과 내용을 입력하세요.",
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
         confirmButtonColor: "#45CB85",
+
+        text: "제목과 내용을 입력하세요.",
+        icon: "info",
+        confirmButtonText: "확인",
       });
     }
   };
@@ -77,8 +84,8 @@ function WriteForm2(props) {
           onChange={(e) => setMessage({ ...message, content: e.target.value })}
         ></textarea>
       </div>
-
-      <div className={style.isReservation}>
+      {/* 정비소 예약관리에서 거절사유 혹은 정비완료 시 이 작성폼을 사용하게되는데 이때 예약하기 안보이게함 */}
+      { noReservation !== '1' ? (<div className={style.isReservation}>
         <label>
           <input
             className={style.checkBoxInput}
@@ -94,7 +101,8 @@ function WriteForm2(props) {
           <span className={style.checkBoxLabel}></span>
         </label>
         <div className={style.isReservationText}>예약하기 활성화</div>
-      </div>
+      </div>) : (null)}
+      
 
       <div className={style.LargeButtonWrap}>
         <LargeButton

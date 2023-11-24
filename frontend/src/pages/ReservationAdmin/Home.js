@@ -46,11 +46,18 @@ function Home() {
       }
     };
     fetchData();
+  }, []);
+
+  // 화면 로딩 시 최하단 화면으로 시작
+  function scrollToBottom() {
+    window.scrollTo(0, document.body.scrollHeight); // 수직 스크롤을 문서의 높이로 이동
+  }
+
+  useEffect(() => {
+    scrollToBottom();
   }, [userlist]);
 
   function moveToTop() {
-    // 부드럽게 스크롤 애니메이션
-    // document.body.scrollHeight
     window.scroll({
       top: 0,
       left: 0,
@@ -59,8 +66,6 @@ function Home() {
   }
 
   function moveToBottom() {
-    // 부드럽게 스크롤 애니메이션
-    // document.body.scrollHeight
     window.scroll({
       top: document.body.scrollHeight,
       left: 0,

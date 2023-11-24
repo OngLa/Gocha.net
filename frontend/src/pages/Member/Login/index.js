@@ -2,7 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import style from "./login.module.css";
 import ContentHeader from "../../../components/ContentHeader";
 import { useCallback, useEffect, useState } from "react";
-import LargeButton, { SmallButton, SmallButton2 } from "../../../components/Button";
+import LargeButton, {
+  SmallButton,
+  SmallButton2,
+} from "../../../components/Button";
 import emailIcon from "../../../img/member/email.png";
 import passwordIcon from "../../../img/member/password.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -72,9 +75,14 @@ function Login() {
 
         //Alert 이쁘게
         Swal.fire({
-          icon: "success",
-          title: "로그인이 완료되었습니다.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+
+          icon: "success",
+          text: "로그인이 완료되었습니다.",
+          confirmButtonText: "확인",
         });
         navigate("/");
       } catch (error) {

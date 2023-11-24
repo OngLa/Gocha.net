@@ -47,15 +47,20 @@ function Info() {
         setIsLoading(false);
         // 차량이 존재하지 않는다면 alert
         Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          fontSize: "1px",
+          confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
+
           title: error.message,
           text: "차량을 등록하시겠습니까?",
-          icon: "warning",
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "등록",
-          cancelButtonText: "취소",
-
-          showCancelButton: true,
+          icon: "warning", // 표시할 아이콘(error, info, question, success, warning)
+          confirmButtonText: "등록", // Ok 대신에 쓸 텍스트
+          cancelButtonText: "취소", // cancel 대신에 쓸 텍스트
+          showCancelButton: true, // cancel 표시 유무
+          
         }).then((result) => {
           if (result.isConfirmed) {
             navigate("/car/registration");

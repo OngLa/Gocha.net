@@ -1,11 +1,12 @@
+
 spring:
   profiles:
     include: swagger, db
   mail:
     host: smtp.gmail.com
     port: 587
-    username:
-    password:
+    username: jisun4547@gmail.com
+    password: sntavnxwyqtsmvgk
     properties:
       mail:
         smtp:
@@ -16,3 +17,4 @@ spring:
           connectiontimeout: 5000
           timeout: 5000
           writetimeout: 5000
+

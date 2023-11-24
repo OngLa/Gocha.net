@@ -24,7 +24,7 @@
         SELECT A.ID, A.RESERVED_DATE, A.STATE, A.CARDATA_ID, A.CARCENTER_ID, B.NAME AS carcenter_name
         FROM RESERVATION A INNER JOIN MEMBER B ON A.carcenter_id = B.id
         where A.MEMBER_ID = #{memberId}
-        order By ID desc
+        order By RESERVED_DATE ASC
     </select>
 
     <!-- 예약 삭제 -->

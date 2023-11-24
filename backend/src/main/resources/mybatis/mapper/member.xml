@@ -24,7 +24,7 @@
                enabled,
                role
         from member
-        where email = #{email}
+        where email = #{email} AND enabled = 1
     </select>
 
     <!-- ID 기반으로 회원 정보 조회 -->

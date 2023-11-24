@@ -44,6 +44,7 @@ public enum ErrorCode {
 
     // 5xx Server Errors
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"),
+    SENDMESSAGE_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "글 작성에 실패하였습니다."),
 
     NOT_IMPLEMENTED(HttpStatus.NOT_IMPLEMENTED, "Not Implemented"),
 

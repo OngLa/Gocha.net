@@ -44,6 +44,16 @@ function Mypage() {
         setMypage(response.data);
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+
+          icon: "warning",
+          text: "잘못된 접근입니다.",
+          confirmButtonText: "확인",
+        });
       }
     };
     fetchUserData();

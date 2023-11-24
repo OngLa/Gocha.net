@@ -45,17 +45,23 @@
 
 .signupLinkBox {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin: 10px;
-  color: white;
+  color: #e7e7e7;
   border-radius: 10px;
   font-size: 15px;
 }
 
+.signupLinkBox > div { 
+  margin-bottom: 10px;
+}
+
 .signupLink {
   color: #47f6c1;
-  text-decoration: none;
   margin: 0px 7px;
+  text-decoration: underline;
 }
 
 .searchPw {

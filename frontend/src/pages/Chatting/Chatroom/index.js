@@ -7,6 +7,7 @@ import ChatPartnerProfile from "../components/ChatPartnerProfile";
 import { getChatroom } from "../../../service/chatting";
 import imgMoveBottom from "../../../img/icon/Caret_Down_MD.png";
 import imgMoveTop from "../../../img/icon/Caret_Up_MD.png";
+import Swal from "sweetalert2";
 
 function Chatroom(props) {
   // [고객과 정비소의 채팅방]

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import style from "./appHeader.module.css";
 import logo from "../../img/logo.png";
-import memberMenu from "../../img/navMenu/memberMenu.png";
+import loginIcon from "../../img/navMenu/loginIcon.png";
+import mypageIcon from "../../img/navMenu/mypageIcon.png";
 import { useSelector } from "react-redux";
 
 function AppHeader() {
@@ -27,7 +28,7 @@ function AppHeader() {
               <div>
                 <Link to="/member/login" className={style.memberWrap}>
                   <img
-                    src={memberMenu}
+                    src={loginIcon}
                     alt="Member"
                     className={style.MemberStyle}
                   />
@@ -37,7 +38,7 @@ function AppHeader() {
               <div>
                 <Link to="/member/mypage" className={style.memberWrap}>
                   <img
-                    src={memberMenu}
+                    src={mypageIcon}
                     alt="Member"
                     className={style.MemberStyle}
                   />

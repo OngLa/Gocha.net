@@ -100,7 +100,7 @@ public class MemberServiceImpl implements MemberService {
         } else { // 이메일 존재하면 -> 비교
             String storedCode = memberMapper.findCodeByEmail(veriEmail);
             if(storedCode.equals(veriCode)) {
-                log.info("이메일 인증 성공");
+                memberMapper.deleteCode(veriEmail, veriCode); // 인증이 완료되면 삭제 처리
             } else {
                 throw new CustomException(ErrorCode.CODE_NOT_FOUND);
             }
@@ -121,7 +121,14 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.update(member);
     }
 
+    @Override
+    public void deleteMember(HttpServletRequest request) {
+        String userEmail = JwtUtil.getEmail(request.getHeader("Authorization").substring(7));
+        Member member = memberMapper.findByEmail(userEmail)
+                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
 
+        memberMapper.delete(member);
+    }
 }
 
 

@@ -3,7 +3,7 @@ import { SmallButton, SmallButton2 } from "../../../components/Button";
 import { deleteFavoriteCarcenter } from "../../../service/reservation";
 import styels from "./MainRepairshopComponent.module.css";
 
-function CardBody({ favoriteCarcenter }) {
+function CardBody({ favoriteCarcenter, refreshList}) {
 
   //주 정비소 삭제
   async function deleteClick() {
@@ -25,6 +25,7 @@ function CardBody({ favoriteCarcenter }) {
           confirmButtonColor: "#45CB85",
         });
       }
+      await refreshList();
     } catch (error) {
       console.error("예약 취소 중 오류 발생:", error);
     }

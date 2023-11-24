@@ -86,8 +86,10 @@ public class ChattingServiceImpl implements ChattingService {
     @Override
     public void insertMessage(SendMessageReqDto sendMessageReqDto) {
         // 글 작성 - 메세지 저장
-        chattingMapper.saveMessage(sendMessageReqDto);
+        int insertCount = chattingMapper.saveMessage(sendMessageReqDto);
+        if (insertCount != 1) {
+            throw new CustomException(ErrorCode.SENDMESSAGE_SERVER_ERROR);
+        }
+
     }
-
-
 }

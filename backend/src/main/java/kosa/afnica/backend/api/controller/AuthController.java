@@ -58,10 +58,4 @@ public class AuthController {
 
         return ResponseEntity.ok(memberLoginResDto);
     }
-
-    // 코큰해독
-    //    @GetMapping("/brand")
-    //    public ResponseEntity<List<BrandResDto>> getBrandList(HttpServletRequest servletRequest) {
-    //        JwtUtil.getId(servletRequest.getHeader("Authencation"))
-    //                .getEmail();}
 }

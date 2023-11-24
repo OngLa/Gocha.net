@@ -32,5 +32,5 @@ public interface ChattingMapper {
 
     List<ChattingCarDataResDto> findAllCarDataByMemberId(Long memberId); // 글 작성 시 본인 차데이터 list 조회
 
-    void saveMessage(SendMessageReqDto sendMessageReqDto); // 글 작성 - 메세지 저장
+    int saveMessage(SendMessageReqDto sendMessageReqDto); // 글 작성 - 메세지 저장
 }

@@ -1,6 +1,6 @@
 package kosa.afnica.backend.api.service;
 
-import kosa.afnica.backend.db.dto.member.EmailVerificationDto;
+import kosa.afnica.backend.db.dto.member.MemberEditPwReqDto;
 import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 import kosa.afnica.backend.db.entity.Member;
@@ -34,5 +34,6 @@ public interface MemberService {
     //정비소 목록 출력
     List<Member> findCarcenter();
 
+    void updatePw(MemberEditPwReqDto memberEditPwResDto);
 
 }

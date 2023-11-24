@@ -12,8 +12,6 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.PostConstruct;
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -30,7 +28,7 @@ public class MailServiceImpl implements MailService {
     private final JavaMailSender emailSender;
 
     // 이메일 전송에 사용되는 이메일 발신자의 이메일 주소
-    private static final String senderEmail = "";
+    private static final String senderEmail = "noreply@gochanet.com";
 
     // 생성된 인증 번호를 저장하는 클래스 변수
     private String ePw;

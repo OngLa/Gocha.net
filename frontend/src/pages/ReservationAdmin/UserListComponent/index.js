@@ -53,7 +53,7 @@ function UserListComponent({ list, refreshList}) {
   };
 
   const pageMoveText = () => {
-    navigate(`/chatting2/chatroom2/:${list.id}?userName=${list.name}`);
+    navigate(`/chatting2/chatroom2?userId=${list.memberId}&userName=${list.name}`);
   };
   return (
     <div className={styles.UserListComponent}>

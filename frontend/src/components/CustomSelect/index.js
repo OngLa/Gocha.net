@@ -17,7 +17,7 @@ function CustomSelect(props) {
         <select value={value} onChange={handleValue}>
           {items.map((item, idx) => (
             <option key={idx} value={idx}>
-              {item.carName}
+              {`${item.carName}(${item.carNumber})`}
             </option>
           ))}
         </select>

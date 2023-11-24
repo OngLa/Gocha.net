@@ -40,3 +40,7 @@ export function readReservationUserList(){
   return axios.get("/member/reservation/bookerlist");
 }
 
+  //ADMIN 진행상태 업데이트
+  export function updateState(data) {
+    return axios.put(`/member/reservation/bookerlist`, data);
+  }

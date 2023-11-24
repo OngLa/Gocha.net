@@ -6,8 +6,7 @@ import happy from "../../../img/icon/happy.png";
 import sad from "../../../img/icon/sad.png";
 
 function GirdItemContent(props) {
-  const { tag, value, style, style2 } = props;
-
+  const { tag, value, style } = props;
 
   let content = value;
   const setContent = () => {
@@ -15,14 +14,13 @@ function GirdItemContent(props) {
       // type이 boolean 이면 아이콘
       content = (
         <img
-        className={styles.image}
-        src={value ? happy : sad}
-        alt={value ? happy : sad}
-
+          className={styles.image}
+          src={value ? happy : sad}
+          alt={value ? happy : sad}
         />
-        );
-        return value ? 2 : 3;
-      } else {
+      );
+      return value ? 2 : 3;
+    } else {
       // type이 숫자면 숫자와 tag에 따른 단위 표시
       content = (
         <NumberFormat
@@ -43,7 +41,9 @@ function GirdItemContent(props) {
       }`}
     >
       <div className={styles.tag}>{tag}</div>
-      <div className={styles.value} style={style}>{content}</div>
+      <div className={styles.value} style={style}>
+        {content}
+      </div>
     </div>
   );
 }

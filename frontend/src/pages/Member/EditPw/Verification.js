@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
-import style from "./findPwPage.module.css";
+import style from "./verification.module.css";
 import LargeButton from "../../../components/Button";
 import ContentHeader from "../../../components/ContentHeader";
 import emailIcon from "../../../img/member/email.png";
@@ -10,12 +10,14 @@ import { comparePwVeriCode, getPwVeriCode } from "../../../service/member";
 import Loading from "../../Loading";
 
 // 이메일 인증 컴포넌트
-function FindPwPage() {
+function Verification() {
   // React Router의 navigate 훅을 사용하기 위한 초기 설정
   const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state && location.state.email;
 
   // 이메일 및 인증 코드를 관리하기 위한 상태 변수
-  const [veriEmail, setVeriEmail] = useState("");
+  const [veriEmail, setVeriEmail] = useState(email);
   const [veriCode, setVeriCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,11 +32,8 @@ function FindPwPage() {
     const { name, value } = event.target;
 
     // 입력 필드에 따라 상태 업데이트
-
     if (name === "veriCode") {
       setVeriCode(value);
-    } else if (name === "veriEmail") {
-      setVeriEmail(value);
     }
   }, []);
 
@@ -43,6 +42,7 @@ function FindPwPage() {
     // 이메일이 확인되었으며 코드 메시지 색상이 녹색인 경우
     if (isEmailCheckApplied && codeMsgColor === "green") {
       navigate("/member/editpw/editpassword", { state: { email: veriEmail } });
+      console.log(location.state && location.state.email);
     } else {
       Swal.fire({
         icon: "warning",
@@ -51,7 +51,6 @@ function FindPwPage() {
         color: "#FFDA47",
         width: "80vw",
         confirmButtonColor: "#45CB85",
-        cancelButtonColor: "gray",
       });
     }
   };
@@ -59,14 +58,14 @@ function FindPwPage() {
   // 입력된 이메일을 확인하고 인증 코드를 전송하는 이벤트 핸들러
   const handleOnCheckEmail = async () => {
     // 이메일 형식을 검증하는 정규식
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    // const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
     try {
       // 유효성 검증 및 인증 코드 전송
       if (veriEmail === "") {
         setEmailCheckApplyResult("이메일을 입력해주세요.");
-      } else if (!emailRegex.test(veriEmail)) {
-        setEmailCheckApplyResult("올바른 이메일 형식이 아닙니다.");
+        // } else if (!emailRegex.test(veriEmail)) {
+        //   setEmailCheckApplyResult("올바른 이메일 형식이 아닙니다.");
       } else {
         setIsLoading(true);
         const requestData = { veriEmail: veriEmail };
@@ -82,7 +81,6 @@ function FindPwPage() {
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
-          cancelButtonColor: "gray",
         });
 
         // 이메일이 검증되었음을 나타내는 상태 업데이트
@@ -124,11 +122,7 @@ function FindPwPage() {
         <>
           {/* 이메일 확인 섹션을 위한 헤더를 표시 */}
           <div className={style.menu}>
-            <ContentHeader menuName="비밀번호 찾기" />
-          </div>
-          <div className={style.information}>
-            가입하신 이메일을 입력해주세요. <br />
-            이메일 인증 후 비밀번호 변경 페이지로 이동합니다.
+            <ContentHeader menuName="이메일 인증" />
           </div>
           {/* 이메일 확인 양식 */}
           <div className={style.emailWrap}>
@@ -193,4 +187,4 @@ function FindPwPage() {
   );
 }
 
-export default FindPwPage;
+export default Verification;

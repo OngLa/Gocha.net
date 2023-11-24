@@ -154,7 +154,7 @@ function Login() {
       </div>
       <div>
         <div className={style.signupLinkBox}>
-          아이디가 없으신분은
+          기존에 가입된 계정이 없으신분은
           <Link to="/member/emailCheck" className={style.signupLink}>
             회원가입
           </Link>

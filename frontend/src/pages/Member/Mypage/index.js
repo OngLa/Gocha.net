@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "./mypage.module.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
 import { SmallButton } from "../../../components/Button";
 import emailIcon from "../../../img/member/email-white.png";
@@ -16,7 +16,7 @@ import {
   setRefreshToken,
 } from "../../../redux/authReducer";
 import { removeAuthHeader } from "../../../service/axiosConfig";
-import { getMypage } from "../../../service/member";
+import { deleteMember, getMypage } from "../../../service/member";
 
 function Mypage() {
   // 마이페이지
@@ -56,29 +56,54 @@ function Mypage() {
 
   // 비밀번호 수정 페이지로 이동
   const handleEditPassword = () => {
-    navigate("/member/emailCheck");
+    navigate("/member/editPw", { state: { email: mypage.email } });
   };
 
   // 회원탈퇴 처리
-  const handleWithdrawal = (e) => {
-    return Swal.fire({
-      icon: "question",
-      title: "정말로 탈퇴하시겠습니까?",
-      text: "탈퇴 시, 모든 정보가 사라집니다.",
-      showCancelButton: true,
-      confirmButtonText: "예",
-      confirmButtonColor: "#45CB85",
-      cancelButtonText: "아니오",
-    }).then((result) => {
+  const handleWithdrawal = async () => {
+    try {
+      const result = await Swal.fire({
+        icon: "question",
+        title: "정말로 탈퇴하시겠습니까?",
+        text: "탈퇴 후에는 동일한 이메일 주소로의 재가입이제한됩니다. ",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+      });
+
       if (result.isConfirmed) {
+        await deleteMember();
+
+        // Redux 상태 및 로컬 스토리지 초기화
+        dispatch(setUser({ user: "" }));
+        dispatch(setRole({ role: "" }));
+        dispatch(setAccessToken({ accessToken: "" }));
+        dispatch(setRefreshToken({ refreshToken: "" }));
+        // localstorage & header 제거
+        localStorage.clear();
+        removeAuthHeader();
+
         Swal.fire({
           icon: "success",
           title: "회원 탈퇴가 정상 처리 되었습니다.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
         });
         navigate("/");
+      } else {
+        console.log("탈퇴 취소");
       }
-    });
+    } catch {
+      console.log("회원탈퇴 실패");
+    }
   };
 
   // 로그아웃 시 redux 변수를 초기화 시켜주기 위해 dispatch 생성

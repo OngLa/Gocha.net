@@ -4,6 +4,7 @@ import kosa.afnica.backend.api.service.MemberService;
 import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.security.JwtUtil;
+import kosa.afnica.backend.db.dto.member.MemberEditPwReqDto;
 import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 import kosa.afnica.backend.db.entity.Member;
@@ -111,6 +112,15 @@ public class MemberServiceImpl implements MemberService {
     public List<Member> findCarcenter() {
         return memberMapper.findCarcenterByRole();
     }
+
+    @Override
+    public void updatePw(MemberEditPwReqDto memberEditPwReqDto) {
+        Member member = memberMapper.findByEmail(memberEditPwReqDto.getEmail()).get();
+        String encodePw = passwordEncoder.encode(memberEditPwReqDto.getPassword());
+        member.updateMember(encodePw);
+        memberMapper.update(member);
+    }
+
 
 }
 

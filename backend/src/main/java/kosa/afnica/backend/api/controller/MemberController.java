@@ -12,13 +12,13 @@ import kosa.afnica.backend.config.exception.CustomException;
 import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.exception.ErrorResponse;
 import kosa.afnica.backend.db.dto.member.EmailVerificationDto;
+import kosa.afnica.backend.db.dto.member.MemberEditPwReqDto;
 import kosa.afnica.backend.db.dto.member.MemberMypageResDto;
 import kosa.afnica.backend.db.dto.member.MemberSignupReqDto;
 import kosa.afnica.backend.db.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.remoting.support.RemoteExporter;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +34,7 @@ public class MemberController {
     private final MemberService memberService;
     private final MailService mailService;
 
-    @Operation(summary = "이메일 인증 - 인증번호 요청 API", description = "이메일 중복 검사 및 인증번호 이메일로 전송")
+    @Operation(summary = "(회원가입) 이메일 인증 - 인증번호 요청 API", description = "이메일 중복 검사 및 인증번호 이메일로 전송")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "409", description = "존재하는 Email 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
@@ -49,7 +49,7 @@ public class MemberController {
         }
     }
 
-    @Operation(summary = "이메일 인증 - 인증번호 비교 API", description = "입력된 인증번호와 생성된 인증번호 비교")
+    @Operation(summary = "(회원가입) 이메일 인증 - 인증번호 비교 API", description = "입력된 인증번호와 생성된 인증번호 비교")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 인증 번호입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
@@ -116,5 +116,37 @@ public class MemberController {
     public ResponseEntity<List<Member>> getCarcenter() {
         List<Member> members = memberService.findCarcenter();
         return ResponseEntity.ok(members);
+    }
+
+    @Operation(summary = "(비밀번호) 이메일 인증 - 인증번호 요청 API", description = "이메일 중복 검사 및 인증번호 이메일로 전송")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 Email 입니다존재하지 않는 Email 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "500", description = "이메일 전송에 실패했습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    @PostMapping("/passwoed")
+    public ResponseEntity<Void> getPwVeriCode(@RequestBody EmailVerificationDto emailVerificationDto) throws Exception {
+
+        if(memberService.existEmail(emailVerificationDto.getVeriEmail())) {
+            throw new CustomException(ErrorCode.EMAIL_NOT_FOUND);
+        } else {
+            mailService.sendMessage(emailVerificationDto.getVeriEmail());
+            return ResponseEntity.ok(null);
+        }
+    }
+
+    @Operation(summary = "(비밀번호) 이메일 인증 - 인증번호 비교 API", description = "입력된 인증번호와 생성된 인증번호 비교")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 인증 번호입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    @GetMapping("/passwoed-veri")
+    public ResponseEntity<Void> comparePwVeriCode(@RequestParam String veriEmail, @RequestParam String veriCode) {
+        memberService.findCode(veriEmail, veriCode);
+        return ResponseEntity.ok(null);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Void> updatePw(@RequestBody MemberEditPwReqDto memberEditPwReqDto) {
+        memberService.updatePw(memberEditPwReqDto);
+        return ResponseEntity.ok(null);
     }
 }

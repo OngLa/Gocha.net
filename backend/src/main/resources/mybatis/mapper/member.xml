@@ -105,7 +105,6 @@
         WHERE role = 'ROLE_CARCENTER'
     </select>
 
-<<<<<<< Updated upstream
     <!--  Email 기반으로 ID 찾기  -->
     <select id="findIdByEmail" parameterType="String" resultType="Long">
         select id
@@ -113,7 +112,6 @@
         where email = #{email}
     </select>
 
-=======
     <!-- 회원 탈퇴 -->
     <update id="delete" parameterType="member">
         update member
@@ -127,5 +125,5 @@
         from vericode
         where veri_email = #{veriEmail}
     </delete>
->>>>>>> Stashed changes
+
 </mapper>

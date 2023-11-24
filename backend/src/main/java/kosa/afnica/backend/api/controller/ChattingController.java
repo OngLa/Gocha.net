@@ -37,11 +37,15 @@ public class ChattingController {
     @Operation(summary = "Chatting Carcenter List API(고객)", description = "비대면 진단을 위해 채팅방 목록 출력(모든 카센터 다 출력)")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = ChattingResDto.class))),
+            @ApiResponse(responseCode = "404", description = "카센터 데이터가 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/carcenter")
     public ResponseEntity<List<ChattingResDto>> getChatting() {
         // 정비소 id, name을 list로 조회(회원탈퇴x)
         List<ChattingResDto> chattingList = chattingService.findAllChatting();
+        if(chattingList == null) {
+            throw new CustomException(ErrorCode.CHATTING_CARCENTERLIST_NOT_FOUND);
+        }
 
         return ResponseEntity.ok(chattingList);
     }
@@ -52,6 +56,7 @@ public class ChattingController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = ChattingResDto.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "본인에게 메세지를 보낸 유저가 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/user")
     public ResponseEntity<List<ChattingResDto>> getChatting2(HttpServletRequest httpServletRequest) {
@@ -63,6 +68,9 @@ public class ChattingController {
 
         // 정비소 id, name을 list로 조회(회원탈퇴x)
         List<ChattingResDto> chattingList = chattingService.findAllChatting2(memberId);
+        if(chattingList == null) {
+            throw new CustomException(ErrorCode.CHATTING_USERLIST_NOT_FOUND);
+        }
 
         return ResponseEntity.ok(chattingList);
     }
@@ -70,7 +78,7 @@ public class ChattingController {
     @Operation(summary = "CarcenterInfo - 카센터 정보 조회 API(공통)", description = "채팅방 입장 전 정비소의 phonenumber, email, address를 보여주기 위함. 고객 예약 관리에서도 사용.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = CarcenterInfoResDto.class))),
-            @ApiResponse(responseCode = "404", description = "해당 카센터의 데이터가 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "해당 카센터의 정보가 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/carcenterinfo")
     public ResponseEntity<CarcenterInfoResDto> getCarcenterInfo(@RequestParam Long carcenterId) {

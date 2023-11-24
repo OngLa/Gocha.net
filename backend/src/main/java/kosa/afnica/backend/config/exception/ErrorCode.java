@@ -34,6 +34,9 @@ public enum ErrorCode {
     CARDATA_NOT_FOUND(HttpStatus.NOT_FOUND, "차량 데이터가 존재하지 않습니다."),
     CAR_NOT_FOUND(HttpStatus.NOT_FOUND, "등록된 차량이 존재하지 않습니다."),
     CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 인증 번호입니다."),
+    CHATTING_CARCENTERLIST_NOT_FOUND(HttpStatus.NOT_FOUND, "카센터 데이터가 존재하지 않습니다."),
+    CHATTING_USERLIST_NOT_FOUND(HttpStatus.NOT_FOUND, "본인에게 메세지를 보낸 유저가 존재하지 않습니다."),
+    CHATTING_CARCENTERINFO_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 카센터의 정보가 존재하지 않습니다."),
 
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "Method Not Allowed"),
 

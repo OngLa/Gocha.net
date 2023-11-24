@@ -1,3 +1,6 @@
+/* ========================================================== */
+/* MainRepairshopComponent css */
+
 .flexCenter {
   display: flex;
   justify-content: center;
@@ -13,9 +16,11 @@
 }
 
 .MainRepairshopComponent:hover {
-  /* background-color: none; */
   border: 2px solid #A4DABE;
 }
+
+/* ========================================================== */
+/* cardHead css */
 
 .cardHead {
   border-bottom: 1px solid #45cb85;
@@ -23,15 +28,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.chatHistory {
-  cursor: pointer;
-  font-size: 0.6rem;
-  text-align: center;
-  color: #fff;
-}
-
+/* 정비소 아이콘 */
 .carcenterIcon {
   width: 40px;
   height: 40px;
@@ -48,11 +49,25 @@
   max-height: 100%; /* 이미지가 컨테이너를 벗어나지 않도록 */
 }
 
-.carcenterName {
+.carcentername{
+  display: flex;
+  align-items: center;
+}
+.Name {
   font-size: 1.2rem; 
   color: #45cb85; 
   margin-left: 10px; 
 }
+/* 상세보기 */
+.chatHistory {
+  cursor: pointer;
+  font-size: 0.6rem;
+  text-align: center;
+  color: #fff;
+  margin-right: 5%;
+}
+/* ========================================================== */
+/* cardBody css */
 
 .cardBody{
   height: 100px;
@@ -64,12 +79,12 @@
   color: #fff;
   box-sizing: border-box; 
 }
-.cardBody h2,h3{
-  margin: auto;
+
+.text {
+  font-size: 0.8rem;
 }
 
-.SmallButton {
-  padding-top: 20px;
-  padding-bottom: 10px;
+.SmallButton{
+display: flex;
+gap: 10px;
 }
-

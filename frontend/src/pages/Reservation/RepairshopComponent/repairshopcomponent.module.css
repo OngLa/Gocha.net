@@ -1,15 +1,26 @@
+/* ========================================================== */
+/* RepairshopComponent css */
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+}
+
 .RepairshopComponent {
   border: 1px solid #45cb85;
   background-color: #5d707f;
   border-radius: 5px;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  min-width: 90%;
+  width: 90%;
 }
 
 .RepairshopComponent:hover {
   border: 2px solid #A4DABE;
 }
+
+/* ========================================================== */
+/* cardHead css */
 
 .cardHead {
   border-bottom: 1px solid #45cb85;
@@ -19,12 +30,6 @@
   gap: 10px;
 }
 
-.chatHistory {
-  cursor: pointer;
-  font-size: 0.6rem;
-  text-align: center;
-  color: #fff;
-}
 
 .carcenterIcon {
   width: 40px;
@@ -41,7 +46,7 @@
   border: 1.5px solid #A4DABE;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-
+  
   width: 35px;
   height: 35px;
 }
@@ -51,6 +56,16 @@
   color: #45cb85; 
   margin-left: 0px;
 }
+
+/* 상세보기 */
+.chatHistory {
+  cursor: pointer;
+  font-size: 0.6rem;
+  text-align: center;
+  color: #fff;
+}
+/* ========================================================== */
+/* cardBody css */
 
 .cardBody{
   height: 100px;
@@ -62,11 +77,7 @@
   color: #fff;
   box-sizing: border-box; 
 }
-.cardBody h2,h3{
-  margin: auto;
-}
 
-.SmallButton{
-  padding-top: 20px;
-  padding-bottom: 10px;
+.text {
+  font-size: 0.8rem;
 }

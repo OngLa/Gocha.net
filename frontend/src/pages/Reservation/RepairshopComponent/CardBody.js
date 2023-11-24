@@ -11,13 +11,13 @@ function CardBody({carcenter}) {
   const toggleSidepanel = () => {
     setOpenSidepanel(!openSidepanel);
   };
-
   return (
     <div>
       <div className={styels.cardBody}>
-        <h2>주소</h2>
-        <h3>{carcenter.address}</h3>
-  
+        <div className={styels.text}>
+          <p>전화번호 : {carcenter.phoneNumber}</p>
+          <p>주소 : {carcenter.address}</p>
+        </div>
         <div className="SmallButton">
           <SmallButton onClick={toggleSidepanel}>예약하기</SmallButton>
         </div>

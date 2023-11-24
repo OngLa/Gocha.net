@@ -91,11 +91,16 @@ function Info() {
         // 데이터 없으면 alert, 데이터 초기화
         console.error(error);
         Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          fontSize: "1px",
+          confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
+
           title: error.message,
           text: `${carList[value].carName} 데이터 업데이트하시겠습니까?`,
           icon: "question",
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
           confirmButtonText: "이동",
           cancelButtonText: "취소",
 
@@ -136,11 +141,16 @@ function Info() {
   // 차량 삭제 alert
   const handleDelete = () => {
     Swal.fire({
+      background: "#334E58",
+      color: "#FFDA47",
+      width: "80vw",
+      fontSize: "1px",
+      confirmButtonColor: "#45CB85",
+      cancelButtonColor: "gray",
+
       title: "내 차 삭제",
       text: "정말 삭제하시겠습니까?",
       icon: "warning",
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
       confirmButtonText: "삭제",
       cancelButtonText: "취소",
 

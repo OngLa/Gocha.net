@@ -41,6 +41,16 @@ function WriteForm2(props) {
         navigate(`/chatting2/chatroom2?userId=${userId}&userName=${userName}`);
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+  
+          text: error.response.data.message,
+          icon: "warning",
+          confirmButtonText: "확인",
+        });
       }
     } else {
       Swal.fire({

@@ -12,14 +12,12 @@ function UserMaintenanceList({ list, refreshList }) {
   async function handleCompleteClick() {
     try {
       const result = await Swal.fire({
-        // 수정x
         background: "#334E58",
         color: "#FFDA47",
         width: "80vw",
         confirmButtonColor: "#45CB85",
         cancelButtonColor: "gray",
 
-        // 커스텀
         title: "승인 하시겠습니까",
         text: "예약승인으로 변경됩니다",
         icon: "question", // 표시할 아이콘(error, info, question, success, warning)
@@ -48,8 +46,19 @@ function UserMaintenanceList({ list, refreshList }) {
         await refreshList();
       }
     } catch (error) {
-      console.error("상태 업데이트 중 오류 발생:", error);
-      Swal.fire("오류", "상태 업데이트 중 오류가 발생했습니다.", "error");
+      Swal.fire({
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
+        text: "상태 업데이트 중 오류가 발생했습니다.",
+        icon: "error",
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+        showCancelButton: true,
+        });
     }
   }
 
@@ -84,17 +93,28 @@ function UserMaintenanceList({ list, refreshList }) {
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
-          cancelButtonColor: "gray",
 
           // 커스텀
-          title: "거절 되었습니다!",
+          text: "거절 되었습니다!",
           icon: "success", // 표시할 아이콘(error, info, question, success, warning)
+          confirmButtonText: "확인",
         });
         navigate(`/chatting2/writeform2?userId=${list.memberId}&userName=${list.name}&inputTitle=${"다음 사유로 인해 예약이 취소되었습니다."}&noReservation=${1}`);
       }
     } catch (error) {
-      console.error("상태 업데이트 중 오류 발생:", error);
-      Swal.fire("오류", "상태 업데이트 중 오류가 발생했습니다.", "error");
+      Swal.fire({
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
+        text: "상태 업데이트 중 오류가 발생했습니다.",
+        icon: "error",
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+        showCancelButton: true,
+        });
     }
   }
 

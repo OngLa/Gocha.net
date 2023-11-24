@@ -63,17 +63,18 @@ function Mypage() {
   const handleWithdrawal = async () => {
     try {
       const result = await Swal.fire({
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
         icon: "question",
         title: "정말로 탈퇴하시겠습니까?",
         text: "탈퇴 후에는 동일한 이메일 주소로의 재가입이제한됩니다. ",
         showCancelButton: true,
         confirmButtonText: "예",
         cancelButtonText: "아니오",
-        background: "#334E58",
-        color: "#FFDA47",
-        width: "80vw",
-        confirmButtonColor: "#45CB85",
-        cancelButtonColor: "gray",
       });
 
       if (result.isConfirmed) {
@@ -89,13 +90,15 @@ function Mypage() {
         removeAuthHeader();
 
         Swal.fire({
-          icon: "success",
-          title: "회원 탈퇴가 정상 처리 되었습니다.",
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
           cancelButtonColor: "gray",
+
+          icon: "success",
+          text: "회원 탈퇴가 정상 처리 되었습니다.",
+          confirmButtonText: "확인",
         });
         navigate("/");
       } else {
@@ -110,17 +113,18 @@ function Mypage() {
   const dispatch = useDispatch();
   const handleLogout = (e) => {
     return Swal.fire({
-      icon: "question",
-      title: "로그아웃 하시겠습니까?",
-      showCancelButton: true,
-      confirmButtonText: "예",
-      cancelButtonText: "아니오",
       background: "#334E58",
       color: "#FFDA47",
       width: "80vw",
       confirmButtonColor: "#45CB85",
       cancelButtonColor: "gray",
-    }).then((result) => {
+      
+      text: "로그아웃 하시겠습니까?",
+      icon: "question", // 표시할 아이콘(error, info, question, success, warning)
+      confirmButtonText: "예", // Ok 대신에 쓸 텍스트
+      cancelButtonText: "아니오", // cancel 대신에 쓸 텍스트
+      showCancelButton: true, // cancel 표시 유무
+        }).then((result) => {
       if (result.isConfirmed) {
         // Redux 상태 및 로컬 스토리지 초기화
         dispatch(setUser({ user: "" }));
@@ -130,15 +134,16 @@ function Mypage() {
         // localstorage & header 제거
         localStorage.clear();
         removeAuthHeader();
-
+        
         Swal.fire({
-          icon: "success",
-          title: "정상적으로 로그아웃 되었습니다.",
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
-          cancelButtonColor: "gray",
+
+          icon: "success",
+          text: "정상적으로 로그아웃 되었습니다.",
+          confirmButtonText: "확인",
         });
         navigate("/");
       }

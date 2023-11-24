@@ -14,9 +14,14 @@ function ChatBox2(props) {
   const moveReservation = () => {
     //Alert 이쁘게
     Swal.fire({
-      icon: "info",
-      title: "고객만 사용 가능합니다.",
+      background: "#334E58",
+      color: "#FFDA47",
+      width: "80vw",
+      fontSize: "1px",
       confirmButtonColor: "#45CB85",
+
+      icon: "info",
+      text: "고객만 사용 가능합니다.",
     });
   };
 

@@ -34,11 +34,15 @@ function DataList() {
       } catch (error) {
         setIsLoading(false);
         Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
+
           title: error.message,
           text: "차량을 등록하시겠습니까?",
           icon: "question",
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
           confirmButtonText: "등록",
           cancelButtonText: "취소",
 
@@ -119,11 +123,15 @@ function DataList() {
     } catch (error) {
       if (showAlert) {
         Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
+
           title: error.message,
           text: "데이터를 등록하시겠습니까?",
           icon: "question",
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
           confirmButtonText: "등록",
           cancelButtonText: "취소",
 
@@ -152,10 +160,14 @@ function DataList() {
       await postCarData(req);
     } finally {
       Swal.fire({
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+
         title: "데이터가 등록 되었습니다.",
         text: `${carList[value].carName}`,
         icon: "success",
-        confirmButtonColor: "#3085d6",
         confirmButtonText: "확인",
       }).then(async (result) => {
         window.location.reload();

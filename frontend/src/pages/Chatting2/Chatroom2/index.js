@@ -7,6 +7,7 @@ import ChatPartnerProfile2 from "../components/ChatPartnerProfile2";
 import { getChatroom } from "../../../service/chatting";
 import imgMoveBottom from "../../../img/icon/Caret_Down_MD.png";
 import imgMoveTop from "../../../img/icon/Caret_Up_MD.png";
+import Swal from "sweetalert2";
 
 function Chatroom2(props) {
   // [고객과 정비소의 채팅방]
@@ -28,6 +29,17 @@ function Chatroom2(props) {
         setMessageList(response.data);
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          fontSize: "1px",
+          confirmButtonColor: "#45CB85",
+  
+          text: error.response.data.message,
+          icon: "warning",
+          confirmButtonText: "확인",
+        });
       }
     };
     loadingChatroom();

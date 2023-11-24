@@ -92,7 +92,7 @@
 
     <!-- 정비소 목록 출력 -->
     <select id="findCarcenterByRole" resultType="member">
-        SELECT id, address, name
+        SELECT id, address, name, phone_number
         FROM member
         WHERE role = 'ROLE_CARCENTER'
     </select>

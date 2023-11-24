@@ -56,7 +56,7 @@ function Mypage() {
 
   // 비밀번호 수정 페이지로 이동
   const handleEditPassword = () => {
-    navigate("/member/emailCheck");
+    navigate("/member/editPw", { state: { email: mypage.email } });
   };
 
   // 회원탈퇴 처리
@@ -67,14 +67,22 @@ function Mypage() {
       text: "탈퇴 시, 모든 정보가 사라집니다.",
       showCancelButton: true,
       confirmButtonText: "예",
-      confirmButtonColor: "#45CB85",
       cancelButtonText: "아니오",
+      background: "#334E58",
+      color: "#FFDA47",
+      width: "80vw",
+      confirmButtonColor: "#45CB85",
+      cancelButtonColor: "gray",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           icon: "success",
           title: "회원 탈퇴가 정상 처리 되었습니다.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
         });
         navigate("/");
       }
@@ -89,8 +97,12 @@ function Mypage() {
       title: "로그아웃 하시겠습니까?",
       showCancelButton: true,
       confirmButtonText: "예",
-      confirmButtonColor: "#45CB85",
       cancelButtonText: "아니오",
+      background: "#334E58",
+      color: "#FFDA47",
+      width: "80vw",
+      confirmButtonColor: "#45CB85",
+      cancelButtonColor: "gray",
     }).then((result) => {
       if (result.isConfirmed) {
         // Redux 상태 및 로컬 스토리지 초기화
@@ -105,7 +117,11 @@ function Mypage() {
         Swal.fire({
           icon: "success",
           title: "정상적으로 로그아웃 되었습니다.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
         });
         navigate("/");
       }

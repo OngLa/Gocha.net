@@ -1,6 +1,6 @@
 import LargeButton from "../../../components/Button";
 import style from "./signup.module.css";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
 import emailIcon from "../../../img/member/email.png";
@@ -14,6 +14,7 @@ import { createMember, nameCheck } from "../../../service/member";
 // 회원가입 컴포넌트
 function Signup() {
   // React Router의 navigate 훅을 사용하기 위한 초기 설정
+
   const navigate = useNavigate();
   const location = useLocation();
   const veriEmail = location.state && location.state.veriEmail;
@@ -93,10 +94,10 @@ function Signup() {
 
   // 전화번호
   const formatPhoneNumber = (input) => {
-    // 숫자가 아닌 문자를 제거합니다.
+    // 숫자가 아닌 문자를 제거
     const phoneNumber = input.replace(/\D/g, "");
 
-    // 전화번호의 길이에 따라 형식을 적용합니다.
+    // 전화번호의 길이에 따라 형식을 적용
     if (phoneNumber.length <= 3) {
       return phoneNumber;
     } else if (phoneNumber.length <= 7) {
@@ -173,20 +174,26 @@ function Signup() {
       return Swal.fire({
         icon: "warning",
         title: "모든 항목을 입력해주세요.",
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
         confirmButtonColor: "#45CB85",
       });
     } else if (
       !isPwdValid ||
       !isconfirmPwdValid ||
       !isNameValid ||
-      !isPhoneNumber
+      !isPhoneNumber ||
+      nicknameMsg === "red"
     ) {
       return Swal.fire({
         icon: "warning",
         title: "일치하지 않은 항목이 있습니다.",
         html: "- 비밀번호: 영문, 숫자, 특수기호 조합으로 8자리 이상 입력해 주세요.<br>- 닉네임: 1글자 이상 9글자 미만으로 입력해 주세요.(특수 문자 제외)<br>- 전화번호: 휴대전화번호가 정확한지 확인해 주세요.",
-        confirmButtonColor: "#45CB85",
         width: 600,
+        background: "#334E58",
+        color: "#FFDA47",
+        confirmButtonColor: "#45CB85",
       });
     } else {
       handleSubmit();
@@ -194,6 +201,9 @@ function Signup() {
       Swal.fire({
         icon: "success",
         title: "회원가입이 완료되었습니다.",
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
         confirmButtonColor: "#45CB85",
       });
       navigate("/member/login");

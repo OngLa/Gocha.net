@@ -2,7 +2,7 @@ import UserCompleteList from "./UserCompleteListComponent";
 import UserMaintenanceList from "./UserMaintenanceListComponent";
 import UserWaitList from "./UserWaitListComponent";
 import styles from "./UserListComponent.module.css";
-import { Navigate, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 function UserListComponent({ list, refreshList}) {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ function UserListComponent({ list, refreshList}) {
   };
 
   const pageMoveText = () => {
-    navigate(`/chatting2/chatroom2/:${list.id}?userName=${list.name}`);
+    navigate(`/chatting2/chatroom2?userId=${list.memberId}&userName=${list.name}`);
   };
   return (
     <div className={styles.UserListComponent}>

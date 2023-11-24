@@ -25,6 +25,13 @@
   gap: 10px;
 }
 
+.chatHistory {
+  cursor: pointer;
+  font-size: 0.6rem;
+  text-align: center;
+  color: #fff;
+}
+
 .carcenterIcon {
   width: 40px;
   height: 40px;
@@ -61,7 +68,7 @@
   margin: auto;
 }
 
-.SmallButton{
+.SmallButton {
   padding-top: 20px;
   padding-bottom: 10px;
 }

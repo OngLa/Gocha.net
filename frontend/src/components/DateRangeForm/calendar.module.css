@@ -1,7 +1,3 @@
-/* .calWrapper {
-  padding: 10px;
-} */
-
 :global(.rdt) {
   display: flex;
   align-items: center;
@@ -55,4 +51,11 @@
 
 :global(.rdtMonths table tr) {
   text-align: center;
+}
+
+:global(.rdtActive) {
+  background-color: #45cb85;
+  color: white;
+  border-radius: 35%;
+  box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5);
 }

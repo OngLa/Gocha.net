@@ -1,7 +1,13 @@
 .formWrapper {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form {
+  display: flex;
   align-items: center;
-  justify-content: space-around;
+  gap: 20px;
 }
 
 .title {
@@ -9,21 +15,9 @@
   font-weight: 800;
   margin-right: 10px;
   font-size: 13px;
-}
-
-.form {
-  display: flex;
-  align-items: center;
+  margin-bottom: 6px;
 }
 
 .calendar {
   margin-top: 10px;
-}
-
-.between {
-  color: white;
-  font-weight: 800;
-  margin-left: 5px;
-  margin-right: 5px;
-  font-size: 13px;
 }

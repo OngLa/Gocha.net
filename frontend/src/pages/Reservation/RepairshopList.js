@@ -26,7 +26,6 @@ function RepairshopList() {
   const [favoriteCarcenterList, setFavoriteCarcenterList] = useState([]);
 
   //주정비소 출력
-  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await readFavoriteCarcenter();
@@ -36,8 +35,16 @@ function RepairshopList() {
         console.log(error);
       }
     };
+  
+
+  useEffect(() => {
     fetchData();
   }, []);
+  
+  // 예약목록 리랜더링 함수
+  const refreshList = () => {
+    fetchData();
+  };
 
   //정비소 출력
   useEffect(() => {
@@ -83,6 +90,7 @@ function RepairshopList() {
             <MainRepairshopComponent
               key={favoriteCarcenter.carcenterId}
               favoriteCarcenter={favoriteCarcenter}
+              refreshList={refreshList}
             />
           ))}
         </div>

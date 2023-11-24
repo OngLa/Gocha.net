@@ -1,24 +1,26 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
-
+import { useState } from "react";
+import styles from "./index.module.css";
 import DateInputForm from "./DateInputForm";
-import style from "./index.module.css";
 import Calendar from "./Calendar";
 
+// DateRangeForm Component
+// Props : startDate(시작 날짜 상태값), setStartDate(상태 처리 함수),
+//         endDate(종료 날짜 상태값), setEndDate(상태 처리 함수)
 const DateRangeForm = (props) => {
-  const { title, startDate, setStartDate, endDate, setEndDate} = props;
+  const { startDate, setStartDate, endDate, setEndDate } = props;
 
   const [open, setOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState("start");
 
   const dateFormat = "YYYY-MM-DD";
 
-  // 달력 아이콘 클릭하면, 달력 select box 나옴
+  // 달력 아이콘 클릭 이벤트 핸들러, 달력 select box 나옴
   const clickBtn = (dataType) => {
     setCurrentDate(dataType);
     setOpen(!open);
   };
 
-  // 시작일을 나타내는 폼인지, 종료일을 나타내는 폼인지 선택
+  // 달력 날짜선택 이벤트 핸들러, 선택한 날짜 유형에 맞춰 데이터 저장
   const calChange = (date) => {
     const formattedDate = date.format(dateFormat);
     if (currentDate === "start") {
@@ -30,18 +32,21 @@ const DateRangeForm = (props) => {
     setOpen(!open);
   };
 
-  // 날짜 입력 시, 정해진 폼에 맞춰서 입력 되도록 설정
   return (
     <div>
-      <div className={style.formWrapper}>
-        <div className={style.title}>{title}</div>
-        <div className={style.form}>
+      <div className={styles.formWrapper}>
+        <div className={styles.form}>
+          <div className={styles.title}>시작일</div>
+          {/* 시작일 */}
           <DateInputForm
             date={startDate}
             setDate={setStartDate}
             clickBtn={() => clickBtn("start")}
           />
-          <div className={style.between}> ~ </div>
+        </div>
+        <div className={styles.form}>
+          <div className={styles.title}>종료일</div>
+          {/* 종료일 */}
           <DateInputForm
             date={endDate}
             setDate={setEndDate}
@@ -50,8 +55,9 @@ const DateRangeForm = (props) => {
         </div>
       </div>
 
+      {/* 달력 컴포넌트 조건부 렌더링 */}
       {open && (
-        <div className={style.calendar}>
+        <div className={styles.calendar}>
           <Calendar
             date={currentDate === "start" ? startDate : endDate}
             onChange={calChange}
@@ -60,6 +66,6 @@ const DateRangeForm = (props) => {
       )}
     </div>
   );
-}
+};
 
 export default DateRangeForm;

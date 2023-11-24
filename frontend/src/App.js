@@ -35,6 +35,7 @@ function App() {
           <AppNavHome2 />
         </div>
       )}
+      {/* <TouchEffect/> */}
     </div>
   );
 }

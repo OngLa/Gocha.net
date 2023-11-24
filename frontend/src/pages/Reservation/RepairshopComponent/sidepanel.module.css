@@ -20,3 +20,26 @@
 .open {
   transform: translateX(0); /* 화면 안으로 이동 */
 }
+
+.selectData {
+  display: flex;
+  align-items: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.selectDataLabel {
+  display: flex;
+  justify-content: center;
+  color: white;
+  width: 100px;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.dataSelectBox {
+  height: 30px;
+  padding-left: 5px;
+}

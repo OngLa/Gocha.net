@@ -13,14 +13,15 @@ function Home() {
     };
   }, []); // 빈 종속성 배열은 컴포넌트가 마운트될 때 한 번만 실행되도록 보장
 
-
   return (
     <div className={style.homeWrap}>
-      <img
-        src={homeBackground}
-        alt="homeBackground"
-        className={style.homeBackground}
-      />
+      <div className={style.backgroundWrap}>
+        <img
+          src={homeBackground}
+          alt="homeBackground"
+          className={style.homeBackground}
+        />
+      </div>
       <div className={style.textBox}>
         <div className={style.title}>
           🚗 GOCHANET: 당신의 자동차 진단 전문가 🛠️

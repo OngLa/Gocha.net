@@ -75,7 +75,7 @@ public class ChattingController {
         return ResponseEntity.ok(chattingList);
     }
 
-    @Operation(summary = "CarcenterInfo - 카센터 정보 조회 API(공통)", description = "채팅방 입장 전 정비소의 phonenumber, email, address를 보여주기 위함. 고객 예약 관리에서도 사용.")
+    @Operation(summary = "CarcenterInfo - 카센터 정보 조회 API(고객)", description = "채팅방 입장 전 정비소의 phonenumber, email, address를 보여주기 위함. 고객 예약 관리에서도 사용.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = CarcenterInfoResDto.class))),
             @ApiResponse(responseCode = "404", description = "해당 카센터의 정보가 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),

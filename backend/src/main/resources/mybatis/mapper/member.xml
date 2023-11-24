@@ -8,14 +8,6 @@
         values (member_seq.nextval, #{email}, #{password}, #{name}, #{phoneNumber}, null, 1, #{role})
     </insert>
 
-<<<<<<< Updated upstream
-    <!--    <insert id="saveAdmin" parameterType="member">
-            insert into member(id, email, password, name, phone_number, address, enabled, role)
-            values (carcenter_seq.nextval, #{email}, #{password}, #{name}, #{phoneNumber}, #{address}, 1, 'ROLE_CARCENTER')
-        </insert>-->
-
-=======
->>>>>>> Stashed changes
     <!-- 이메일 기반으로 회원 정보 조회 -->
     <select id="findByEmail" parameterType="String" resultType="member">
         select id,

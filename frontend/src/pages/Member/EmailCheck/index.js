@@ -44,12 +44,16 @@ function EmailCheck() {
       navigate("/member/signup", { state: { veriEmail } });
     } else {
       Swal.fire({
-        icon: "warning",
-        title: "인증 번호를 다시 확인해주세요.",
         background: "#334E58",
         color: "#FFDA47",
         width: "80vw",
+        fontSize: "1px",
         confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
+        icon: "warning",
+        text: "인증 번호를 다시 확인해주세요.",
+        confirmButtonText: "확인",
       });
     }
   };
@@ -73,13 +77,16 @@ function EmailCheck() {
 
         // 인증 코드가 성공적으로 전송되면 성공 메시지 표시
         Swal.fire({
-          icon: "success",
-          title: "인증 번호가 발송되었습니다.",
-          text: "인증 번호를 확인하신 후 아래 입력창에 입력해주세요.",
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
+
+          icon: "success",
+          title: "인증 번호가 발송되었습니다.",
+          text: "인증 번호를 확인하신 후 아래 입력창에 입력해주세요.",
+          confirmButtonText: "확인",
         });
 
         // 이메일이 검증되었음을 나타내는 상태 업데이트

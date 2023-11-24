@@ -33,7 +33,9 @@ function Chatroom(props) {
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",
+          fontSize: "1px",
           confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
   
           text: error.response.data.message,
           icon: "warning",

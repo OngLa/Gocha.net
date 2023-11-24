@@ -63,17 +63,18 @@ function Mypage() {
   const handleWithdrawal = async () => {
     try {
       const result = await Swal.fire({
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
         icon: "question",
         title: "정말로 탈퇴하시겠습니까?",
         text: "탈퇴 후에는 동일한 이메일 주소로의 재가입이제한됩니다. ",
         showCancelButton: true,
         confirmButtonText: "예",
         cancelButtonText: "아니오",
-        background: "#334E58",
-        color: "#FFDA47",
-        width: "80vw",
-        confirmButtonColor: "#45CB85",
-        cancelButtonColor: "gray",
       });
 
       if (result.isConfirmed) {
@@ -89,13 +90,15 @@ function Mypage() {
         removeAuthHeader();
 
         Swal.fire({
-          icon: "success",
-          title: "회원 탈퇴가 정상 처리 되었습니다.",
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
           cancelButtonColor: "gray",
+
+          icon: "success",
+          text: "회원 탈퇴가 정상 처리 되었습니다.",
+          confirmButtonText: "확인",
         });
         navigate("/");
       } else {

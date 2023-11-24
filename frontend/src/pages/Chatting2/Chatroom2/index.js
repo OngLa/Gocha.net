@@ -33,6 +33,7 @@ function Chatroom2(props) {
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",
+          fontSize: "1px",
           confirmButtonColor: "#45CB85",
   
           text: error.response.data.message,

@@ -29,9 +29,14 @@ function Sidepanel({ open, toggle, carcenter}) {
           carDataId: message.cardataId    //선택한 데이터(null허용)
         });
         Swal.fire({
-          icon: "success",
-          title: "요청이 정상 처리 되었습니다.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+
+          icon: "success",
+          text: "요청이 정상 처리 되었습니다.",
+          confirmButtonText: "확인",
         });
         navigate(-1);
       } catch (error) {

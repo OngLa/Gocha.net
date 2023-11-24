@@ -83,17 +83,6 @@ public class MemberController {
         return ResponseEntity.ok(null);
     }
 
-/*    @Operation(summary = " 정비소 회원가입 API", description = "정비소 회원가입 진행")
-    @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
-            @ApiResponse(responseCode = "409", description = "존재하는 user 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
-    })
-    @PostMapping("/admin-signup")
-    public ResponseEntity<Void> postAdmin(@RequestBody MemberSignupReqDto memberSignupReqDto) {
-        memberService.creatAdminMember(memberSignupReqDto);
-
-        return ResponseEntity.ok(null);
-    }*/
-
     @Operation(summary = "유저 마이페이지 API", description = "마이페이지에서 이메일 기반으로 회원 정보 조회")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = MemberMypageResDto.class)))
@@ -120,7 +109,7 @@ public class MemberController {
 
     @Operation(summary = "(비밀번호) 이메일 인증 - 인증번호 요청 API", description = "이메일 중복 검사 및 인증번호 이메일로 전송")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
-            @ApiResponse(responseCode = "404", description = "존재하지 않는 Email 입니다존재하지 않는 Email 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 Email 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "500", description = "이메일 전송에 실패했습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @PostMapping("/passwoed")
@@ -144,9 +133,25 @@ public class MemberController {
         return ResponseEntity.ok(null);
     }
 
+    @Operation(summary = "비밀번호 변경", description = "비밀번호 변경 후 저장")
+    @ApiResponses(
+            {@ApiResponse(responseCode = "200", description = "성공")
+    })
     @PutMapping("/update")
     public ResponseEntity<Void> updatePw(@RequestBody MemberEditPwReqDto memberEditPwReqDto) {
         memberService.updatePw(memberEditPwReqDto);
         return ResponseEntity.ok(null);
     }
+
+    @Operation(summary = "회원 탈퇴", description = "유저의 enable, role 상태 변경 후 회원 탈퇴 처리")
+    @ApiResponses(
+            {@ApiResponse(responseCode = "200", description = "성공")
+    })
+    @DeleteMapping("/")
+    public ResponseEntity<Void> deleteMember(HttpServletRequest request) {
+        memberService.deleteMember(request);
+        return ResponseEntity.ok(null);
+
+    }
+
 }

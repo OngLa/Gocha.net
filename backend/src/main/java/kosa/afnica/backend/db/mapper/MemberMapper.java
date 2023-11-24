@@ -50,5 +50,9 @@ public interface MemberMapper {
     // Email 기반으로 ID 찾기
     Optional<Long> findIdByEmail(String email);
 
+    // 회원탈퇴
+    void delete(Member member);
 
+    // 이메일 인증 후 테이블 삭제
+    void deleteCode(String veriEmail, String veriCode);
 }

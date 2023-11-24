@@ -84,9 +84,6 @@ public class ChattingController {
     public ResponseEntity<CarcenterInfoResDto> getCarcenterInfo(@RequestParam Long carcenterId) {
         // 해당 carcenter의 정보(phonenumber, email, address)를 반환
         CarcenterInfoResDto carcenterInfo = chattingService.findCarcenterInfo(carcenterId);
-        if(carcenterInfo == null) {
-            throw new CustomException(ErrorCode.CHATTING_CARCENTERINFO_NOT_FOUND);
-        }
 
         return ResponseEntity.ok(carcenterInfo);
     }

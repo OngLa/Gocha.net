@@ -2,38 +2,53 @@
   width: 100%;
   height: 80px;
   display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
   border-radius: 10px;
+  justify-content: space-between;
   background-color: #5D707F;
   border: 1px solid #45cb85;
   margin-bottom: 15px;
+  padding: 5px;
 }
 
-
 .cardBody:hover {
-  background-color: #5d707f;
   border: 2px solid #A4DABE;
 }
 
-.imgWrap {
-  display: flex;
-  align-items: center; /* 수직 중앙 정렬 */
-  width: 100%; /* 너비를 100%로 설정하거나 필요한 대로 조절 */
-  font-size: 14px;
-  font-weight: 100;
-  color: #fff;
-  padding: 10px;
-}
-
-.imgWrap > img {
+.imgWrap img {
   height: 100%; /* 이미지 높이를 .imgWrap 높이에 맞춤 */
   margin-right: 20px; /* 이미지와 텍스트 사이의 간격 조절*/
   margin-left: 5px; /* 이미지와 텍스트 사이의 간격 조절*/
   border: 1.5px solid #A4DABE;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-
   width: 50px;
   height: 50px;
+}
+
+.statusTextWrapper{
+  font-size: 14px;
+  font-weight: 100;
+  color: #fff;
+
+}
+
+.chatpart{
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.chatpart button {
+margin-bottom: 10px;
+}
+
+
+.chatHistory {
+  cursor: pointer;
+  font-size: 0.6rem;
+  text-align: center;
+  color: #fff;
 }
 
 /* 상태별 색상 클래스 */
@@ -56,7 +71,3 @@
 .statusError {
   color: #6C757D; /* 회색으로 '오류' 상태를 표시 */
 }
-
-
-
-

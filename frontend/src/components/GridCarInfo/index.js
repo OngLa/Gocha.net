@@ -1,15 +1,20 @@
+// import
+import React from "react";
 import GirdItemContent from "./GirdItemContent";
 import styleA from "./styleA.module.css";
 import styleB from "./styleB.module.css";
 import styleC from "./styleC.module.css";
 
+// GridCarInfo Component
+// Props : item(데이터 정보), layoutType(레이아웃 종류), style(추가하고 싶은 style)
 function GridCarInfo(props) {
   const { item, layoutType, style } = props;
 
+  // 동적으로 레이아웃 종류에 따른 css 파일 결정
   let styles;
-  if (layoutType ==='A') {
+  if (layoutType === "A") {
     styles = styleA;
-  } else if (layoutType === 'B') {
+  } else if (layoutType === "B") {
     styles = styleB;
   } else {
     styles = styleC;
@@ -33,4 +38,5 @@ function GridCarInfo(props) {
   );
 }
 
-export default GridCarInfo;
+// Component 최적화, Props 값의 변화에 따른 리랜더링 방지
+export default React.memo(GridCarInfo);

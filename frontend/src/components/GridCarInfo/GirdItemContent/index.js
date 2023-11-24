@@ -1,14 +1,19 @@
+// import
+import React from "react";
 import NumberFormat from "react-number-format";
-
 import styles from "./style.module.css";
-
 import happy from "../../../img/icon/happy.png";
 import sad from "../../../img/icon/sad.png";
 
+// GirdItemContent Component
+// Props : tag(객체의 key값), value(객체의 value), style(추가적으로 적용하고 싶은 css)
 function GirdItemContent(props) {
   const { tag, value, style } = props;
 
+  // 출력할 content
   let content = value;
+
+  // value의 type에 따라 다른 content 생성
   const setContent = () => {
     if (typeof value === "boolean") {
       // type이 boolean 이면 아이콘
@@ -48,4 +53,5 @@ function GirdItemContent(props) {
   );
 }
 
-export default GirdItemContent;
+// Component 최적화, Props 값의 변화에 따른 리랜더링 방지
+export default React.memo(GirdItemContent);

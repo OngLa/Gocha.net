@@ -15,7 +15,6 @@ function Sidepanel({ open, toggle, cardataId }) {
         const response = await getCarData(cardataId);
         setCardata(response.data);
       } catch (error) {
-        console.log(error);
         Swal.fire({
           background: "#334E58",
           color: "#FFDA47",
@@ -49,10 +48,6 @@ function Sidepanel({ open, toggle, cardataId }) {
       { breakdown_code: "E002", explanation: "에러코드 설명2" },
     ]
   });
-
-  // useEffect(() => {
-  //   console.log(cardata);
-  //   }, [cardata]);
 
   return (
     <div className={`${style.sidePanel} ${open ? style.open : ""}`}>

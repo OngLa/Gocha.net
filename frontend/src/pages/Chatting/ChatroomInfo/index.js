@@ -9,12 +9,14 @@ import addressLocation from "./addressLocation.png";
 import { useEffect, useState } from "react";
 import { getCarcenterInfo } from "../../../service/chatting";
 import Swal from "sweetalert2";
+import Loading from "../../Loading";
 
 function ChatroomInfo(props) {
   const [searchParams] = useSearchParams();
   let carcenterId = searchParams.get("carcenterId");
   let carcenterName = searchParams.get("carcenterName");
 
+  const [isLoading, setIsLoading] = useState(true);
   const [carcenterInfo, setCarcenterInfo] = useState({
     phoneNumber: "-",
     email: "-",
@@ -24,20 +26,23 @@ function ChatroomInfo(props) {
   useEffect(() => {
     const infoLoading = async () => {
       try {
+        setIsLoading(true);
         const response = await getCarcenterInfo(carcenterId);
         setCarcenterInfo(response.data);
       } catch (error) {
-        console.log(error);
+        setIsLoading(false);
         Swal.fire({
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
-  
+
           text: error.response.data.message,
           icon: "warning",
           confirmButtonText: "확인",
         });
+      } finally {
+        setIsLoading(false);
       }
     };
     infoLoading();
@@ -52,40 +57,45 @@ function ChatroomInfo(props) {
 
   return (
     <div className={style.ChatroomInfoWrap}>
-      <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
-      <div className={style.largeButton}>
-        <LargeButton
-          children="문의하기"
-          onClick={() => handleChatroom()}
-        ></LargeButton>
-      </div>
-      <div className={style.infoBoxWrap}>
-        {/* 전화번호 정보 */}
-        <div className={style.infoBox}>
-          <img src={phoneIcon} alt="phoneIcon" className={style.infoImg} />
-          <div className={style.text}>{carcenterInfo.phoneNumber}</div>
-        </div>
-        {/* 이메일 정보 */}
-        <div className={style.infoBox}>
-          <img src={emailIcon} alt="emailIcon" className={style.infoImg} />
-          <div className={style.text}>{carcenterInfo.email}</div>
-        </div>
-        {/* 주소 정보 */}
-        <div className={style.infoBox}>
-          <img
-            src={addressIcon}
-            alt="addressIcon"
-            className={style.infoImg}
-          />
-          <div className={style.text}>{carcenterInfo.address}</div>
-        </div>
-        <div className={style.addressLocationWrap}>
-          <img
-            src={addressLocation}
-            alt="addressIcon"
-          />
-        </div>
-      </div>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <ChatPartnerProfile
+            carcenterName={carcenterName}
+          ></ChatPartnerProfile>
+          <div className={style.largeButton}>
+            <LargeButton
+              children="문의하기"
+              onClick={() => handleChatroom()}
+            ></LargeButton>
+          </div>
+          <div className={style.infoBoxWrap}>
+            {/* 전화번호 정보 */}
+            <div className={style.infoBox}>
+              <img src={phoneIcon} alt="phoneIcon" className={style.infoImg} />
+              <div className={style.text}>{carcenterInfo.phoneNumber}</div>
+            </div>
+            {/* 이메일 정보 */}
+            <div className={style.infoBox}>
+              <img src={emailIcon} alt="emailIcon" className={style.infoImg} />
+              <div className={style.text}>{carcenterInfo.email}</div>
+            </div>
+            {/* 주소 정보 */}
+            <div className={style.infoBox}>
+              <img
+                src={addressIcon}
+                alt="addressIcon"
+                className={style.infoImg}
+              />
+              <div className={style.text}>{carcenterInfo.address}</div>
+            </div>
+            <div className={style.addressLocationWrap}>
+              <img src={addressLocation} alt="addressIcon" />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

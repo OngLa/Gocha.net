@@ -6,6 +6,7 @@ import LargeButton from "../../../components/Button/index";
 import { sendMessage } from "../../../service/chatting";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Loading from "../../Loading";
 
 function WriteForm(props) {
   // [고객 메세지 작성 페이지]
@@ -20,7 +21,7 @@ function WriteForm(props) {
   let carcenterId = searchParams.get("carcenterId");
   let carcenterName = searchParams.get("carcenterName");
 
-  // message 객체 상태
+  const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState({
     toMemberId: carcenterId,
     title: "",
@@ -36,6 +37,7 @@ function WriteForm(props) {
   useEffect(() => {
     const loadingData = async () => {
       try {
+        setIsLoading(true);
         const response_car = await axios.get(
           "http://localhost:8080/api/chatting/car"
         );
@@ -46,26 +48,23 @@ function WriteForm(props) {
         setCarDataList(response_cardata.data);
         window.scrollTo(0, 0);
       } catch (error) {
-        console.log(error);
+        setIsLoading(false);
         Swal.fire({
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
-  
+
           text: error.response.data.message,
           icon: "warning",
           confirmButtonText: "확인",
         });
+      } finally {
+        setIsLoading(false);
       }
     };
     loadingData();
   }, []);
-
-  // 데이터 확인
-  // useEffect(() => {
-  //   console.log(message);
-  // }, [message]);
 
   //예제 데이터
   // const carList = [
@@ -151,99 +150,111 @@ function WriteForm(props) {
 
   return (
     <div className={style.WriteFormWrap}>
-      <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
-      <div>
-        <div className={style.textWhite}>제목</div>
-        <textarea
-          className={style.textarea}
-          id="message"
-          name="message"
-          rows="1"
-          cols="50"
-          placeholder="제목을 입력하세요."
-          value={message.title}
-          onChange={(e) => setMessage({ ...message, title: e.target.value })}
-        ></textarea>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <ChatPartnerProfile
+            carcenterName={carcenterName}
+          ></ChatPartnerProfile>
+          <div>
+            <div className={style.textWhite}>제목</div>
+            <textarea
+              className={style.textarea}
+              id="message"
+              name="message"
+              rows="1"
+              cols="50"
+              placeholder="제목을 입력하세요."
+              value={message.title}
+              onChange={(e) =>
+                setMessage({ ...message, title: e.target.value })
+              }
+            ></textarea>
 
-        <div className={style.textWhite}>내용</div>
-        <textarea
-          className={style.textarea}
-          id="message"
-          name="message"
-          rows="5"
-          cols="50"
-          placeholder="내용을 입력하세요."
-          value={message.content}
-          onChange={(e) => setMessage({ ...message, content: e.target.value })}
-        ></textarea>
-      </div>
+            <div className={style.textWhite}>내용</div>
+            <textarea
+              className={style.textarea}
+              id="message"
+              name="message"
+              rows="5"
+              cols="50"
+              placeholder="내용을 입력하세요."
+              value={message.content}
+              onChange={(e) =>
+                setMessage({ ...message, content: e.target.value })
+              }
+            ></textarea>
+          </div>
 
-      {/* 차량 선택 */}
-      <div className={style.selectData}>
-        <div htmlFor="car" className={style.selectDataLabel}>
-          차량 선택:
-        </div>
-        <select
-          className={style.dataSelectBox}
-          id="car"
-          name="car"
-          value={message.selectCar || ''}
-          onChange={(e) => {
-            const selectedCarId = e.target.value;
+          {/* 차량 선택 */}
+          <div className={style.selectData}>
+            <div htmlFor="car" className={style.selectDataLabel}>
+              차량 선택:
+            </div>
+            <select
+              className={style.dataSelectBox}
+              id="car"
+              name="car"
+              value={message.selectCar || ""}
+              onChange={(e) => {
+                const selectedCarId = e.target.value;
 
-            // 선택된 차량으로 메시지 상태를 업데이트합니다.
-            setMessage({
-              ...message,
-              selectCar: selectedCarId,
-            });
-          }}
-        >
-          <option value="">선택</option>
-          {carList.map((car) => (
-            <option key={car.id} value={car.id}>
-              {car.carNumber}
-            </option>
-          ))}
-        </select>
-      </div>
+                // 선택된 차량으로 메시지 상태를 업데이트합니다.
+                setMessage({
+                  ...message,
+                  selectCar: selectedCarId,
+                });
+              }}
+            >
+              <option value="">선택</option>
+              {carList.map((car) => (
+                <option key={car.id} value={car.id}>
+                  {car.carNumber}
+                </option>
+              ))}
+            </select>
+          </div>
 
-      {/* 데이터 선택 */}
-      <div className={style.selectData}>
-        <div htmlFor="data" className={style.selectDataLabel}>
-          데이터 선택:
-        </div>
-        <select
-          className={style.dataSelectBox}
-          id="data"
-          name="data"
-          value={message.cardataId || ''}
-          onChange={(e) => {
-            const selectedDataId = e.target.value;
+          {/* 데이터 선택 */}
+          <div className={style.selectData}>
+            <div htmlFor="data" className={style.selectDataLabel}>
+              데이터 선택:
+            </div>
+            <select
+              className={style.dataSelectBox}
+              id="data"
+              name="data"
+              value={message.cardataId || ""}
+              onChange={(e) => {
+                const selectedDataId = e.target.value;
 
-            // 선택된 데이터로 메시지 상태를 업데이트합니다.
-            setMessage({
-              ...message,
-              cardataId: parseInt(selectedDataId, 10), // 정수로 변환
-            });
-          }}
-        >
-          <option value="">선택</option>
-          {carDataList
-            .filter((data) => data.carId === parseInt(message.selectCar)) //데이터 필터링
-            .map((data) => (
-              <option key={data.id} value={data.id}>
-                Update - {data.lastUpdate}
-              </option>
-            ))}
-        </select>
-      </div>
+                // 선택된 데이터로 메시지 상태를 업데이트합니다.
+                setMessage({
+                  ...message,
+                  cardataId: parseInt(selectedDataId, 10), // 정수로 변환
+                });
+              }}
+            >
+              <option value="">선택</option>
+              {carDataList
+                .filter((data) => data.carId === parseInt(message.selectCar)) //데이터 필터링
+                .map((data) => (
+                  <option key={data.id} value={data.id}>
+                    Update - {data.lastUpdate}
+                  </option>
+                ))}
+            </select>
+          </div>
 
-      <div className={style.LargeButtonWrap}>
-        <LargeButton
-          children="전송하기"
-          onClick={() => handleMessage()}
-        ></LargeButton>
-      </div>
+          <div className={style.LargeButtonWrap}>
+            <LargeButton
+              children="전송하기"
+              onClick={() => handleMessage()}
+            ></LargeButton>
+          </div>
+        </>
+      )}
     </div>
   );
 }

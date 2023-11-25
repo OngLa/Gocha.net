@@ -6,19 +6,24 @@ import UserListComponent from "./UserListComponent";
 import imgMoveBottom from "../../img/icon/Caret_Down_MD.png";
 import imgMoveTop from "../../img/icon/Caret_Up_MD.png";
 import { SmallButton, SmallButton2 } from "../../components/Button";
+import Loading from "../Loading";
 
 function Home() {
   // ================================================================//
   //예약자 목록 출력
-
+  const [isLoading, setIsLoading] = useState(true);
   const [userlist, setUserlist] = useState([]);
 
   const fetchData = async () => {
     try {
+      setIsLoading(true);
       const response = await readReservationUserList();
       setUserlist(response.data);
     } catch (error) {
+      setIsLoading(false);
       console.error("Error fetching user list:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -110,71 +115,75 @@ function Home() {
 
   return (
     <div>
-      <ContentHeader menuName="예약관리" />
-      {/* ================================================================ */}
-      {/* 필터 컴포넌트 */}
-      <div className={styles.filterContainer}>
-       <div className={styles.box1}>
-          <select
-            className={styles.statusFilter}
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-          >
-            <option value="">전체</option>
-            <option value="0">승인대기중</option>
-            <option value="1">승인됨</option>
-            <option value="2">정비완료</option>
-            <option value="3">취소됨</option>
-          </select>
-  
-          <input
-            type="text"
-            placeholder="검색 이름"
-            className={styles.searchInput}
-            value={searchName}
-            onChange={(e) => setSearchName(e.target.value)}
-          />
-       </div>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <ContentHeader menuName="예약관리" />
+          {/* ================================================================ */}
+          {/* 필터 컴포넌트 */}
+          <div className={styles.filterContainer}>
+            <div className={styles.box1}>
+              <select
+                className={styles.statusFilter}
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+              >
+                <option value="">전체</option>
+                <option value="0">승인대기중</option>
+                <option value="1">승인됨</option>
+                <option value="2">정비완료</option>
+                <option value="3">취소됨</option>
+              </select>
 
-        <div className={styles.dateInputs}>
-          <input
-            type="date"
-            placeholder="시작 날짜"
-            className={styles.dateInput}
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-          <input
-            type="date"
-            placeholder="종료 날짜"
-            className={styles.dateInput}
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-        </div>
+              <input
+                type="text"
+                placeholder="검색 이름"
+                className={styles.searchInput}
+                value={searchName}
+                onChange={(e) => setSearchName(e.target.value)}
+              />
+            </div>
 
-        <div className={styles.fileterButton}>
-          <SmallButton onClick={refreshList}>필터 적용</SmallButton>
-          <SmallButton2 onClick={resetFilters}>필터 초기화</SmallButton2>
-        </div>
-      </div>
+            <div className={styles.dateInputs}>
+              <input
+                type="date"
+                placeholder="시작 날짜"
+                className={styles.dateInput}
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+              <input
+                type="date"
+                placeholder="종료 날짜"
+                className={styles.dateInput}
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+            </div>
 
-      {/* ================================================================ */}
-      {/* 예약 컴포넌트 출력 */}
+            <div className={styles.fileterButton}>
+              <SmallButton onClick={refreshList}>필터 적용</SmallButton>
+              <SmallButton2 onClick={resetFilters}>필터 초기화</SmallButton2>
+            </div>
+          </div>
 
-      <div>
-        {filteredUserList.map((list) => (
-          <UserListComponent
-            key={list.id}
-            list={list}
-            refreshList={refreshList}
-          />
-        ))}
-      </div>
-      {/* ================================================================ */}
-      {/* 스크롤 로직 */}
+          {/* ================================================================ */}
+          {/* 예약 컴포넌트 출력 */}
 
-      {/* <img
+          <div>
+            {filteredUserList.map((list) => (
+              <UserListComponent
+                key={list.id}
+                list={list}
+                refreshList={refreshList}
+              />
+            ))}
+          </div>
+          {/* ================================================================ */}
+          {/* 스크롤 로직 */}
+
+          {/* <img
         src={imgMoveTop}
         alt="scroll"
         className={styles.scrollToTop}
@@ -186,7 +195,9 @@ function Home() {
         className={styles.scrollToBottom}
         onClick={moveToBottom}
       /> */}
-      {/* ================================================================ */}
+          {/* ================================================================ */}
+        </>
+      )}
     </div>
   );
 }

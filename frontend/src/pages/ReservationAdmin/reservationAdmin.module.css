@@ -40,6 +40,21 @@
 /* ============================================================ */
 /* 필터 컨테이너 스타일 */
 /* 컨테이너 스타일 */
+.filterContainer,
+.box1,
+.statusFilter,
+.searchInput,
+.dateInputs,
+.dateInput,
+.fileterButton {
+  color: white !important;
+}
+
+.searchInput::placeholder {
+  color: #c9c9c9 !important;
+  padding-left: 5px;
+}
+
 .filterContainer {
   display: flex;
   flex-direction: column;
@@ -61,7 +76,7 @@
 
 /* 상태 필터 */
 .statusFilter {
-  padding: 10px 0;
+  padding: 10px 0px 10px 7px;
   border: 1px solid #45cb85;
   background-color: #4e5f6f;
 }
@@ -80,7 +95,7 @@
   border: 1px solid #45cb85; /* 녹색 테두리 */
   background-color: #4e5f6f;
   font-size: 16px; /* 글자 크기 */
-  
+  margin-right: 3px;
 }
 
 /* 날짜선택 아이콘 색상변경 */

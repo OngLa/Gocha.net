@@ -1,11 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import style from "./login.module.css";
 import ContentHeader from "../../../components/ContentHeader";
 import { useCallback, useEffect, useState } from "react";
-import LargeButton, {
-  SmallButton,
-  SmallButton2,
-} from "../../../components/Button";
+import LargeButton, { SmallButton2 } from "../../../components/Button";
 import emailIcon from "../../../img/member/email.png";
 import passwordIcon from "../../../img/member/password.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +19,24 @@ function Login() {
   // 로그인 페이지
   // ㄴ로그인 & 토큰 생성 및 localstorage/redux등록
   // ㄴ비밀번호 찾기 페이지 이동
+
+  // main에서 이동한 페이지라면 main=1을 가져오고,
+  //잘못된 접근으로 login페이지로 이동한 것이라면 alert를 띄워주기.
+  const [searchParams] = useSearchParams();
+  let main = searchParams.get("main");
+
+  useEffect(() => {
+    main !== "1" && Swal.fire({
+      background: "#334E58",
+      color: "#FFDA47",
+      width: "80vw",
+      confirmButtonColor: "#45CB85",
+
+      icon: "info",
+      text: "로그인 후 이용하시길 바랍니다.",
+      confirmButtonText: "확인",
+    });
+  }, [])
 
   const navigate = useNavigate();
 
@@ -41,13 +56,13 @@ function Login() {
   // 로그인 시 user, role, token을 redux에 등록시켜주기 위해 dispatch 생성.
   const dispatch = useDispatch();
   // 로그인 시 console에 email, role을 찍어주기 위해 Redux에서 user, role을 받아옴.
-  const gUser = useSelector((state) => state.authReducer.user);
-  const gRole = useSelector((state) => state.authReducer.role);
-
+  // const gUser = useSelector((state) => state.authReducer.user);
+  // const gRole = useSelector((state) => state.authReducer.role);
+  
   //로그인 시 Redux에 로그인 정보(email, role)가 수정되면 console에서 확인.
-  useEffect(() => {
-    console.log("Login Result = email: " + gUser + " / role: " + gRole);
-  }, [gUser, gRole]);
+  // useEffect(() => {
+  //   console.log("Login Result = email: " + gUser + " / role: " + gRole);
+  // }, [gUser, gRole]);
 
   // 로그인 버튼 클릭 시 handle
   const handleLogin = useCallback(async (event) => {
@@ -93,7 +108,7 @@ function Login() {
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
-  
+
           text: "아이디 또는 비밀번호가 일치하지 않습니다.",
           icon: "error",
           confirmButtonText: "확인",
@@ -156,10 +171,10 @@ function Login() {
         <div className={style.signupLinkBox}>
           <div>기존에 가입된 계정이 없으신분은</div>
           <div>
-          <Link to="/member/emailCheck" className={style.signupLink}>
-            회원가입
-          </Link>
-          후 이용해 주세요.
+            <Link to="/member/emailCheck" className={style.signupLink}>
+              회원가입
+            </Link>
+            후 이용해 주세요.
           </div>
         </div>
       </div>

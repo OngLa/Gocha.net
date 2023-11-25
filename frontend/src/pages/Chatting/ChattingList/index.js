@@ -6,6 +6,7 @@ import ContentHeader from "../../../components/ContentHeader";
 import searchIcon from "../../../img/chatting/searchIcon.png";
 import { getChattingCarcenter } from "../../../service/chatting";
 import Swal from "sweetalert2";
+import Loading from "../../Loading";
 
 function ChattingList() {
   // [고객 채팅목록 페이지]
@@ -13,25 +14,29 @@ function ChattingList() {
   // 해당 지점을 클릭하면 채팅방으로 이동
   // *고객의 채팅목록 페이지는 모든 정비소를 다 보여준다.
 
+  const [isLoading, setIsLoading] = useState(true);
   const [carcenterList, setCarcenterList] = useState([]);
 
   useEffect(() => {
     const lodingChatting = async () => {
       try {
+        setIsLoading(true);
         const response = await getChattingCarcenter();
         setCarcenterList(response.data);
       } catch (error) {
-        console.log(error);
+        setIsLoading(false);
         Swal.fire({
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
-  
+
           text: error.response.data.message,
           icon: "warning",
           confirmButtonText: "확인",
         });
+      } finally {
+        setIsLoading(false);
       }
     };
     lodingChatting();
@@ -63,35 +68,41 @@ function ChattingList() {
 
   return (
     <div className={style.chattingWrap}>
-      <div>
-        <ContentHeader menuName="정비소 목록"></ContentHeader>
-      </div>
-      <div className={style.searchWrap}>
-        <div className={style.searchImgWrap}>
-          <img className={style.searchImg} src={searchIcon} alt="User" />
-        </div>
-        <div>
-          <input
-            className={style.searchInput}
-            placeholder="정비소를 검색하세요."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className={style.ChatMemberBoxWrap}>
-        {filteredUserList.map((carcenter) => (
-          <div key={carcenter.id}>
-            {/* 멤버가 보여지는 Box */}
-            <Link
-              to={`/chatting/chatroominfo?carcenterId=${carcenter.id}&carcenterName=${carcenter.name}`}
-              style={{ textDecoration: "none" }}
-            >
-              <ChatMemberBox carcenterName={carcenter.name} />
-            </Link>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <div>
+            <ContentHeader menuName="정비소 목록"></ContentHeader>
           </div>
-        ))}
-      </div>
+          <div className={style.searchWrap}>
+            <div className={style.searchImgWrap}>
+              <img className={style.searchImg} src={searchIcon} alt="User" />
+            </div>
+            <div>
+              <input
+                className={style.searchInput}
+                placeholder="정비소를 검색하세요."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className={style.ChatMemberBoxWrap}>
+            {filteredUserList.map((carcenter) => (
+              <div key={carcenter.id}>
+                {/* 멤버가 보여지는 Box */}
+                <Link
+                  to={`/chatting/chatroominfo?carcenterId=${carcenter.id}&carcenterName=${carcenter.name}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <ChatMemberBox carcenterName={carcenter.name} />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -1,3 +1,7 @@
+
+/* ===========================================*/
+/* 스크롤 관련 css */
+
 /* .RepairshopList {
 } */
 
@@ -19,6 +23,8 @@
   width: 100%;
 }
 
+
+/* 정비소검색창 */
 .searchWrap {
   width: 60%;
   height: 40px;
@@ -29,8 +35,10 @@
   border-radius: 7px;
   margin-top: 20px;
   margin-left: 5%;
+  margin-bottom: 15px;
 }
-
+ 
+/* 검색창안 돋보기 이미지 */
 .searchImgWrap {
   width: 30%;
   display: flex;
@@ -43,6 +51,7 @@
   height: 22px;
 }
 
+/* 검색창 입력창  */
 .searchInput {
   width: 90%;
   height: 22px;
@@ -54,13 +63,14 @@
   font-size: 15px;
 }
 
+/* 검색창 위에 있는 구분선 */
 .hrLine {
   width: 90%;
   border:  0.5px solid #486f7d;
   margin-top: 30px;
 }
 
-
+/* 스크롤 css */
 .scrollToTop {
   position: fixed;
   bottom: 20.5%;
@@ -80,12 +90,14 @@
   border-radius: 50%;
   padding: 5px;
 }
+/*==============================================*/
+/* reservationList-예약목록 css*/
 
+/* 새예약 등록 하기 버튼 위치고정 css */
 .largeButtonWrap {
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: #334e5870;
   width: 100vw;
   height: 100px;
@@ -94,3 +106,20 @@
   left: 50%;
   transform: translate(-50%);
 }
+/* ============================================== */ 
+/* repairshopList-정비소목록 css*/
+
+/* 주정비소 등록하기 버튼 css */
+.SmallButton {
+  margin-bottom: 1rem;
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.SmallButton text{
+  color: #45CB85;
+}
+/* ============================================== */

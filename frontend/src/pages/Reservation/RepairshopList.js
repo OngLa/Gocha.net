@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import LargeButton from "../../components/Button";
+import { SmallButton } from "../../components/Button";
 import { useEffect, useState } from "react";
 import ContentHeader from "../../components/ContentHeader";
 import RepairshopComponent from "./RepairshopComponent";
@@ -80,12 +80,13 @@ function RepairshopList() {
         <ContentHeader menuName="정비소 목록" />
       </div>
       <div className={styles.RepairshopList}>
-        <div className={styles.LargeButton}>
-          <LargeButton onClick={handleOnclick} style={{ marginBottom: "40px" }}>
+        <div className={styles.SmallButton}>
+        <text>나의 주 정비소</text>
+          <SmallButton onClick={handleOnclick}>
             주 정비소 등록하기
-          </LargeButton>
+          </SmallButton>
         </div>
-        <div className={styles.MainRepairshopComponent}>
+        <div>
           {favoriteCarcenterList.map((favoriteCarcenter) => (
             <MainRepairshopComponent
               key={favoriteCarcenter.carcenterId}

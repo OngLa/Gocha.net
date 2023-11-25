@@ -9,7 +9,7 @@
   background-color: #5d707f;
   border: 1px solid #45cb85;
   border-radius: 15px;
-} 
+}
 
 .button {
   display: flex;
@@ -22,7 +22,7 @@
   bottom: 20.5%;
   right: 16px;
   cursor: pointer;
-  background-color: rgba(171, 171, 171, 0.6); 
+  background-color: rgba(171, 171, 171, 0.6);
   border-radius: 50%;
   padding: 5px;
 }
@@ -32,7 +32,62 @@
   bottom: 14%;
   right: 16px;
   cursor: pointer;
-  background-color: rgba(171, 171, 171, 0.6); 
+  background-color: rgba(171, 171, 171, 0.6);
   border-radius: 50%;
   padding: 5px;
+}
+
+/* ============================================================ */
+/* 필터 컨테이너 스타일 */
+/* 컨테이너 스타일 */
+.filterContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+  border: 1.5px solid #45cb85;;
+  padding: 10px;
+}
+
+.box1 {
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 상태 필터 */
+.statusFilter {
+  padding: 10px 0;
+  border: 1px solid #45cb85;
+  background-color: #4e5f6f;
+}
+
+/* 검색 필드 스타일 */
+.searchInput {
+  padding: 10px 0; /* 패딩 조정 */
+  border: 1px solid #45cb85; /* 녹색 테두리 */
+  background-color: #4e5f6f; /* 배경색 투명 */
+  font-size: 15px; /* 글자 크기 */
+}
+
+/* 날짜 선택 필드 스타일 */
+.dateInput {
+  padding: 10px 10px; /* 패딩 조정 */
+  border: 1px solid #45cb85; /* 녹색 테두리 */
+  background-color: #4e5f6f;
+  font-size: 16px; /* 글자 크기 */
+  
+}
+
+/* 날짜선택 아이콘 색상변경 */
+
+
+/* 버튼 스타일 */
+.fileterButton {
+  display: flex;
+  gap: 10px;
 }

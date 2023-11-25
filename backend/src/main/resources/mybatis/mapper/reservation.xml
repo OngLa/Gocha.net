@@ -47,6 +47,7 @@
         FROM RESERVATION r
         join MEMBER m on r.MEMBER_ID =m.ID
         where CARCENTER_ID = #{carcenterId}
+        order by r.RESERVED_DATE desc
     </select>
 
     <!-- ADMIN 예약자 상태(state) 업데이트 -->

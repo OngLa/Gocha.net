@@ -51,37 +51,37 @@ public class WebSecurityConfig {
 
                         //Chatting
                         //공통
-                        .antMatchers(HttpMethod.GET, "/api/chatting/chatroom").hasAnyRole("CARCENTER", "USER")
-                        .antMatchers(HttpMethod.GET, "/api/chatting/open-cardata").hasAnyRole("CARCENTER", "USER")
-                        .antMatchers(HttpMethod.POST, "/api/chatting/sendmessage").hasAnyRole("CARCENTER", "USER")
-                        //carcenter
-                        .antMatchers(HttpMethod.GET, "/api/chatting/user").hasAuthority("ROLE_CARCENTER")
-                        //user
-                        .antMatchers("/api/chatting/**").hasAuthority("ROLE_USER")
-
-                        //Car
-                        .antMatchers("/api/cars/**").hasAuthority("ROLE_USER")
-
-                        //Car
-                        .antMatchers("/api/car-data/**").hasAuthority("ROLE_USER")
-
-                        //Fc & Reservation
-                        //공통
-                        .antMatchers(HttpMethod.GET, "/api/member/reservation/list").hasAnyRole("CARCENTER", "USER")
-                        .antMatchers(HttpMethod.DELETE, "/api/member/reservation/**").hasAnyRole("CARCENTER", "USER")
-                        //carcenter
-                        .antMatchers(HttpMethod.PUT, "/api/member/reservation/bookerlist").hasAuthority("ROLE_CARCENTER")
-                        .antMatchers(HttpMethod.GET, "/api/member/reservation/bookerlist").hasAuthority("ROLE_CARCENTER")
-                        //user
-                        .antMatchers("/api/member/reservation/**").hasAuthority("ROLE_USER")
-
-                        //Member
-                        .antMatchers(HttpMethod.GET, "/api/member/mypage").hasAnyRole("CARCENTER", "USER")
+//                        .antMatchers(HttpMethod.GET, "/api/chatting/chatroom").hasAnyRole("CARCENTER", "USER")
+//                        .antMatchers(HttpMethod.GET, "/api/chatting/open-cardata").hasAnyRole("CARCENTER", "USER")
+//                        .antMatchers(HttpMethod.POST, "/api/chatting/sendmessage").hasAnyRole("CARCENTER", "USER")
+//                        //carcenter
+//                        .antMatchers(HttpMethod.GET, "/api/chatting/user").hasAuthority("ROLE_CARCENTER")
+//                        //user
+//                        .antMatchers("/api/chatting/**").hasAuthority("ROLE_USER")
+//
+//                        //Car
+//                        .antMatchers("/api/cars/**").hasAuthority("ROLE_USER")
+//
+//                        //Car
+//                        .antMatchers("/api/car-data/**").hasAuthority("ROLE_USER")
+//
+//                        //Fc & Reservation
+//                        //공통
+//                        .antMatchers(HttpMethod.GET, "/api/member/reservation/list").hasAnyRole("CARCENTER", "USER")
+//                        .antMatchers(HttpMethod.DELETE, "/api/member/reservation/**").hasAnyRole("CARCENTER", "USER")
+//                        //carcenter
+//                        .antMatchers(HttpMethod.PUT, "/api/member/reservation/bookerlist").hasAuthority("ROLE_CARCENTER")
+//                        .antMatchers(HttpMethod.GET, "/api/member/reservation/bookerlist").hasAuthority("ROLE_CARCENTER")
+//                        //user
+//                        .antMatchers("/api/member/reservation/**").hasAuthority("ROLE_USER")
+//
+//                        //Member
+//                        .antMatchers(HttpMethod.GET, "/api/member/mypage").hasAnyRole("CARCENTER", "USER")
 
                 //.antMatchers("/api/chatting/**").hasAuthority("ROLE_CARCENTER") // 전체(**)
                 //.antMatchers(HttpMethod.GET, "/board/list").hasAuthority("ROLE_USER") //ROLE_생략하면 안됨
                 //.antMatchers(HttpMethod.GET, "/api/member/reservation/list").hasAnyRole("CARCENTER", "USER") //ROLE_ 붙이면 안됨
-                //.anyRequest().permitAll() //그 이외의 모든 경로 허가
+                .anyRequest().permitAll() //그 이외의 모든 경로 허가
         );
 
         return http.build();

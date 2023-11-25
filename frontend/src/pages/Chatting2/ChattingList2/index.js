@@ -6,6 +6,7 @@ import ContentHeader from "../../../components/ContentHeader";
 import searchIcon from "../../../img/chatting/searchIcon.png";
 import { getChattingUser } from "../../../service/chatting";
 import Swal from "sweetalert2";
+import Loading from "../../Loading";
 
 function ChattingList2() {
   // [정비소 채팅목록 페이지]
@@ -14,35 +15,34 @@ function ChattingList2() {
   // *정비소는 자신에게 메시지를 보낸 기록이 있는 채팅방만 표시한다.
   // (고객의 채팅목록 페이지는 모든 정비소를 다 보여준다.)
 
+  const [isLoading, setIsLoading] = useState(true);
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
     const lodingChatting = async () => {
       try {
+        setIsLoading(true);
         // 나에게 메세지 보낸 유저 목록 load
         const response = await getChattingUser();
         setUserList(response.data);
       } catch (error) {
-        console.log(error);
+        setIsLoading(false);
         Swal.fire({
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
-  
+
           text: error.response.data.message,
           icon: "warning",
           confirmButtonText: "확인",
         });
+      } finally {
+        setIsLoading(false);
       }
     };
     lodingChatting();
   }, []);
-
-  // useEffect(() => {
-  //   console.log(userList);
-  // }, [userList])
-
 
   // const userList = [
   //   {
@@ -73,26 +73,28 @@ function ChattingList2() {
 
   return (
     <div className={style.chattingWrap}>
-      <div>
-        <ContentHeader menuName="고객 목록"></ContentHeader>
-      </div>
-      <div className={style.searchWrap}>
-        <div className={style.searchImgWrap}>
-          <img className={style.searchImg} src={searchIcon} alt="User" />
-        </div>
-        <div>
-          <input
-            className={style.searchInput}
-            placeholder="고객을 검색하세요."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className={style.ChatMemberBoxWrap}>
-        {filteredUserList.map(
-          (user) =>
-            (
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <div>
+            <ContentHeader menuName="고객 목록"></ContentHeader>
+          </div>
+          <div className={style.searchWrap}>
+            <div className={style.searchImgWrap}>
+              <img className={style.searchImg} src={searchIcon} alt="User" />
+            </div>
+            <div>
+              <input
+                className={style.searchInput}
+                placeholder="고객을 검색하세요."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className={style.ChatMemberBoxWrap}>
+            {filteredUserList.map((user) => (
               <div key={user.id}>
                 {/* 해당 유저와의 채팅방으로 입장 */}
                 <Link
@@ -102,9 +104,10 @@ function ChattingList2() {
                   <ChatMemberBox2 userName={user.name} />
                 </Link>
               </div>
-            )
-        )}
-      </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

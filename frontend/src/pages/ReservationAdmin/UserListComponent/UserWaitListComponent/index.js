@@ -122,9 +122,9 @@ function UserMaintenanceList({ list, refreshList }) {
     <div>
       <div className={styles.cardBody}>
         <div className={styles.h2}>
-          <h2>에러코드:{list.carDataId}</h2>
-          <h2>예약일자:{list.reservedDate}</h2>
-          <h2>전화번호:{list.phoneNumber}</h2>
+          <h2>에러코드: {list.carDataId}</h2>
+          <h2>예약일자: {list.reservedDate}</h2>
+          <h2>전화번호: {list.phoneNumber}</h2>
         </div>
 
         <div className={styles.button}>

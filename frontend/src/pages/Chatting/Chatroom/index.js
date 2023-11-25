@@ -8,6 +8,7 @@ import { getChatroom } from "../../../service/chatting";
 import imgMoveBottom from "../../../img/icon/Caret_Down_MD.png";
 import imgMoveTop from "../../../img/icon/Caret_Up_MD.png";
 import Swal from "sweetalert2";
+import Loading from "../../Loading";
 
 function Chatroom(props) {
   // [고객과 정비소의 채팅방]
@@ -19,16 +20,19 @@ function Chatroom(props) {
   const [searchParams] = useSearchParams();
   let carcenterId = searchParams.get("carcenterId");
   let carcenterName = searchParams.get("carcenterName");
+
+  const [isLoading, setIsLoading] = useState(true);
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
     const loadingChatroom = async () => {
       // 채팅방 메세지 조회
       try {
+        setIsLoading(true);
         const response = await getChatroom(carcenterId);
         setMessageList(response.data);
       } catch (error) {
-        console.log(error);
+        setIsLoading(false);
         Swal.fire({
           background: "#334E58",
           color: "#FFDA47",
@@ -36,11 +40,13 @@ function Chatroom(props) {
           fontSize: "1px",
           confirmButtonColor: "#45CB85",
           cancelButtonColor: "gray",
-  
+
           text: error.response.data.message,
           icon: "warning",
           confirmButtonText: "확인",
         });
+      } finally {
+        setIsLoading(false);
       }
     };
     loadingChatroom();
@@ -54,11 +60,6 @@ function Chatroom(props) {
   useEffect(() => {
     scrollToBottom();
   }, [messageList]);
-
-  // 데이터 확인
-  // useEffect(() => {
-  //   console.log(messageList);
-  // }, [messageList]);
 
   // 예제데이터
   //   [
@@ -144,55 +145,63 @@ function Chatroom(props) {
 
   return (
     <div className={style.ChatroomWrap}>
-      <ChatPartnerProfile carcenterName={carcenterName}></ChatPartnerProfile>
-      {messageList.map((message) =>
-        // 현재는 고객페이지이기에 memberId가 100000보다 작으면 내가 보낸 메세지로 보이기 위해 우측 정렬한다.(isSender로 자기 메세지 구분)
-        message.memberId < 100000 ? (
-          // 고객
-          <div className={style.ChatboxSenderWrap} key={message.id}>
-            {/* ChatBox는 메세지가 보여지는 box단위이다. sender가 1이면 우측정렬로 초록색으로표시됨 */}
-            <ChatBox
-              title={message.title}
-              content={message.content}
-              sendDate={message.sendDate}
-              // isReservation={message.isReservation} 고객은 예약 활성화 버튼 필요x
-              cardataId={message.cardataId}
-              issender="1"
-            ></ChatBox>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <ChatPartnerProfile
+            carcenterName={carcenterName}
+          ></ChatPartnerProfile>
+          {messageList.map((message) =>
+            // 현재는 고객페이지이기에 memberId가 100000보다 작으면 내가 보낸 메세지로 보이기 위해 우측 정렬한다.(isSender로 자기 메세지 구분)
+            message.memberId < 100000 ? (
+              // 고객
+              <div className={style.ChatboxSenderWrap} key={message.id}>
+                {/* ChatBox는 메세지가 보여지는 box단위이다. sender가 1이면 우측정렬로 초록색으로표시됨 */}
+                <ChatBox
+                  title={message.title}
+                  content={message.content}
+                  sendDate={message.sendDate}
+                  // isReservation={message.isReservation} 고객은 예약 활성화 버튼 필요x
+                  cardataId={message.cardataId}
+                  issender="1"
+                ></ChatBox>
+              </div>
+            ) : (
+              // 정비소
+              <div className={style.ChatboxWrap} key={message.id}>
+                <ChatBox
+                  title={message.title}
+                  content={message.content}
+                  sendDate={message.sendDate}
+                  isReservation={message.isReservation}
+                  carcenterName={carcenterName}
+                  // cardataId={message.cardataId} 정비소는 데이터 첨부 버튼 필요x
+                  issender="0"
+                ></ChatBox>
+              </div>
+            )
+          )}
+          <div className={style.largeButtonWrap}>
+            <LargeButton
+              children="작성하기"
+              onClick={() => moveWrite()}
+            ></LargeButton>
           </div>
-        ) : (
-          // 정비소
-          <div className={style.ChatboxWrap} key={message.id}>
-            <ChatBox
-              title={message.title}
-              content={message.content}
-              sendDate={message.sendDate}
-              isReservation={message.isReservation}
-              carcenterName={carcenterName}
-              // cardataId={message.cardataId} 정비소는 데이터 첨부 버튼 필요x
-              issender="0"
-            ></ChatBox>
-          </div>
-        )
+          <img
+            src={imgMoveTop}
+            alt="scroll"
+            className={style.scrollToTop}
+            onClick={moveToTop}
+          />
+          <img
+            src={imgMoveBottom}
+            alt="scroll"
+            className={style.scrollToBottom}
+            onClick={moveToBottom}
+          />
+        </>
       )}
-      <div className={style.largeButtonWrap}>
-        <LargeButton
-          children="작성하기"
-          onClick={() => moveWrite()}
-        ></LargeButton>
-      </div>
-      <img
-        src={imgMoveTop}
-        alt="scroll"
-        className={style.scrollToTop}
-        onClick={moveToTop}
-      />
-      <img
-        src={imgMoveBottom}
-        alt="scroll"
-        className={style.scrollToBottom}
-        onClick={moveToBottom}
-      />
     </div>
   );
 }

@@ -89,9 +89,14 @@ function Login() {
         console.log(error);
 
         return Swal.fire({
-          icon: "error",
-          title: "아이디 또는 비밀번호가 일치하지 않습니다.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+  
+          text: "아이디 또는 비밀번호가 일치하지 않습니다.",
+          icon: "error",
+          confirmButtonText: "확인",
         });
       }
     }
@@ -149,11 +154,13 @@ function Login() {
       </div>
       <div>
         <div className={style.signupLinkBox}>
-          아이디가 없으신분은
+          <div>기존에 가입된 계정이 없으신분은</div>
+          <div>
           <Link to="/member/emailCheck" className={style.signupLink}>
             회원가입
           </Link>
           후 이용해 주세요.
+          </div>
         </div>
       </div>
     </div>

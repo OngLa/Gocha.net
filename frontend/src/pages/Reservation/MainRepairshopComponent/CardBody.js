@@ -22,12 +22,10 @@ function CardBody({ favoriteCarcenter, refreshList }) {
   async function deleteClick() {
     try {
       const result = await Swal.fire({
-        // 수정x
         background: "#334E58",
         color: "#FFDA47",
         width: "80vw",
         confirmButtonColor: "#45CB85",
-        cancelButtonColor: "gray",
 
         // 커스텀
         title: "삭제하시겠습니까?",
@@ -40,19 +38,17 @@ function CardBody({ favoriteCarcenter, refreshList }) {
       if (result.isConfirmed) {
         await deleteFavoriteCarcenter(favoriteCarcenter.id);
         Swal.fire({
-          // 수정x
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",
           confirmButtonColor: "#45CB85",
           cancelButtonColor: "gray",
 
-          // 커스텀
-          title: "요청이 정상 처리 되었습니다.",
-          icon: "success", // 표시할 아이콘(error, info, question, success, warning)
-          confirmButtonText: "예", // Ok 대신에 쓸 텍스트
-          cancelButtonText: "아니오", // cancel 대신에 쓸 텍스트
-          showCancelButton: true, // cancel 표시 유무
+          text: "요청이 정상 처리 되었습니다.",
+          icon: "success", 
+          confirmButtonText: "예", 
+          cancelButtonText: "아니오", 
+          showCancelButton: true, 
         });
       }
       await refreshList();

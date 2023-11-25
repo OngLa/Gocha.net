@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "./mypage.module.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
 import { SmallButton } from "../../../components/Button";
 import emailIcon from "../../../img/member/email-white.png";
@@ -16,7 +16,7 @@ import {
   setRefreshToken,
 } from "../../../redux/authReducer";
 import { removeAuthHeader } from "../../../service/axiosConfig";
-import { getMypage } from "../../../service/member";
+import { deleteMember, getMypage } from "../../../service/member";
 
 function Mypage() {
   // 마이페이지
@@ -44,6 +44,16 @@ function Mypage() {
         setMypage(response.data);
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+
+          icon: "warning",
+          text: "잘못된 접근입니다.",
+          confirmButtonText: "확인",
+        });
       }
     };
     fetchUserData();
@@ -56,43 +66,30 @@ function Mypage() {
 
   // 비밀번호 수정 페이지로 이동
   const handleEditPassword = () => {
-    navigate("/member/emailCheck");
+    navigate("/member/editPw", { state: { email: mypage.email } });
   };
 
   // 회원탈퇴 처리
-  const handleWithdrawal = (e) => {
-    return Swal.fire({
-      icon: "question",
-      title: "정말로 탈퇴하시겠습니까?",
-      text: "탈퇴 시, 모든 정보가 사라집니다.",
-      showCancelButton: true,
-      confirmButtonText: "예",
-      confirmButtonColor: "#45CB85",
-      cancelButtonText: "아니오",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          icon: "success",
-          title: "회원 탈퇴가 정상 처리 되었습니다.",
-          confirmButtonColor: "#45CB85",
-        });
-        navigate("/");
-      }
-    });
-  };
+  const handleWithdrawal = async () => {
+    try {
+      const result = await Swal.fire({
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
 
-  // 로그아웃 시 redux 변수를 초기화 시켜주기 위해 dispatch 생성
-  const dispatch = useDispatch();
-  const handleLogout = (e) => {
-    return Swal.fire({
-      icon: "question",
-      title: "로그아웃 하시겠습니까?",
-      showCancelButton: true,
-      confirmButtonText: "예",
-      confirmButtonColor: "#45CB85",
-      cancelButtonText: "아니오",
-    }).then((result) => {
+        icon: "question",
+        title: "정말로 탈퇴하시겠습니까?",
+        text: "탈퇴 후에는 동일한 이메일 주소로의 재가입이제한됩니다. ",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+      });
+
       if (result.isConfirmed) {
+        await deleteMember();
+
         // Redux 상태 및 로컬 스토리지 초기화
         dispatch(setUser({ user: "" }));
         dispatch(setRole({ role: "" }));
@@ -103,9 +100,60 @@ function Mypage() {
         removeAuthHeader();
 
         Swal.fire({
-          icon: "success",
-          title: "정상적으로 로그아웃 되었습니다.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
           confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
+
+          icon: "success",
+          text: "회원 탈퇴가 정상 처리 되었습니다.",
+          confirmButtonText: "확인",
+        });
+        navigate("/");
+      } else {
+        console.log("탈퇴 취소");
+      }
+    } catch {
+      console.log("회원탈퇴 실패");
+    }
+  };
+
+  // 로그아웃 시 redux 변수를 초기화 시켜주기 위해 dispatch 생성
+  const dispatch = useDispatch();
+  const handleLogout = (e) => {
+    return Swal.fire({
+      background: "#334E58",
+      color: "#FFDA47",
+      width: "80vw",
+      confirmButtonColor: "#45CB85",
+      cancelButtonColor: "gray",
+      
+      text: "로그아웃 하시겠습니까?",
+      icon: "question", // 표시할 아이콘(error, info, question, success, warning)
+      confirmButtonText: "예", // Ok 대신에 쓸 텍스트
+      cancelButtonText: "아니오", // cancel 대신에 쓸 텍스트
+      showCancelButton: true, // cancel 표시 유무
+        }).then((result) => {
+      if (result.isConfirmed) {
+        // Redux 상태 및 로컬 스토리지 초기화
+        dispatch(setUser({ user: "" }));
+        dispatch(setRole({ role: "" }));
+        dispatch(setAccessToken({ accessToken: "" }));
+        dispatch(setRefreshToken({ refreshToken: "" }));
+        // localstorage & header 제거
+        localStorage.clear();
+        removeAuthHeader();
+        
+        Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+
+          icon: "success",
+          text: "정상적으로 로그아웃 되었습니다.",
+          confirmButtonText: "확인",
         });
         navigate("/");
       }

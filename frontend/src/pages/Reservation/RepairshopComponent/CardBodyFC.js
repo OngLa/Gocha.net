@@ -14,16 +14,27 @@ function CardBodyFC({carcenter}) {
         carcenterId: carcenter.id,
       });
       Swal.fire({
-        icon: "success",
-        title: "주정비소로 등록되었습니다..",
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
         confirmButtonColor: "#45CB85",
+
+        icon: "success",
+        text: "주정비소로 등록되었습니다.",
+        confirmButtonText: "확인",
       });
       navigate(-1);
     } catch (error) {
       Swal.fire({
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+
         icon: "error",
         title: "오류 발생",
         text: "등록을 완료할 수 없습니다. 다시 시도해주세요.",
+        confirmButtonText: "확인",
       });
     }
   };

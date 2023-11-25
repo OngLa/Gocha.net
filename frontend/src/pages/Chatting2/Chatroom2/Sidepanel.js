@@ -4,6 +4,7 @@ import breakdownIcon from "../../../img/chatting/breakdownIcon.png";
 import { useEffect, useState } from "react";
 import { getCarData } from "../../../service/chatting";
 import GridCarInfo from "../../../components/GridCarInfo";
+import Swal from "sweetalert2";
 
 function Sidepanel({ open, toggle, cardataId }) {
 
@@ -14,6 +15,16 @@ function Sidepanel({ open, toggle, cardataId }) {
         setCardata(response.data);
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+  
+          text: error.response.data.message,
+          icon: "warning",
+          confirmButtonText: "확인",
+        });
       }
     }
     loadingData();

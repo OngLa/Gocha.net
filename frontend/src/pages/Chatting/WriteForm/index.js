@@ -44,9 +44,19 @@ function WriteForm(props) {
         );
         setCarList(response_car.data);
         setCarDataList(response_cardata.data);
-        window.scrollTo(0, document.body.scrollHeight);
+        window.scrollTo(0, 0);
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+  
+          text: error.response.data.message,
+          icon: "warning",
+          confirmButtonText: "확인",
+        });
       }
     };
     loadingData();
@@ -170,14 +180,14 @@ function WriteForm(props) {
 
       {/* 차량 선택 */}
       <div className={style.selectData}>
-        <div for="car" className={style.selectDataLabel}>
+        <div htmlFor="car" className={style.selectDataLabel}>
           차량 선택:
         </div>
         <select
           className={style.dataSelectBox}
           id="car"
           name="car"
-          value={message.selectCar}
+          value={message.selectCar || ''}
           onChange={(e) => {
             const selectedCarId = e.target.value;
 
@@ -199,14 +209,14 @@ function WriteForm(props) {
 
       {/* 데이터 선택 */}
       <div className={style.selectData}>
-        <div for="data" className={style.selectDataLabel}>
+        <div htmlFor="data" className={style.selectDataLabel}>
           데이터 선택:
         </div>
         <select
           className={style.dataSelectBox}
           id="data"
           name="data"
-          value={message.cardataId}
+          value={message.cardataId || ''}
           onChange={(e) => {
             const selectedDataId = e.target.value;
 

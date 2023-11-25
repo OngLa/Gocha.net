@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
 import searchIcon from "../../../img/chatting/searchIcon.png";
 import { getChattingUser } from "../../../service/chatting";
+import Swal from "sweetalert2";
 
 function ChattingList2() {
   // [정비소 채팅목록 페이지]
@@ -23,6 +24,16 @@ function ChattingList2() {
         setUserList(response.data);
       } catch (error) {
         console.log(error);
+        Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+  
+          text: error.response.data.message,
+          icon: "warning",
+          confirmButtonText: "확인",
+        });
       }
     };
     lodingChatting();

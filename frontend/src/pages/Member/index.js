@@ -12,9 +12,9 @@ function Member(props) {
       <Route path="" Component={Login} />
       <Route path="login" Component={Login} />
       <Route path="signup" Component={Signup} />
-      <Route path="emailCheck" Component={EmailCheck} />
+      <Route path="emailcheck" Component={EmailCheck} />
       <Route path="mypage" Component={Mypage} />
-      <Route path="editpw" Component={EditPw} />
+      <Route path="editpw/*" Component={EditPw} />
       <Route path="findpw/*" Component={FindPw} />
     </Routes>
   );

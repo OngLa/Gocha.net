@@ -1,6 +1,8 @@
 package kosa.afnica.backend.api.service.impl;
 
 import kosa.afnica.backend.api.service.FcService;
+import kosa.afnica.backend.config.exception.CustomException;
+import kosa.afnica.backend.config.exception.ErrorCode;
 import kosa.afnica.backend.config.security.JwtUtil;
 import kosa.afnica.backend.db.dto.reservation.FcCarcenterDto;
 import kosa.afnica.backend.db.dto.reservation.FcDto;
@@ -30,7 +32,15 @@ public class FcServiceImpl implements FcService {
         Long memberId = reservationMapper.findIdByEmail(userEmail);
 
         fcDto.setMemberId(memberId);
-        fcMapper.saveFc(fcDto);
+
+        if(fcMapper.findByMemberIdAndCarcenterId(fcDto).isPresent()) {
+            // 카센터가 이미 등록 되어 있는경우
+            throw new CustomException(ErrorCode.DUPLICATE_FC);
+        } else {
+            // 안된 경우
+            fcMapper.saveFc(fcDto);
+        }
+
     }
 
     //주정비소 목록 출력

@@ -11,12 +11,21 @@
         INSERT INTO FAVORITE_CARCENTER(ID,CARCENTER_ID,MEMBER_ID) VALUES(#{id},#{carcenterId},#{memberId})
     </insert>
 
+    <!--    주 정비소 등록여부 확인-->
+    <select id="findByMemberIdAndCarcenterId" parameterType="Long">
+        SELECT ID
+        FROM FAVORITE_CARCENTER
+        WHERE member_id =#{memberId}
+        AND carcenter_id=#{carcenterID}
+    </select>
+
     <!--주 정비소 출력-->
     <select id="findCarcenterByMemberId" parameterType="Long" resultType="fcCarcenterDto">
-        SELECT fc.ID, fc.CARCENTER_ID, m.ADDRESS, m.PHONE_NUMBER, m.name as CARCENTER_NAME
-        FROM MEMBER m inner join FAVORITE_CARCENTER fc on m.id = fc.CARCENTER_ID
-        where fc.MEMBER_ID = #{memberId}
+                SELECT fc.ID, fc.CARCENTER_ID, m.ADDRESS, m.PHONE_NUMBER, m.name as CARCENTER_NAME
+                FROM MEMBER m inner join FAVORITE_CARCENTER fc on m.id = fc.CARCENTER_ID
+                where fc.MEMBER_ID = #{memberId}
     </select>
+
 
     <!--주정비소 삭제-->
     <delete id="deleteById" parameterType="Long">

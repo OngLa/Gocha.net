@@ -14,12 +14,13 @@ function CardHead({ carcenter }) {
   return (
     <div className={styles.cardHead}>
       {/* ===================================================== */}
-      {/* 정비소명 */}
-      <div className={styles.carcentername}></div>
-      <div className={styles.carcenterIcon}>
-        <img src={carcenterIcon} alt="carcenterIcon" />
+       {/* 정비소명 */}
+       <div className={styles.carcentername}>
+        <div className={styles.carcenterIcon}>
+          <img src={carcenterIcon} alt="carcenterIcon" />
+        </div>
+        <div className={styles.Name}>{carcenter.name}</div>
       </div>
-      <div className={styles.carcenterName}>{carcenter.name}</div>
     {/* ===================================================== */}
       {/* 상세보기 이동 텍스트 */}
       <div onClick={pageMoveText} className={styles.chatHistory}>

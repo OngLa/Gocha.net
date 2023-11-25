@@ -87,7 +87,6 @@ function FindPwPage() {
 
         // 이메일이 검증되었음을 나타내는 상태 업데이트
         setIsEmailCheckApplied(true);
-        console.log("이메일 인증 성공", response.data);
       }
     } catch (error) {
       // 이메일 검증 실패시 오류 메시지 표시
@@ -97,7 +96,6 @@ function FindPwPage() {
       } else {
         // 기타 오류 처리
         setEmailCheckApplyResult("이메일 인증에 실패했습니다.");
-        console.log("이메일 인증 실패", error);
       }
     }
   };

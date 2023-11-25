@@ -43,7 +43,6 @@ function Mypage() {
         const response = await getMypage(email);
         setMypage(response.data);
       } catch (error) {
-        console.log(error);
         Swal.fire({
           background: "#334E58",
           color: "#FFDA47",
@@ -105,17 +104,22 @@ function Mypage() {
           width: "80vw",
           confirmButtonColor: "#45CB85",
           cancelButtonColor: "gray",
-
           icon: "success",
           text: "회원 탈퇴가 정상 처리 되었습니다.",
           confirmButtonText: "확인",
         });
         navigate("/");
-      } else {
-        console.log("탈퇴 취소");
-      }
+      } 
     } catch {
-      console.log("회원탈퇴 실패");
+      Swal.fire({
+        icon: "warning",
+        title: "회원 탈퇴를 완료할 수 없습니다.",
+        text: "현재 서버에 문제가 있어 잠시 후에 다시 시도해주세요.",
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+      });
     }
   };
 

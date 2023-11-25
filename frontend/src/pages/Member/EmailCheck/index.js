@@ -91,7 +91,6 @@ function EmailCheck() {
 
         // 이메일이 검증되었음을 나타내는 상태 업데이트
         setIsEmailCheckApplied(true);
-        console.log("이메일 인증 성공", response.data);
       }
     } catch (error) {
       // 이메일 검증 실패시 오류 메시지 표시
@@ -108,7 +107,6 @@ function EmailCheck() {
       } else {
         // 기타 오류 처리
         setEmailCheckApplyResult("이메일 인증에 실패했습니다.");
-        console.log("이메일 인증 실패", error);
       }
     } finally {
       // 데이터 다 불러오면 loading 완료
@@ -141,8 +139,7 @@ function EmailCheck() {
             <ContentHeader menuName="이메일 인증" />
           </div>
           <div className={style.information}>
-            회원가입을 진행해 주셔서 감사합니다! <br />
-            이메일 인증에 사용되는 이메일은 회원가입에도 사용됩니다. <br />
+            현재 사용되는 이메일은 회원가입에도 사용됩니다. <br />
             이메일 주소가 정확한지 확인해주새요.
           </div>
           {/* 이메일 확인 양식 */}

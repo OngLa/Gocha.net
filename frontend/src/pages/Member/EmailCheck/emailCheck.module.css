@@ -1,5 +1,5 @@
-.information{
-  color: white;
+.information {
+  color: #e7e7e7;
   font-size: 17px;
   padding: 20px 15px;
   line-height: 1.5;
@@ -28,7 +28,8 @@
   padding: 0px 10px;
 }
 
-.EmailCheckApplyBtn, .nextBtn {
+.EmailCheckApplyBtn,
+.nextBtn {
   margin: 50px 0px;
   display: flex;
   justify-content: center;
@@ -44,10 +45,11 @@
 
 .result {
   font-size: 15px;
-  color: #FFDA47;
+  color: #ffda47;
   margin: 0px 30px 50px 30px;
   display: flex;
   justify-content: center;
+  margin-top: -12px;
 }
 
 .EmailCheckApplyBtn {

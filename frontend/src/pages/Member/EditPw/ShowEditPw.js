@@ -68,7 +68,6 @@ function ShowEditPw() {
 
   // 수정 완료 버튼 클릭 핸들러
   const handleEditComplete = async () => {
-    console.log("이메일 : ", veriEmail);
     try {
       // 항목 전부 입력해야 수정 가능
       if (!password || !confirmPassword) {
@@ -97,11 +96,7 @@ function ShowEditPw() {
           email: veriEmail,
           password: password,
         };
-        
-        console.log(requestData);
         await editPw(requestData);
-
-        console.log("비밀번호 변경 성공", requestData.data);
 
         // 성공적으로 변경되면 메시지 출력 및 홈페이지로 이동
         Swal.fire({
@@ -118,7 +113,6 @@ function ShowEditPw() {
       }
     } catch (error) {
       // 비밀번호 변경 실패 시 오류 메시지 출력
-      console.log("비밀번호 변경 실패", error);
       Swal.fire({
         icon: "warning",
         title: "비밀번호 변경에 실패하였습니다.",

@@ -68,7 +68,16 @@ function Login() {
   const handleLogin = useCallback(async (event) => {
     // 항목 전부 입력해야 회원가입 가능
     if (!member.email || !member.password) {
-      return alert("모든 항목을 입력해주세요.");
+      return Swal.fire({
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+
+        text: "모든 항목을 입력해주세요.",
+        icon: "warning",
+        confirmButtonText: "확인",
+      });
     } else {
       try {
         // axios 로그인 요청

@@ -2,26 +2,6 @@
 /* ===========================================*/
 /* 스크롤 관련 css */
 
-/* .RepairshopList {
-} */
-
-.reservationList{
-  padding-bottom: 7.5vh;
-}
-
-.LargeButton {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.RepairshopComponent{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  width: 100%;
-}
 
 
 /* 정비소검색창 */

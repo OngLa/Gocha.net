@@ -44,6 +44,7 @@ public enum ErrorCode {
     DUPLICATE_EMAIL(HttpStatus.CONFLICT, "존재하는 Email 입니다"),
     DUPLICATE_NAME(HttpStatus.CONFLICT, "존재하는 Name 입니다"),
     DUPLICATE_USER(HttpStatus.CONFLICT, "존재하는 user 입니다"),
+    DUPLICATE_FC(HttpStatus.CONFLICT, "이미 등록된 정비소 입니다."),
 
     // 5xx Server Errors
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"),

@@ -32,8 +32,8 @@ function CardBodyFC({carcenter}) {
         confirmButtonColor: "#45CB85",
 
         icon: "error",
-        title: "오류 발생",
-        text: "등록을 완료할 수 없습니다. 다시 시도해주세요.",
+        title: "등록에 실패했습니다.",
+        text: "이미 등록된 정비소 입니다.",
         confirmButtonText: "확인",
       });
     }

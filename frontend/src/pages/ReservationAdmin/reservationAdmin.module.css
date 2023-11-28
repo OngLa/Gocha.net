@@ -91,7 +91,7 @@
 
 /* 날짜 선택 필드 스타일 */
 .dateInput {
-  padding: 10px 10px; /* 패딩 조정 */
+  padding: 10px 9.5px; /* 패딩 조정 */
   border: 1px solid #45cb85; /* 녹색 테두리 */
   background-color: #4e5f6f;
   font-size: 16px; /* 글자 크기 */

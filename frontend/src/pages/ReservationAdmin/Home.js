@@ -47,22 +47,22 @@ function Home() {
   //   scrollToBottom();
   // }, [userlist]);
 
-  // //스크롤 로직
-  // function moveToTop() {
-  //   window.scroll({
-  //     top: 0,
-  //     left: 0,
-  //     behavior: "smooth",
-  //   });
-  // }
+  //스크롤 로직
+  function moveToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
 
-  // function moveToBottom() {
-  //   window.scroll({
-  //     top: document.body.scrollHeight,
-  //     left: 0,
-  //     behavior: "smooth",
-  //   });
-  // }
+  function moveToBottom() {
+    window.scroll({
+      top: document.body.scrollHeight,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
   // ================================================================//
   //필터
 
@@ -183,7 +183,7 @@ function Home() {
           {/* ================================================================ */}
           {/* 스크롤 로직 */}
 
-          {/* <img
+          <img
         src={imgMoveTop}
         alt="scroll"
         className={styles.scrollToTop}
@@ -194,7 +194,7 @@ function Home() {
         alt="scroll"
         className={styles.scrollToBottom}
         onClick={moveToBottom}
-      /> */}
+      />
           {/* ================================================================ */}
         </>
       )}

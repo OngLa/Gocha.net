@@ -16,7 +16,7 @@
         SELECT ID
         FROM FAVORITE_CARCENTER
         WHERE member_id =#{memberId}
-        AND carcenter_id=#{carcenterID}
+        AND carcenter_id=#{carcenterId}
     </select>
 
     <!--주 정비소 출력-->

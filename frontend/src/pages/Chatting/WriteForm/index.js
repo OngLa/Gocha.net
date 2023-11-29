@@ -124,6 +124,19 @@ function WriteForm(props) {
   const handleMessage = async () => {
     // title과 content가 모두 공백이 아닌 경우에만 전송
     if (message.title.trim() !== "" && message.content.trim() !== "") {
+      if (message.title.length > 60) {
+        Swal.fire({
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+          text: "제목은 60자 이내로 입력하세요.",
+          icon: "info",
+          confirmButtonText: "확인",
+        });
+        return; // 넘어가지 않도록 함수를 종료
+      }
+      
       try {
         // 데이터 전송
         await sendMessage(message);
@@ -165,7 +178,7 @@ function WriteForm(props) {
               name="message"
               rows="1"
               cols="50"
-              placeholder="제목을 입력하세요."
+              placeholder="제목을 입력하세요.(60자 이내)"
               value={message.title}
               onChange={(e) =>
                 setMessage({ ...message, title: e.target.value })

@@ -12,6 +12,7 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -25,7 +26,7 @@ public class MailServiceImpl implements MailService {
 
     private final MemberService memberService;
     private final MemberMapper memberMapper;
-    private final JavaMailSender emailSender;
+    private final JavaMailSender javaMailSender; //MIME을 지원하는 MailSender 구현체
 
     // 이메일 전송에 사용되는 이메일 발신자의 이메일 주소
     private static final String senderEmail = "noreply@gochanet.com";
@@ -36,28 +37,29 @@ public class MailServiceImpl implements MailService {
     // 메세지 생성하여 반환
     private MimeMessage createMessage(String email)throws Exception {
 
-        MimeMessage message = emailSender.createMimeMessage();
+        MimeMessage message = javaMailSender.createMimeMessage();
 
         // 메세지 설정
         message.addRecipients(Message.RecipientType.TO, email); // 받는 대상
         message.setSubject("GOCHANET : 인증 번호 안내 메일입니다."); // 제목
 
         // HTML 형식의 이메일 내용 작성
-        String msgg ="";
-        msgg+= "<div style='margin:20px;'>";
-        msgg+= "<h1> 인증 번호 안내 </h1>";
-        msgg+= "<br>";
-        msgg+= "<p>GOCHANET을 이용해주셔서 감사합니다.<p>";
-        msgg+= "<br>";
-        msgg+= "<p>인증 번호를 확인하여 회원가입을 완료해주세요.<p>";
-        msgg+= "<br>";
-        msgg+= "<div align='center' style='border:1px solid #A4DABE; background:#5D707F font-family:verdana';>";
-        msgg+= "<h3 style='color:#45CB85;'>회원가입 인증 번호입니다.</h3>";
-        msgg+= "<div style='font-size:130% color:#47F6C1'>";
-        msgg+= "CODE : <strong>";
-        msgg+= ePw+"</strong><div><br/> ";
-        msgg+= "</div>";
-        message.setText(msgg, "utf-8", "html"); // 메세지 내용과 형식 설정
+        String msgg = "<div style='margin:20px; background-color: #334E58; color: #E7E7E7;'>";
+        msgg += "<div align='center' style='padding: 30px 0;'>";
+        msgg += "<br>";
+        msgg += "<h2>GOCHANET을 이용해주셔서 감사합니다.</h2>";
+        msgg += "<h2>요청하신 인증 번호를 보내드립니다.</h2>";
+        msgg += "<br>";
+        msgg += "<h1 style='color:#45CB85;'>" + ePw + "</h1><br/>";
+        msgg += "<br>";
+        msgg += "<h2>위 인증 번호를 인증 번호 입력창에 입력해주세요.</h2>";
+        msgg += "<br>";
+        msgg += "<p>본인이 인증 번호를 요청하지 않았을 경우 본 이메일을 무시해주세요.</p>";
+        msgg += "<p>Please ignore the email if you did not request a verification code.</p>";
+        msgg += "</div>";
+        msgg += "</div>";
+
+        message.setContent(msgg, "text/html; charset=utf-8"); // 메세지 내용과 형식 설정
         message.setFrom(new InternetAddress(senderEmail)); // 보내는 대상
 
         return message;
@@ -100,7 +102,7 @@ public class MailServiceImpl implements MailService {
             ePw = createKey();
             MimeMessage message = createMessage(veriEmail);
             try {
-                emailSender.send(message);
+                javaMailSender.send(message);
             } catch (MailException es) {
                 es.printStackTrace();
                 throw new CustomException(ErrorCode.UNABLE_TO_SEND_EMAIL);
@@ -118,7 +120,7 @@ public class MailServiceImpl implements MailService {
             ePw = createKey();
             MimeMessage message = createMessage(veriEmail);
             try {
-                emailSender.send(message);
+                javaMailSender.send(message);
             } catch (MailException es) {
                 es.printStackTrace();
                 throw new CustomException(ErrorCode.UNABLE_TO_SEND_EMAIL);

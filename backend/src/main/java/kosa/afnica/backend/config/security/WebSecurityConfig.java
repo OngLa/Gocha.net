@@ -69,6 +69,7 @@ public class WebSecurityConfig {
                         //.antMatchers(HttpMethod.GET, "/board/battach/*").hasAnyRole("USER")
 
                         //그 이외의 모든 경로 허가
+                        .antMatchers("/api/auth/oauth-login").permitAll()
                         .anyRequest().permitAll()
         );
 

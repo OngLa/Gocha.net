@@ -50,8 +50,9 @@ public enum ErrorCode {
     BAD_GATEWAY(HttpStatus.BAD_GATEWAY, "Bad Gateway"),
 
     UNABLE_TO_SEND_EMAIL(HttpStatus.BAD_REQUEST, "이메일 전송에 실패했습니다."),
-    NO_SUCH_ALGORITHM(HttpStatus.BAD_REQUEST, "해당 알고리즘이 사용 가능하지 않습니다.");
+    NO_SUCH_ALGORITHM(HttpStatus.BAD_REQUEST, "해당 알고리즘이 사용 가능하지 않습니다."),
 
+    GOOGLE_SERVER_ERROR(HttpStatus.BAD_REQUEST, "구글 오류");
     private final HttpStatus httpStatus;
     private final String message;
 }

@@ -13,14 +13,10 @@ public interface MemberMapper {
     // 회원 정보 저장
     void save(Member member);
 
-//    void saveAdmin(Member member);
-
-    // ID 기반으로 회원 정보 조회
-    Optional<Member> findById(Long id);
-
     // 이메일 기반으로 회원 정보 조회
     Optional<Member> findByEmail(String email);
 
+    // 이메일 기반으로 권한 조회
     String findRoleByEmail(String email);
 
     // 중복되는 이메일 조회
@@ -47,10 +43,10 @@ public interface MemberMapper {
     //정비소 목록 출력
     List<Member> findCarcenterByRole();
 
-    // Email 기반으로 ID 찾기
+    // 이메일 기반으로 ID 찾기
     Optional<Long> findIdByEmail(String email);
 
-    // 회원탈퇴
+    // 회원 탈퇴
     void delete(Member member);
 
     // 이메일 인증 후 테이블 삭제

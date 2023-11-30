@@ -23,10 +23,10 @@ function Login() {
   // main에서 이동한 페이지라면 main=1을 가져오고,
   //잘못된 접근으로 login페이지로 이동한 것이라면 alert를 띄워주기.
   const [searchParams] = useSearchParams();
-  let main = searchParams.get("main");
+  let redirect = searchParams.get("redirect");
 
   useEffect(() => {
-    main !== "1" && Swal.fire({
+    redirect === "1" && Swal.fire({
       background: "#334E58",
       color: "#FFDA47",
       width: "80vw",

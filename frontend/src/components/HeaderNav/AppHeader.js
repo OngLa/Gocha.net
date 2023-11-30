@@ -26,7 +26,7 @@ function AppHeader() {
             {/* 로그인 안했을 경우 로그인 / 로그인했으면 마이페이지 */}
             {user === "" ? (
               <div>
-                <Link to={`/member/login?main=${1}`} className={style.memberWrap}>
+                <Link to="/member/login" className={style.memberWrap}>
                   <img
                     src={loginIcon}
                     alt="Member"

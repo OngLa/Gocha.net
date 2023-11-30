@@ -32,22 +32,22 @@ const AppRoute = () => {
           <>
             <Route
               path="/chatting/*"
-              element={<Navigate to="/member/login" />}
+              element={<Navigate to={`/member/login?redirect=${1}`} />}
             />
             <Route
               path="/chatting2/*"
-              element={<Navigate to="/member/login" />}
+              element={<Navigate to={`/member/login?redirect=${1}`} />}
             />
-            <Route path="/car/*" element={<Navigate to="/member/login" />} />
+            <Route path="/car/*" element={<Navigate to={`/member/login?redirect=${1}`} />} />
             <Route
               path="/reservation/*"
-              element={<Navigate to="/member/login" />}
+              element={<Navigate to={`/member/login?redirect=${1}`} />}
             />
             <Route
               path="/reservationadmin/*"
-              element={<Navigate to="/member/login" />}
+              element={<Navigate to={`/member/login?redirect=${1}`} />}
             />
-            <Route path="/parts" element={<Navigate to="/member/login" />} />
+            <Route path="/parts" element={<Navigate to={`/member/login?redirect=${1}`} />} />
           </>
         )}
       </Routes>

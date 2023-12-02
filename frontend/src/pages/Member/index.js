@@ -6,6 +6,7 @@ import Mypage from "./Mypage";
 import EditPw from "./EditPw";
 import FindPw from "./FindPw";
 import { useSelector } from "react-redux";
+import LoadingLogin from "./Login/LoadingLogin";
 
 function Member(props) {
   // 권한(role)에 따라 잘못된 접근을 막기 위해 redux에서 role 가져옴
@@ -24,6 +25,7 @@ function Member(props) {
       ) : (
         <Route path="mypage" element={<Navigate to="/member/login" />} />
       )}
+      <Route path="/login-success" element={<LoadingLogin />} />
     </Routes>
   );
 }

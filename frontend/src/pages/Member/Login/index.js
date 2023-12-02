@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import LargeButton, { SmallButton2 } from "../../../components/Button";
 import emailIcon from "../../../img/member/email.png";
 import passwordIcon from "../../../img/member/password.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addAuthHeader } from "../../../service/axiosConfig";
 import {
   setUser as gSetUser,
@@ -14,6 +14,7 @@ import {
 } from "../../../redux/authReducer";
 import { login } from "../../../service/auth";
 import Swal from "sweetalert2";
+import GoogleLoginButton from "./GoogleLoginButton";
 
 function Login() {
   // 로그인 페이지
@@ -32,11 +33,11 @@ function Login() {
       width: "80vw",
       confirmButtonColor: "#45CB85",
 
-      icon: "info",
-      text: "로그인 후 이용하시길 바랍니다.",
-      confirmButtonText: "확인",
-    });
-  }, [])
+        icon: "info",
+        text: "로그인 후 이용하시길 바랍니다.",
+        confirmButtonText: "확인",
+      });
+  }, []);
 
   const navigate = useNavigate();
 
@@ -58,7 +59,7 @@ function Login() {
   // 로그인 시 console에 email, role을 찍어주기 위해 Redux에서 user, role을 받아옴.
   // const gUser = useSelector((state) => state.authReducer.user);
   // const gRole = useSelector((state) => state.authReducer.role);
-  
+
   //로그인 시 Redux에 로그인 정보(email, role)가 수정되면 console에서 확인.
   // useEffect(() => {
   //   console.log("Login Result = email: " + gUser + " / role: " + gRole);
@@ -186,6 +187,16 @@ function Login() {
             후 이용해 주세요.
           </div>
         </div>
+      </div>
+
+      <div className={style.hrLineWrap}>
+        <div className={style.hrSideBox}></div>
+        <div className={style.hrLine}></div>
+        <div className={style.hrSideBox}></div>
+      </div>
+
+      <div className={style.gLogin}>
+        <GoogleLoginButton />
       </div>
     </div>
   );

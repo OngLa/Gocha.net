@@ -35,10 +35,17 @@ public class ChattingController {
 
 
     @Operation(summary = "Chatting Carcenter List API(고객)", description = "비대면 진단을 위해 채팅방 목록 출력(모든 카센터 다 출력)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = ChattingResDto.class))),
+            @ApiResponse(responseCode = "404", description = "카센터 데이터가 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
     @GetMapping("/carcenter")
     public ResponseEntity<List<ChattingResDto>> getChatting() {
         // 정비소 id, name을 list로 조회(회원탈퇴x)
         List<ChattingResDto> chattingList = chattingService.findAllChatting();
+        if(chattingList == null) {
+            throw new CustomException(ErrorCode.CHATTING_CARCENTERLIST_NOT_FOUND);
+        }
 
         return ResponseEntity.ok(chattingList);
     }
@@ -46,6 +53,11 @@ public class ChattingController {
 
     //    public ResponseEntity<List<ChattingResDto>> getChatting2(HttpServletRequest httpServletRequest) {
     @Operation(summary = "Chatting User List API(카센터)", description = "비대면 진단을 위해 채팅방 목록 출력(본인에게 메세지 보낸 고객 다 출력)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = ChattingResDto.class))),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "본인에게 메세지를 보낸 유저가 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
     @GetMapping("/user")
     public ResponseEntity<List<ChattingResDto>> getChatting2(HttpServletRequest httpServletRequest) {
         // 헤더로 Token받고 email얻고 mapper로 id로 변환
@@ -56,11 +68,18 @@ public class ChattingController {
 
         // 정비소 id, name을 list로 조회(회원탈퇴x)
         List<ChattingResDto> chattingList = chattingService.findAllChatting2(memberId);
+        if(chattingList == null) {
+            throw new CustomException(ErrorCode.CHATTING_USERLIST_NOT_FOUND);
+        }
 
         return ResponseEntity.ok(chattingList);
     }
 
-    @Operation(summary = "CarcenterInfo - 카센터 정보 조회 API(공통)", description = "채팅방 입장 전 정비소의 phonenumber, email, address를 보여주기 위함. 고객 예약 관리에서도 사용.")
+    @Operation(summary = "CarcenterInfo - 카센터 정보 조회 API(고객)", description = "채팅방 입장 전 정비소의 phonenumber, email, address를 보여주기 위함. 고객 예약 관리에서도 사용.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = CarcenterInfoResDto.class))),
+            @ApiResponse(responseCode = "404", description = "해당 카센터의 정보가 존재하지 않습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
     @GetMapping("/carcenterinfo")
     public ResponseEntity<CarcenterInfoResDto> getCarcenterInfo(@RequestParam Long carcenterId) {
         // 해당 carcenter의 정보(phonenumber, email, address)를 반환
@@ -70,6 +89,10 @@ public class ChattingController {
     }
 
     @Operation(summary = "Chatroom - 메세지 조회 API(공통)", description = "채팅방 - 메세지 전체 조회")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = MessageResDto.class))),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
     @GetMapping("/chatroom")
     public ResponseEntity<List<MessageResDto>> getChatroom(HttpServletRequest httpServletRequest, @RequestParam(name = "member_id") Long member2Id) {
         // get id
@@ -107,6 +130,10 @@ public class ChattingController {
     }
 
     @Operation(summary = "WriteForm - 본인 Car List 조회 API(고객)", description = "글 작성 시 본인 자동차 조회")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = ChattingCarResDto.class))),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
     @GetMapping("/car")
     public ResponseEntity<List<ChattingCarResDto>> getChattingCar(HttpServletRequest httpServletRequest) {
         // get id
@@ -122,6 +149,10 @@ public class ChattingController {
     }
 
     @Operation(summary = "WriteForm - 본인 CarData List 조회 API(고객)", description = "글 작성 시 본인 차데이터 조회")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = ChattingCarDataResDto.class))),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
     @GetMapping("/cardata")
     public ResponseEntity<List<ChattingCarDataResDto>> getChattingCarData(HttpServletRequest httpServletRequest) {
         // get id
@@ -137,6 +168,11 @@ public class ChattingController {
     }
 
     @Operation(summary = "WriteForm - SendMessage API(공통)", description = "메세지 작성 - 제목, 내용, 예약활성화여부, 차량데이터id를 받아와 저장. Role에 따라 예약활성화여부 or 차량데이터id 저장여부가 switch됨.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공"),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "500", description = "글 작성에 실패하였습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+    })
     @PostMapping("/sendmessage")
     public ResponseEntity<Void> postMessage(HttpServletRequest httpServletRequest, @RequestBody SendMessageReqDto sendMessageReqDto) {
         // get id

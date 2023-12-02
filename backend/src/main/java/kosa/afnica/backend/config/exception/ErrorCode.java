@@ -34,6 +34,9 @@ public enum ErrorCode {
     CARDATA_NOT_FOUND(HttpStatus.NOT_FOUND, "차량 데이터가 존재하지 않습니다."),
     CAR_NOT_FOUND(HttpStatus.NOT_FOUND, "등록된 차량이 존재하지 않습니다."),
     CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 인증 번호입니다."),
+    CHATTING_CARCENTERLIST_NOT_FOUND(HttpStatus.NOT_FOUND, "카센터 데이터가 존재하지 않습니다."),
+    CHATTING_USERLIST_NOT_FOUND(HttpStatus.NOT_FOUND, "본인에게 메세지를 보낸 유저가 존재하지 않습니다."),
+    CHATTING_CARCENTERINFO_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 카센터의 정보가 존재하지 않습니다."),
 
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "Method Not Allowed"),
 
@@ -41,9 +44,11 @@ public enum ErrorCode {
     DUPLICATE_EMAIL(HttpStatus.CONFLICT, "존재하는 Email 입니다"),
     DUPLICATE_NAME(HttpStatus.CONFLICT, "존재하는 Name 입니다"),
     DUPLICATE_USER(HttpStatus.CONFLICT, "존재하는 user 입니다"),
+    DUPLICATE_FC(HttpStatus.CONFLICT, "이미 등록된 정비소 입니다."),
 
     // 5xx Server Errors
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"),
+    SENDMESSAGE_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "글 작성에 실패하였습니다."),
 
     NOT_IMPLEMENTED(HttpStatus.NOT_IMPLEMENTED, "Not Implemented"),
 

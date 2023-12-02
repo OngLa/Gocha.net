@@ -33,6 +33,9 @@ public class ChattingServiceImpl implements ChattingService {
     public List<ChattingResDto> findAllChatting2(Long memberId) {
         // 나에게 메세지 보낸 유저 목록 반환
         List<Long> sendUserList = chattingMapper.findSendUser(memberId);
+        if (sendUserList.isEmpty()) {
+            throw new CustomException(ErrorCode.CHATTING_CARCENTERINFO_NOT_FOUND);
+        }
 
         return chattingMapper.findAllUser(sendUserList);
     }
@@ -86,8 +89,10 @@ public class ChattingServiceImpl implements ChattingService {
     @Override
     public void insertMessage(SendMessageReqDto sendMessageReqDto) {
         // 글 작성 - 메세지 저장
-        chattingMapper.saveMessage(sendMessageReqDto);
+        int insertCount = chattingMapper.saveMessage(sendMessageReqDto);
+        if (insertCount != 1) {
+            throw new CustomException(ErrorCode.SENDMESSAGE_SERVER_ERROR);
+        }
+
     }
-
-
 }

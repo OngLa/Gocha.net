@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -47,26 +48,36 @@ public class WebSecurityConfig {
 
         //요청 경로별 권한 설정
         http.authorizeHttpRequests(customizer -> customizer
-                        //방법1
-                        // 카센터 전용 API 먼저
-//                .antMatchers(HttpMethod.GET, "/api/chatting/user").hasAuthority("ROLE_CARCENTER")
-//                .antMatchers(HttpMethod.GET, "/api/chatting/chatroom").hasAuthority("ROLE_CARCENTER")
-                        // 유저
-//                .antMatchers("/api/chatting/**").hasAuthority("ROLE_USER")
-                        // 카센터
-//                .antMatchers("/api/chatting/**").hasAuthority("ROLE_USER")
 
+                        //Chatting
+                        //공통
+                        .antMatchers(HttpMethod.GET, "/api/chatting/chatroom").hasAnyRole("CARCENTER", "USER")
+                        .antMatchers(HttpMethod.GET, "/api/chatting/open-cardata").hasAnyRole("CARCENTER", "USER")
+                        .antMatchers(HttpMethod.POST, "/api/chatting/sendmessage").hasAnyRole("CARCENTER", "USER")
+                        //carcenter
+                        .antMatchers(HttpMethod.GET, "/api/chatting/user").hasAuthority("ROLE_CARCENTER")
+                        //user
+                        .antMatchers("/api/chatting/**").hasAuthority("ROLE_USER")
 
-//                .antMatchers("/api/chatting/**").hasAuthority("ROLE_CARCENTER")
+                        //Car
+                        .antMatchers("/api/cars/**").hasAuthority("ROLE_USER")
 
-                        //방법2
-                        //.antMatchers(HttpMethod.GET, "/board/list").hasAuthority("ROLE_USER") //ROLE_생략하면 안됨
-                        //.antMatchers(HttpMethod.POST, "/board/create").hasAnyRole("USER") //ROLE_ 붙이면 안됨
-                        //.antMatchers(HttpMethod.GET, "/board/read/*").hasAnyRole("USER")
-                        //.antMatchers(HttpMethod.PUT, "/board/update").hasAnyRole("USER")
-                        //.antMatchers(HttpMethod.DELETE, "/board/delete/*").hasAnyRole("USER")
-                        //.antMatchers(HttpMethod.POST, "/board/createWithAttach").hasAnyRole("USER")
-                        //.antMatchers(HttpMethod.GET, "/board/battach/*").hasAnyRole("USER")
+                        //Car
+                        .antMatchers("/api/car-data/**").hasAuthority("ROLE_USER")
+
+                        //Fc & Reservation
+                        //공통
+                        .antMatchers(HttpMethod.GET, "/api/member/reservation/list").hasAnyRole("CARCENTER", "USER")
+                        .antMatchers(HttpMethod.DELETE, "/api/member/reservation/**").hasAnyRole("CARCENTER", "USER")
+                        //carcenter
+                        .antMatchers(HttpMethod.PUT, "/api/member/reservation/bookerlist").hasAuthority("ROLE_CARCENTER")
+                        .antMatchers(HttpMethod.GET, "/api/member/reservation/bookerlist").hasAuthority("ROLE_CARCENTER")
+                        //user
+                        .antMatchers("/api/member/reservation/**").hasAuthority("ROLE_USER")
+
+                        //Member
+                        .antMatchers(HttpMethod.GET, "/api/member/mypage").hasAnyRole("CARCENTER", "USER")
+
 
                         //그 이외의 모든 경로 허가
                         .antMatchers("/api/auth/oauth-login").permitAll()

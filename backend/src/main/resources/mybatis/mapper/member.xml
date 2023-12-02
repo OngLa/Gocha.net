@@ -19,7 +19,7 @@
                enabled,
                role
         from member
-        where email = #{email}
+        where email = #{email} AND enabled = 1
     </select>
 
     <!-- 이메일 기반으로 권한 조회 -->
@@ -79,7 +79,7 @@
 
     <!-- 정비소 목록 출력 -->
     <select id="findCarcenterByRole" resultType="member">
-        SELECT id, address, name
+        SELECT id, address, name, phone_number
         FROM member
         WHERE role = 'ROLE_CARCENTER'
     </select>

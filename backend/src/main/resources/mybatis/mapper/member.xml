@@ -22,20 +22,7 @@
         where email = #{email} AND enabled = 1
     </select>
 
-    <!-- ID 기반으로 회원 정보 조회 -->
-    <select id="findById" parameterType="Long" resultType="member">
-        select id,
-               email,
-               password,
-               name,
-               phone_number,
-               address,
-               enabled,
-               role
-        from member
-        where id = #{id}
-    </select>
-
+    <!-- 이메일 기반으로 권한 조회 -->
     <select id="findRoleByEmail" parameterType="String" resultType="String">
         select role
         from member
@@ -97,7 +84,7 @@
         WHERE role = 'ROLE_CARCENTER'
     </select>
 
-    <!--  Email 기반으로 ID 찾기  -->
+    <!--  이메일 기반으로 ID 찾기  -->
     <select id="findIdByEmail" parameterType="String" resultType="Long">
         select id
         from member
@@ -112,6 +99,7 @@
         where id = #{id}
     </update>
 
+    <!-- 이메일 인증 후 테이블 삭제 -->
     <delete id="deleteCode" parameterType="map">
         delete
         from vericode

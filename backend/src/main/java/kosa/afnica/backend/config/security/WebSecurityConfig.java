@@ -78,10 +78,10 @@ public class WebSecurityConfig {
                         //Member
                         .antMatchers(HttpMethod.GET, "/api/member/mypage").hasAnyRole("CARCENTER", "USER")
 
-                //.antMatchers("/api/chatting/**").hasAuthority("ROLE_CARCENTER") // 전체(**)
-                //.antMatchers(HttpMethod.GET, "/board/list").hasAuthority("ROLE_USER") //ROLE_생략하면 안됨
-                //.antMatchers(HttpMethod.GET, "/api/member/reservation/list").hasAnyRole("CARCENTER", "USER") //ROLE_ 붙이면 안됨
-                //.anyRequest().permitAll() //그 이외의 모든 경로 허가
+
+                        //그 이외의 모든 경로 허가
+                        .antMatchers("/api/auth/oauth-login").permitAll()
+                        .anyRequest().permitAll()
         );
 
         return http.build();

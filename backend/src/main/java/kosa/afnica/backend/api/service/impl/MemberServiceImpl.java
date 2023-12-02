@@ -58,23 +58,9 @@ public class MemberServiceImpl implements MemberService {
                 .build();
 
         memberMapper.save(member);
+//        memberMapper.deleteCode(veriEmail, veriCode); // 인증이 완료되면 삭제 처리
+
     }
-
-  /*  @Override
-    public void creatAdminMember(MemberSignupReqDto memberSignupReqDto) {
-
-        Member member = Member.builder()
-                .email(memberSignupReqDto.getEmail())
-                .name(memberSignupReqDto.getName())
-                .password(passwordEncoder.encode(memberSignupReqDto.getPassword()))
-                .phoneNumber(memberSignupReqDto.getPhoneNumber())
-                .address(memberSignupReqDto.getAddress())
-                .role(memberSignupReqDto.getRole())
-                .build();
-
-        memberMapper.saveAdmin(member);
-
-    }*/
 
     @Override
     public String findRole(String email) {
@@ -99,9 +85,7 @@ public class MemberServiceImpl implements MemberService {
             throw new CustomException(ErrorCode.EMAIL_NOT_FOUND);
         } else { // 이메일 존재하면 -> 비교
             String storedCode = memberMapper.findCodeByEmail(veriEmail);
-            if(storedCode.equals(veriCode)) {
-                memberMapper.deleteCode(veriEmail, veriCode); // 인증이 완료되면 삭제 처리
-            } else {
+            if(!storedCode.equals(veriCode)) {
                 throw new CustomException(ErrorCode.CODE_NOT_FOUND);
             }
         }

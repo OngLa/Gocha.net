@@ -5,3 +5,8 @@ export function login(member) {
   console.log("Login Input member: " + qs.stringify(member));
   return axios.post("/auth/login", member);
 }
+
+export function googleLogin (member) {
+  return axios.post("/auth/user", member);
+}
+

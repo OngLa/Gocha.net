@@ -1,6 +1,6 @@
 import LargeButton from "../../../components/Button";
 import style from "./signup.module.css";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ContentHeader from "../../../components/ContentHeader";
 import emailIcon from "../../../img/member/email.png";
@@ -25,6 +25,12 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [nickname, setNickname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+
+  useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    const queryEmail = query.get("email");
+    if (queryEmail) setEmail(queryEmail);
+    }, []);
 
   // 비밀번호 유효성 검사 함수
   const validatePwd = (password) => {
@@ -187,7 +193,7 @@ function Signup() {
       !isconfirmPwdValid ||
       !isNameValid ||
       !isPhoneNumber ||
-      nicknameMsg === "red"
+      nameMsgColor === "red"
     ) {
       return Swal.fire({
         background: "#334E58",

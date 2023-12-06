@@ -38,7 +38,7 @@
   background-color: white;
 }
 
-.valid {
+/* .valid {
   font-size: 15px;
   color: green;
   margin: 0px 30px;
@@ -52,7 +52,7 @@
   margin: 0px 30px;
   display: flex;
   justify-content: center;
-}
+} */
 
 .available-nickname {
   color: #47f6c1;

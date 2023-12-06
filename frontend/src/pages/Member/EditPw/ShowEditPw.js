@@ -128,7 +128,7 @@ function ShowEditPw() {
   return (
     <div>
       {/* 페이지 상단에 위치하는 콘텐츠 헤더 */}
-      <ContentHeader menuName="비밀번호 변경"></ContentHeader>
+      <ContentHeader menuName="비밀번호 수정"></ContentHeader>
 
       {/* 비밀번호 입력 부분 */}
       <div className={style.memberBox}>

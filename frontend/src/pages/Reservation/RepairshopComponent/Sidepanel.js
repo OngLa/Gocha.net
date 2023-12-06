@@ -59,10 +59,10 @@ function Sidepanel({ open, toggle, carcenter}) {
       const loadingData = async () => {
         try {
           const response_car = await axios.get(
-            "http://localhost:8080/api/chatting/car"
+            "https://www.gochanet.com/api/chatting/car"
           );
           const response_cardata = await axios.get(
-            "http://localhost:8080/api/chatting/cardata"
+            "https://www.gochanet.com/api/chatting/cardata"
           );
           setCarList(response_car.data);
           setCarDataList(response_cardata.data);

@@ -73,18 +73,43 @@ public class OauthController {
     @PostMapping("/oauth-login")
     public ResponseEntity<Map<String, Object>> handleGoogleLogin(@RequestParam("credential") String idTokenString) {
         try {
-            log.info(idTokenString);
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory()).setAudience(Collections.singletonList(clientId)).build();
             GoogleIdToken idToken = verifier.verify(idTokenString);
             if (idToken != null) {
                 // 여기서부터 로직 구현
                 GoogleIdToken.Payload payload = idToken.getPayload();
+
                 // 필요한 정보 추출
                 String email = payload.getEmail();
+
+                // email 기반으로 가입된 유저인지 확인 : 로그인 or 회원가입
+                int check = (memberService.existEmail(email) ? 0 : 1);
+
                 // 리다이렉트를 위한 header 설정
                 HttpHeaders headers = new HttpHeaders();
-                // email 기반으로 가입된 유저인지 확인 : 로그인 or 회원가입
-                if (memberService.existEmail(email)) {
+
+                if (check == 1) {
+                    if (memberService.findRole(email) == null) {
+                        String message = ErrorCode.INVALID_ACCOUNTS.getMessage();
+                        String url = UriComponentsBuilder
+                                .fromUriString(baseUrl + "/member/login-fail")
+                                .queryParam("message", message)
+                                .toUriString();
+                        headers.setLocation(URI.create(url));
+                    } else {
+                        // 가입된 유저가 존재할 경우
+                        // email, role, tokken 정보와 함께 login-succeess 화면으로 이동
+                        String accessToken = JwtUtil.createToken(email);
+                        String role = memberService.findRole(email);
+                        String url = UriComponentsBuilder
+                                .fromUriString(baseUrl + "/member/login-success")
+                                .queryParam("email", email)
+                                .queryParam("role", role)
+                                .queryParam("accessToken", accessToken)
+                                .toUriString();
+                        headers.setLocation(URI.create(url));
+                    }
+                } else {
                     // 가입된 유저가 존재하지 않을 경우
                     // email 정보와 함께 회원가입 페이지로 리다이렉트
                     String url = UriComponentsBuilder
@@ -92,19 +117,8 @@ public class OauthController {
                             .queryParam("email", email)
                             .toUriString();
                     headers.setLocation(URI.create(url));
-                } else {
-                    // 가입된 유저가 존재할 경우
-                    // email, role, tokken 정보와 함께 login-succeess 화면으로 이동
-                    String accessToken = JwtUtil.createToken(email);
-                    String role = memberService.findRole(email);
-                    String url = UriComponentsBuilder
-                            .fromUriString(baseUrl + "/member/login-success")
-                            .queryParam("email", email)
-                            .queryParam("role", role)
-                            .queryParam("accessToken", accessToken)
-                            .toUriString();
-                    headers.setLocation(URI.create(url));
                 }
+
                 return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
             } else {
                 // 예외처리1. 구글에서 넘어온 token의 정보가 존재하지 않을 경우

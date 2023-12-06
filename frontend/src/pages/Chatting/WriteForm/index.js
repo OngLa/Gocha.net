@@ -39,10 +39,10 @@ function WriteForm(props) {
       try {
         setIsLoading(true);
         const response_car = await axios.get(
-          "http://localhost:8080/api/chatting/car"
+          "https://www.gochanet.com/api/chatting/car"
         );
         const response_cardata = await axios.get(
-          "http://localhost:8080/api/chatting/cardata"
+          "https://www.gochanet.com/api/chatting/cardata"
         );
         setCarList(response_car.data);
         setCarDataList(response_cardata.data);
@@ -136,7 +136,7 @@ function WriteForm(props) {
         });
         return; // 넘어가지 않도록 함수를 종료
       }
-      
+
       try {
         // 데이터 전송
         await sendMessage(message);

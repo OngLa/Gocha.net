@@ -19,9 +19,8 @@ import kosa.afnica.backend.db.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -37,7 +36,8 @@ public class MemberController {
 
     @Operation(summary = "(회원가입) 이메일 인증 - 인증번호 요청 API", description = "이메일 중복 검사 및 인증번호 이메일로 전송")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
-            @ApiResponse(responseCode = "409", description = "존재하는 Email 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+            @ApiResponse(responseCode = "409", description = "존재하는 Email 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "500", description = "이메일 전송에 실패했습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @PostMapping("/email")
     public ResponseEntity<Void> getVeriCode(@RequestBody EmailVerificationDto emailVerificationDto) throws Exception {
@@ -50,8 +50,10 @@ public class MemberController {
         }
     }
 
+
     @Operation(summary = "(회원가입) 이메일 인증 - 인증번호 비교 API", description = "입력된 인증번호와 생성된 인증번호 비교")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 Email 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 인증 번호입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @GetMapping("/email-veri")
@@ -86,7 +88,8 @@ public class MemberController {
 
     @Operation(summary = "유저 마이페이지 API", description = "마이페이지에서 이메일 기반으로 회원 정보 조회")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = MemberMypageResDto.class)))
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = MemberMypageResDto.class))),
+            @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다", content = @Content(schema = @Schema(implementation = MemberMypageResDto.class)))
     })
     @GetMapping("/mypage")
     public ResponseEntity<MemberMypageResDto> getMypage(HttpServletRequest request) {
@@ -113,7 +116,7 @@ public class MemberController {
             @ApiResponse(responseCode = "404", description = "존재하지 않는 Email 입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "500", description = "이메일 전송에 실패했습니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @PostMapping("/passwoed")
+    @PostMapping("/password")
     public ResponseEntity<Void> getPwVeriCode(@RequestBody EmailVerificationDto emailVerificationDto) throws Exception {
 
         if(memberService.existEmail(emailVerificationDto.getVeriEmail())) {
@@ -128,7 +131,7 @@ public class MemberController {
     @ApiResponses({@ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "404", description = "존재하지 않는 인증 번호입니다", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @GetMapping("/passwoed-veri")
+    @GetMapping("/password-veri")
     public ResponseEntity<Void> comparePwVeriCode(@RequestParam String veriEmail, @RequestParam String veriCode) {
         memberService.findCode(veriEmail, veriCode);
         return ResponseEntity.ok(null);
@@ -136,7 +139,9 @@ public class MemberController {
 
     @Operation(summary = "비밀번호 변경", description = "비밀번호 변경 후 저장")
     @ApiResponses(
-            {@ApiResponse(responseCode = "200", description = "성공")
+            {@ApiResponse(responseCode = "200", description = "성공"),
+        @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다", content = @Content(schema = @Schema(implementation = MemberMypageResDto.class)))
+
     })
     @PutMapping("/update")
     public ResponseEntity<Void> updatePw(@RequestBody MemberEditPwReqDto memberEditPwReqDto) {
@@ -146,7 +151,8 @@ public class MemberController {
 
     @Operation(summary = "회원 탈퇴", description = "유저의 enable, role 상태 변경 후 회원 탈퇴 처리")
     @ApiResponses(
-            {@ApiResponse(responseCode = "200", description = "성공")
+            {@ApiResponse(responseCode = "200", description = "성공"),
+        @ApiResponse(responseCode = "404", description = "존재하지 않는 유저입니다", content = @Content(schema = @Schema(implementation = MemberMypageResDto.class)))
     })
     @DeleteMapping("/")
     public ResponseEntity<Void> deleteMember(HttpServletRequest request) {

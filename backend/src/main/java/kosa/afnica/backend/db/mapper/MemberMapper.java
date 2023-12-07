@@ -51,4 +51,5 @@ public interface MemberMapper {
 
     // 이메일 인증 후 테이블 삭제
     void deleteCode(String veriEmail, String veriCode);
+
 }

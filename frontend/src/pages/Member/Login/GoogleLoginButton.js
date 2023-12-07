@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 function GoogleLoginButton() {
   // 렌더링 시, google oauth에 대한 버튼 정보
   useEffect(() => {
-    console.log("서버 전송 성공");
     window.google.accounts.id.initialize({
       client_id: "",
       auto_prompt: false,

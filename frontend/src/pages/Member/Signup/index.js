@@ -71,7 +71,7 @@ function Signup() {
       setPwdMsgColor("#ffda47");
     } else {
       setPwdMsg("사용 가능한 비밀번호입니다.");
-      setPwdMsgColor("#45cb85");
+      setPwdMsgColor("green");
     }
   }, []);
 
@@ -166,12 +166,19 @@ function Signup() {
         phoneNumber: phoneNumber,
         role: "ROLE_USER",
       };
-
-      const response = await createMember(requestData);
-
-      console.log("회원가입 성공: ", response.data);
+      await createMember(requestData);
     } catch (error) {
-      console.error("회원가입 실패: ", error.response.data);
+      Swal.fire({
+        background: "#334E58",
+        color: "#FFDA47",
+        width: "80vw",
+        confirmButtonColor: "#45CB85",
+        cancelButtonColor: "gray",
+
+        icon: "error",
+        text: "회원가입 중 오류가 발생했습니다.",
+        confirmButtonText: "확인"
+      });
     }
   };
 

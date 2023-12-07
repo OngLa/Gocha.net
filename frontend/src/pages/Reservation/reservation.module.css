@@ -73,6 +73,10 @@
 /*==============================================*/
 /* reservationList-예약목록 css*/
 
+.reservationList {
+  margin-bottom: 55px;
+}
+
 /* 새예약 등록 하기 버튼 위치고정 css */
 .largeButtonWrap {
   display: flex;

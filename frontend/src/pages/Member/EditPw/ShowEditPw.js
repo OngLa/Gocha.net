@@ -20,7 +20,7 @@ function ShowEditPw() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   // 비밀번호 유효성 검사 함수
-  
+
   const validatePwd = (password) => {
     return password.match(
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/
@@ -84,6 +84,16 @@ function ShowEditPw() {
         Swal.fire({
           icon: "warning",
           title: "비밀번호와 비밀번호 확인이 일치하지 않습니다.",
+          background: "#334E58",
+          color: "#FFDA47",
+          width: "80vw",
+          confirmButtonColor: "#45CB85",
+          cancelButtonColor: "gray",
+        });
+      } else if (!validatePwd(password)) {
+        Swal.fire({
+          icon: "warning",
+          title: "영문, 숫자, 특수기호 조합으로 8자리 이상 입력해주세요.",
           background: "#334E58",
           color: "#FFDA47",
           width: "80vw",

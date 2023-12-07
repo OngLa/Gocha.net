@@ -29,4 +29,5 @@ public class Member {
     public void updateMember(String password) {
         this.password = password;
     }
+
 }

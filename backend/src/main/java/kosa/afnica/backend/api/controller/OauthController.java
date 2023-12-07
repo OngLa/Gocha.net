@@ -73,7 +73,6 @@ public class OauthController {
     @PostMapping("/oauth-login")
     public ResponseEntity<Map<String, Object>> handleGoogleLogin(@RequestParam("credential") String idTokenString) {
         try {
-            log.info(idTokenString);
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory()).setAudience(Collections.singletonList(clientId)).build();
             GoogleIdToken idToken = verifier.verify(idTokenString);
             if (idToken != null) {
@@ -94,16 +93,27 @@ public class OauthController {
                     headers.setLocation(URI.create(url));
                 } else {
                     // 가입된 유저가 존재할 경우
-                    // email, role, tokken 정보와 함께 login-succeess 화면으로 이동
-                    String accessToken = JwtUtil.createToken(email);
+                    // 오류 메세지와 함께 login-fail 화면으로 이동
                     String role = memberService.findRole(email);
-                    String url = UriComponentsBuilder
-                            .fromUriString(baseUrl + "/member/login-success")
-                            .queryParam("email", email)
-                            .queryParam("role", role)
-                            .queryParam("accessToken", accessToken)
-                            .toUriString();
-                    headers.setLocation(URI.create(url));
+                    if (role == null) {
+                        String message = ErrorCode.INVALID_ACCOUNTS.getMessage();
+                        String url = UriComponentsBuilder
+                                .fromUriString(baseUrl + "/member/login-fail")
+                                .queryParam("message", message)
+                                .toUriString();
+                        headers.setLocation(URI.create(url));
+                    } else {
+                        // email, role, tokken 정보와 함께 login-succeess 화면으로 이동
+                        String accessToken = JwtUtil.createToken(email);
+//                        String role = memberService.findRole(email);
+                        String url = UriComponentsBuilder
+                                .fromUriString(baseUrl + "/member/login-success")
+                                .queryParam("email", email)
+                                .queryParam("role", role)
+                                .queryParam("accessToken", accessToken)
+                                .toUriString();
+                        headers.setLocation(URI.create(url));
+                    }
                 }
                 return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
             } else {
@@ -115,6 +125,7 @@ public class OauthController {
             throw new CustomException(ErrorCode.GOOGLE_SERVER_ERROR);
         }
     }
+
 
 
     // 코큰해독

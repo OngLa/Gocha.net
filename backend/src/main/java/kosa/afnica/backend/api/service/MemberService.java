@@ -19,16 +19,16 @@ public interface MemberService {
     // 회원가입
     public void createMember(MemberSignupReqDto memberSignupReqDto);
 
-//    public void creatAdminMember(MemberSignupReqDto memberSignupReqDto);
-
     // 이메일로 권한 찾기
     String findRole(String email);
 
+    // 마이페이지 조회
     MemberMypageResDto findMypage(HttpServletRequest request);
 
     // veriCode 테이블 이메일 중복 검사
     boolean existVeriEmail(String veriEmail);
 
+    // 코드 조회
     void findCode(String veriEmail, String veriCode);
 
     //정비소 목록 출력

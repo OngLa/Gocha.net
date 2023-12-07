@@ -58,8 +58,6 @@ public class MemberServiceImpl implements MemberService {
                 .build();
 
         memberMapper.save(member);
-//        memberMapper.deleteCode(veriEmail, veriCode); // 인증이 완료되면 삭제 처리
-
     }
 
     @Override
@@ -99,7 +97,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void updatePw(MemberEditPwReqDto memberEditPwReqDto) {
-        Member member = memberMapper.findByEmail(memberEditPwReqDto.getEmail()).get();
+        Member member = memberMapper.findByEmail(memberEditPwReqDto.getEmail())
+                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
         String encodePw = passwordEncoder.encode(memberEditPwReqDto.getPassword());
         member.updateMember(encodePw);
         memberMapper.update(member);
@@ -113,6 +112,7 @@ public class MemberServiceImpl implements MemberService {
 
         memberMapper.delete(member);
     }
+
 }
 
 

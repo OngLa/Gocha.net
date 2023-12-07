@@ -28,12 +28,12 @@ export function getMypage(email) {
 
 // 비밀번호 찾기/수정 : 이메일 인증번호 요청
 export function getPwVeriCode(veriEmail) {
-  return axios.post("/member/passwoed", veriEmail);
+  return axios.post("/member/password", veriEmail);
 }
 
 // 비밀번호 찾기/수정 : 이메일 인증번호 확인
 export function comparePwVeriCode(veriEmail, veriCode) {
-  return axios.get("/member/passwoed-veri", { params: { veriEmail, veriCode } });
+  return axios.get("/member/password-veri", { params: { veriEmail, veriCode } });
 }
 
 // 비밀번호 수정

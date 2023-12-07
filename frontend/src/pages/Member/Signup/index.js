@@ -45,6 +45,7 @@ function Signup() {
   };
 
   // 상태 및 유효성 검사 결과를 저장하는 변수들
+  const [pwdMsgColor, setPwdMsgColor] = useState("");
   const [confirmPwdMsgColor, setConfirmPwdMsgColor] = useState("");
   const [phoneNumberMsgColor, setPhoneNumberMsgColor] = useState("");
   const [nameMsgColor, setNameMsgColor] = useState("");
@@ -67,8 +68,10 @@ function Signup() {
 
     if (!validatePwd(curPwd)) {
       setPwdMsg("영문, 숫자, 특수기호 조합으로 8자리 이상 입력해주세요.");
+      setPwdMsgColor("#ffda47");
     } else {
       setPwdMsg("사용 가능한 비밀번호입니다.");
+      setPwdMsgColor("#45cb85");
     }
   }, []);
 
@@ -80,7 +83,7 @@ function Signup() {
 
       if (curConfirmPwd !== password) {
         setconfirmPwdMsg("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-        setConfirmPwdMsgColor("red");
+        setConfirmPwdMsgColor("#ffda47");
       } else {
         setconfirmPwdMsg("비밀번호와 비밀번호 확인이 일치합니다.");
         setConfirmPwdMsgColor("green");
@@ -95,7 +98,7 @@ function Signup() {
     setNickname(curNickname);
 
     setNicknameMsg("1글자 이상 9글자 미만으로 입력해주세요.(특수 문자 제외)");
-    setNameMsgColor("red");
+    setNameMsgColor("#ffda47");
   }, []);
 
   // 전화번호
@@ -126,7 +129,7 @@ function Signup() {
       setPhoneNumberMsgColor("green");
     } else {
       setPhoneNumberMsg("올바른 전화번호 형식이 아닙니다.");
-      setPhoneNumberMsgColor("red");
+      setPhoneNumberMsgColor("#ffda47");
     }
 
     setPhoneNumber(formattedNumber); // 필요한 경우 원시 전화번호를 상태로 설정합니다.
@@ -139,7 +142,7 @@ function Signup() {
     try {
       if (nickname === "") {
         setNicknameMsg("닉네임을 입력해주세요.");
-        setNameMsgColor("red");
+        setNameMsgColor("#ffda47");
       } else {
         await nameCheck(nickname);
 
@@ -148,7 +151,7 @@ function Signup() {
       }
     } catch (error) {
       setNicknameMsg("이미 사용 중인 닉네임입니다.");
-      setNameMsgColor("red");
+      setNameMsgColor("#ffda47");
     }
   };
 
@@ -193,7 +196,7 @@ function Signup() {
       !isconfirmPwdValid ||
       !isNameValid ||
       !isPhoneNumber ||
-      nameMsgColor === "red"
+      nicknameMsg === "#ffda47"
     ) {
       return Swal.fire({
         background: "#334E58",
@@ -271,7 +274,7 @@ function Signup() {
               onChange={handleOnChangePwd}
             />
           </div>
-          <div className={validatePwd(password) ? style.valid : style.invalid}>
+          <div style={{ color: pwdMsgColor, textAlign: "center" }}>
             {PwdMsg}
           </div>
 
